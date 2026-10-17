@@ -23,10 +23,11 @@ Skrypt tylko odczytuje stan środowiska. Nie instaluje pakietów i nie uruchamia
 
 - [Plan realizacji i kryteria ukończenia faz](docs/plan-faz.md)
 - [Stan środowiska i kolejne kroki](docs/environment.md)
+- [Pierwszy test symulacji Gazebo](docs/first-simulation.md)
 
 ## Najbliższy kamień milowy
 
-Uruchomić istniejący przykład ROS 2/Gazebo, sprawdzić renderowanie i dopiero potem zbudować hangar z sektorami A/B/C. Polecenia uruchomienia demo będą dodawane po ich rzeczywistym sprawdzeniu.
+Uruchomić istniejący przykład ROS 2/Gazebo, sprawdzić renderowanie i dopiero potem zbudować hangar z sektorami A/B/C. Test serwera bez GUI przeszedł; sprawdzenie okna i ruchu jest opisane w instrukcji pierwszej symulacji.
 
 ## Dokumentacja i odtwarzalność
 
