@@ -10,8 +10,8 @@
 </section>
 <section class="telemetry" aria-label="Stan robota"><div><span>NAWIGACJA</span><strong id="mission-state">—</strong></div><div><span>CEL</span><strong id="goal">—</strong></div><div><span>DO CELU</span><strong id="distance">—</strong></div><div><span>POZYCJA NA MAPIE</span><strong id="position">—</strong></div><div><span>PRĘDKOŚĆ</span><strong id="speed">—</strong></div></section>
 <div class="notice" id="message" role="status">Uruchamianie symulacji i lokalizacji…</div>
-<section class="history" id="map-section" hidden><h2>Mapa z lidaru — SLAM</h2>
-<p id="map-status" role="status"></p><img id="slam-map" alt="Mapa zajętości: czarne przeszkody, jasne wolne miejsce, szare nieznane" style="max-width:100%;max-height:560px;image-rendering:pixelated;border:1px solid #304456">
-<p class="help">Czarne: przeszkody · jasne: wolne · szare: nieznane. Mapowanie: uruchom survey_hangar.sh w drugim terminalu, potem zapisz mapę poleceniem save_slam_map.sh.</p></section>
+<section class="history" id="map-section" hidden><h2>Mapa hali i pozycja robota</h2>
+<p id="map-status" role="status"></p><div class="map-view"><img id="slam-map" alt="Mapa zajętości: czarne przeszkody, jasne wolne miejsce, szare nieznane"><span id="robot-marker" class="robot-marker" role="img" aria-label="Pozycja robota" hidden></span></div>
+<p class="help">Czarne: przeszkody · jasne: wolne · szare: nieznane. Mapowaniem sterujesz z panelu sterowania.</p></section>
 <footer><span id="rendering">Renderowanie: —</span><span>RoboInspect AI / SLAM i misje</span><span>Wszystkie trzy widoki pochodzą z kamer symulacji</span></footer>
 </main></body></html>

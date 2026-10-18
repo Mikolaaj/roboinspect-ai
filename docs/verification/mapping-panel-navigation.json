@@ -1,0 +1,223 @@
+{
+  "passed": true,
+  "scenario": "normal",
+  "routes": [
+    {
+      "goal": "A",
+      "state": "succeeded",
+      "world_xy": [
+        -9.05537863435347,
+        -1.089755379601114
+      ],
+      "error_m": 0.10546478706277,
+      "seconds": 27.4
+    },
+    {
+      "goal": "BASE",
+      "state": "succeeded",
+      "world_xy": [
+        -11.000983053512634,
+        -6.937125741191878
+      ],
+      "error_m": 0.06288194347250611,
+      "seconds": 64.9
+    }
+  ],
+  "cameras": {
+    "fpv": {
+      "age_s": 0.07,
+      "sequence": 555,
+      "stamp_s": 55.4,
+      "width": 320,
+      "height": 240
+    },
+    "follow": {
+      "age_s": 0.06,
+      "sequence": 243,
+      "stamp_s": 55.4,
+      "width": 640,
+      "height": 360
+    },
+    "overhead": {
+      "age_s": 0.21,
+      "sequence": 161,
+      "stamp_s": 55.25,
+      "width": 640,
+      "height": 480
+    }
+  },
+  "camera_fps_wall": {
+    "fpv": 9.97,
+    "follow": 3.99,
+    "overhead": 2.99
+  },
+  "simulation_realtime_factor": 1.0,
+  "camera_lag_sim_s": {
+    "fpv": 0.085,
+    "follow": 0.085,
+    "overhead": 0.235
+  },
+  "cancel_drift_m": 0.0,
+  "final_status": {
+    "ready": true,
+    "busy": false,
+    "state": "succeeded",
+    "execution_id": "177bebf0-fd1d-4991-998d-c41d175e2188",
+    "goal": "BASE",
+    "scenario": "normal",
+    "message": "Wszystkie kroki misji wykonane",
+    "distance_m": null,
+    "map_position": {
+      "x": -10.971436320377375,
+      "y": -6.949498154968921
+    },
+    "rendering": {
+      "mode": "gpu",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    },
+    "mode": "navigation",
+    "map_file": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_18a856d114fa470c8c932c95cdc281e9.yaml",
+    "remote_active": false,
+    "recovery_state": null,
+    "robot_marker": {
+      "x": 81.37499450141702,
+      "y": 362.3925736748948,
+      "heading": -0.12158710020737892
+    },
+    "map": {
+      "width": 603,
+      "height": 447,
+      "resolution": 0.05000000074505806,
+      "known_cells": 257793,
+      "occupied_cells": 4293,
+      "frame": "map",
+      "updates": 1,
+      "origin": [
+        -15.040186106077321,
+        -11.129869533516569,
+        0.0
+      ]
+    },
+    "velocity": {
+      "linear": 0.0,
+      "angular": 0.0
+    },
+    "service": "roboinspect",
+    "goals": [
+      "BASE",
+      "A",
+      "B",
+      "C",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5"
+    ],
+    "mapping_controls": true,
+    "transitioning": false,
+    "mapping_ready": false,
+    "map_age_s": 163.0,
+    "simulation_s": 160.792,
+    "events": [
+      {
+        "time": "10:24:26",
+        "message": "Misja przyjęta"
+      },
+      {
+        "time": "10:24:26",
+        "message": "Krok 1/1: jazda do BASE"
+      },
+      {
+        "time": "10:25:31",
+        "message": "Zakończono krok 1: BASE"
+      },
+      {
+        "time": "10:25:31",
+        "message": "Wszystkie kroki misji wykonane"
+      }
+    ],
+    "cameras": {
+      "fpv": {
+        "age_s": 0.09,
+        "sequence": 1608,
+        "stamp_s": 160.7,
+        "width": 320,
+        "height": 240
+      },
+      "follow": {
+        "age_s": 0.38,
+        "sequence": 709,
+        "stamp_s": 160.4,
+        "width": 640,
+        "height": 360
+      },
+      "overhead": {
+        "age_s": 0.03,
+        "sequence": 483,
+        "stamp_s": 160.75,
+        "width": 640,
+        "height": 480
+      }
+    },
+    "runtime_ready": true,
+    "mission": {
+      "id": "a2adb27e-3274-4701-9488-46e435f057b9",
+      "name": "Przejazd do BASE",
+      "scenario": "normal",
+      "status": "succeeded",
+      "steps": [
+        {
+          "action": "navigate",
+          "target": "BASE",
+          "timeout_seconds": 300,
+          "status": "succeeded",
+          "execution_id": "177bebf0-fd1d-4991-998d-c41d175e2188"
+        }
+      ],
+      "current_step": 0,
+      "message": "Wszystkie kroki misji wykonane",
+      "created_at": "2026-10-18T08:24:26.861679Z",
+      "updated_at": "2026-10-18T08:25:31.602348Z"
+    },
+    "mission_id": "a2adb27e-3274-4701-9488-46e435f057b9",
+    "operation": {
+      "id": "18a856d1-14fa-470c-8c93-2c95cdc281e9",
+      "kind": "finish",
+      "name": "Zakończenie mapowania i nawigacja",
+      "status": "succeeded",
+      "message": "Mapowanie zakończone. Nav2 gotowe na zapisanej mapie; robot w BASE.",
+      "cancel_requested": false,
+      "saved_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_18a856d114fa470c8c932c95cdc281e9.yaml",
+      "created_at": "2026-10-18T08:21:21.780368Z",
+      "updated_at": "2026-10-18T08:21:38.298984Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:21:21.780382Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:21:22.220495Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:21:22.223093Z",
+          "message": "Zapisywanie mapy i grafu SLAM…"
+        },
+        {
+          "time": "2026-10-18T08:21:23.625610Z",
+          "message": "Zapisano wersję mapy: hangar_18a856d114fa470c8c932c95cdc281e9.yaml"
+        },
+        {
+          "time": "2026-10-18T08:21:23.628282Z",
+          "message": "Mapa zapisana. Przełączanie na AMCL + Nav2; robot startuje w BASE…"
+        },
+        {
+          "time": "2026-10-18T08:21:38.298980Z",
+          "message": "Mapowanie zakończone. Nav2 gotowe na zapisanej mapie; robot w BASE."
+        }
+      ]
+    },
+    "operation_busy": false
+  }
+}

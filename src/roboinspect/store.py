@@ -7,10 +7,31 @@ import json
 from pathlib import Path
 from threading import RLock
 
-from sqlalchemy import JSON, Column, Integer, MetaData, String, Table, create_engine, event, select
+from sqlalchemy import (
+    JSON,
+    Boolean,
+    Column,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    create_engine,
+    event,
+    select,
+)
 from sqlalchemy.exc import IntegrityError
 
-from .contracts import ACTIVE, ConflictError, MissionEvent, MissionPlan, MissionRecord, now
+from .contracts import (
+    ACTIVE,
+    ConflictError,
+    MappingOperation,
+    MissionEvent,
+    MissionPlan,
+    MissionRecord,
+    MissionStatus,
+    OperationLog,
+    now,
+)
 
 metadata = MetaData()
 missions = Table(
@@ -31,6 +52,18 @@ events = Table(
     Column("time", String(40), nullable=False),
     Column("message", String(1000), nullable=False),
     Column("status", String(20), nullable=False),
+)
+
+operations = Table(
+    "mapping_operations",
+    metadata,
+    Column("id", String(36), primary_key=True),
+    Column("request_key", String(128), unique=True),
+    Column("kind", String(20), nullable=False),
+    Column("status", String(20), nullable=False),
+    Column("cancel_requested", Boolean, nullable=False, default=False),
+    Column("created_at", String(40), nullable=False),
+    Column("record", JSON, nullable=False),
 )
 
 
@@ -151,3 +184,100 @@ class MissionStore:
                 select(missions.c.record).where(missions.c.request_key == key)
             ).first()
             return MissionRecord.model_validate(row[0]) if row else None
+
+    def operation(self, operation_id):
+        with self.engine.connect() as connection:
+            row = (
+                connection.execute(select(operations).where(operations.c.id == operation_id))
+                .mappings()
+                .first()
+            )
+            return self._operation_row(row) if row else None
+
+    @staticmethod
+    def _operation_row(row):
+        record = MappingOperation.model_validate(row["record"])
+        record.cancel_requested = row["cancel_requested"]
+        return record
+
+    def operation_list(self, limit=50):
+        with self.engine.connect() as connection:
+            rows = connection.execute(
+                select(operations).order_by(operations.c.created_at.desc()).limit(limit)
+            ).mappings()
+            return [self._operation_row(row) for row in rows]
+
+    def operation_busy(self):
+        with self.engine.connect() as connection:
+            rows = connection.execute(
+                select(operations)
+                .where(operations.c.status.in_([s.value for s in ACTIVE]))
+                .order_by(operations.c.created_at)
+            ).mappings()
+            return [self._operation_row(row) for row in rows]
+
+    def operation_key(self, key):
+        with self.engine.connect() as connection:
+            row = (
+                connection.execute(select(operations).where(operations.c.request_key == key))
+                .mappings()
+                .first()
+            )
+            return self._operation_row(row) if row else None
+
+    def create_operation(self, record, key, cancel_id=None):
+        record.events.append(OperationLog(message=record.message))
+        with self.engine.begin() as connection:
+            connection.execute(
+                operations.insert().values(
+                    id=record.id,
+                    kind=record.kind.value,
+                    request_key=key,
+                    status=record.status.value,
+                    cancel_requested=False,
+                    created_at=record.created_at.isoformat(),
+                    record=record.model_dump(mode="json"),
+                )
+            )
+            if cancel_id is not None:
+                connection.execute(
+                    operations.update()
+                    .where(operations.c.id == cancel_id)
+                    .values(cancel_requested=True)
+                )
+        return record
+
+    def update_operation(self, operation_id, *, status=None, message=None, saved_map=None):
+        # Only the single cockpit supervisor writes execution progress.
+        record = self.operation(operation_id)
+        if status is not None:
+            record.status = status
+        if message is not None:
+            record.message = message
+            record.events.append(OperationLog(message=message))
+        if saved_map is not None:
+            record.saved_map = saved_map
+        record.updated_at = now()
+        with self.engine.begin() as connection:
+            connection.execute(
+                operations.update()
+                .where(operations.c.id == operation_id)
+                .values(status=record.status.value, record=record.model_dump(mode="json"))
+            )
+        return record
+
+    def cancel_operation(self, operation_id):
+        with self.engine.begin() as connection:
+            connection.execute(
+                operations.update()
+                .where(operations.c.id == operation_id)
+                .values(cancel_requested=True)
+            )
+
+    def interrupt_operations(self):
+        for record in self.operation_busy():
+            self.update_operation(
+                record.id,
+                status=MissionStatus.INTERRUPTED,
+                message="Restart lub zamknięcie kokpitu; operacja nie będzie ponawiana",
+            )

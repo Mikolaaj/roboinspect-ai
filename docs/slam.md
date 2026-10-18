@@ -11,7 +11,76 @@ Pakiet systemowy: `sudo apt install ros-jazzy-slam-toolbox`.
 Na obecnym komputerze był już zainstalowany. Pozostałe zależności i venv:
 [install-and-run.md](install-and-run.md).
 
-## Uruchomienie i sprawdzenie samodzielnie
+## Obsługa z panelu — dwie komendy (zalecane)
+
+Powyższe skrypty CLI pozostają narzędziami diagnostycznymi. Standardowa obsługa
+mapowania jest teraz w panelu, pod przyciskami A/B/C/BASE.
+
+Najpierw zatrzymanie całego stosu:
+
+```bash
+cd ~/Desktop/roboinspect-ai
+bash scripts/stop_cockpit.sh
+```
+
+Terminal 1:
+
+```bash
+cd ~/Desktop/roboinspect-ai
+bash scripts/run_cockpit.sh
+```
+
+Terminal 2:
+
+```bash
+cd ~/Desktop/roboinspect-ai
+bash scripts/run_control_panel.sh
+```
+
+Dalej używaj przycisków:
+
+| Przycisk | Działanie |
+|---|---|
+| Rozpocznij mapowanie | Przełącza na świeży SLAM, ustawia robota w BASE i wykonuje obchód 8 punktów |
+| Zapisz mapę | Zapisuje nową wersję mapy, podglądu, metadanych i grafu; robot musi być zatrzymany |
+| Resetuj mapę | Przerywa obchód, zeruje bieżącą mapę i wraca do BASE w trybie SLAM; zachowuje zapisane mapy i historię |
+| Zakończ mapowanie | Przerywa ewentualny obchód, zapisuje aktualną mapę i uruchamia AMCL + Nav2 na niej; symulacja startuje w BASE |
+
+„Anuluj przejazd” zatrzymuje też aktywny obchód mapujący. Podczas operacji
+nie można zlecać misji nawigacyjnych. Podczas obchodu zapis jest zablokowany;
+można go przerwać resetem, zakończeniem lub anulowaniem. Przy przełączaniu
+trybu kamery chwilowo oczekują na nową symulację; strona i API pozostają otwarte.
+
+Turkusowa kropka na mapie jest aktualną pozycją robota, a grot pokazuje kierunek.
+Pozycja pochodzi z TF `map → base_link`; rysowanie uwzględnia origin, obrót,
+rozdzielczość i odwrócenie wierszy obrazu oraz przesunięcie `map_slam`.
+Przy braku aktualnej pozycji kropka znika, zamiast pokazywać stary odczyt.
+Mapa z robotem jest dostępna w kokpicie i panelu sterowania.
+
+## Trwała historia operacji
+
+Start, zapis, reset, zakończenie, postęp punktów, przerwanie i błędy są zapisywane
+w tej samej bazie aplikacji co misje (`mapping_operations` w SQLite). Sekcja
+„Historia przejazdów i mapowania” łączy oba typy wpisów. „Przebieg operacji”
+rozwija szczegółowe zdarzenia z czasami. API: `GET /api/history` oraz
+`POST /api/mapping/start|save|reset|finish`. Operacje przyjmują nagłówek
+`Idempotency-Key`; ponowienie tego samego żądania nie powtarza przejazdu.
+
+Operacje wykonuje pojedynczy nadzorca kokpitu; API zapisuje żądanie przed
+uruchomieniem procesu. Przy zamknięciu/restarcie niedokończone operacje
+otrzymują `interrupted` i nie są automatycznie ponawiane. Reset nie usuwa
+historii ani plików zapisanych wersji. Wspólna blokada przyjmowania poleceń
+wyklucza równoczesne misje i operacje SLAM.
+
+Wersje map zapisują się w `data/maps/hangar_<id>.yaml` wraz z pozostałymi plikami.
+Po udanym „Zakończ mapowanie” plik `data/current-map.json` zapamiętuje wybraną
+mapę. Następny zwykły start kokpitu używa jej automatycznie dla tego samego
+scenariusza. Jawne `--map` nadal nadpisuje wybór dla danego uruchomienia.
+Duże lokalne grafy i baza nie trafiają do Git.
+
+## Diagnostyka CLI (opcjonalna)
+
+### Mapowanie i zapis z terminala
 
 ### 1. Najpierw zatrzymaj wszystko
 
@@ -141,3 +210,5 @@ a niekoniecznie jego blat. Nie oznacza to pełnej rekonstrukcji 3D.
 Następny etap: [lokalny czat LLM na RTX](llm-local-plan.md).
 
 Wyniki odbioru: [slam-results.md](slam-results.md).
+
+Wyniki odbioru panelu: [mapping-panel-results.md](mapping-panel-results.md).

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "history_preserved": true,
+  "auto_selected_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_18a856d114fa470c8c932c95cdc281e9.yaml",
+  "marker_after_restart": {
+    "x": 80.80372091747432,
+    "y": 363.4026105604688,
+    "heading": 4.102590333189868e-18
+  },
+  "history_ids": [
+    "90d2258e-8a57-4894-95f2-5fd24ebc2999",
+    "b12ac9d1-e1eb-469c-bd4f-757d9a1492cf",
+    "d07fdd0c-3e51-411e-a86a-3f322f12cb86",
+    "92b6b0b6-ecc4-40de-957c-84c22bab9ce9",
+    "18a856d1-14fa-470c-8c93-2c95cdc281e9"
+  ]
+}

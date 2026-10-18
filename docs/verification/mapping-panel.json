@@ -1,0 +1,215 @@
+{
+  "passed": true,
+  "operations": [
+    {
+      "id": "90d2258e-8a57-4894-95f2-5fd24ebc2999",
+      "kind": "save",
+      "name": "Zapis mapy SLAM",
+      "status": "succeeded",
+      "message": "Mapa i graf zapisane; można kontynuować mapowanie.",
+      "cancel_requested": false,
+      "saved_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_90d2258e8a57489495f25fd24ebc2999.yaml",
+      "created_at": "2026-10-18T08:17:55.537719Z",
+      "updated_at": "2026-10-18T08:17:56.820446Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:17:55.537725Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:17:55.812572Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:17:55.815211Z",
+          "message": "Zapisywanie mapy i grafu SLAM…"
+        },
+        {
+          "time": "2026-10-18T08:17:56.817627Z",
+          "message": "Zapisano wersję mapy: hangar_90d2258e8a57489495f25fd24ebc2999.yaml"
+        },
+        {
+          "time": "2026-10-18T08:17:56.820442Z",
+          "message": "Mapa i graf zapisane; można kontynuować mapowanie."
+        }
+      ]
+    },
+    {
+      "id": "b12ac9d1-e1eb-469c-bd4f-757d9a1492cf",
+      "kind": "reset",
+      "name": "Reset bieżącej mapy",
+      "status": "succeeded",
+      "message": "Bieżąca mapa wyzerowana. Zapisane wersje i historia zostały zachowane.",
+      "cancel_requested": false,
+      "saved_map": null,
+      "created_at": "2026-10-18T08:17:57.071585Z",
+      "updated_at": "2026-10-18T08:18:08.303952Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:17:57.071592Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:17:57.322327Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:17:57.324939Z",
+          "message": "Reset bieżącej mapy i powrót robota do BASE…"
+        },
+        {
+          "time": "2026-10-18T08:18:08.303948Z",
+          "message": "Bieżąca mapa wyzerowana. Zapisane wersje i historia zostały zachowane."
+        }
+      ]
+    },
+    {
+      "id": "d07fdd0c-3e51-411e-a86a-3f322f12cb86",
+      "kind": "start",
+      "name": "Mapowanie hangaru",
+      "status": "succeeded",
+      "message": "Obchód zakończony; robot zatrzymany. Zapisz mapę lub zakończ mapowanie.",
+      "cancel_requested": false,
+      "saved_map": null,
+      "created_at": "2026-10-18T08:18:08.692441Z",
+      "updated_at": "2026-10-18T08:21:18.804448Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:18:08.692452Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:18:08.805834Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:18:08.808348Z",
+          "message": "Ustawianie robota w BASE i uruchamianie świeżego SLAM…"
+        },
+        {
+          "time": "2026-10-18T08:18:19.040145Z",
+          "message": "Mapowanie w toku: obchód 8 punktów hali"
+        },
+        {
+          "time": "2026-10-18T08:18:31.561809Z",
+          "message": "Ukończono punkt 1/8 (-8.5, -4)"
+        },
+        {
+          "time": "2026-10-18T08:18:57.602671Z",
+          "message": "Ukończono punkt 2/8 (-8.5, 6)"
+        },
+        {
+          "time": "2026-10-18T08:19:35.655401Z",
+          "message": "Ukończono punkt 3/8 (6, 6)"
+        },
+        {
+          "time": "2026-10-18T08:19:46.171623Z",
+          "message": "Ukończono punkt 4/8 (10, 6)"
+        },
+        {
+          "time": "2026-10-18T08:19:59.189707Z",
+          "message": "Ukończono punkt 5/8 (6, 6)"
+        },
+        {
+          "time": "2026-10-18T08:20:26.225765Z",
+          "message": "Ukończono punkt 6/8 (6, -4)"
+        },
+        {
+          "time": "2026-10-18T08:21:04.277891Z",
+          "message": "Ukończono punkt 7/8 (-8.5, -4)"
+        },
+        {
+          "time": "2026-10-18T08:21:15.296005Z",
+          "message": "Ukończono punkt 8/8 (-11, -7)"
+        },
+        {
+          "time": "2026-10-18T08:21:18.804444Z",
+          "message": "Obchód zakończony; robot zatrzymany. Zapisz mapę lub zakończ mapowanie."
+        }
+      ]
+    },
+    {
+      "id": "92b6b0b6-ecc4-40de-957c-84c22bab9ce9",
+      "kind": "save",
+      "name": "Zapis mapy SLAM",
+      "status": "succeeded",
+      "message": "Mapa i graf zapisane; można kontynuować mapowanie.",
+      "cancel_requested": false,
+      "saved_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_92b6b0b6ecc440de957c84c22bab9ce9.yaml",
+      "created_at": "2026-10-18T08:21:19.224966Z",
+      "updated_at": "2026-10-18T08:21:21.718561Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:21:19.224973Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:21:19.312378Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:21:19.313735Z",
+          "message": "Zapisywanie mapy i grafu SLAM…"
+        },
+        {
+          "time": "2026-10-18T08:21:21.717084Z",
+          "message": "Zapisano wersję mapy: hangar_92b6b0b6ecc440de957c84c22bab9ce9.yaml"
+        },
+        {
+          "time": "2026-10-18T08:21:21.718557Z",
+          "message": "Mapa i graf zapisane; można kontynuować mapowanie."
+        }
+      ]
+    },
+    {
+      "id": "18a856d1-14fa-470c-8c93-2c95cdc281e9",
+      "kind": "finish",
+      "name": "Zakończenie mapowania i nawigacja",
+      "status": "succeeded",
+      "message": "Mapowanie zakończone. Nav2 gotowe na zapisanej mapie; robot w BASE.",
+      "cancel_requested": false,
+      "saved_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_18a856d114fa470c8c932c95cdc281e9.yaml",
+      "created_at": "2026-10-18T08:21:21.780368Z",
+      "updated_at": "2026-10-18T08:21:38.298984Z",
+      "events": [
+        {
+          "time": "2026-10-18T08:21:21.780382Z",
+          "message": "Operacja przyjęta"
+        },
+        {
+          "time": "2026-10-18T08:21:22.220495Z",
+          "message": "Rozpoczynanie operacji…"
+        },
+        {
+          "time": "2026-10-18T08:21:22.223093Z",
+          "message": "Zapisywanie mapy i grafu SLAM…"
+        },
+        {
+          "time": "2026-10-18T08:21:23.625610Z",
+          "message": "Zapisano wersję mapy: hangar_18a856d114fa470c8c932c95cdc281e9.yaml"
+        },
+        {
+          "time": "2026-10-18T08:21:23.628282Z",
+          "message": "Mapa zapisana. Przełączanie na AMCL + Nav2; robot startuje w BASE…"
+        },
+        {
+          "time": "2026-10-18T08:21:38.298980Z",
+          "message": "Mapowanie zakończone. Nav2 gotowe na zapisanej mapie; robot w BASE."
+        }
+      ]
+    }
+  ],
+  "final_marker": {
+    "x": 80.80372091747432,
+    "y": 363.4026105604688,
+    "heading": 3.85205856302473e-19
+  },
+  "selected_map": "/home/mikolaj/Desktop/roboinspect-ai/data/maps/hangar_18a856d114fa470c8c932c95cdc281e9.yaml",
+  "history_ids": [
+    "90d2258e-8a57-4894-95f2-5fd24ebc2999",
+    "b12ac9d1-e1eb-469c-bd4f-757d9a1492cf",
+    "d07fdd0c-3e51-411e-a86a-3f322f12cb86",
+    "92b6b0b6-ecc4-40de-957c-84c22bab9ce9",
+    "18a856d1-14fa-470c-8c93-2c95cdc281e9"
+  ]
+}

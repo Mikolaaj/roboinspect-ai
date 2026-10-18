@@ -3,6 +3,7 @@ const $ = id => document.getElementById(id);
 const labels = {idle:'Gotowy',dispatching:'Wysyłanie celu',navigating:'W drodze',canceling:'Anulowanie',succeeded:'Dotarł do celu',canceled:'Anulowano',failed:'Błąd przejazdu',queued:'Przyjęto',running:'W drodze',uncertain:'Sprawdzanie zatrzymania',interrupted:'Przerwano po utracie kontaktu'};
 let submitting = false;
 let current = null;
+let historyFingerprint = null;
 function text(id,value){if($(id)) $(id).textContent = value;}
 function buttons(){
   document.querySelectorAll('[data-goal]').forEach(button=>{
@@ -10,7 +11,16 @@ function buttons(){
     button.classList.toggle('active', Boolean(current?.busy && current?.goal === button.dataset.goal));
   });
   if($('run-plan')) $('run-plan').disabled = submitting || !current?.ready || current?.busy;
-  if($('cancel')) $('cancel').disabled = submitting || !current?.busy || current?.state === 'canceling';
+  const op = current?.operation_busy ? current.operation : null;
+  const missionBusy = current?.busy && !op;
+  document.querySelectorAll('[data-mapping]').forEach(button=>{
+    const kind = button.dataset.mapping;
+    const mayInterrupt = op?.kind === 'start' && !op.cancel_requested && ['reset','finish'].includes(kind);
+    button.disabled = submitting || !current?.mapping_controls || current?.scenario !== 'normal' || missionBusy ||
+      (op ? !mayInterrupt : (['save','finish'].includes(kind) && !current?.mapping_ready));
+  });
+  if($('cancel')) $('cancel').disabled = submitting || !current?.busy || current?.state === 'canceling' ||
+      (op && (op.kind !== 'start' || op.cancel_requested));
 }
 function error(message){if($('error')){$('error').hidden = !message; $('error').textContent = message;}}
 async function command(path,data){
@@ -31,13 +41,14 @@ async function command(path,data){
   finally{submitting = false; await poll();}
 }
 document.querySelectorAll('[data-goal]').forEach(button=>button.addEventListener('click',()=>command('/api/goal',{goal:button.dataset.goal})));
+document.querySelectorAll('[data-mapping]').forEach(button=>button.addEventListener('click',()=>command('/api/mapping/'+button.dataset.mapping,{})));
 if($('cancel')) $('cancel').addEventListener('click',()=>command('/api/cancel',{}));
 async function poll(){
   try{
     const response = await fetch('/api/status',{cache:'no-store',signal:AbortSignal.timeout(2500)});
     if(!response.ok) throw new Error('Brak odpowiedzi');
     current = await response.json();
-    text('connection',current.mode === 'mapping' ? (current.mapping_ready ? 'SLAM · mapowanie aktywne' : 'SLAM · oczekiwanie na lidar') : current.ready ? 'Połączono · Nav2 gotowe' : 'Oczekiwanie na symulację / Nav2');
+    text('connection',current.transitioning ? 'Przełączanie trybu…' : current.mode === 'mapping' ? (current.mapping_ready ? 'SLAM · mapowanie aktywne' : 'SLAM · oczekiwanie na lidar') : current.ready ? 'Połączono · Nav2 gotowe' : 'Oczekiwanie na symulację / Nav2');
     $('connection-dot').classList.toggle('ready',current.ready || current.mapping_ready);
     text('rendering',current.rendering ? `Renderowanie: ${current.rendering.device} · fizyka i ROS: CPU` : 'Renderowanie: —');
     text('scenario',({normal:'HALA STANDARDOWA',blocked:'HALA Z BLOKADĄ',unreachable:'TEST: CEL B NIEDOSTĘPNY'})[current.scenario]);
@@ -46,11 +57,24 @@ async function poll(){
     text('distance',current.distance_m == null ? '—' : `${current.distance_m.toFixed(1)} m`);
     text('speed',current.velocity ? `${current.velocity.linear.toFixed(2)} m/s` : '—');
     text('position',current.map_position ? `${current.map_position.x.toFixed(1)}, ${current.map_position.y.toFixed(1)} m` : '—');
-    text('message',current.mode === 'mapping' ? 'Tryb SLAM: nawigacja sektorowa jest wyłączona. Uruchom przejazd mapujący w drugim terminalu.' : current.message);
+    const op = current.operation;
+    const opShown = op && (current.operation_busy || !current.mission || new Date(op.created_at) > new Date(current.mission.created_at));
+    if(opShown) text('mission-state',current.operation_busy ? 'Operacja w toku' : ({succeeded:'Operacja zakończona',failed:'Błąd operacji',canceled:'Operacja anulowana',interrupted:'Operacja przerwana'}[op.status] || labels[op.status] || op.status));
+    text('mapping-progress',op ? `${op.name} · ${op.message}` : 'Mapowaniem sterujesz przyciskami powyżej.');
+    text('message',opShown ? op.message : current.mode === 'mapping' ? 'SLAM aktywny. Użyj przycisków mapowania w panelu sterowania.' : current.message);
     if($('map-section')) {
       $('map-section').hidden = !current.map;
       if(current.map) {
         const m = current.map;
+        const marker = $('robot-marker');
+        const point = current.robot_marker;
+        marker.hidden = !point;
+        if(point) {
+          marker.style.left = `${100*point.x/m.width}%`;
+          marker.style.top = `${100*point.y/m.height}%`;
+          marker.style.transform = `translate(-50%,-50%) rotate(${-point.heading}rad)`;
+          marker.title = `Robot: ${current.map_position.x.toFixed(2)}, ${current.map_position.y.toFixed(2)} m`;
+        }
         text('map-status',`${current.mode === 'mapping' ? 'Tworzenie mapy' : 'Mapa nawigacyjna'} · ${m.width}×${m.height} · ${m.resolution.toFixed(2)} m/komórkę · znane: ${m.known_cells} · przeszkody: ${m.occupied_cells}`);
         if($('slam-map').dataset.version !== String(m.updates)) {
           $('slam-map').src = '/api/map.png?version='+m.updates;
@@ -59,7 +83,7 @@ async function poll(){
       }
     }
     const mission = current.mission;
-    text('plan-progress',mission ? `${mission.name} · krok ${mission.current_step == null ? '—' : mission.current_step+1}/${mission.steps.length} · ${labels[mission.status] || mission.status}` : '');
+    text('plan-progress',opShown ? '' : mission ? `${mission.name} · krok ${mission.current_step == null ? '—' : mission.current_step+1}/${mission.steps.length} · ${labels[mission.status] || mission.status}` : '');
     for(const name of ['fpv','follow','overhead']){
       const badge = document.querySelector(`[data-badge="${name}"]`);
       const wait = document.querySelector(`[data-wait="${name}"]`);
@@ -81,6 +105,7 @@ async function poll(){
       if(!current.events.length){const li = document.createElement('li');li.textContent = 'Brak poleceń w tej sesji.';$('events').append(li);}
     }
   }catch(exc){
+    if($('robot-marker')) $('robot-marker').hidden=true;
     current = null;text('connection','Brak połączenia z kokpitem');$('connection-dot').classList.remove('ready');
     text('message','Uruchom kokpit lub sprawdź jego terminal.');
     document.querySelectorAll('[data-wait]').forEach(el=>{el.hidden=false;el.textContent='Brak połączenia';});
@@ -105,17 +130,36 @@ if($('run-plan')) $('run-plan').addEventListener('click',()=>{
 async function history(){
   if(!$('missions')) return;
   try {
-    const response = await fetch('/api/missions?limit=10');
+    const response = await fetch('/api/history?limit=30');
     if(!response.ok) throw new Error('history');
     const records = await response.json();
+    const fingerprint = JSON.stringify(records);
+    if(fingerprint !== historyFingerprint){
+    const opened = new Set([...$('missions').querySelectorAll('details[open]')].map(el=>el.dataset.operation));
+    historyFingerprint = fingerprint;
     $('missions').replaceChildren();
     for(const record of records){
       const li = document.createElement('li');
-      li.textContent = `${new Date(record.created_at).toLocaleString('pl-PL')} · ${record.name} · ${labels[record.status] || record.status} · ${record.steps.map(s=>s.target+' ('+s.status+')').join(' → ')}`;
+      const status = record.kind === 'mapping' ? ({running:'W toku',succeeded:'Zakończono',queued:'Przyjęto'}[record.status] || labels[record.status] || record.status) : labels[record.status] || record.status;
+      const title = document.createElement('strong');
+      title.textContent = `${new Date(record.created_at).toLocaleString('pl-PL')} · ${record.name} · ${status}`;
+      li.append(title);
+      if(record.kind === 'mapping') {
+        const details = document.createElement('details');
+        details.dataset.operation = record.id;
+        details.open = opened.has(record.id);
+        const summary = document.createElement('summary');
+        summary.textContent = `Przebieg operacji (${record.details.length} zdarzeń)`;
+        details.append(summary);
+        for(const event of record.events || []){const line=document.createElement('div');line.textContent=`${new Date(event.time).toLocaleTimeString('pl-PL')} · ${event.message}`;details.append(line);}
+        li.append(details);
+      } else {const line=document.createElement('div');line.textContent=record.details.join(' → ');li.append(line);}
+      if(record.saved_map){const saved=document.createElement('div'); saved.textContent='Zapisana wersja: '+record.saved_map.split('/').pop();li.append(saved);}
       $('missions').append(li);
     }
-    if(!records.length) $('missions').textContent = 'Brak zapisanych misji.';
-  } catch { $('missions').textContent = 'Nie udało się pobrać historii.'; }
+    if(!records.length) $('missions').textContent = 'Brak zapisanych przejazdów i operacji.';
+    }
+  } catch { historyFingerprint = null; $('missions').textContent = 'Nie udało się pobrać historii.'; }
   setTimeout(history,2000);
 }
 history();

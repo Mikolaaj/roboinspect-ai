@@ -103,3 +103,38 @@ class Sector(StrictModel):
     label: str
     bounds: tuple[float, float, float, float]
     color: tuple[float, float, float, float]
+
+
+class MappingAction(StrEnum):
+    START = "start"
+    SAVE = "save"
+    RESET = "reset"
+    FINISH = "finish"
+
+
+class OperationLog(StrictModel):
+    time: datetime = Field(default_factory=now)
+    message: str
+
+
+class MappingOperation(StrictModel):
+    id: str = Field(default_factory=lambda: str(uuid4()))
+    kind: MappingAction
+    name: str
+    status: MissionStatus = MissionStatus.QUEUED
+    message: str = "Operacja przyjęta"
+    cancel_requested: bool = False
+    saved_map: str | None = None
+    created_at: datetime = Field(default_factory=now)
+    updated_at: datetime = Field(default_factory=now)
+    events: list[OperationLog] = Field(default_factory=list)
+
+
+class MappingRequest(StrictModel):
+    pass
+
+
+class RuntimeUpdate(StrictModel):
+    mode: Literal["navigation", "mapping"]
+    transitioning: bool
+    map_file: str | None = None

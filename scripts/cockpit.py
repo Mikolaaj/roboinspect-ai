@@ -14,15 +14,18 @@ import time
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 import webbrowser
+from uuid import uuid4
+from roboinspect.store import MissionStore
+from roboinspect.mapping_runner import MappingRunner
 from rendering import configure
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT/'artifacts/cockpit-runtime.json'
 
 
-def request(url, data=None):
+def request(url, data=None, token=None):
     req = Request(url, data=None if data is None else json.dumps(data).encode(),
-                  headers={'Content-Type':'application/json'})
+                  headers={'Content-Type':'application/json',**({'X-Runtime-Token':token} if token else {})})
     with urlopen(req,timeout=3) as response:
         return json.load(response)
 
@@ -68,6 +71,69 @@ def stop(proc):
             time.sleep(0.5)
 
 
+class RuntimeManager:
+    def __init__(self, args, start, stop_named, shutdown, token):
+        self.root=ROOT
+        self.log_dir=args.log_dir
+        self.scenario=args.scenario
+        self.args=args
+        self.start=start
+        self.stop_named=stop_named
+        self.shutdown=shutdown
+        self.token=token
+        self.mode=args.mode
+        self.map_path=Path(os.environ['ROBOINSPECT_MAP'])
+        self.generation=0
+        self.stop=stop
+
+    def write_runtime(self):
+        RUNTIME.write_text(json.dumps({'pid':os.getpid(),'port':self.args.port,
+            'scenario':self.scenario,'mode':self.mode,'map':str(self.map_path),
+            'rendering':{'mode':os.environ.get('ROBOINSPECT_RENDERING'),
+                         'device':os.environ.get('ROBOINSPECT_RENDER_DEVICE')},
+            'gz_partition':os.environ['GZ_PARTITION'],
+            'ros_domain_id':os.environ.get('ROS_DOMAIN_ID','0')})+'\n')
+
+    def switch(self, mode, map_path):
+        url=f'http://127.0.0.1:{self.args.port}'
+        request(url+'/api/internal/runtime',{'mode':self.mode,'transitioning':True,
+                                            'map_file':str(self.map_path)},self.token)
+        for name in ['navigation','slam','simulation']:
+            self.stop_named(name)
+        if self.shutdown.is_set():
+            raise RuntimeError('Kokpit jest zamykany')
+        self.generation+=1
+        os.environ['GZ_PARTITION']=f'roboinspect_cockpit_{os.getpid()}_{self.generation}'
+        self.mode=mode
+        self.map_path=Path(map_path) if map_path else ROOT/f'maps/hangar_{self.scenario}.yaml'
+        os.environ['ROBOINSPECT_MODE']=mode
+        os.environ['ROBOINSPECT_MAP']=str(self.map_path)
+        request(url+'/api/internal/runtime',{'mode':mode,'transitioning':False,
+                                            'map_file':str(self.map_path)},self.token)
+        self.write_runtime()
+        self.start_stack()
+        deadline=time.monotonic()+60
+        while not self.shutdown.wait(.3):
+            state=request(url+'/api/status')
+            ready=state.get('mapping_ready') if mode=='mapping' else state.get('runtime_ready')
+            expected_frame='map_slam' if mode=='mapping' else 'map'
+            if ready and state.get('map',{}).get('frame')==expected_frame and state.get('robot_marker'):
+                return
+            if time.monotonic()>deadline:
+                raise RuntimeError('Nowy tryb nie uzyskał gotowości; sprawdź logi kokpitu')
+        raise RuntimeError('Przełączenie przerwane przez zamknięcie kokpitu')
+
+    def start_stack(self):
+        self.start('simulation',['bash',str(ROOT/'scripts/run_robot.sh'),
+                     f'scenario:={self.scenario}',f'headless:={str(not self.args.gazebo_gui).lower()}'])
+        if self.mode=='mapping':
+            self.start('slam',['/usr/bin/python3','/opt/ros/jazzy/bin/ros2','launch',
+                              str(ROOT/'robotics/launch/slam.launch.py')])
+        else:
+            self.start('navigation',['bash',str(ROOT/'scripts/run_navigation.sh'),
+                                    f'scenario:={self.scenario}',f'map:={self.map_path}'])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode', choices=['navigation','mapping'], default='navigation')
@@ -85,6 +151,11 @@ def main():
         parser.error('--map is only for navigation; mapping always starts a fresh map')
     if args.map and not args.map.expanduser().is_file():
         parser.error('Map file not found; save it in mapping mode first')
+    selection=ROOT/'data/current-map.json'
+    if args.mode=='navigation' and args.map is None and selection.exists():
+        chosen=json.loads(selection.read_text())
+        if chosen.get('scenario')==args.scenario and Path(chosen['map']).is_file():
+            args.map=Path(chosen['map'])
     environment = ROOT/'.venv/bin/python'
     if not environment.exists():
         print('Najpierw uruchom: bash scripts/setup_project.sh', file=sys.stderr)
@@ -114,8 +185,7 @@ def main():
             from PIL import Image  # noqa: F401
             from ament_index_python.packages import get_package_share_directory
             packages = ['nav2_bringup','ros_gz_bridge','ros_gz_sim']
-            if args.mode == 'mapping':
-                packages.append('slam_toolbox')
+            packages.append('slam_toolbox')
             for package in packages:
                 get_package_share_directory(package)
         except (ImportError,LookupError) as exc:
@@ -128,6 +198,8 @@ def main():
             return 1
         graphics_env['ROBOINSPECT_MODE'] = args.mode
         graphics_env['ROBOINSPECT_MAP'] = str(args.map.expanduser().resolve()) if args.map else str(ROOT/f'maps/hangar_{args.scenario}.yaml')
+        token=uuid4().hex
+        graphics_env['ROBOINSPECT_RUNTIME_TOKEN']=token
         os.environ.clear()
         os.environ.update(graphics_env)
         print(f"Renderowanie: {graphics['mode'].upper()} — {graphics['device']}",flush=True)
@@ -147,17 +219,18 @@ def main():
             proc = subprocess.Popen(command,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,
                                     start_new_session=True)
             processes.append((name,proc))
+        def stop_named(name):
+            for item in list(processes):
+                if item[0]==name:
+                    stop(item[1])
+                    processes.remove(item)
+        database=os.environ.get('ROBOINSPECT_DATABASE_URL',f'sqlite:///{ROOT / "data/missions.sqlite3"}')
+        store=MissionStore(database)
+        store.interrupt_operations()
+        manager=RuntimeManager(args,start,stop_named,shutdown,token)
+        runner=MappingRunner(manager,store)
         try:
-            start('simulation',['bash',str(ROOT/'scripts/run_robot.sh'),
-                                f'scenario:={args.scenario}',
-                                f'headless:={str(not args.gazebo_gui).lower()}'])
-            if args.mode == 'mapping':
-                start('slam',['/usr/bin/python3','/opt/ros/jazzy/bin/ros2','launch',
-                              str(ROOT/'robotics/launch/slam.launch.py')])
-            else:
-                start('navigation',['bash',str(ROOT/'scripts/run_navigation.sh'),
-                                    f'scenario:={args.scenario}',
-                                    'map:='+os.environ['ROBOINSPECT_MAP']])
+            manager.start_stack()
             start('operator',[str(ROOT/'.venv/bin/python'),str(ROOT/'operator/server.py'),
                               '--port',str(args.port),'--scenario',args.scenario])
             deadline = time.monotonic()+30
@@ -175,18 +248,15 @@ def main():
                     raise RuntimeError('Serwer kokpitu nie uruchomił się w 30 s')
                 shutdown.wait(0.3)
             if not shutdown.is_set():
-                RUNTIME.write_text(json.dumps({'pid':os.getpid(),'port':args.port,
-                                              'scenario':args.scenario,'rendering':graphics,
-                                              'gz_partition':os.environ['GZ_PARTITION'],
-                                              'mode':args.mode,'map':os.environ['ROBOINSPECT_MAP'],
-                                              'ros_domain_id':os.environ.get('ROS_DOMAIN_ID','0')})+'\n')
+                manager.write_runtime()
                 print(f'\nKokpit: {url}/\nSterowanie: {url}/control\nLogi: {args.log_dir}\n'+
-                      ('Tryb mapowania: uruchom bash scripts/survey_hangar.sh w drugim terminalu.\n'
+                      ('Tryb mapowania: steruj mapowaniem z panelu /control.\n'
                        if args.mode == 'mapping' else 'Poczekaj na trzy obrazy i zielony status Nav2.\n')+
                       'Ctrl+C w tym terminalu zamyka całość.\n',flush=True)
                 if not args.no_browser:
                     threading.Thread(target=webbrowser.open,args=(url+'/',),daemon=True).start()
             while not shutdown.wait(0.5):
+                runner.tick()
                 failed = [(name,p.returncode) for name,p in processes if p.poll() is not None]
                 if failed:
                     raise RuntimeError(f'Proces zakończył się: {failed}. Logi: {args.log_dir}')
@@ -195,6 +265,7 @@ def main():
             print(str(exc),file=sys.stderr,flush=True)
         finally:
             print('Zamykanie kokpitu…',flush=True)
+            runner.close()
             try:
                 request(url+'/api/cancel',{})
                 deadline = time.monotonic()+4
@@ -202,10 +273,12 @@ def main():
                     time.sleep(0.2)
             except (URLError,TimeoutError,ValueError,OSError):
                 pass
+            stop_named('operator')
             for _,proc in reversed(processes):
                 stop(proc)
             for file in files:
                 file.close()
+            store.close()
             if RUNTIME.exists():
                 try:
                     if json.loads(RUNTIME.read_text()).get('pid') == os.getpid():

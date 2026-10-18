@@ -60,3 +60,23 @@ def test_exported_unknown_remains_unknown_when_loaded_by_map_server(tmp_path):
             else -1
         )
     assert states == [-1, 0, 100, 0, -1, -1]
+
+
+def test_robot_projection_matches_native_and_navigation_maps():
+    from roboinspect.mapping import project_robot
+
+    native = project_robot(0, 0, 0, (-4, -4, 0), 0.05, 600, 440)
+    navigation = project_robot(-11, -7, 0, (-15, -11, 0), 0.05, 600, 440)
+    assert native == navigation == {"x": 80.0, "y": 359.0, "heading": 0}
+    assert project_robot(-1, 0, 0, (0, 0, 0), 1, 10, 10) is None
+
+
+def test_robot_projection_rotates_map_origin():
+    import math
+
+    from roboinspect.mapping import project_robot
+
+    point = project_robot(9, 22, math.pi / 2, (10, 20, math.pi / 2), 1, 10, 10)
+    assert point["x"] == pytest.approx(2)
+    assert point["y"] == pytest.approx(8)
+    assert point["heading"] == pytest.approx(0)

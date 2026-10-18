@@ -46,3 +46,14 @@ def write_aligned_map(prefix: Path, data, width, height, resolution, origin):
     }
     prefix.with_suffix(".yaml").write_text(yaml.safe_dump(info, sort_keys=False))
     return info
+
+
+def project_robot(x, y, yaw, origin, resolution, width, height):
+    """Map coordinates -> image pixels; inverse map-origin rotation + ROS row flip."""
+    dx, dy = x - origin[0], y - origin[1]
+    c, s = math.cos(origin[2]), math.sin(origin[2])
+    column = (c * dx + s * dy) / resolution
+    row = height - 1 - (-s * dx + c * dy) / resolution
+    if not (0 <= column < width and 0 <= row < height):
+        return None
+    return {"x": column, "y": row, "heading": yaw - origin[2]}

@@ -171,6 +171,7 @@ def main():
     parser.add_argument('command',choices=['survey','save'])
     parser.add_argument('--name',default='hangar_slam')
     parser.add_argument('--overwrite',action='store_true')
+    parser.add_argument('--operation-id',help=argparse.SUPPRESS)
     args=parser.parse_args()
     if not args.name.replace('_','').replace('-','').isalnum():
         parser.error('--name: użyj liter, cyfr, _ lub -')
@@ -180,7 +181,9 @@ def main():
     os.environ['ROS_DOMAIN_ID']=runtime.get('ros_domain_id','0')
     with urlopen(f'http://127.0.0.1:{runtime["port"]}/api/status',timeout=4) as r:
         state=json.load(r)
-    if state.get('mode')!='mapping' or state.get('busy'):
+    managed=(bool(os.environ.get('ROBOINSPECT_RUNTIME_TOKEN')) and args.operation_id
+             and (state.get('operation') or {}).get('id')==args.operation_id)
+    if state.get('mode')!='mapping' or (state.get('busy') and not managed):
         raise RuntimeError('Kokpit nie jest w bezczynnym trybie mapowania')
     (ROOT/'data').mkdir(exist_ok=True)
     with (ROOT/'data/mapping-control.lock').open('a') as lock:

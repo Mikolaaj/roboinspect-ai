@@ -1,5 +1,6 @@
 """FastAPI routes shared by buttons and the future validated LLM planner."""
 
+import secrets
 import threading
 from collections.abc import Callable
 from contextlib import asynccontextmanager
@@ -14,12 +15,17 @@ from .contracts import (
     ACTIVE,
     ConflictError,
     GoalRequest,
+    MappingAction,
+    MappingOperation,
+    MappingRequest,
     MissionEvent,
     MissionPlan,
     MissionRecord,
+    RuntimeUpdate,
     Sector,
 )
 from .missions import MissionService
+from .operations import request_operation
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "operator/web"
@@ -79,6 +85,55 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
             status_code=400 if request.url.path == "/api/goal" else 422,
         )
 
+    @app.get("/api/history")
+    def activity_history(limit: int = Query(default=30, ge=1, le=100)):
+        rows = [
+            {
+                "id": r.id,
+                "kind": "mission",
+                "name": r.name,
+                "status": r.status,
+                "created_at": r.created_at,
+                "message": r.message,
+                "details": [f"{s.target} ({s.status})" for s in r.steps],
+            }
+            for r in service.store.list(limit)
+        ]
+        rows += [
+            {
+                "id": r.id,
+                "kind": "mapping",
+                "name": r.name,
+                "status": r.status,
+                "created_at": r.created_at,
+                "message": r.message,
+                "saved_map": r.saved_map,
+                "details": [e.message for e in r.events],
+                "events": r.events,
+            }
+            for r in service.store.operation_list(limit)
+        ]
+        return sorted(rows, key=lambda r: r["created_at"], reverse=True)[:limit]
+
+    @app.post("/api/mapping/{action}", response_model=MappingOperation, status_code=202)
+    def mapping_action(
+        action: MappingAction,
+        body: MappingRequest,
+        response: Response,
+        idempotency_key: str | None = Header(default=None, min_length=1, max_length=128),
+    ):
+        record, created = request_operation(service, action, idempotency_key)
+        response.status_code = 202 if created else 200
+        return record
+
+    @app.post("/api/internal/runtime", include_in_schema=False)
+    def runtime_update(update: RuntimeUpdate, x_runtime_token: str | None = Header(default=None)):
+        expected = getattr(operator, "runtime_token", "")
+        if not expected or not secrets.compare_digest(x_runtime_token or "", expected):
+            raise HTTPException(403, "Runtime token required")
+        operator.set_runtime(update.mode, update.transitioning, update.map_file)
+        return {"accepted": True}
+
     @app.get("/api/missions", response_model=list[MissionRecord])
     def list_missions(limit: int = Query(default=30, ge=1, le=100)):
         return service.store.list(limit)
@@ -123,6 +178,13 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
 
     @app.post("/api/cancel")
     def cancel_active(response: Response):
+        jobs = service.store.operation_busy()
+        if jobs:
+            if jobs[0].kind != MappingAction.START or len(jobs) > 1:
+                raise ConflictError("Trwa operacja przełączenia lub zapisu mapy")
+            service.store.cancel_operation(jobs[0].id)
+            response.status_code = 202
+            return {"accepted": True, "operation_id": jobs[0].id}
         record = service.cancel()
         response.status_code = 202 if record and record.status in ACTIVE else 200
         return {"accepted": True, "mission_id": record.id if record else None}
@@ -130,6 +192,7 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
     @app.get("/api/status")
     def status():
         result = service.robot.snapshot()
+        result["runtime_ready"] = result["ready"]
         record = service.summary()
         result["mission"] = record.model_dump(mode="json") if record else None
         result["ready"] = result["ready"] and service.healthy
@@ -151,6 +214,21 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
                 result["goal"] = record.steps[record.current_step].target
             if record.status.value == "uncertain":
                 result["ready"] = False
+        jobs = service.store.operation_busy()
+        recent = service.store.operation_list(1)
+        operation = jobs[0] if jobs else (recent[0] if recent else None)
+        result["operation"] = operation.model_dump(mode="json") if operation else None
+        result["operation_busy"] = bool(jobs)
+        if operation and (jobs or record is None or operation.created_at > record.created_at):
+            result.update(message=operation.message, state=operation.status.value, goal=None)
+            result["events"] = [
+                {"time": e.time.astimezone().strftime("%H:%M:%S"), "message": e.message}
+                for e in operation.events
+            ]
+        if jobs:
+            result.update(ready=False, busy=True)
+            if jobs[0].cancel_requested:
+                result.update(state="canceling", message="Zatrzymywanie obchodu…")
         return result
 
     @app.get("/api/sectors", response_model=dict[str, Sector])
@@ -193,6 +271,8 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
                         timeout=1,
                     )
                     image = operator.frames.get(name)
+                    if image is None:
+                        sequence = -1
                     data = None
                     if image and image["sequence"] != sequence:
                         data, sequence = image["jpeg"], image["sequence"]

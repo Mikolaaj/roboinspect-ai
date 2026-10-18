@@ -84,18 +84,13 @@ Instrukcja instalacji, konfiguracji, uruchamiania, treningu i wdrożenia będzie
 
 Klucze API przechowujemy poza Git. Duże dane, wagi modeli, nagrania i lokalne logi nie są commitowane. Konfiguracja przykładowa będzie dodana wraz z pierwszą usługą.
 
-## SLAM — mapa z lidaru
+## SLAM — mapa i robot w panelu
 
-Pełna kolejność zatrzymania, mapowania, zapisu i uruchomienia Nav2 na mapie
-z pomiarów: [docs/slam.md](docs/slam.md).
+Uruchamianie nadal wymaga dwóch komend: `bash scripts/run_cockpit.sh` oraz
+`bash scripts/run_control_panel.sh`. W panelu pod A/B/C/BASE są przyciski:
+rozpocznij mapowanie, zapisz mapę, resetuj mapę i zakończ mapowanie.
+Na mapie widać kropkę robota. Operacje i ich postęp trafiają do wspólnej
+historii z misjami, a wybrana mapa jest pamiętana po restarcie.
 
-```bash
-bash scripts/stop_cockpit.sh
-bash scripts/run_cockpit.sh --mode mapping
-# Drugi terminal:
-bash scripts/survey_hangar.sh
-bash scripts/save_slam_map.sh --overwrite
-```
-
-Po zapisaniu mapy zatrzymaj kokpit i uruchom:
-`bash scripts/run_cockpit.sh --map data/maps/hangar_slam.yaml`.
+Zatrzymanie całości: `bash scripts/stop_cockpit.sh`.
+Pełna instrukcja i narzędzia diagnostyczne: [docs/slam.md](docs/slam.md).

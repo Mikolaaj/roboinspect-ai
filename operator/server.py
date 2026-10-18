@@ -27,11 +27,13 @@ from roboinspect.adapter import RosRobot
 from roboinspect.api import create_app
 from roboinspect.missions import MissionService
 from roboinspect.store import MissionStore
-from geometry_msgs.msg import PoseWithCovarianceStamped, Twist
+from geometry_msgs.msg import Twist
 from lifecycle_msgs.srv import GetState
 from nav2_msgs.action import NavigateToPose
 from nav_msgs.msg import Odometry, OccupancyGrid
-from roboinspect.mapping import grid_image, BASE_OFFSET
+from roboinspect.mapping import grid_image, BASE_OFFSET, project_robot
+from tf2_ros import Buffer, TransformListener, TransformException
+from rclpy.time import Time
 from rosgraph_msgs.msg import Clock
 from sensor_msgs.msg import Image
 
@@ -63,8 +65,11 @@ class Operator(Node):
         self.create_subscription(OccupancyGrid, '/map', self.map_received,
                                  QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL,
                                             reliability=ReliabilityPolicy.RELIABLE))
-        if self.mode == 'mapping':
-            self.create_subscription(PoseWithCovarianceStamped, '/pose', self.slam_position, 10)
+        self.transitioning = False
+        self.runtime_token = os.environ.get('ROBOINSPECT_RUNTIME_TOKEN','')
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer,self)
+        self.create_timer(.1,self.update_pose)
         self.active = False
         self.last_odom = 0
         self.last_clock = 0
@@ -88,9 +93,47 @@ class Operator(Node):
             self.create_subscription(Image, topic, partial(self.image, name), qos_profile_sensor_data)
         self.create_subscription(Odometry, '/roboinspect/odom', self.odometry, qos_profile_sensor_data)
         self.create_subscription(Clock, '/clock', self.clock, qos_profile_sensor_data)
-        self.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.position, 10)
         self.create_timer(0.05, self.process_commands)
         self.create_timer(1.0, self.monitor)
+
+    def set_runtime(self, mode, transitioning, map_file):
+        with self.lock:
+            self.mode,self.transitioning=mode,transitioning
+            self.state.update(mode=mode,map_file=map_file,map_position=None,robot_marker=None,
+                              busy=False,state='idle',goal=None,remote_active=False)
+            self.state.pop('map',None)
+            self.map_png=None
+            self.last_map=self.last_odom=self.last_clock=0
+            self.clock_value=None
+            self.active=False
+            self.lifecycle_future=None
+            self.request_id+=1
+            self.tf_buffer.clear()
+            self.frames.clear()
+
+    def update_pose(self):
+        with self.lock:
+            self.state['robot_marker']=None
+            if self.transitioning or self.clock_value is None:
+                return
+            try:
+                tf=self.tf_buffer.lookup_transform('map','base_link',Time())
+            except TransformException:
+                return
+            stamp=tf.header.stamp.sec+tf.header.stamp.nanosec/1e9
+            clock=self.clock_value[0]+self.clock_value[1]/1e9
+            if abs(clock-stamp)>2 or time.monotonic()-self.last_odom>2:
+                return
+            p,q=tf.transform.translation,tf.transform.rotation
+            yaw=math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z))
+            self.state['map_position']={'x':p.x,'y':p.y}
+            info=self.state.get('map')
+            if info:
+                x,y=p.x,p.y
+                if info['frame']=='map_slam':
+                    x,y=x-BASE_OFFSET[0],y-BASE_OFFSET[1]
+                self.state['robot_marker']=project_robot(x,y,yaw,info['origin'],
+                    info['resolution'],info['width'],info['height'])
 
     def event(self, message):
         self.state['message'] = message
@@ -117,6 +160,8 @@ class Operator(Node):
             self.get_logger().error(f'Camera {name}: {exc}')
 
     def map_received(self, msg):
+        if self.transitioning or msg.header.frame_id != ('map_slam' if self.mode == 'mapping' else 'map'):
+            return
         image = grid_image(msg.data, msg.info.width, msg.info.height)
         output = BytesIO()
         image.save(output, format='PNG')
@@ -128,12 +173,10 @@ class Operator(Node):
                                  'resolution':msg.info.resolution,
                                  'known_cells':sum(v >= 0 for v in msg.data),
                                  'occupied_cells':sum(v >= 65 for v in msg.data),
-                                 'frame':msg.header.frame_id, 'updates':self.map_updates}
-
-    def slam_position(self, msg):
-        with self.lock:
-            self.state['map_position'] = {'x':msg.pose.pose.position.x+BASE_OFFSET[0],
-                                          'y':msg.pose.pose.position.y+BASE_OFFSET[1]}
+                                 'frame':msg.header.frame_id, 'updates':self.map_updates,
+                                 'origin':[msg.info.origin.position.x,msg.info.origin.position.y,
+                                     math.atan2(2*(msg.info.origin.orientation.w*msg.info.origin.orientation.z),
+                                                1-2*msg.info.origin.orientation.z**2)]}
 
     def odometry(self, msg):
         with self.lock:
@@ -148,21 +191,17 @@ class Operator(Node):
                 self.clock_value = value
                 self.last_clock = time.monotonic()
 
-    def position(self, msg):
-        with self.lock:
-            self.state['map_position'] = {'x':msg.pose.pose.position.x,
-                                          'y':msg.pose.pose.position.y}
-
     def ready(self):
         now = time.monotonic()
-        return (self.active and self.nav.server_is_ready() and
+        return (self.mode == 'navigation' and not self.transitioning and self.active and self.nav.server_is_ready() and
                 now-self.last_odom < 4 and now-self.last_clock < 4)
 
     def snapshot(self):
         with self.lock:
             now = time.monotonic()
             return {**self.state, 'service':'roboinspect', 'ready':self.ready(), 'goals':list(self.goals),
-                    'mapping_ready':self.mode == 'mapping' and now-self.last_map < 5 and now-self.last_odom < 2 and now-self.last_clock < 2,
+                    'mapping_controls':bool(self.runtime_token), 'transitioning':self.transitioning,
+                    'mapping_ready':not self.transitioning and self.mode == 'mapping' and now-self.last_map < 5 and now-self.last_odom < 2 and now-self.last_clock < 2,
                     'map_age_s':None if not self.last_map else round(now-self.last_map,2),
                     'simulation_s':None if self.clock_value is None else self.clock_value[0]+self.clock_value[1]/1e9,
                     'events':list(self.events),
@@ -320,6 +359,8 @@ class Operator(Node):
 
     def lifecycle_result(self, future):
         with self.lock:
+            if future is not self.lifecycle_future:
+                return
             try:
                 self.active = future.result().current_state.id == 3
             except Exception:

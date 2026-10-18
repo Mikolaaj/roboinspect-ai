@@ -80,6 +80,7 @@ class MissionService:
                 or state.get("busy")
                 or state.get("remote_active")
                 or self.store.active()
+                or self.store.operation_busy()
             ):
                 raise ConflictError("Robot nie jest gotowy lub ma aktywną misję")
             return self.store.create(plan, self.scenario, key)

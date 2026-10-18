@@ -170,3 +170,9 @@ odśwież kartę.
 
 Po aktualizacji do fazy 5a uruchom raz `bash scripts/setup_project.sh`.
 Panel `/control` zawiera również formularz sekwencji i trwałą historię.
+
+## Mapowanie bez dodatkowych terminali
+
+Uruchom tylko `run_cockpit.sh` i `run_control_panel.sh`. Panel zawiera start,
+zapis, reset i zakończenie mapowania. Mapę z kropką robota widać na obu stronach.
+Misje i operacje SLAM mają wspólną trwałą historię. [Instrukcja](slam.md#obsługa-z-panelu--dwie-komendy-zalecane).
