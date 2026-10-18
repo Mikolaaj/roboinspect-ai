@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RoboInspect · Sterowanie</title><link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script></head>
+<body data-page="control"><header><a class="brand" href="/">◈ <span>RoboInspect <em>AI</em></span></a><span class="tag">STEROWANIE</span><div class="connection"><i id="connection-dot"></i><span id="connection">Łączenie…</span></div><a class="link" href="/" target="_blank" rel="noopener">Otwórz kokpit ↗</a></header>
+<main class="control-main"><div class="heading"><div><p class="eyebrow">NAWIGACJA ROBOTA</p><h1>Dokąd jedziemy?</h1></div><span class="scenario" id="scenario">SCENARIUSZ —</span></div>
+<div class="control-layout"><section class="destinations" aria-label="Wybierz cel"><div class="goal-grid">
+<button class="goal-button sector-a" data-goal="A" disabled><span class="sector-letter">A</span><span><strong>Serwis</strong><small>Jedź do sektora A</small></span><span class="arrow">↗</span></button>
+<button class="goal-button sector-b" data-goal="B" disabled><span class="sector-letter">B</span><span><strong>Inspekcja</strong><small>Jedź do sektora B</small></span><span class="arrow">↗</span></button>
+<button class="goal-button sector-c" data-goal="C" disabled><span class="sector-letter">C</span><span><strong>Magazyn</strong><small>Jedź do sektora C</small></span><span class="arrow">↗</span></button>
+<button class="goal-button base" data-goal="BASE" disabled><span class="sector-letter">⌂</span><span><strong>Powrót do bazy</strong><small>Jedź do punktu BASE</small></span><span class="arrow">↗</span></button>
+</div><button id="cancel" class="cancel" disabled>■ &nbsp; Anuluj przejazd</button><p class="help">Wybierz jeden cel. Kolejny przejazd możesz zlecić po zakończeniu lub anulowaniu bieżącego.</p><div id="error" class="error" role="alert" hidden></div></section>
+<aside class="mission-card"><p class="eyebrow">AKTUALNY PRZEJAZD</p><h2 id="mission-state">Oczekiwanie</h2><div class="mission-destination" id="goal">—</div><dl><div><dt>Pozostały dystans</dt><dd id="distance">—</dd></div><div><dt>Prędkość</dt><dd id="speed">—</dd></div><div><dt>Pozycja na mapie</dt><dd id="position">—</dd></div></dl><p id="message" role="status">Oczekiwanie na nawigację…</p></aside></div>
+<section class="history planner"><h2>Zaplanuj misję</h2>
+<p class="help">Kroki wykonywane kolejno. Błąd lub anulowanie pomija pozostałe cele.</p>
+<label>Nazwa misji <input id="plan-name" value="Obchód hali" maxlength="120"></label>
+<label>Kolejność celów <input id="plan-targets" value="A, BASE" aria-describedby="plan-help"></label>
+<p class="help" id="plan-help">Oddziel przecinkami: A, B, C, BASE, P1–P5. Maksymalnie 20 kroków.</p>
+<button class="cancel" id="run-plan" disabled>Uruchom misję</button>
+<p id="plan-progress" role="status"></p></section>
+<section class="history"><h2>Zapisane misje</h2><ol id="missions"><li>Ładowanie historii…</li></ol></section>
+<section class="history"><h2>Historia zdarzeń</h2><ol id="events"><li>Brak zdarzeń ostatniej misji.</li></ol></section>
+<footer><span id="rendering">Renderowanie: —</span><span>RoboInspect AI / panel lokalny</span><span id="refresh-status">Status odświeżany automatycznie</span></footer></main></body></html>

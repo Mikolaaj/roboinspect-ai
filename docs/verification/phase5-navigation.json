@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "scenario": "normal",
+  "routes": [
+    {
+      "goal": "A",
+      "state": "succeeded",
+      "world_xy": [
+        -8.94790156632536,
+        -1.036177171362831
+      ],
+      "error_m": 0.06342739565177272,
+      "seconds": 25.9
+    },
+    {
+      "goal": "BASE",
+      "state": "succeeded",
+      "world_xy": [
+        -10.781739400504947,
+        -6.69726407088409
+      ],
+      "error_m": 0.3732113771974446,
+      "seconds": 65.5
+    }
+  ],
+  "cameras": {
+    "fpv": {
+      "age_s": 0.02,
+      "sequence": 504,
+      "stamp_s": 50.3,
+      "width": 320,
+      "height": 240
+    },
+    "follow": {
+      "age_s": 0.11,
+      "sequence": 223,
+      "stamp_s": 50.2,
+      "width": 640,
+      "height": 360
+    },
+    "overhead": {
+      "age_s": 0.07,
+      "sequence": 158,
+      "stamp_s": 50.25,
+      "width": 640,
+      "height": 480
+    }
+  },
+  "camera_fps_wall": {
+    "fpv": 9.97,
+    "follow": 4.49,
+    "overhead": 3.99
+  },
+  "simulation_realtime_factor": 1.0,
+  "camera_lag_sim_s": {
+    "fpv": 0.033,
+    "follow": 0.133,
+    "overhead": 0.083
+  },
+  "cancel_drift_m": 0.0,
+  "final_status": {
+    "ready": true,
+    "busy": false,
+    "state": "succeeded",
+    "execution_id": "55d02355-611d-48b5-87fd-3cfe9b4e4e6d",
+    "goal": "BASE",
+    "scenario": "normal",
+    "message": "Wszystkie kroki misji wykonane",
+    "distance_m": null,
+    "map_position": {
+      "x": -10.999669038767667,
+      "y": -6.981554167515651
+    },
+    "rendering": {
+      "mode": "gpu",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    },
+    "remote_active": false,
+    "recovery_state": null,
+    "velocity": {
+      "linear": 0.0,
+      "angular": 0.0
+    },
+    "service": "roboinspect",
+    "goals": [
+      "BASE",
+      "A",
+      "B",
+      "C",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5"
+    ],
+    "simulation_s": 146.199,
+    "events": [
+      {
+        "time": "09:18:58",
+        "message": "Misja przyjęta"
+      },
+      {
+        "time": "09:18:58",
+        "message": "Krok 1/1: jazda do BASE"
+      },
+      {
+        "time": "09:20:04",
+        "message": "Zakończono krok 1: BASE"
+      },
+      {
+        "time": "09:20:04",
+        "message": "Wszystkie kroki misji wykonane"
+      }
+    ],
+    "cameras": {
+      "fpv": {
+        "age_s": 0.09,
+        "sequence": 1462,
+        "stamp_s": 146.1,
+        "width": 320,
+        "height": 240
+      },
+      "follow": {
+        "age_s": 0.19,
+        "sequence": 660,
+        "stamp_s": 146.0,
+        "width": 640,
+        "height": 360
+      },
+      "overhead": {
+        "age_s": 0.18,
+        "sequence": 463,
+        "stamp_s": 146.0,
+        "width": 640,
+        "height": 480
+      }
+    },
+    "mission": {
+      "id": "c68b8c4e-d1aa-4fff-b7c4-84fccc2e6ab3",
+      "name": "Przejazd do BASE",
+      "scenario": "normal",
+      "status": "succeeded",
+      "steps": [
+        {
+          "action": "navigate",
+          "target": "BASE",
+          "timeout_seconds": 300,
+          "status": "succeeded",
+          "execution_id": "55d02355-611d-48b5-87fd-3cfe9b4e4e6d"
+        }
+      ],
+      "current_step": 0,
+      "message": "Wszystkie kroki misji wykonane",
+      "created_at": "2026-10-18T07:18:58.882316Z",
+      "updated_at": "2026-10-18T07:20:04.252753Z"
+    },
+    "mission_id": "c68b8c4e-d1aa-4fff-b7c4-84fccc2e6ab3"
+  }
+}

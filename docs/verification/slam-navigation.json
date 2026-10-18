@@ -1,0 +1,192 @@
+{
+  "passed": true,
+  "scenario": "normal",
+  "routes": [
+    {
+      "goal": "A",
+      "state": "succeeded",
+      "world_xy": [
+        -9.033313347321204,
+        -1.0878851714913318
+      ],
+      "error_m": 0.0939871399596987,
+      "seconds": 27.5
+    },
+    {
+      "goal": "B",
+      "state": "succeeded",
+      "world_xy": [
+        -0.07949379481584071,
+        -1.0703559289210054
+      ],
+      "error_m": 0.10615658316166994,
+      "seconds": 52.1
+    },
+    {
+      "goal": "C",
+      "state": "succeeded",
+      "world_xy": [
+        9.934411963774382,
+        3.9059782632667988
+      ],
+      "error_m": 0.11463802804593416,
+      "seconds": 57.5
+    },
+    {
+      "goal": "BASE",
+      "state": "succeeded",
+      "world_xy": [
+        -10.909581245538186,
+        -6.9579023452199955
+      ],
+      "error_m": 0.09973847650932997,
+      "seconds": 119.5
+    }
+  ],
+  "cameras": {
+    "fpv": {
+      "age_s": 0.0,
+      "sequence": 101,
+      "stamp_s": 10.0,
+      "width": 320,
+      "height": 240
+    },
+    "overhead": {
+      "age_s": 0.24,
+      "sequence": 29,
+      "stamp_s": 9.75,
+      "width": 640,
+      "height": 480
+    },
+    "follow": {
+      "age_s": 0.19,
+      "sequence": 44,
+      "stamp_s": 9.8,
+      "width": 640,
+      "height": 360
+    }
+  },
+  "camera_fps_wall": {
+    "fpv": 9.96,
+    "overhead": 1.99,
+    "follow": 3.98
+  },
+  "simulation_realtime_factor": 1.0,
+  "camera_lag_sim_s": {
+    "fpv": 0.01,
+    "overhead": 0.26,
+    "follow": 0.21
+  },
+  "cancel_drift_m": 0.0,
+  "final_status": {
+    "ready": true,
+    "busy": false,
+    "state": "succeeded",
+    "execution_id": "9134d463-0dbe-46e5-b15b-b78e0e4b703a",
+    "goal": "BASE",
+    "scenario": "normal",
+    "message": "Wszystkie kroki misji wykonane",
+    "distance_m": null,
+    "map_position": {
+      "x": -10.917668461919368,
+      "y": -6.95479091332825
+    },
+    "rendering": {
+      "mode": "gpu",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    },
+    "mode": "navigation",
+    "map_file": "/home/mikolaj/Desktop/roboinspect-ai/maps/slam/hangar_slam.yaml",
+    "remote_active": false,
+    "recovery_state": null,
+    "map": {
+      "width": 603,
+      "height": 449,
+      "resolution": 0.05000000074505806,
+      "known_cells": 257374,
+      "occupied_cells": 3973,
+      "frame": "map",
+      "updates": 1
+    },
+    "velocity": {
+      "linear": 0.0,
+      "angular": 0.0
+    },
+    "service": "roboinspect",
+    "goals": [
+      "BASE",
+      "A",
+      "B",
+      "C",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5"
+    ],
+    "mapping_ready": false,
+    "map_age_s": 280.89,
+    "simulation_s": 278.743,
+    "events": [
+      {
+        "time": "09:55:37",
+        "message": "Misja przyjęta"
+      },
+      {
+        "time": "09:55:37",
+        "message": "Krok 1/1: jazda do BASE"
+      },
+      {
+        "time": "09:57:36",
+        "message": "Zakończono krok 1: BASE"
+      },
+      {
+        "time": "09:57:36",
+        "message": "Wszystkie kroki misji wykonane"
+      }
+    ],
+    "cameras": {
+      "fpv": {
+        "age_s": 0.04,
+        "sequence": 2788,
+        "stamp_s": 278.7,
+        "width": 320,
+        "height": 240
+      },
+      "overhead": {
+        "age_s": 0.23,
+        "sequence": 812,
+        "stamp_s": 278.5,
+        "width": 640,
+        "height": 480
+      },
+      "follow": {
+        "age_s": 0.13,
+        "sequence": 1264,
+        "stamp_s": 278.6,
+        "width": 640,
+        "height": 360
+      }
+    },
+    "mission": {
+      "id": "417d6521-405e-4fc5-88d8-c1ad55b93381",
+      "name": "Przejazd do BASE",
+      "scenario": "normal",
+      "status": "succeeded",
+      "steps": [
+        {
+          "action": "navigate",
+          "target": "BASE",
+          "timeout_seconds": 300,
+          "status": "succeeded",
+          "execution_id": "9134d463-0dbe-46e5-b15b-b78e0e4b703a"
+        }
+      ],
+      "current_step": 0,
+      "message": "Wszystkie kroki misji wykonane",
+      "created_at": "2026-10-18T07:55:37.462491Z",
+      "updated_at": "2026-10-18T07:57:36.530246Z"
+    },
+    "mission_id": "417d6521-405e-4fc5-88d8-c1ad55b93381"
+  }
+}

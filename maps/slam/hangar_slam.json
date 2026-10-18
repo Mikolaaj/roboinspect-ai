@@ -1,0 +1,36 @@
+{
+  "source": "slam_toolbox /map, lidar only",
+  "scenario": "normal",
+  "native_frame": "map_slam",
+  "navigation_frame": "map",
+  "native_to_navigation_translation": [
+    -11.0,
+    -7.0
+  ],
+  "initial_world_pose": [
+    -11,
+    -7,
+    0
+  ],
+  "known_cells": 257374,
+  "occupied_cells": 3973,
+  "native_origin": [
+    -4.039269945036943,
+    -4.240263521260463,
+    0.0
+  ],
+  "navigation_map": {
+    "image": "hangar_slam.pgm",
+    "mode": "trinary",
+    "resolution": 0.05000000074505806,
+    "origin": [
+      -15.039269945036942,
+      -11.240263521260463,
+      0.0
+    ],
+    "negate": 0,
+    "occupied_thresh": 0.65,
+    "free_thresh": 0.196
+  },
+  "posegraph_frame": "map_slam; do not load as a world-aligned graph"
+}

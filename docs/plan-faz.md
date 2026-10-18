@@ -1,8 +1,17 @@
 # RoboInspect AI — plan realizacji krok po kroku
 
-Status: plan przyszłych prac, nie lista wykonanych funkcji. Data: 17.10.2026.
+Status: plan docelowy; stan wykonania opisują README.md i docs/phase3-results.md. Data: 17.10.2026.
+
+Aktualizacja zakresu: na życzenie użytkownika podstawowy kokpit z trzema kamerami
+i panel A/B/C/BASE przeniesiono z fazy 4 do bieżącej fazy 3. Dodatkowe
+wygładzanie kamery, nakładki trasy oraz dalsze pomiary fazy 4 pozostają
+odrębnymi ulepszeniami.
 
 Cel: robot mobilny w wirtualnym hangarze Gazebo, sterowany poleceniami tekstowymi lub głosowymi, wykonujący inspekcje za pomocą własnego modelu wizyjnego. Gotowy LLM interpretuje tekst, gotowy STT transkrybuje mowę, a własne eksperymenty ML dotyczą obrazów. Projekt obejmuje testy, MLOps, CI/CD i instrukcję odtworzenia na innym komputerze.
+
+Uzupełnienie z 18.10.2026: w późniejszej percepcji dodamy YOLO do detekcji
+oraz SAM do segmentacji obiektów z kamery robota. To zaplanowane funkcje,
+jeszcze niezaimplementowane. Podział ról, dane i pomiary: [perception-plan.md](perception-plan.md).
 
 ## Docelowy ekran operatora
 
@@ -128,8 +137,13 @@ Kryterium: jeden przejazd robota widać równocześnie z przodu, z trzeciej osob
 
 ### Faza 5 — API i trwałe wykonanie misji
 
+Stan 18.10: wykonany rdzeń 5a — uv, testy, workflow CI, FastAPI, Pydantic,
+własny wykonawca sekwencji i SQLite. PostgreSQL, Pydantic Graph i tracing
+pozostają do wykonania. [Instrukcja i zakres](missions.md).
+
 Zadania:
 
+- Uzupełnić zaległe elementy fazy 1: pyproject/uv i lockfile, Ruff, pytest oraz podstawowe CI; samo istnienie repo i skryptów testowych nie oznacza ich wykonania.
 - Zbudować FastAPI: sektory, stan robota, tworzenie/status/anulowanie misji i wyniki.
 - Wprowadzić kontrakty Pydantic i walidację domenową.
 - Zaimplementować wykonawcę misji / Pydantic Graph ze stanami i obsługą błędów.
@@ -141,6 +155,14 @@ Zadania:
 Rezultat: kompletna misja uruchamiana przez API, jeszcze z planu utworzonego bez LLM.
 
 Kryterium: duplikat żądania nie uruchamia drugiego przejazdu; restart API nie kasuje historii, a stan wykonywanej misji jest uzgadniany z adapterem. Utrata połączenia nie jest raportowana jako sukces.
+
+### Faza 5b — SLAM przed czatem
+
+- Osobny tryb mapowania SLAM Toolbox, bez AMCL i Nav2.
+- Kontrolowany obchód hali z pozycją SLAM i kontrolą przeszkód lidarem.
+- Podgląd mapy, zapis rastra i grafu, jawne uzgodnienie układów współrzędnych.
+- Ponowny start AMCL + Nav2 na zapisanej mapie i test przejazdów.
+- Instrukcja: [slam.md](slam.md). SLAM nie zastępuje dalszych zadań PostgreSQL i tracing.
 
 ### Faza 6 — chatbot tekstowy i gotowy LLM
 
@@ -201,6 +223,7 @@ Zadania:
 - Podzielić dane po scenach/instancjach/rodzinach tekstur; odseparować test przed strojeniem.
 - Przygotować zestaw o zmienionych warunkach do badania odporności.
 - Uruchomić MLflow tracking z trwałym przechowywaniem metadanych i artefaktów; to osobna funkcja od bazy aplikacji, nawet jeśli korzysta z tej samej instancji PostgreSQL.
+- Przygotować bounding boxy dla docelowych klas YOLO oraz referencyjne maski do oceny SAM; dane syntetyczne lub ręczne adnotacje są podstawą oceny, maski wygenerowane przez SAM nie zastępują niezależnego ground truth.
 
 Rezultat: odtwarzalny dataset, raport EDA i jawny split train/validation/test.
 
@@ -217,6 +240,8 @@ Zadania:
 - Zmierzyć macro-F1, recall defektów, fałszywe alarmy i macierz pomyłek.
 - Wybrać model według jawnych kryteriów jakości i czasu.
 - Zarejestrować wybraną wersję, zapisać model card i końcową ocenę na teście.
+- Dodać baseline detekcji YOLO i, jeśli potrzebne, fine-tuning dla paneli/defektów; nie zakładać, że gotowe wagi rozpoznają nasze klasy przemysłowe.
+- Porównać konfiguracje YOLO + SAM: jakość detekcji/masek, opóźnienie i VRAM wspólnie z działającym Gazebo. Wersję i rozmiar SAM dobierzemy po pomiarach na RTX 4060 8 GB.
 
 Rezultat: porównanie algorytmów i wersjonowany model gotowy do wykorzystania przez usługę.
 
@@ -227,6 +252,9 @@ Kryterium: trening uruchamia się z konfiguracji, wynik jest powiązany z danymi
 Zadania:
 
 - Dodać InspectPanel: dojazd, stabilizacja kadru, pobranie aktualnego obrazu i inferencja.
+- Podłączyć YOLO do lokalizacji obiektu oraz SAM do wyznaczania jego maski z boxa/punktu; maskę i box wyświetlać jako przełączaną nakładkę FPV.
+- Zachować własny model oceny defektów: maska obiektu nie oznacza automatycznego rozpoznania uszkodzenia. Łączyć detekcję, segmentację i ocenę z tym samym kadrem i czasem.
+- Uruchamiać percepcję w osobnym workerze z ograniczoną kolejką; zmierzyć tryb klatek okresowych i inspekcji po zatrzymaniu. Nie blokować Nav2 ani trzech podglądów inferencją.
 - Obsłużyć brak obrazu, zbyt stary obraz i niską pewność wyniku.
 - Powiązać każdy wynik z panelem, misją, obrazem i wersją modelu.
 - Wyświetlać wynik w panelu FPV i na monitoringu hangaru.

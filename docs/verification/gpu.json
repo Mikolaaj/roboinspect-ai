@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "rendering": {
+    "mode": "gpu",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "opengl_renderer": "08:48:42: GL_RENDERER = NVIDIA GeForce RTX 4060 Laptop GPU/PCIe/SSE2",
+  "nvidia_gazebo_processes": [
+    {
+      "pid": 39220,
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "memory": "50 MiB",
+      "type": "G"
+    }
+  ],
+  "camera_fps_wall": {
+    "fpv": 10.39,
+    "follow": 4.0,
+    "overhead": 3.2
+  },
+  "realtime_factor": 1.03,
+  "physics_and_ros": "CPU",
+  "navigation_routes": [
+    {
+      "goal": "A",
+      "state": "succeeded",
+      "world_xy": [
+        -8.974111108696455,
+        -1.0268668772105525
+      ],
+      "error_m": 0.03731037099753453,
+      "seconds": 26.7
+    },
+    {
+      "goal": "BASE",
+      "state": "succeeded",
+      "world_xy": [
+        -10.83855080083066,
+        -6.734364024906071
+      ],
+      "error_m": 0.31085095331448404,
+      "seconds": 89.5
+    }
+  ],
+  "cancel_drift_m": 0.0,
+  "verified_on": "2026-10-18",
+  "launch_configuration_sha256": {
+    "scripts/rendering.py": "8128589fad51941c45d407b78a49dff8897206673482abceabbeeef556201664",
+    "scripts/cockpit.py": "772ab13737940cc16a627ed94396aa61849fe5d711e133cee3f963fd2f95f36a",
+    "scripts/launch_robot.py": "09fa9dcaf1cabf4a66f9808f3d93738132bac595333b63feef4c6f7ddbc82223"
+  },
+  "startup_cleanup_regression": {
+    "isolated_clock_ready": true,
+    "no_native_servers_after_cpu_shutdown": true,
+    "no_native_servers_after_gpu_shutdown": true,
+    "auto_selected_gpu": true
+  }
+}

@@ -25,3 +25,7 @@ dist/
 *.db3
 # OS
 .DS_Store
+
+# Local persistent mission history and environments
+/data/
+.env

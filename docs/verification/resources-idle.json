@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-18",
+  "sample_seconds": 5.16,
+  "workload": "robot stationary at BASE; physics, Nav2 and three cameras; browser CPU excluded",
+  "project_process_count": 17,
+  "logical_cpus": 20,
+  "project_cpu_percent_one_core_100": 284.3,
+  "project_cpu_percent_total_capacity": 14.4,
+  "gpu_utilization_percent_samples": [
+    0.0,
+    3.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "gpu_utilization_percent_mean": 1.2,
+  "gpu_memory_used_mib_samples": [
+    72.0,
+    72.0,
+    72.0,
+    72.0,
+    72.0
+  ],
+  "gpu_memory_total_mib": 8188.0,
+  "rendering": {
+    "mode": "gpu",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "velocity": {
+    "linear": 9.757840692050092e-20,
+    "angular": 5.47549116737347e-20
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "mode": "mapping",
+  "nav2_ready": false,
+  "map": {
+    "width": 603,
+    "height": 449,
+    "resolution": 0.05000000074505806,
+    "known_cells": 257374,
+    "occupied_cells": 3973,
+    "frame": "map_slam",
+    "updates": 329
+  },
+  "pose": {
+    "x": -10.855158142932902,
+    "y": -6.871726866971896
+  },
+  "velocity": {
+    "linear": 0.0,
+    "angular": 0.0
+  },
+  "survey_waypoints_completed": 8,
+  "goal_cells_pgm": {
+    "A": 254,
+    "B": 254,
+    "C": 254,
+    "BASE": 254
+  },
+  "saved_map": "data/maps/hangar_slam.yaml",
+  "native_graph_bytes": 50444984
+}

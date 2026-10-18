@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "after_restart": {
+    "sequence": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+    "cancel": "b740322f-31bd-4844-9a70-6a6abee725b5"
+  },
+  "statuses": {
+    "sequence": "succeeded",
+    "cancel": "canceled"
+  },
+  "ready": true,
+  "busy": false,
+  "rendering": {
+    "mode": "gpu",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  }
+}

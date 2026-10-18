@@ -1,0 +1,156 @@
+{
+  "verified_on": "2026-10-18",
+  "passed": true,
+  "position_tolerance_m": 0.5,
+  "configuration_sha256": {
+    "config/nav2.yaml": "7c8779f0690e58817dd65ce78dbfc47cb3b4ff0f15e2dd14e72e39dc1a42d09f",
+    "operator/server.py": "63510189499bfb464544c1fa21e263fcd6965a6b69e56975f1e9cdbbedad9596",
+    "scripts/build_hangar.py": "b0c84323f6eb6798fa2f4e69663a98be9fb756cf785e7bec7674c927caf85b0f"
+  },
+  "scenarios": {
+    "normal": {
+      "passed": true,
+      "routes": [
+        {
+          "goal": "A",
+          "state": "succeeded",
+          "world_xy": [
+            -8.913486726465718,
+            -1.0074719137716566
+          ],
+          "error_m": 0.08683533838840317,
+          "seconds": 27.9
+        },
+        {
+          "goal": "B",
+          "state": "succeeded",
+          "world_xy": [
+            -0.09787066942484576,
+            -1.0702326266893523
+          ],
+          "error_m": 0.12046281494865274,
+          "seconds": 52.0
+        },
+        {
+          "goal": "P3",
+          "state": "succeeded",
+          "world_xy": [
+            -0.9824056642753178,
+            6.439633473039905
+          ],
+          "error_m": 0.16132880591771476,
+          "seconds": 45.9
+        },
+        {
+          "goal": "C",
+          "state": "succeeded",
+          "world_xy": [
+            9.814239174490796,
+            4.058439631074671
+          ],
+          "error_m": 0.19473642385030243,
+          "seconds": 68.9
+        },
+        {
+          "goal": "BASE",
+          "state": "succeeded",
+          "world_xy": [
+            -10.749552247003713,
+            -6.769042876930964
+          ],
+          "error_m": 0.34068353302913684,
+          "seconds": 120.3
+        }
+      ],
+      "cancel_drift_m": 0.0,
+      "camera_fps_wall": {
+        "fpv": 9.49,
+        "follow": 5.0,
+        "overhead": 2.5
+      },
+      "simulation_realtime_factor": 0.96,
+      "launcher_exit_code": 0,
+      "final_camera_age_s": {
+        "fpv": 0.07,
+        "follow": 0.05,
+        "overhead": 0.2
+      }
+    },
+    "blocked": {
+      "passed": true,
+      "routes": [
+        {
+          "goal": "B",
+          "state": "succeeded",
+          "world_xy": [
+            -0.09987036132987857,
+            -1.1284648716484431
+          ],
+          "error_m": 0.1627185063839128,
+          "seconds": 55.3
+        },
+        {
+          "goal": "C",
+          "state": "succeeded",
+          "world_xy": [
+            9.957546437472743,
+            3.8668873227133553
+          ],
+          "error_m": 0.13971860944653763,
+          "seconds": 64.2
+        },
+        {
+          "goal": "BASE",
+          "state": "succeeded",
+          "world_xy": [
+            -10.677637805658154,
+            -6.802533732384593
+          ],
+          "error_m": 0.37803480155516017,
+          "seconds": 126.4
+        }
+      ],
+      "cancel_drift_m": 0.0,
+      "camera_fps_wall": {
+        "fpv": 9.49,
+        "follow": 4.5,
+        "overhead": 3.0
+      },
+      "simulation_realtime_factor": 0.96,
+      "launcher_exit_code": 0,
+      "final_camera_age_s": {
+        "fpv": 0.08,
+        "follow": 0.16,
+        "overhead": 0.11
+      }
+    },
+    "unreachable": {
+      "passed": true,
+      "routes": [
+        {
+          "goal": "B",
+          "state": "failed",
+          "world_xy": [
+            -10.69410682010603,
+            -7.103869294307682
+          ],
+          "error_m": 12.313453660197471,
+          "seconds": 19.8
+        }
+      ],
+      "cancel_drift_m": 0.0,
+      "camera_fps_wall": {
+        "fpv": 9.49,
+        "follow": 4.49,
+        "overhead": 3.0
+      },
+      "simulation_realtime_factor": 0.98,
+      "launcher_exit_code": 0,
+      "final_camera_age_s": {
+        "fpv": 0.04,
+        "follow": 0.03,
+        "overhead": 0.33
+      }
+    }
+  }
+}

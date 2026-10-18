@@ -46,3 +46,5 @@ Zachowaj komunikaty terminala. Rozróżniamy uruchomienie serwera od działania 
 - W ograniczonym środowisku narzędzia wystąpił błąd getifaddrs; ten sam test z dostępem do interfejsów sieciowych zakończył się poprawnie.
 - Wyświetlanie GUI i ruch przez most ROS nie zostały jeszcze potwierdzone.
 - Nav2 nie jest zainstalowane; to osobny krok po potwierdzeniu działania przykładu.
+
+Aktualizacja po sprawdzeniu przez użytkownika: potwierdzono wyświetlanie przykładu oraz ruch i zatrzymanie niebieskiego pojazdu przez komendy ROS. Ostrzeżenia EGL pozostały; nie naprawiano sterownika NVIDIA.

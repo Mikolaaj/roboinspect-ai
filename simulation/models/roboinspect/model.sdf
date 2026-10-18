@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="roboinspect">
+    <pose>-11 -7 0.02 0 0 0</pose>
+    <link name="base_link">
+      <pose>0 0 0.25 0 0 0</pose>
+      <inertial><mass>8</mass><inertia><ixx>0.17</ixx><iyy>0.26</iyy><izz>0.40</izz></inertia></inertial>
+      <collision name="chassis_collision"><geometry><box><size>0.58 0.42 0.22</size></box></geometry></collision>
+      <visual name="chassis"><geometry><box><size>0.58 0.42 0.22</size></box></geometry><material><ambient>0.04 0.38 0.55 1</ambient><diffuse>0.04 0.55 0.75 1</diffuse></material></visual>
+      <collision name="mast_collision"><pose>-0.12 0 0.35 0 0 0</pose><geometry><box><size>0.06 0.06 0.55</size></box></geometry></collision>
+      <visual name="mast"><pose>-0.12 0 0.35 0 0 0</pose><geometry><box><size>0.06 0.06 0.55</size></box></geometry><material><ambient>0.3 0.33 0.37 1</ambient><diffuse>0.3 0.33 0.37 1</diffuse></material></visual>
+      <visual name="camera_housing"><pose>0.12 0 0.65 0 0 0</pose><geometry><box><size>0.28 0.15 0.12</size></box></geometry><material><ambient>0.08 0.10 0.13 1</ambient><diffuse>0.08 0.10 0.13 1</diffuse></material></visual>
+      <visual name="camera_lens"><pose>0.265 0 0.65 0 0 0</pose><geometry><box><size>0.025 0.09 0.075</size></box></geometry><material><ambient>0.2 0.7 0.9 1</ambient><diffuse>0.2 0.7 0.9 1</diffuse></material></visual>
+      <visual name="lidar_housing"><pose>0.14 0 0.23 0 0 0</pose><geometry><cylinder><radius>0.065</radius><length>0.07</length></cylinder></geometry><material><ambient>0.9 0.55 0.1 1</ambient><diffuse>0.9 0.55 0.1 1</diffuse></material></visual>
+      <sensor name="front_camera" type="camera">
+        <pose>0.29 0 0.65 0 0 0</pose><topic>/roboinspect/camera/image</topic>
+        <always_on>true</always_on><update_rate>10</update_rate>
+        <camera><horizontal_fov>1.047</horizontal_fov><image><width>320</width><height>240</height><format>R8G8B8</format></image><clip><near>0.05</near><far>40</far></clip></camera>
+      </sensor>
+      <sensor name="lidar" type="gpu_lidar">
+        <pose>0.14 0 0.29 0 0 0</pose><topic>/roboinspect/scan</topic>
+        <always_on>true</always_on><update_rate>10</update_rate>
+        <lidar><scan><horizontal><samples>360</samples><resolution>1</resolution><min_angle>-3.14159265</min_angle><max_angle>3.14159265</max_angle></horizontal></scan><range><min>0.35</min><max>30</max><resolution>0.01</resolution></range></lidar>
+      </sensor>
+    </link>
+    <link name="left_wheel">
+      <pose>0 0.26 0.12 1.57079632679 0 0</pose>
+      <inertial><mass>0.5</mass><inertia><ixx>0.00195</ixx><iyy>0.00195</iyy><izz>0.0036</izz></inertia></inertial>
+      <collision name="wheel_collision"><geometry><cylinder><radius>0.12</radius><length>0.06</length></cylinder></geometry><surface><friction><ode><mu>1</mu><mu2>1</mu2></ode></friction></surface></collision>
+      <visual name="wheel"><geometry><cylinder><radius>0.12</radius><length>0.06</length></cylinder></geometry><material><ambient>0.07 0.08 0.10 1</ambient><diffuse>0.07 0.08 0.10 1</diffuse></material></visual>
+    </link>
+    <link name="right_wheel">
+      <pose>0 -0.26 0.12 1.57079632679 0 0</pose>
+      <inertial><mass>0.5</mass><inertia><ixx>0.00195</ixx><iyy>0.00195</iyy><izz>0.0036</izz></inertia></inertial>
+      <collision name="wheel_collision"><geometry><cylinder><radius>0.12</radius><length>0.06</length></cylinder></geometry><surface><friction><ode><mu>1</mu><mu2>1</mu2></ode></friction></surface></collision>
+      <visual name="wheel"><geometry><cylinder><radius>0.12</radius><length>0.06</length></cylinder></geometry><material><ambient>0.07 0.08 0.10 1</ambient><diffuse>0.07 0.08 0.10 1</diffuse></material></visual>
+    </link>
+    <link name="front_caster">
+      <pose>0.22 0 0.05 0 0 0</pose><inertial><mass>0.1</mass><inertia><ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz></inertia></inertial>
+      <collision name="caster_collision"><geometry><sphere><radius>0.05</radius></sphere></geometry><surface><friction><ode><mu>0</mu><mu2>0</mu2></ode></friction></surface></collision>
+      <visual name="caster"><geometry><sphere><radius>0.05</radius></sphere></geometry></visual>
+    </link>
+    <link name="rear_caster">
+      <pose>-0.22 0 0.05 0 0 0</pose><inertial><mass>0.1</mass><inertia><ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz></inertia></inertial>
+      <collision name="caster_collision"><geometry><sphere><radius>0.05</radius></sphere></geometry><surface><friction><ode><mu>0</mu><mu2>0</mu2></ode></friction></surface></collision>
+      <visual name="caster"><geometry><sphere><radius>0.05</radius></sphere></geometry></visual>
+    </link>
+    <joint name="left_wheel_joint" type="revolute"><parent>base_link</parent><child>left_wheel</child><axis><xyz expressed_in="__model__">0 1 0</xyz></axis></joint>
+    <joint name="right_wheel_joint" type="revolute"><parent>base_link</parent><child>right_wheel</child><axis><xyz expressed_in="__model__">0 1 0</xyz></axis></joint>
+    <joint name="front_caster_joint" type="fixed"><parent>base_link</parent><child>front_caster</child></joint>
+    <joint name="rear_caster_joint" type="fixed"><parent>base_link</parent><child>rear_caster</child></joint>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint><right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.52</wheel_separation><wheel_radius>0.12</wheel_radius>
+      <topic>/roboinspect/cmd_vel</topic><odom_topic>/roboinspect/odom</odom_topic><tf_topic>/roboinspect/tf</tf_topic>
+      <frame_id>odom</frame_id><child_frame_id>base_link</child_frame_id><odom_publish_frequency>30</odom_publish_frequency>
+      <max_linear_velocity>0.4</max_linear_velocity><min_linear_velocity>-0.4</min_linear_velocity>
+      <max_angular_velocity>0.8</max_angular_velocity><min_angular_velocity>-0.8</min_angular_velocity>
+      <max_linear_acceleration>0.6</max_linear_acceleration><min_linear_acceleration>-0.6</min_linear_acceleration>
+    </plugin>
+  </model>
+</sdf>

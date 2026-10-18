@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "sequence": {
+    "id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+    "name": "Test sekwencji A i BASE",
+    "scenario": "normal",
+    "status": "succeeded",
+    "steps": [
+      {
+        "action": "navigate",
+        "target": "A",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "74e02127-dbf5-44b6-9e95-6bf450a774b5"
+      },
+      {
+        "action": "navigate",
+        "target": "BASE",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "51e48b2f-dc01-4465-bb1e-7244893c0840"
+      }
+    ],
+    "current_step": 1,
+    "message": "Wszystkie kroki misji wykonane",
+    "created_at": "2026-10-18T07:20:27.703594Z",
+    "updated_at": "2026-10-18T07:22:15.481752Z"
+  },
+  "events": [
+    {
+      "id": 17,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:20:27.703596Z",
+      "message": "Misja przyjęta",
+      "status": "queued"
+    },
+    {
+      "id": 18,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:20:27.847566Z",
+      "message": "Krok 1/2: jazda do A",
+      "status": "running"
+    },
+    {
+      "id": 19,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:21:02.375191Z",
+      "message": "Zakończono krok 1: A",
+      "status": "running"
+    },
+    {
+      "id": 20,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:21:02.377939Z",
+      "message": "Krok 2/2: jazda do BASE",
+      "status": "running"
+    },
+    {
+      "id": 21,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:22:15.473349Z",
+      "message": "Zakończono krok 2: BASE",
+      "status": "running"
+    },
+    {
+      "id": 22,
+      "mission_id": "aa8c292d-5b11-42ae-abdf-a96447b2bd6a",
+      "time": "2026-10-18T07:22:15.481752Z",
+      "message": "Wszystkie kroki misji wykonane",
+      "status": "succeeded"
+    }
+  ],
+  "cancel": {
+    "id": "b740322f-31bd-4844-9a70-6a6abee725b5",
+    "name": "Test anulowania sekwencji",
+    "scenario": "normal",
+    "status": "canceled",
+    "steps": [
+      {
+        "action": "navigate",
+        "target": "A",
+        "timeout_seconds": 300,
+        "status": "canceled",
+        "execution_id": "1c9ea4ee-e3ac-447d-bca2-2c02cb5b25ba"
+      },
+      {
+        "action": "navigate",
+        "target": "B",
+        "timeout_seconds": 300,
+        "status": "skipped",
+        "execution_id": null
+      },
+      {
+        "action": "navigate",
+        "target": "BASE",
+        "timeout_seconds": 300,
+        "status": "skipped",
+        "execution_id": null
+      }
+    ],
+    "current_step": 0,
+    "message": "Misja anulowana; robot zatrzymany",
+    "created_at": "2026-10-18T07:22:15.828966Z",
+    "updated_at": "2026-10-18T07:22:26.323369Z"
+  }
+}
