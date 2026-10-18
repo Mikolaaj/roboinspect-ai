@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "turn_count": 8,
+  "chat_id": "b55b1ee2-74bd-4b47-b452-4cb2b5ad60e4",
+  "text": "Gdzie teraz jesteś?",
+  "reply": "Pozycja: x = -10.50 m, y = -4.68 m. Misja: Krok 1/2: jazda do A",
+  "mission_id": null,
+  "prompt_version": "bielik-pl-v3"
+}

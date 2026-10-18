@@ -18,7 +18,10 @@ def setup(context):
     engine = LaunchConfiguration('render_engine').perform(context)
     if engine not in ('ogre', 'ogre2'):
         raise ValueError('render_engine must be ogre or ogre2')
-    world = ROOT / 'simulation/worlds' / f'hangar_{scenario}_robot.sdf'
+    custom=LaunchConfiguration('world').perform(context)
+    world = Path(custom).resolve() if custom else ROOT / 'simulation/worlds' / f'hangar_{scenario}_robot.sdf'
+    if not world.is_relative_to(ROOT.resolve()):
+        raise ValueError('world must belong to this project')
     if not world.exists():
         raise FileNotFoundError(f'{world}: run /usr/bin/python3 scripts/build_hangar.py')
     # Server-only mode still uses the desktop display for sensor rendering.
@@ -36,6 +39,7 @@ def setup(context):
 def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('scenario', default_value='normal'),
+        DeclareLaunchArgument('world', default_value=''),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('render_engine', default_value='ogre'),
         OpaqueFunction(function=setup),

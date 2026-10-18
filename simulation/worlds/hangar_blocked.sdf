@@ -2302,23 +2302,6 @@
         </visual>
       </link>
     </model>
-    <model name="inspection_marker_P1">
-      <static>true</static>
-      <link name="body">
-        <visual name="spot">
-          <pose>-11 6.6 0.01 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.6 0.6 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.95 0.78 0.18 1</ambient>
-            <diffuse>0.95 0.78 0.18 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
     <model name="panel_P2">
       <static>true</static>
       <link name="body">
@@ -2733,23 +2716,6 @@
           <material>
             <ambient>0.95 0.97 1 1</ambient>
             <diffuse>0.95 0.97 1 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name="inspection_marker_P2">
-      <static>true</static>
-      <link name="body">
-        <visual name="spot">
-          <pose>-7 6.6 0.01 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.6 0.6 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.95 0.78 0.18 1</ambient>
-            <diffuse>0.95 0.78 0.18 1</diffuse>
           </material>
         </visual>
       </link>
@@ -3184,23 +3150,6 @@
         </visual>
       </link>
     </model>
-    <model name="inspection_marker_P3">
-      <static>true</static>
-      <link name="body">
-        <visual name="spot">
-          <pose>-1 6.6 0.01 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.6 0.6 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.95 0.78 0.18 1</ambient>
-            <diffuse>0.95 0.78 0.18 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
     <model name="panel_P4">
       <static>true</static>
       <link name="body">
@@ -3615,23 +3564,6 @@
           <material>
             <ambient>0.95 0.97 1 1</ambient>
             <diffuse>0.95 0.97 1 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-    <model name="inspection_marker_P4">
-      <static>true</static>
-      <link name="body">
-        <visual name="spot">
-          <pose>3 6.6 0.01 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.6 0.6 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.95 0.78 0.18 1</ambient>
-            <diffuse>0.95 0.78 0.18 1</diffuse>
           </material>
         </visual>
       </link>
@@ -4090,22 +4022,3581 @@
         </visual>
       </link>
     </model>
-    <model name="inspection_marker_P5">
+    <model name="inspection_zone_A">
       <static>true</static>
       <link name="body">
-        <visual name="spot">
-          <pose>10 6.6 0.01 0 0 0</pose>
+        <visual name="paint">
+          <pose>-9 5.0 0.015 0 0 0</pose>
           <geometry>
             <box>
-              <size>0.6 0.6 0.01</size>
+              <size>2.0 1.4 0.008</size>
             </box>
           </geometry>
           <material>
-            <ambient>0.95 0.78 0.18 1</ambient>
-            <diffuse>0.95 0.78 0.18 1</diffuse>
+            <ambient>0.52 0.06 0.08 1</ambient>
+            <diffuse>0.52 0.06 0.08 1</diffuse>
+          </material>
+        </visual>
+        <visual name="north">
+          <pose>-9 5.7 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.0 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="south">
+          <pose>-9 4.3 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.0 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="west">
+          <pose>-10.0 5.0 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="east">
+          <pose>-8.0 5.0 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
           </material>
         </visual>
       </link>
+    </model>
+    <model name="inspection_zone_B">
+      <static>true</static>
+      <link name="body">
+        <visual name="paint">
+          <pose>1 5.0 0.015 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.0 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.52 0.06 0.08 1</ambient>
+            <diffuse>0.52 0.06 0.08 1</diffuse>
+          </material>
+        </visual>
+        <visual name="north">
+          <pose>1 5.7 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.0 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="south">
+          <pose>1 4.3 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.0 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="west">
+          <pose>0.0 5.0 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="east">
+          <pose>2.0 5.0 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="inspection_zone_C">
+      <static>true</static>
+      <link name="body">
+        <visual name="paint">
+          <pose>10 6.6 0.015 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.6 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.52 0.06 0.08 1</ambient>
+            <diffuse>0.52 0.06 0.08 1</diffuse>
+          </material>
+        </visual>
+        <visual name="north">
+          <pose>10 7.3 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.6 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="south">
+          <pose>10 5.8999999999999995 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.6 0.07 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="west">
+          <pose>9.2 6.6 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="east">
+          <pose>10.8 6.6 0.022 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.07 1.4 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.22 0.25 1</ambient>
+            <diffuse>1 0.22 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="route_segment_0">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_1">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_2">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_3">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_4">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_5">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_6">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_7">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_8">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_9">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_10">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_11">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_12">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_13">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_14">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_15">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_16">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_17">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_18">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_19">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_20">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_21">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_22">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_23">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_24">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_25">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_26">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_27">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_28">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_29">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_30">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_31">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_32">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_33">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_34">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_35">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_36">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_37">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_38">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_39">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_40">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_41">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_42">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_43">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_44">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_45">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_46">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_47">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_48">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_49">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_50">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_51">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_52">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_53">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_54">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_55">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_56">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_57">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_58">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_59">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_60">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_61">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_62">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_63">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_64">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_65">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_66">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_67">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_68">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_69">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_70">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_71">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_72">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_73">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_74">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_75">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_76">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_77">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_78">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_79">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_80">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_81">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_82">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_83">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_84">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_85">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_86">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_87">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_88">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_89">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_90">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_91">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_92">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_93">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_94">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_95">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_96">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_97">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_98">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_99">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_100">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_101">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_102">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_103">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_104">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_105">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_106">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_107">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_108">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_109">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_110">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_111">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_112">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_113">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_114">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_115">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_116">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_117">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_118">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_119">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_120">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_121">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_122">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_123">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_124">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_125">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_126">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_127">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_128">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_129">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_130">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_131">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_132">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_133">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_134">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_135">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_136">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_137">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_138">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_139">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_140">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_141">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_142">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_143">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_144">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_145">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_146">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_147">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_148">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_149">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_150">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_151">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_152">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_153">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_154">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_155">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_156">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_157">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_158">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_segment_159">
+      <static>true</static>
+      <link name="body">
+        <visual name="line">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.55 0.1 0.008</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.42</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
+    </model>
+    <model name="route_goal">
+      <static>true</static>
+      <link name="body">
+        <visual name="dot">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>0.009</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1 0.76 0.08 1</ambient>
+            <diffuse>1 0.76 0.08 1</diffuse>
+            <emissive>0.5 0.3 0 1</emissive>
+          </material>
+          <transparency>0.2</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+      <pose>0 0 -2 0 0 0</pose>
     </model>
     <model name="workbench_A">
       <static>true</static>

@@ -93,7 +93,7 @@ class MappingTools(Node):
 
     def survey(self):
         # A known survey itinerary, NOT exploration or a path planner. Lidar builds the map.
-        waypoints = [(-8.5,-4),(-8.5,6),(6,6),(10,6),(6,6),(6,-4),(-8.5,-4),(-11,-7)]
+        waypoints = [(-9,-4),(-9,6),(5.5,6),(10,6),(5.5,6),(5.5,-4),(-9,-4),(-11,-7)]
         for index,(wx,wy) in enumerate(waypoints):
             gx,gy = wx-BASE_OFFSET[0],wy-BASE_OFFSET[1]
             deadline = time.monotonic()+120

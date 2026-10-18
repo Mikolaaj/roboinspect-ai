@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "goal": "BASE",
+  "position": {
+    "x": -10.939514107834889,
+    "y": -6.934730113062305
+  },
+  "route": {
+    "points": [],
+    "goal": null,
+    "revision": 164,
+    "status": "idle"
+  },
+  "visual": {
+    "ready": true,
+    "error": null,
+    "segments_active": false,
+    "fresh": true
+  }
+}

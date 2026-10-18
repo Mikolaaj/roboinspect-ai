@@ -30,7 +30,9 @@ from roboinspect.store import MissionStore
 from geometry_msgs.msg import Twist
 from lifecycle_msgs.srv import GetState
 from nav2_msgs.action import NavigateToPose
-from nav_msgs.msg import Odometry, OccupancyGrid
+from nav_msgs.msg import Odometry, OccupancyGrid, Path as NavPath
+from std_msgs.msg import String
+from roboinspect.routes import RouteState, costmap_obstacles
 from roboinspect.mapping import grid_image, BASE_OFFSET, project_robot
 from tf2_ros import Buffer, TransformListener, TransformException
 from rclpy.time import Time
@@ -47,11 +49,25 @@ CAMERAS = {'fpv':'/roboinspect/camera/image',
 class Operator(Node):
     def __init__(self, scenario):
         super().__init__('roboinspect_operator')
+        self.world_file=os.environ.get('ROBOINSPECT_WORLD')
+        self.warehouse=json.loads(os.environ.get('ROBOINSPECT_WAREHOUSE','{}'))
+        self.route = RouteState()
+        self.cost_obstacles = []
+        self.cost_at = 0
+        self.visual_status = {}
+        self.visual_at = 0
         self.goals = json.loads((ROOT/'config/navigation-goals.json').read_text())['poses']
         self.lock = threading.RLock()
         self.frames_changed = threading.Condition(self.lock)
         self.frames = {}
         self.commands = Queue(maxsize=32)
+        self.route_pub = self.create_publisher(String, '/roboinspect/visual_route', 1)
+        self.create_subscription(NavPath, '/plan', self.plan_received, 1)
+        self.create_subscription(OccupancyGrid, '/global_costmap/costmap', self.costmap_received,
+                                 QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL,
+                                            reliability=ReliabilityPolicy.RELIABLE))
+        self.create_subscription(String, '/roboinspect/route_visual_status', self.visual_received, 1)
+        self.create_timer(.5, self.publish_route)
         self.events = deque(maxlen=30)
         self.state = {'scenario':scenario, 'state':'idle', 'message':'Oczekiwanie na nawigację',
                       'goal':None, 'busy':False, 'distance_m':None, 'map_position':None,
@@ -98,6 +114,9 @@ class Operator(Node):
 
     def set_runtime(self, mode, transitioning, map_file):
         with self.lock:
+            self.route.clear()
+            self.cost_obstacles = []
+            self.cost_at = self.visual_at = 0
             self.mode,self.transitioning=mode,transitioning
             self.state.update(mode=mode,map_file=map_file,map_position=None,robot_marker=None,
                               busy=False,state='idle',goal=None,remote_active=False)
@@ -110,6 +129,11 @@ class Operator(Node):
             self.request_id+=1
             self.tf_buffer.clear()
             self.frames.clear()
+
+    def set_warehouse(self, world_file, warehouse):
+        with self.lock:
+            self.world_file=world_file
+            self.warehouse=warehouse
 
     def update_pose(self):
         with self.lock:
@@ -134,6 +158,43 @@ class Operator(Node):
                     x,y=x-BASE_OFFSET[0],y-BASE_OFFSET[1]
                 self.state['robot_marker']=project_robot(x,y,yaw,info['origin'],
                     info['resolution'],info['width'],info['height'])
+
+    def route_snapshot(self):
+        return self.route.snapshot(self.state.get('busy') and not self.cancel_requested
+                                   and self.mode == 'navigation' and self.ready())
+
+    def plan_received(self, msg):
+        with self.lock:
+            if self.mode != 'navigation' or not self.state['busy'] or self.cancel_requested:
+                return
+            stamp = msg.header.stamp.sec+msg.header.stamp.nanosec/1e9
+            clock=self.clock_value[0]+self.clock_value[1]/1e9 if self.clock_value else 0
+            self.route.update([(p.pose.position.x,p.pose.position.y) for p in msg.poses],
+                              msg.header.frame_id, stamp, simulation_time=clock)
+
+    def costmap_received(self, msg):
+        if msg.header.frame_id != 'map' or self.transitioning or self.mode != 'navigation':
+            return
+        p,q=msg.info.origin.position,msg.info.origin.orientation
+        yaw=math.atan2(2*q.w*q.z,1-2*q.z*q.z)
+        boxes=costmap_obstacles(msg.data,msg.info.width,msg.info.height,msg.info.resolution,(p.x,p.y,yaw))
+        with self.lock:
+            self.cost_obstacles=boxes
+            self.cost_at=time.monotonic()
+
+    def visual_received(self, msg):
+        try:
+            info=json.loads(msg.data)
+            with self.lock:
+                self.visual_status=info
+                self.visual_at=time.monotonic()
+        except ValueError:
+            pass
+
+    def publish_route(self):
+        with self.lock:
+            route=self.route_snapshot()
+        self.route_pub.publish(String(data=json.dumps(route)))
 
     def event(self, message):
         self.state['message'] = message
@@ -199,7 +260,11 @@ class Operator(Node):
     def snapshot(self):
         with self.lock:
             now = time.monotonic()
-            return {**self.state, 'service':'roboinspect', 'ready':self.ready(), 'goals':list(self.goals),
+            return {**self.state, 'warehouse':self.warehouse, 'route':self.route_snapshot(),
+                    'observed_obstacles':self.cost_obstacles if now-self.cost_at<4 else [],
+                    'obstacles_fresh':now-self.cost_at<4,
+                    'route_visual':{**self.visual_status,'fresh':now-self.visual_at<4},
+                    'service':'roboinspect', 'ready':self.ready(), 'goals':list(self.goals),
                     'mapping_controls':bool(self.runtime_token), 'transitioning':self.transitioning,
                     'mapping_ready':not self.transitioning and self.mode == 'mapping' and now-self.last_map < 5 and now-self.last_odom < 2 and now-self.last_clock < 2,
                     'map_age_s':None if not self.last_map else round(now-self.last_map,2),
@@ -247,6 +312,8 @@ class Operator(Node):
         self.state.update(state='dispatching',goal=name,busy=True,distance_m=None,execution_id=execution_id)
         self.event(f'Wysyłanie celu {name}')
         x,y,yaw = self.goals[name]
+        stamp = self.clock_value[0]+self.clock_value[1]/1e9
+        self.route.begin([x,y,yaw],stamp)
         goal = NavigateToPose.Goal()
         goal.pose.header.frame_id = 'map'
         goal.pose.pose.position.x, goal.pose.pose.position.y = float(x), float(y)
@@ -299,6 +366,11 @@ class Operator(Node):
             self.goal_handle = None
             self.cancel_future = None
             self.goal_started = None
+
+    def emergency_stop(self):
+        with self.lock:
+            self.zero.publish(Twist())
+            self.cancel()
 
     def cancel(self):
         if not self.state['busy']:

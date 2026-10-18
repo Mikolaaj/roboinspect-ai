@@ -1,0 +1,9 @@
+{
+  "text": "Jedź do sektora A. I wróć do bazy.",
+  "language": "pl",
+  "duration_seconds": 2.6131875,
+  "latency_seconds": 1.2756230129998585,
+  "model": "whisper-small",
+  "device": "cpu",
+  "tracking_error": false
+}

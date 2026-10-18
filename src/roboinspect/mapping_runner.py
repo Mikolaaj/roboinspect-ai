@@ -5,6 +5,11 @@ import subprocess
 import time
 
 from roboinspect.contracts import MappingAction, MissionStatus
+from roboinspect.operations import WAREHOUSE_KINDS
+
+
+class MappingCanceled(Exception):
+    pass
 
 
 class MappingRunner:
@@ -49,6 +54,9 @@ class MappingRunner:
             )
             deadline = time.monotonic() + 60
             while process.poll() is None:
+                if self.store.operation(self.current.id).cancel_requested:
+                    self.manager.stop(process)
+                    raise MappingCanceled()
                 if self.manager.shutdown.wait(0.2) or time.monotonic() > deadline:
                     self.manager.stop(process)
                     raise RuntimeError("Zapis mapy przerwany lub przekroczył limit czasu")
@@ -131,7 +139,18 @@ class MappingRunner:
                     start_new_session=True,
                 )
                 return
-            if job.kind == MappingAction.RESET:
+            if job.kind in WAREHOUSE_KINDS:
+                self.progress("Przygotowanie układu i sprawdzanie drogi do wszystkich celów…")
+                selection = self.manager.change_warehouse(
+                    job.kind.value.removeprefix("warehouse_"),
+                    job.layout_seed,
+                    lambda: self.store.operation(job.id).cancel_requested,
+                )
+                message = (
+                    f"Magazyn gotowy. Robot w BASE; przeszkody: {selection['movable_count']}. "
+                    "Wszystkie czerwone strefy i punkty P są dostępne."
+                )
+            elif job.kind == MappingAction.RESET:
                 self.progress("Reset bieżącej mapy i powrót robota do BASE…")
                 self.manager.switch("mapping", None)
                 message = "Bieżąca mapa wyzerowana. Zapisane wersje i historia zostały zachowane."
@@ -140,16 +159,33 @@ class MappingRunner:
                 message = "Mapa i graf zapisane; można kontynuować mapowanie."
             else:
                 path = self.save()
+                if self.store.operation(job.id).cancel_requested:
+                    raise MappingCanceled()
                 self.progress("Mapa zapisana. Przełączanie na AMCL + Nav2; robot startuje w BASE…")
                 self.manager.switch("navigation", path)
                 selection = self.manager.root / "data/current-map.json"
                 temporary = selection.with_suffix(".tmp")
                 temporary.write_text(
-                    json.dumps({"scenario": self.manager.scenario, "map": str(path)}) + "\n"
+                    json.dumps(
+                        {
+                            "scenario": self.manager.scenario,
+                            "map": str(path),
+                            "layout_id": getattr(self.manager, "warehouse", {}).get(
+                                "layout_id", "standard"
+                            ),
+                        }
+                    )
+                    + "\n"
                 )
                 temporary.replace(selection)
                 message = "Mapowanie zakończone. Nav2 gotowe na zapisanej mapie; robot w BASE."
+            if self.store.operation(job.id).cancel_requested:
+                raise MappingCanceled()
             self.store.update_operation(job.id, status=MissionStatus.SUCCEEDED, message=message)
+        except MappingCanceled:
+            self.store.update_operation(
+                job.id, status=MissionStatus.CANCELED, message="Operacja zatrzymana poleceniem STOP"
+            )
         except Exception as exc:
             self.store.update_operation(
                 job.id, status=MissionStatus.FAILED, message=str(exc)[:1000]

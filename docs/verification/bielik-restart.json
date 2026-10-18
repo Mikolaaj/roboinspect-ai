@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "turns_preserved": 3,
+  "ids": [
+    "69c3dc0c-27c7-4dad-ad82-75258190c311",
+    "dd0f2124-cdf7-45f3-aa85-0c9111e0666b",
+    "2ed235c9-b6eb-4ea9-af8e-d5247b57c27b"
+  ],
+  "nav2_ready": true,
+  "mission_status": "succeeded"
+}

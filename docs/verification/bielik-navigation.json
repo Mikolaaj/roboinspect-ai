@@ -1,0 +1,36 @@
+{
+  "chat_id": "8d094ada-3951-41fe-8934-2f9575e750a6",
+  "mission_id": "07e22711-0dda-43a3-a72f-65b9a143ff1c",
+  "run_id": "a52786e7b7624eedab9bedd7d33e99cf",
+  "mission": {
+    "id": "07e22711-0dda-43a3-a72f-65b9a143ff1c",
+    "name": "Czat: Jedź do sektora A i wróć do bazy",
+    "scenario": "normal",
+    "status": "succeeded",
+    "steps": [
+      {
+        "action": "navigate",
+        "target": "A",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "9d6dbb45-c13a-4fab-af4a-6feeca3a4a75"
+      },
+      {
+        "action": "navigate",
+        "target": "BASE",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "2f826b44-9c9d-4408-9001-f2a99082ab3b"
+      }
+    ],
+    "current_step": 1,
+    "message": "Wszystkie kroki misji wykonane",
+    "created_at": "2026-10-18T14:46:45.587275Z",
+    "updated_at": "2026-10-18T14:48:38.026688Z"
+  },
+  "final_position": {
+    "x": -10.947009298872128,
+    "y": -6.928098090788573
+  },
+  "passed": true
+}

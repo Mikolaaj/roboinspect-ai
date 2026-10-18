@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "warehouse": {
+    "mode": "random",
+    "layout_id": "random-a7d9dc259777",
+    "seed": 3450501803,
+    "movable_count": 8
+  },
+  "position": {
+    "x": -11.000000000000142,
+    "y": -7.000000000000159
+  },
+  "map": "/home/mikolaj/Desktop/roboinspect-ai/data/warehouse/versions/random-a7d9dc259777/hangar.yaml"
+}

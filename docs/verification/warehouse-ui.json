@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "model_spinner_visible_while_pending": true,
+  "model_spinner_hidden_after_answer": true,
+  "warehouse_help_answered_without_mission": true,
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "mobile_button_height_px": 44.59,
+  "no_horizontal_overflow": true,
+  "speech_spinner": "covered by JavaScript lifecycle tests; physical microphone not recorded in this acceptance",
+  "python_tests": 121,
+  "javascript_tests": 8
+}

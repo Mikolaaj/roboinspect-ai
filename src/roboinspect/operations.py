@@ -11,6 +11,8 @@ TITLES = {
 
 
 def request_operation(service, action: MappingAction, key: str | None):
+    if action.value.startswith("warehouse_"):
+        raise ConflictError("Użyj panelu ustawień magazynu")
     # Shared lock with mission creation: an operation and a mission cannot race.
     with service.lock:
         store = service.store
@@ -40,4 +42,50 @@ def request_operation(service, action: MappingAction, key: str | None):
                 raise ConflictError("Najpierw rozpocznij mapowanie")
         record = MappingOperation(kind=action, name=TITLES[action])
         store.create_operation(record, key, cancel_id=jobs[0].id if jobs else None)
+        return record, True
+
+
+WAREHOUSE_KINDS = {
+    MappingAction.WAREHOUSE_STANDARD,
+    MappingAction.WAREHOUSE_CLEAR,
+    MappingAction.WAREHOUSE_RANDOM,
+}
+WAREHOUSE_TITLES = {
+    MappingAction.WAREHOUSE_STANDARD: "Standardowe ustawienie magazynu",
+    MappingAction.WAREHOUSE_CLEAR: "Usunięcie wszystkich przeszkód",
+    MappingAction.WAREHOUSE_RANDOM: "Losowanie przeszkód w magazynie",
+}
+
+
+def request_warehouse(service, action, key):
+    import secrets
+
+    from .missions import stationary
+
+    kind = MappingAction("warehouse_" + action.value)
+    with service.lock:
+        if key and (previous := service.store.operation_key(key)):
+            if previous.kind != kind:
+                raise ConflictError("Klucz został użyty do innej operacji")
+            return previous, False
+        state = service.robot.snapshot()
+        if not state.get("mapping_controls") or state.get("scenario") != "normal":
+            raise ConflictError("Zmiana magazynu wymaga kokpitu standardowego hangaru")
+        if (
+            not service.healthy
+            or not state.get("ready")
+            or state.get("mode") != "navigation"
+            or not stationary(state)
+            or service.store.active()
+            or service.store.operation_busy()
+            or state.get("busy")
+            or state.get("remote_active")
+        ):
+            raise ConflictError("Zakończ mapowanie lub przejazd i poczekaj na gotowość robota")
+        record = MappingOperation(
+            kind=kind,
+            name=WAREHOUSE_TITLES[kind],
+            layout_seed=secrets.randbits(32) if action.value == "random" else None,
+        )
+        service.store.create_operation(record, key)
         return record, True

@@ -1,0 +1,16 @@
+{
+  "tests_passed": 72,
+  "javascript_syntax": "passed",
+  "diff_whitespace": "passed",
+  "desktop": "reviewed",
+  "mobile_width": 390,
+  "horizontal_overflow": false,
+  "mobile_chat_top_px": 70.125,
+  "cameras_loaded_widths": [
+    320,
+    640,
+    640
+  ],
+  "browser_open_helper": "both URLs verified with mocked browser",
+  "performance": "background polling and offscreen video connections reduced"
+}

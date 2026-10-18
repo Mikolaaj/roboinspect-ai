@@ -1,0 +1,14 @@
+{
+  "model": "roboinspect-bielik:q4_k_m",
+  "base_model": "speakleash/Bielik-4.5B-v3.0-Instruct",
+  "quantization_repository": "second-state/Bielik-4.5B-v3.0-Instruct-GGUF",
+  "revision": "5ed9534f824c7c184c21320f4d339e75569d0987",
+  "filename": "Bielik-4.5B-v3.0-Instruct-Q4_K_M.gguf",
+  "sha256": "39fb78db7c5e1582d3ef5bded109cd98606aabd5acbb5c98601155174b6763e1",
+  "runtime": "ollama",
+  "runtime_version": "0.40.6",
+  "host": "127.0.0.1:11435",
+  "num_ctx": 4096,
+  "temperature": 0,
+  "keep_alive": "2m"
+}

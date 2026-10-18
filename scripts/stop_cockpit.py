@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import sys
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -22,13 +23,34 @@ def main():
         return 0
     if str(ROOT/'scripts/cockpit.py').encode() not in arguments:
         raise RuntimeError('PID nie należy do tego kokpitu; nie wysłano sygnału')
-    os.kill(pid,signal.SIGINT)
-    for _ in range(200):
+    try:
+        os.kill(pid,signal.SIGINT)
+    except ProcessLookupError:
+        print('Proces kokpitu już się zakończył.')
+        return 0
+    print('Zamykanie kokpitu, symulacji, Bielika i MLflow… Poczekaj na potwierdzenie.',flush=True)
+    deadline=time.monotonic()+120
+    progress=time.monotonic()+5
+    while time.monotonic()<deadline:
         if not runtime.exists():
             print('Kokpit i symulacja zamknięte.')
             return 0
+        if time.monotonic()>=progress:
+            print('Zamykanie nadal trwa…',flush=True)
+            progress=time.monotonic()+5
         time.sleep(.2)
     raise RuntimeError('Zamykanie trwa zbyt długo; sprawdź logi kokpitu')
 
+def cli():
+    try:
+        return main()
+    except KeyboardInterrupt:
+        print('\nPrzerwano oczekiwanie. Kokpit może nadal się zamykać. '
+              'Ponów: bash scripts/stop_cockpit.sh',file=sys.stderr)
+        return 130
+    except (RuntimeError,OSError,ValueError,KeyError) as exc:
+        print(str(exc),file=sys.stderr)
+        return 1
+
 if __name__=='__main__':
-    raise SystemExit(main())
+    raise SystemExit(cli())

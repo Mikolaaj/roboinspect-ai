@@ -1,3 +1,7 @@
+> Mapa 2D obok SLAM i trasa w trzech kamerach: [navigation-route-view.md](navigation-route-view.md).
+
+> Aktualizacja interfejsu: `bash scripts/run_cockpit.sh` otwiera teraz obie karty. Drugi terminal jest opcjonalny. Szczegóły: [layout.md](layout.md).
+
 # Kokpit i panel sterowania — faza 3
 
 ## Dwie komendy

@@ -14,6 +14,12 @@ SECTORS = {
 POINTS = {f'P{i}': {'sector': sector, 'panel_xyz': [x, 8.6, 1.2],
                    'observation_pose': [x, 6.6, 1.57079632679]}
           for i, (sector, x) in enumerate([('A', -11), ('A', -7), ('B', -1), ('B', 3), ('C', 10)], 1)}
+# One shared inspection stop per sector; individual P points remain precise targets.
+ZONES = {
+    'A': {'pose': [-9, 5.0, 1.5707963267948966], 'size': [2.0, 1.4], 'panels': ['P1', 'P2']},
+    'B': {'pose': [1, 5.0, 1.5707963267948966], 'size': [2.0, 1.4], 'panels': ['P3', 'P4']},
+    'C': {'pose': [10, 6.6, 1.5707963267948966], 'size': [1.6, 1.4], 'panels': ['P5']},
+}
 GLYPHS = {
  'A': ['01110','10001','10001','11111','10001','10001','10001'],
  'B': ['11110','10001','10001','11110','10001','10001','11110'],
@@ -130,8 +136,40 @@ def world_tree(blocked=False, unreachable=False):
         box(link,'frame',[x,y,z],[1.3,0.22,1.3],[0.09,0.12,0.16,1])
         box(link,'surface',[x,y-0.13,z],[1.12,0.03,1.1],[0.66,0.73,0.78,1])
         text(world,name,[x,7.9],0.09)
-        mark=model(world,f'inspection_marker_{name}')
-        box(mark,'spot',[x,6.6,0.01],[0.6,0.6,0.01],[0.95,0.78,0.18,1],False)
+    # Red paint is visual only and must not appear as a lidar obstacle.
+    for sector, zone in ZONES.items():
+        x, y, _ = zone['pose']
+        width, depth = zone['size']
+        mark = model(world, f'inspection_zone_{sector}')
+        box(mark, 'paint', [x, y, 0.015], [width, depth, 0.008], [0.52, 0.06, 0.08, 1], False)
+        for name, xyz, size in [
+            ('north', [x,y+depth/2,0.022], [width,0.07,0.008]),
+            ('south', [x,y-depth/2,0.022], [width,0.07,0.008]),
+            ('west', [x-width/2,y,0.022], [0.07,depth,0.008]),
+            ('east', [x+width/2,y,0.022], [0.07,depth,0.008]),
+        ]:
+            box(mark, name, xyz, size, [1,0.22,0.25,1], False)
+    # Persistent visual pool. Hidden below the floor until a Nav2 path arrives.
+    for i in range(160):
+        link = model(world, f'route_segment_{i}')
+        sub(world[-1], 'pose', '0 0 -2 0 0 0')
+        box(link, 'line', [0,0,0], [0.55,0.10,0.008], [1,0.76,0.08,1], False)
+        visual = link.find('visual')
+        sub(visual, 'transparency', 0.42)
+        sub(visual, 'cast_shadows', 'false')
+        sub(visual.find('material'), 'emissive', '0.5 0.3 0 1')
+    goal = model(world, 'route_goal')
+    sub(world[-1], 'pose', '0 0 -2 0 0 0')
+    visual = sub(goal, 'visual', name='dot')
+    geometry = sub(sub(visual, 'geometry'), 'cylinder')
+    sub(geometry, 'radius', .25)
+    sub(geometry, 'length', .009)
+    material = sub(visual, 'material')
+    sub(material, 'ambient', '1 0.76 0.08 1')
+    sub(material, 'diffuse', '1 0.76 0.08 1')
+    sub(material, 'emissive', '0.5 0.3 0 1')
+    sub(visual, 'transparency', .20)
+    sub(visual, 'cast_shadows', 'false')
     # Workbench in A, storage in C, crates in B.
     bench=model(world,'workbench_A')
     box(bench,'top',[-11,0.4,1.0],[2.7,1.3,0.16],[0.45,0.50,0.57,1])
@@ -152,10 +190,10 @@ def world_tree(blocked=False, unreachable=False):
     if unreachable:
         # Known negative test: B lies inside a sealed enclosure, start remains outside.
         for name, xyz, size in [
-            ('west',[-1.5,-1,0.8],[0.2,3.2,1.6]),
-            ('east',[1.5,-1,0.8],[0.2,3.2,1.6]),
-            ('north',[0,0.5,0.8],[3.2,0.2,1.6]),
-            ('south',[0,-2.5,0.8],[3.2,0.2,1.6]),
+            ('west',[-0.2,5,0.8],[0.2,2.6,1.6]),
+            ('east',[2.2,5,0.8],[0.2,2.6,1.6]),
+            ('north',[1,6.2,0.8],[2.6,0.2,1.6]),
+            ('south',[1,3.8,0.8],[2.6,0.2,1.6]),
         ]:
             solid(world,f'sealed_B_{name}',xyz,size,[0.8,0.19,0.10,1])
     return root
@@ -184,6 +222,7 @@ def main():
         tree.write(worlds/f'hangar_{scenario}_robot.sdf', encoding='utf-8', xml_declaration=True)
     layout={'frame':'world','units':'meters','floor_bounds':[-15,15,-11,11],
             'base_pose':[-11,-7,0], 'sectors':SECTORS,'inspection_points':POINTS,
+            'inspection_zones':ZONES,
             'note':'World reference poses; run build_navigation_maps.py and Nav2 for navigation.'}
     (ROOT/'config/hangar.json').write_text(json.dumps(layout,indent=2,ensure_ascii=False)+'\n')
     print('Generated six hangar worlds (empty/robot) and config/hangar.json')

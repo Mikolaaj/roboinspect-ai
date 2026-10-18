@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "obstacle": [
+    1.5219835507770938,
+    2.9110249493450766
+  ],
+  "replan_seconds": 1.6396174120000069,
+  "before_revision": 50,
+  "after_revision": 52,
+  "clearance_m": 1.2799990704159043,
+  "visual": {
+    "ready": true,
+    "error": null,
+    "segments_active": true,
+    "fresh": true
+  },
+  "cleared_after_cancel": true
+}

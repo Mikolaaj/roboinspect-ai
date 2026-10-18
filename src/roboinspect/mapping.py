@@ -57,3 +57,28 @@ def project_robot(x, y, yaw, origin, resolution, width, height):
     if not (0 <= column < width and 0 <= row < height):
         return None
     return {"x": column, "y": row, "heading": yaw - origin[2]}
+
+
+def project_zones(info, zones):
+    """Render-only overlays in either the native SLAM frame or the navigation frame."""
+    markers = []
+    for name, zone in zones.items():
+        x, y, _ = zone["pose"]
+        if info["frame"] == "map_slam":
+            x -= BASE_OFFSET[0]
+            y -= BASE_OFFSET[1]
+        point = project_robot(
+            x, y, 0, info["origin"], info["resolution"], info["width"], info["height"]
+        )
+        if point:
+            markers.append(
+                {
+                    "name": name,
+                    "x": 100 * point["x"] / info["width"],
+                    "y": 100 * point["y"] / info["height"],
+                    "width": 100 * zone["size"][0] / info["resolution"] / info["width"],
+                    "height": 100 * zone["size"][1] / info["resolution"] / info["height"],
+                    "rotation": info["origin"][2],
+                }
+            )
+    return markers

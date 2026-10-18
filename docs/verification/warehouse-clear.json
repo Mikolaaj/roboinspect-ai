@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "mode": "clear",
+  "warehouse": {
+    "mode": "clear",
+    "layout_id": "clear-5ff1b6833d18",
+    "seed": null,
+    "movable_count": 0
+  },
+  "actual_models": [],
+  "static_obstacle_boxes": 20,
+  "operation_id": "91677d9d-e8b7-458b-90a3-eefd2915166a",
+  "position": {
+    "x": -11.000000000000142,
+    "y": -7.00000000000016
+  },
+  "history": {
+    "id": "91677d9d-e8b7-458b-90a3-eefd2915166a",
+    "kind": "warehouse",
+    "name": "Usunięcie wszystkich przeszkód",
+    "status": "succeeded",
+    "created_at": "2026-10-18T19:59:16.550303+00:00",
+    "message": "Magazyn gotowy. Robot w BASE; przeszkody: 0. Wszystkie czerwone strefy i punkty P są dostępne.",
+    "saved_map": null,
+    "details": [
+      "Operacja przyjęta",
+      "Rozpoczynanie operacji…",
+      "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…",
+      "Magazyn gotowy. Robot w BASE; przeszkody: 0. Wszystkie czerwone strefy i punkty P są dostępne."
+    ],
+    "events": [
+      {
+        "time": "2026-10-18T19:59:16.550318Z",
+        "message": "Operacja przyjęta"
+      },
+      {
+        "time": "2026-10-18T19:59:16.592050Z",
+        "message": "Rozpoczynanie operacji…"
+      },
+      {
+        "time": "2026-10-18T19:59:16.593557Z",
+        "message": "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…"
+      },
+      {
+        "time": "2026-10-18T19:59:31.582859Z",
+        "message": "Magazyn gotowy. Robot w BASE; przeszkody: 0. Wszystkie czerwone strefy i punkty P są dostępne."
+      }
+    ]
+  }
+}

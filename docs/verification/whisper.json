@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source": "synthetic_polish",
+  "transcript": {
+    "text": "Jedź do sektora A. Jedź do bazy.",
+    "language": "pl",
+    "duration_seconds": 2.61325,
+    "latency_seconds": 2.4902207109998926,
+    "model": "whisper-small",
+    "device": "cpu",
+    "tracking_error": false
+  },
+  "mission_created": false,
+  "microphone_hardware_tested": false
+}

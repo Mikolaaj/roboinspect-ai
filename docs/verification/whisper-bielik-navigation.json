@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "transcript": "Jedź do sektora A. Jedź do bazy.",
+  "chat_id": "ef300230-d7fa-49eb-8c38-18ad54c49c57",
+  "mission_id": "1de326e0-6680-4766-a1d6-562cd02ec6cd",
+  "targets": [
+    "A",
+    "BASE"
+  ],
+  "moving_before_stop": true,
+  "stop_action": "stop",
+  "stop_seconds": 0.9736859710001227,
+  "returned_base": true
+}

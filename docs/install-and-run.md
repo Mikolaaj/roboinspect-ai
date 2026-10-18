@@ -63,24 +63,23 @@ cd roboinspect-ai
 Kod kokpitu musi być w pobieranej wersji repozytorium. Lokalne zmiany trzeba
 wcześniej zapisać w commitach i wypchnąć, aby były dostępne na drugim komputerze.
 
-## 3. Dwie komendy startowe
+## 3. Jedna komenda startowa
 
-Terminal 1:
+Najpierw zatrzymaj poprzednią sesję i poczekaj na zakończenie:
 
 ```bash
 cd ~/Desktop/roboinspect-ai
+bash scripts/stop_cockpit.sh
+```
+
+Następnie uruchom:
+
+```bash
 bash scripts/run_cockpit.sh
 ```
 
-Terminal 2:
+Komenda uruchamia Gazebo, kamery, ROS, Nav2, serwer, Bielika i MLflow. Otwiera dwie karty przeglądarki: kokpit oraz panel sterowania. `--no-browser` pomija otwieranie obu kart. Skrót `run_control_panel.sh` jest opcjonalny.
 
-```bash
-cd ~/Desktop/roboinspect-ai
-bash scripts/run_control_panel.sh
-```
-
-Pierwsza komenda uruchamia fizykę Gazebo, trzy kamery, mosty ROS, Nav2 oraz
-lokalny serwer i otwiera kokpit w przeglądarce. Druga otwiera przyciski.
 Jeśli przeglądarka nie otworzy się automatycznie, użyj adresów:
 
 - kokpit: http://127.0.0.1:8765/
@@ -114,3 +113,24 @@ potwierdza działania renderowania. Zobacz docs/environment.md.
 
 Przed pierwszym startem kokpitu uruchom `bash scripts/setup_project.sh`.
 Instrukcja, baza danych, panel sekwencji i testy: [missions.md](missions.md).
+
+## Lokalny model i MLflow
+
+Po przygotowaniu `.venv` na nowym komputerze wykonaj jednorazowo:
+
+```bash
+bash scripts/setup_bielik.sh
+```
+
+Instalacja jest lokalna, wymaga curl i obsługi zstd w tar. Pobiera około 4.3 GB
+silnika i wag; sprawdza sumę kontrolną modelu. Potem standardowy `run_cockpit.sh`
+uruchamia również Ollama i MLflow, i otwiera kokpit oraz panel z czatem.
+Zatrzymanie: `bash scripts/stop_cockpit.sh`. Szczegóły: [bielik-chat.md](bielik-chat.md).
+
+## Lokalny mikrofon
+
+Jednorazowo `bash scripts/setup_whisper.sh` po instalacji zależności. Standardowy start pozostaje jedną komendą. [Obsługa i testy głosu oraz nowych stref](voice-and-inspection-zones.md). Do testów programu wymagany jest Node.js 18+; CI używa Node.js 22.
+
+## Wizualizacja trasy
+
+run_cockpit.sh automatycznie buduje klienta z robotics/visualization/pose_client.cpp. Wymaga g++, pkg-config oraz bibliotek Gazebo Transport 13 / Messages 10 z instalacji ROS. Po zmianie światów zrestartuj cały kokpit. [Mapa 2D i trasy](navigation-route-view.md).

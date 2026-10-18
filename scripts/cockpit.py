@@ -16,11 +16,18 @@ from urllib.request import Request, urlopen
 import webbrowser
 from uuid import uuid4
 from roboinspect.store import MissionStore
-from roboinspect.mapping_runner import MappingRunner
+from roboinspect.mapping_runner import MappingRunner, MappingCanceled
+from roboinspect.warehouse import read_selection, view, prepare_layout, persist_selection
 from rendering import configure
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT/'artifacts/cockpit-runtime.json'
+
+
+def open_operator_views(url):
+    """Open both operator views from the single cockpit command."""
+    webbrowser.open_new_tab(url + '/')
+    webbrowser.open_new_tab(url + '/control')
 
 
 def request(url, data=None, token=None):
@@ -83,12 +90,44 @@ class RuntimeManager:
         self.token=token
         self.mode=args.mode
         self.map_path=Path(os.environ['ROBOINSPECT_MAP'])
+        self.selection=read_selection(ROOT) if self.scenario == 'normal' else None
+        self.warehouse=view(self.selection)
+        self.world_path=Path(self.selection['world']) if self.selection else ROOT/f'simulation/worlds/hangar_{self.scenario}_robot.sdf'
+        self.default_map=Path(self.selection['map']) if self.selection else ROOT/f'maps/hangar_{self.scenario}.yaml'
+        if self.selection and args.map is None:
+            self.map_path=self.default_map
+        self.environment()
         self.generation=0
         self.stop=stop
+
+    def environment(self):
+        os.environ['ROBOINSPECT_WORLD']=str(self.world_path)
+        os.environ['ROBOINSPECT_WAREHOUSE']=json.dumps(self.warehouse)
+        os.environ['ROBOINSPECT_MAP']=str(self.map_path)
+
+    def change_warehouse(self, mode, seed, canceled):
+        selection=prepare_layout(mode,seed,ROOT)
+        if canceled():raise MappingCanceled()
+        old=(self.selection,self.warehouse,self.world_path,self.default_map,self.map_path)
+        self.selection=selection
+        self.warehouse=view(selection)
+        self.world_path=Path(selection['world'])
+        self.default_map=Path(selection['map'])
+        try:
+            self.switch('navigation',self.default_map)
+            if canceled():raise MappingCanceled()
+            persist_selection(selection,ROOT)
+        except Exception:
+            self.selection,self.warehouse,self.world_path,self.default_map,self.map_path=old
+            if not self.shutdown.is_set():
+                self.switch('navigation',self.map_path)
+            raise
+        return selection
 
     def write_runtime(self):
         RUNTIME.write_text(json.dumps({'pid':os.getpid(),'port':self.args.port,
             'scenario':self.scenario,'mode':self.mode,'map':str(self.map_path),
+            'world':str(self.world_path),'warehouse':self.warehouse,
             'rendering':{'mode':os.environ.get('ROBOINSPECT_RENDERING'),
                          'device':os.environ.get('ROBOINSPECT_RENDER_DEVICE')},
             'gz_partition':os.environ['GZ_PARTITION'],
@@ -98,18 +137,20 @@ class RuntimeManager:
         url=f'http://127.0.0.1:{self.args.port}'
         request(url+'/api/internal/runtime',{'mode':self.mode,'transitioning':True,
                                             'map_file':str(self.map_path)},self.token)
-        for name in ['navigation','slam','simulation']:
+        for name in ['route-visualizer','navigation','slam','simulation']:
             self.stop_named(name)
         if self.shutdown.is_set():
             raise RuntimeError('Kokpit jest zamykany')
         self.generation+=1
         os.environ['GZ_PARTITION']=f'roboinspect_cockpit_{os.getpid()}_{self.generation}'
         self.mode=mode
-        self.map_path=Path(map_path) if map_path else ROOT/f'maps/hangar_{self.scenario}.yaml'
+        self.map_path=Path(map_path) if map_path else self.default_map
         os.environ['ROBOINSPECT_MODE']=mode
+        self.environment()
         os.environ['ROBOINSPECT_MAP']=str(self.map_path)
         request(url+'/api/internal/runtime',{'mode':mode,'transitioning':False,
-                                            'map_file':str(self.map_path)},self.token)
+                                            'map_file':str(self.map_path),
+                                            'world_file':str(self.world_path),'warehouse':self.warehouse},self.token)
         self.write_runtime()
         self.start_stack()
         deadline=time.monotonic()+60
@@ -124,8 +165,10 @@ class RuntimeManager:
         raise RuntimeError('Przełączenie przerwane przez zamknięcie kokpitu')
 
     def start_stack(self):
+        self.start('route-visualizer',[str(ROOT/'.venv/bin/python'),str(ROOT/'scripts/route_visualizer.py')])
         self.start('simulation',['bash',str(ROOT/'scripts/run_robot.sh'),
-                     f'scenario:={self.scenario}',f'headless:={str(not self.args.gazebo_gui).lower()}'])
+                     f'scenario:={self.scenario}',f'headless:={str(not self.args.gazebo_gui).lower()}',
+                     f'world:={self.world_path}'])
         if self.mode=='mapping':
             self.start('slam',['/usr/bin/python3','/opt/ros/jazzy/bin/ros2','launch',
                               str(ROOT/'robotics/launch/slam.launch.py')])
@@ -154,7 +197,9 @@ def main():
     selection=ROOT/'data/current-map.json'
     if args.mode=='navigation' and args.map is None and selection.exists():
         chosen=json.loads(selection.read_text())
-        if chosen.get('scenario')==args.scenario and Path(chosen['map']).is_file():
+        active_warehouse=read_selection(ROOT) if args.scenario=='normal' else None
+        current_layout=view(active_warehouse)['layout_id']
+        if chosen.get('scenario')==args.scenario and chosen.get('layout_id','standard')==current_layout and Path(chosen['map']).is_file():
             args.map=Path(chosen['map'])
     environment = ROOT/'.venv/bin/python'
     if not environment.exists():
@@ -172,7 +217,7 @@ def main():
         try:
             fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:
-            print('Kokpit już działa. Otwórz jego adres lub zatrzymaj go przez Ctrl+C.',file=sys.stderr)
+            print('Kokpit działa lub nadal się zamyka. Poczekaj na zakończenie: bash scripts/stop_cockpit.sh',file=sys.stderr)
             return 1
         with socket.socket() as probe:
             probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -202,7 +247,7 @@ def main():
         graphics_env['ROBOINSPECT_RUNTIME_TOKEN']=token
         os.environ.clear()
         os.environ.update(graphics_env)
-        print(f"Renderowanie: {graphics['mode'].upper()} — {graphics['device']}",flush=True)
+        print(f"Renderowanie: {graphics['mode'].upper()} · {graphics['device']}",flush=True)
         shutdown = threading.Event()
         # Separate runs must never discover native Gazebo servers left by another
         # shell/session. Acceptance tests supply their own partition explicitly.
@@ -230,6 +275,19 @@ def main():
         manager=RuntimeManager(args,start,stop_named,shutdown,token)
         runner=MappingRunner(manager,store)
         try:
+            ollama=ROOT/'data/ollama-runtime/bin/ollama'
+            if ollama.exists():
+                os.environ.update(OLLAMA_HOST='127.0.0.1:11435',
+                    OLLAMA_MODELS=str(ROOT/'data/ollama-models'),
+                    OLLAMA_MAX_LOADED_MODELS='1', OLLAMA_NUM_PARALLEL='1',
+                    OLLAMA_CONTEXT_LENGTH='4096', OLLAMA_NO_CLOUD='true')
+                start('ollama',[str(ollama),'serve'])
+            else:
+                print('Czat: najpierw wykonaj bash scripts/setup_bielik.sh',flush=True)
+            start('mlflow',[str(ROOT/'.venv/bin/mlflow'),'server',
+                '--backend-store-uri',f'sqlite:///{ROOT / "data/mlflow.db"}',
+                '--default-artifact-root',str(ROOT/'data/mlflow-artifacts'),
+                '--host','127.0.0.1','--port','5001','--workers','1'])
             manager.start_stack()
             start('operator',[str(ROOT/'.venv/bin/python'),str(ROOT/'operator/server.py'),
                               '--port',str(args.port),'--scenario',args.scenario])
@@ -254,7 +312,7 @@ def main():
                        if args.mode == 'mapping' else 'Poczekaj na trzy obrazy i zielony status Nav2.\n')+
                       'Ctrl+C w tym terminalu zamyka całość.\n',flush=True)
                 if not args.no_browser:
-                    threading.Thread(target=webbrowser.open,args=(url+'/',),daemon=True).start()
+                    threading.Thread(target=open_operator_views,args=(url,),daemon=True).start()
             while not shutdown.wait(0.5):
                 runner.tick()
                 failed = [(name,p.returncode) for name,p in processes if p.poll() is not None]

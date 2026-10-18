@@ -9,16 +9,19 @@ z dostępnych transkrypcji. Poniżej rozróżniamy wykonane funkcje od planów.
 | Integracja systemów | ROS, most Gazebo, kolejka poleceń, callbacki, osobne procesy, logi i restart | ROS/Gazebo to rozszerzenie robotyczne projektu, nie dowód zrealizowania modułów ML |
 | Testowanie | Własne testy integracyjne/E2E na rzeczywistej symulacji, anulowanie, brak trasy, pozycja ground truth | Dodano pytest/fixtures, Ruff i workflow GitHub Actions; CI czeka na push |
 | REST/API | FastAPI, kontrakty Pydantic, stan/cel/anulowanie, sekwencje misji i historia SQLite | PostgreSQL, Pydantic Graph i tracing pozostają w planie |
-| Robotyka — rozszerzenie projektu | SLAM Toolbox, mapa z lidaru, eksport do AMCL/Nav2 | Kontrolowany obchód normalnej hali; brak autonomicznej eksploracji |
+| Robotyka: rozszerzenie projektu | SLAM Toolbox, mapa z lidaru, eksport do AMCL/Nav2 | Kontrolowany obchód normalnej hali; brak autonomicznej eksploracji |
+| LLM i NLP | Lokalny Bielik 4.5B Q4_K_M, JSON Schema, walidacja Pydantic, czat i trwałe misje, lokalny Whisper z mikrofonem | Polecenia interpretowane osobno; Pydantic AI, RAG i TTS pozostają w planie |
+| MLOps / MLflow | Lokalne eksperymenty, wersja promptu, parametry i metryki, ewaluacja poleceń | Brak treningu wag i rejestru własnego modelu wizyjnego |
 | Obrazy i GPU | RGB, JPEG/MJPEG, trzy kamery, NVIDIA RTX i pomiary zasobów | Nie ma jeszcze modeli detekcji/segmentacji ani własnego treningu |
 | Repo i odtwarzanie | Repo Git, konfiguracje, launchery, instrukcje, zapis wyników testów | Dodano uv/pyproject/lockfile; kontenery i automatyczny deployment pozostają w planie |
 
-Gotowe: robotyczna platforma do przyszłego AI. Pozostają do implementacji
-uczenie modeli, EDA, LLM/Pydantic AI, głos, RAG, MLflow/Optuna, Docker,
-Kubernetes i deployment CD. Podstawowe CI jest już skonfigurowane. Samo zainstalowanie narzędzia lub wpisanie go w plan
-nie oznacza wykorzystania go w projekcie.
+Gotowe: platforma robotyczna, czerwone strefy inspekcji, lokalny czat AI i mikrofon z Whisperem oraz pomiarami MLflow.
+Pozostają uczenie modeli, EDA, RAG, Optuna, Docker, Kubernetes i deployment CD.
+Wykorzystujemy kontrakty Pydantic bez biblioteki Pydantic AI. Podstawowe CI jest
+skonfigurowane; nowy etap wymaga wypchnięcia zmian. Instrukcja i wyniki:
+[bielik-chat.md](bielik-chat.md), [bielik-results.md](bielik-results.md).
 
-## Aktualny pomiar zasobów
+## Historyczny pomiar zasobów przed dodaniem LLM
 
 Próbka 5.16 s, robot zatrzymany w BASE, trzy kamery, Nav2 i backend;
 CPU przeglądarki nie jest wliczone w procesy projektu. Próba została
@@ -47,7 +50,7 @@ wykonano wcześniej w fazie 3; wygładzanie/nakładki będą rozwijane dalej.
 |---|---|
 | Uzupełnienie 1 | uv/pyproject/lockfile, Ruff, pytest, podstawowe GitHub Actions |
 | 5 | Pydantic, FastAPI, wykonawca i trwała historia misji, PostgreSQL |
-| 6 | Czat, gotowy LLM przez Pydantic AI, walidowany plan i pomiary MLflow |
+| 6 — wdrożono | Czat Bielik, walidowany plan Pydantic i pomiary MLflow; biblioteka Pydantic AI pozostaje opcjonalna |
 | 7 | Mikrofon, gotowy STT, korekta transkrypcji, TTS |
 | 8 | RAG: procedury techniczne, wyszukiwanie i odpowiedzi oparte na danych |
 | 9 | Dane obrazowe, EDA, etykiety klas/boxów/masek i poprawne splity |
@@ -61,3 +64,7 @@ wykonano wcześniej w fazie 3; wygładzanie/nakładki będą rozwijane dalej.
 
 Założenia YOLO + SAM: [perception-plan.md](perception-plan.md). Wersji modeli
 nie wybieramy teraz; wspólny budżet RTX 8 GB sprawdzimy przy ich wdrażaniu.
+
+## Rozszerzenie: głos i punkty inspekcyjne
+
+Dodano lokalny Whisper small, nagrywanie z mikrofonu, walidację audio, edytowalną transkrypcję oraz osobny eksperyment MLflow. Sektory prowadzą do czerwonych stref przed tablicami. Głos korzysta z istniejącego wykonawcy misji po sprawdzeniu i wysłaniu tekstu przez operatora. Szczegóły: [instrukcja](voice-and-inspection-zones.md).

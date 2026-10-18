@@ -1,0 +1,18 @@
+# Panel operatora
+
+Start: `bash scripts/run_cockpit.sh`. Komenda otwiera kokpit i sterowanie w dwóch kartach domyślnej przeglądarki. Opcja `--no-browser` nie otwiera kart.
+
+Stop: Ctrl+C w terminalu uruchomienia lub `bash scripts/stop_cockpit.sh`. Poczekaj na zakończenie przed ponownym startem.
+
+Interfejs używa lokalnych SVG Phosphor, systemowego fontu i bezpośredniego HTML/CSS/JS. Nie wymaga CDN. Sektory mają litery w okręgach. Na telefonie pasek Sterowanie / Czat przewija do właściwej sekcji. Historia, SLAM, misje i rozmowy zachowują dotychczasowe działanie.
+
+Nieaktywna karta ogranicza pobieranie statusu, historii i czatu oraz wyłącza strumienie kamer. Kamery poza widocznym obszarem także zwalniają połączenie. Te zmiany dotyczą wyłącznie przeglądarki: nawigacja i obsługa STOP pozostają po stronie serwera.
+
+## Kolejne etapy
+
+1. Głos: lokalny Whisper, mikrofon i ten sam walidowany wykonawca misji.
+2. RAG: odpowiedzi o obsłudze oparte na dokumentacji i źródłach.
+3. Obraz: dane i EDA, YOLO, segmentacja SAM, ocena jakości oraz MLflow.
+4. Inspekcje: rozpoznawanie usterek, dowody z kamer i raport misji.
+5. Stabilność: budżet VRAM, ewaluacje, testy integracji i obsługa awarii.
+6. Wdrożenie: Docker Compose, Kubernetes, CD i instrukcja na drugim komputerze.

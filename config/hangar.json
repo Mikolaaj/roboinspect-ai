@@ -126,5 +126,51 @@
       ]
     }
   },
+  "inspection_zones": {
+    "A": {
+      "pose": [
+        -9,
+        5.0,
+        1.5707963267948966
+      ],
+      "size": [
+        2.0,
+        1.4
+      ],
+      "panels": [
+        "P1",
+        "P2"
+      ]
+    },
+    "B": {
+      "pose": [
+        1,
+        5.0,
+        1.5707963267948966
+      ],
+      "size": [
+        2.0,
+        1.4
+      ],
+      "panels": [
+        "P3",
+        "P4"
+      ]
+    },
+    "C": {
+      "pose": [
+        10,
+        6.6,
+        1.5707963267948966
+      ],
+      "size": [
+        1.6,
+        1.4
+      ],
+      "panels": [
+        "P5"
+      ]
+    }
+  },
   "note": "World reference poses; run build_navigation_maps.py and Nav2 for navigation."
 }

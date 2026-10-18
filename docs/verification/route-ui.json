@@ -1,0 +1,13 @@
+{
+  "python_tests_passed": 99,
+  "javascript_tests_passed": 5,
+  "mobile_width": 390,
+  "horizontal_overflow": false,
+  "mobile_map_width": 315,
+  "maps_desktop_columns": 2,
+  "maps_mobile_columns": 1,
+  "gazebo_transparency": 0.42,
+  "route_source": "/plan",
+  "temporary_obstacle_removed": true,
+  "robot_returned_base": true
+}

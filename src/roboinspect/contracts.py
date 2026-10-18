@@ -110,6 +110,9 @@ class MappingAction(StrEnum):
     SAVE = "save"
     RESET = "reset"
     FINISH = "finish"
+    WAREHOUSE_STANDARD = "warehouse_standard"
+    WAREHOUSE_CLEAR = "warehouse_clear"
+    WAREHOUSE_RANDOM = "warehouse_random"
 
 
 class OperationLog(StrictModel):
@@ -125,6 +128,7 @@ class MappingOperation(StrictModel):
     message: str = "Operacja przyjęta"
     cancel_requested: bool = False
     saved_map: str | None = None
+    layout_seed: int | None = None
     created_at: datetime = Field(default_factory=now)
     updated_at: datetime = Field(default_factory=now)
     events: list[OperationLog] = Field(default_factory=list)
@@ -134,7 +138,22 @@ class MappingRequest(StrictModel):
     pass
 
 
+class WarehouseAction(StrEnum):
+    STANDARD = "standard"
+    CLEAR = "clear"
+    RANDOM = "random"
+
+
+class WarehouseView(StrictModel):
+    mode: Literal["standard", "clear", "random"] = "standard"
+    layout_id: str = "standard"
+    seed: int | None = None
+    movable_count: int = 8
+
+
 class RuntimeUpdate(StrictModel):
     mode: Literal["navigation", "mapping"]
     transitioning: bool
     map_file: str | None = None
+    world_file: str | None = None
+    warehouse: WarehouseView | None = None

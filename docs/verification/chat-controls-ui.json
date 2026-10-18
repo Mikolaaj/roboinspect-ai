@@ -1,0 +1,12 @@
+{
+  "source": "manual acceptance through browser UI",
+  "enter_sends_message": true,
+  "shift_enter_keeps_two_lines_without_sending": true,
+  "thinking_indicator_dot_count": 3,
+  "stop_answer_button_canceled_real_request": true,
+  "stop_enter_available_during_analysis": true,
+  "stop_enter_canceled_pending_analysis": true,
+  "operator_explanation_contains_actual_description": true,
+  "chat_error_empty_after_stop": true,
+  "test_conversation_archived_at_end": true
+}

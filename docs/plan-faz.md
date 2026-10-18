@@ -13,6 +13,12 @@ Uzupełnienie z 18.10.2026: w późniejszej percepcji dodamy YOLO do detekcji
 oraz SAM do segmentacji obiektów z kamery robota. To zaplanowane funkcje,
 jeszcze niezaimplementowane. Podział ról, dane i pomiary: [perception-plan.md](perception-plan.md).
 
+Aktualizacja czatu: bieżący czat tekstowy Bielik znajduje się po prawej stronie
+**panelu sterowania**, zgodnie z najnowszą decyzją użytkownika. Dotychczasowe
+sterowanie i historia są po lewej; trzy kamery pozostają w kokpicie.
+Instrukcja: [bielik-chat.md](bielik-chat.md). Poniższy szkic opisuje wcześniejszy
+układ docelowy; nie jest zrzutem aktualnego interfejsu.
+
 ## Docelowy ekran operatora
 
 Trzy kolumny, trzy rzeczywiste widoki symulacji i czat w trzeciej kolumnie:
@@ -181,7 +187,9 @@ Rezultat: pierwsza pionowa ścieżka tekst -> gotowy LLM -> walidowany plan -> r
 
 Kryterium: ustalony zestaw komend działa na symulatorze; nieistniejący sektor nie powoduje wymyślenia współrzędnych; czat nie ogłasza zakończenia przed zdarzeniem z wykonawcy.
 
-### Faza 7 — mikrofon, gotowy STT i odpowiedzi głosowe
+### Faza 7: mikrofon, gotowy STT i odpowiedzi głosowe
+
+Stan: mikrofon i lokalny Whisper są wdrożone, włącznie z edycją transkrypcji i pomiarami MLflow. TTS pozostaje do dodania. Poniższa lista opisuje pełny zakres fazy.
 
 Zadania:
 
@@ -464,3 +472,7 @@ Kamienie milowe:
 8. MLflow: porównanie modeli i konfiguracja użytej wersji.
 9. CI/CD: testy, obraz, wykonany deployment i rollback.
 10. Ograniczenia oraz kierunki dalszego rozwoju.
+
+## Aktualizacja: lokalna mowa i strefy inspekcji
+
+Mikrofon i Whisper small są wdrożone. Rozpoznany tekst operator sprawdza i wysyła do tego samego czatu. Dodano lokalne metryki ASR w MLflow oraz po jednej czerwonej strefie przed tablicami w A/B/C. Następne prace: RAG operatora, dane/EDA, YOLO i SAM, własny model defektów, pełne raporty inspekcji, następnie Docker, Kubernetes i CD. Instrukcja: [głos i strefy](voice-and-inspection-zones.md).

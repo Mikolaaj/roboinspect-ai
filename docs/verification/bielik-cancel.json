@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "mission_id": "51335155-8b94-46f0-bdae-1597b277a2ac",
+  "cancel_chat_id": "3224e0d8-e533-44ae-ab33-315c1c37ca82",
+  "mission_status": "canceled",
+  "velocity": {
+    "linear": 0.0,
+    "angular": 0.0
+  }
+}

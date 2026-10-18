@@ -1,5 +1,6 @@
 """FastAPI routes shared by buttons and the future validated LLM planner."""
 
+import json
 import secrets
 import threading
 from collections.abc import Callable
@@ -10,7 +11,9 @@ from uuid import UUID
 from fastapi import FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from starlette.concurrency import run_in_threadpool
 
+from .chat import ChatRequest, ChatService
 from .contracts import (
     ACTIVE,
     ConflictError,
@@ -23,23 +26,40 @@ from .contracts import (
     MissionRecord,
     RuntimeUpdate,
     Sector,
+    WarehouseAction,
 )
+from .mapping import project_zones
 from .missions import MissionService
-from .operations import request_operation
+from .operations import request_operation, request_warehouse
+from .routes import hangar_layout
+from .speech import AUDIO_TYPES, SpeechError, SpeechService, Transcript
 
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "operator/web"
 CAMERAS = {"fpv", "follow", "overhead"}
 
 
-def create_app(service: MissionService, operator=None, port=8765, shutdown: Callable | None = None):
+def create_app(
+    service: MissionService,
+    operator=None,
+    port=8765,
+    shutdown: Callable | None = None,
+    chat=None,
+    speech=None,
+):
+    chat = chat or ChatService(service)
+    speech = speech or SpeechService()
+    zones = json.loads((ROOT / "config/hangar.json").read_text())["inspection_zones"]
+
     @asynccontextmanager
     async def lifespan(_):
         service.start_worker()
+        chat.start()
         try:
             yield
         finally:
             stopping.set()
+            chat.close()
             service.close()
             if shutdown:
                 shutdown()
@@ -57,11 +77,16 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
             origin = request.headers.get("origin")
             if origin and origin != f"http://{host}":
                 return JSONResponse({"error": "Origin not allowed"}, status_code=403)
-            if request.headers.get("content-type", "").split(";")[0] != "application/json":
-                return JSONResponse({"error": "Use application/json"}, status_code=415)
+            is_audio = request.url.path == "/api/speech/transcribe"
+            content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
+            if (is_audio and content_type not in AUDIO_TYPES) or (
+                not is_audio and content_type != "application/json"
+            ):
+                return JSONResponse({"error": "Nieobsługiwany typ danych"}, status_code=415)
             try:
-                if int(request.headers.get("content-length", "0")) > 16384:
-                    return JSONResponse({"error": "Request too large"}, status_code=413)
+                limit = speech.config["max_bytes"] if is_audio else 16384
+                if int(request.headers.get("content-length", "0")) > limit:
+                    return JSONResponse({"error": "Żądanie jest za duże"}, status_code=413)
             except ValueError:
                 return JSONResponse({"error": "Invalid content length"}, status_code=400)
         response = await call_next(request)
@@ -85,6 +110,83 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
             status_code=400 if request.url.path == "/api/goal" else 422,
         )
 
+    @app.get("/api/speech/runtime")
+    def speech_runtime():
+        return speech.runtime()
+
+    @app.post("/api/speech/transcribe", response_model=Transcript)
+    async def transcribe_audio(request: Request):
+        data = bytearray()
+        async for chunk in request.stream():
+            data.extend(chunk)
+            if len(data) > speech.config["max_bytes"]:
+                raise HTTPException(413, "Nagranie jest za duże")
+        try:
+            return await run_in_threadpool(speech.transcribe, bytes(data))
+        except SpeechError as exc:
+            raise HTTPException(exc.code, str(exc)) from exc
+
+    @app.get("/api/chat/runtime")
+    def chat_runtime():
+        import httpx
+
+        try:
+            with httpx.Client(timeout=1, trust_env=False) as client:
+                tags = client.get("http://127.0.0.1:11435/api/tags")
+                tags.raise_for_status()
+                available = any(m["name"] == chat.planner.model for m in tags.json()["models"])
+                loaded = client.get("http://127.0.0.1:11435/api/ps")
+                loaded.raise_for_status()
+                model = next(
+                    (m for m in loaded.json()["models"] if m["name"] == chat.planner.model), None
+                )
+            return {
+                "available": available,
+                "model": chat.planner.model,
+                "loaded": model is not None,
+                "gpu_memory_bytes": model.get("size_vram", 0) if model else None,
+            }
+        except (httpx.HTTPError, ValueError, KeyError):
+            return {
+                "available": False,
+                "model": chat.planner.model,
+                "loaded": False,
+                "message": "Uruchom kokpit; przygotowanie: bash scripts/setup_bielik.sh",
+            }
+
+    @app.get("/api/chat")
+    def chat_history(
+        before: int | None = Query(default=None, ge=1),
+        limit: int = Query(default=100, ge=1, le=200),
+        include_archived: bool = False,
+    ):
+        return chat.history(before, limit, include_archived)
+
+    @app.get("/api/chat/control")
+    def chat_control():
+        return {"control_epoch": chat.control_epoch()}
+
+    @app.post("/api/chat/{turn_id}/cancel")
+    def stop_answer(turn_id: UUID, body: MappingRequest):
+        record = chat.cancel_answer(str(turn_id))
+        if record is None:
+            raise HTTPException(404, "Wiadomość nie istnieje")
+        return record
+
+    @app.post("/api/chat/new")
+    def new_chat(body: MappingRequest, idempotency_key: str = Header(min_length=1, max_length=128)):
+        return chat.new_conversation(idempotency_key)
+
+    @app.post("/api/chat", status_code=202)
+    def chat_message(
+        body: ChatRequest,
+        response: Response,
+        idempotency_key: str = Header(min_length=1, max_length=128),
+    ):
+        record, created = chat.submit(body.text, idempotency_key, body.control_epoch)
+        response.status_code = 202 if created else 200
+        return record
+
     @app.get("/api/history")
     def activity_history(limit: int = Query(default=30, ge=1, le=100)):
         rows = [
@@ -102,7 +204,7 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
         rows += [
             {
                 "id": r.id,
-                "kind": "mapping",
+                "kind": "warehouse" if r.kind.value.startswith("warehouse_") else "mapping",
                 "name": r.name,
                 "status": r.status,
                 "created_at": r.created_at,
@@ -126,12 +228,25 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
         response.status_code = 202 if created else 200
         return record
 
+    @app.post("/api/warehouse/{action}", response_model=MappingOperation, status_code=202)
+    def warehouse_action(
+        action: WarehouseAction,
+        body: MappingRequest,
+        response: Response,
+        idempotency_key: str = Header(min_length=1, max_length=128),
+    ):
+        record, created = request_warehouse(service, action, idempotency_key)
+        response.status_code = 202 if created else 200
+        return record
+
     @app.post("/api/internal/runtime", include_in_schema=False)
     def runtime_update(update: RuntimeUpdate, x_runtime_token: str | None = Header(default=None)):
         expected = getattr(operator, "runtime_token", "")
         if not expected or not secrets.compare_digest(x_runtime_token or "", expected):
             raise HTTPException(403, "Runtime token required")
         operator.set_runtime(update.mode, update.transitioning, update.map_file)
+        if update.world_file is not None and update.warehouse is not None:
+            operator.set_warehouse(update.world_file, update.warehouse.model_dump())
         return {"accepted": True}
 
     @app.get("/api/missions", response_model=list[MissionRecord])
@@ -192,6 +307,9 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
     @app.get("/api/status")
     def status():
         result = service.robot.snapshot()
+        result["inspection_zones"] = (
+            project_zones(result["map"], zones) if result.get("map") else []
+        )
         result["runtime_ready"] = result["ready"]
         record = service.summary()
         result["mission"] = record.model_dump(mode="json") if record else None
@@ -230,6 +348,14 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
             if jobs[0].cancel_requested:
                 result.update(state="canceling", message="Zatrzymywanie obchodu…")
         return result
+
+    @app.get("/api/hangar")
+    def hangar():
+        return hangar_layout(
+            service.scenario,
+            getattr(operator, "world_file", None),
+            getattr(operator, "warehouse", {}).get("layout_id", "standard"),
+        )
 
     @app.get("/api/sectors", response_model=dict[str, Sector])
     def sectors():
@@ -301,6 +427,9 @@ def create_app(service: MissionService, operator=None, port=8765, shutdown: Call
         "/": ("index.html", "text/html"),
         "/control": ("control.html", "text/html"),
         "/app.js": ("app.js", "text/javascript"),
+        "/activity.js": ("activity.js", "text/javascript"),
+        "/voice.js": ("voice.js", "text/javascript"),
+        "/route-map.js": ("route-map.js", "text/javascript"),
         "/style.css": ("style.css", "text/css"),
     }
 

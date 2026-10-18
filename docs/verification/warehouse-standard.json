@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "mode": "standard",
+  "warehouse": {
+    "mode": "standard",
+    "layout_id": "standard-8e6cb1b73792",
+    "seed": null,
+    "movable_count": 8
+  },
+  "actual_models": [
+    "column_0",
+    "column_1",
+    "crate_0",
+    "crate_1",
+    "crate_2",
+    "crate_3",
+    "rack_C",
+    "workbench_A"
+  ],
+  "static_obstacle_boxes": 38,
+  "operation_id": "a483dc37-b804-4754-836f-0ef2e4221d67",
+  "position": {
+    "x": -11.000000000000142,
+    "y": -7.000000000000158
+  },
+  "history": {
+    "id": "a483dc37-b804-4754-836f-0ef2e4221d67",
+    "kind": "warehouse",
+    "name": "Standardowe ustawienie magazynu",
+    "status": "succeeded",
+    "created_at": "2026-10-18T20:06:22.390685+00:00",
+    "message": "Magazyn gotowy. Robot w BASE; przeszkody: 8. Wszystkie czerwone strefy i punkty P są dostępne.",
+    "saved_map": null,
+    "details": [
+      "Operacja przyjęta",
+      "Rozpoczynanie operacji…",
+      "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…",
+      "Magazyn gotowy. Robot w BASE; przeszkody: 8. Wszystkie czerwone strefy i punkty P są dostępne."
+    ],
+    "events": [
+      {
+        "time": "2026-10-18T20:06:22.390700Z",
+        "message": "Operacja przyjęta"
+      },
+      {
+        "time": "2026-10-18T20:06:22.400289Z",
+        "message": "Rozpoczynanie operacji…"
+      },
+      {
+        "time": "2026-10-18T20:06:22.401574Z",
+        "message": "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…"
+      },
+      {
+        "time": "2026-10-18T20:06:37.009487Z",
+        "message": "Magazyn gotowy. Robot w BASE; przeszkody: 8. Wszystkie czerwone strefy i punkty P są dostępne."
+      }
+    ]
+  }
+}

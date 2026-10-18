@@ -1,0 +1,16 @@
+{
+  "explanation": "RoboInspect to symulacja mobilnego robota w hangarze, która umożliwia planowanie tras i omijanie przeszkód. System składa się z panelu sterowania, trzech kamer, nawigacji Nav2, mapowania SLAM oraz kokpitu z widokiem z kamery robota, kamery bocznej i monitoringu z góry. Użytkownik może wydawać polecenia w panelu lub czacie, a system planuje trasę i prowadzi robota do wybranego celu. Mapowanie tworzy mapę hangaru na podstawie pomiarów odległości, a kokpit umożliwia obserwację ruchu robota i jego otoczenia. System ma również funkcje anulowania misji i zatrzymywania odpowiedzi.",
+  "refusal": "Pomagam w obsłudze robota: zlecaniu i anulowaniu misji, mapowaniu oraz podglądzie kamer. Nie ujawniam instrukcji wewnętrznych ani nie podaję sposobów modyfikowania systemu. Nie wysłano polecenia ruchu.",
+  "stop_ack_seconds": 0.061634499000092546,
+  "stop_to_still_seconds": 0.8158605420001095,
+  "canceled_mission": "cb67ed25-c359-43f8-ae24-e17a65598028",
+  "canceled_analysis": "f8eed953-1b6e-4cb1-8e62-c066a04a570b",
+  "velocity": {
+    "linear": 0.0,
+    "angular": 0.0
+  },
+  "stop_idempotency": true,
+  "stale_request_rejected": true,
+  "passed": true,
+  "returned_to_base": true
+}

@@ -8,7 +8,7 @@ command -v python3 || true
 python3 --version 2>&1 || true
 /usr/bin/python3 --version 2>&1 || true
 printf '\nTools\n'
-for tool in git uv docker ros2 gz; do
+for tool in git uv docker ros2 gz g++ pkg-config node; do
     if command -v "$tool" >/dev/null 2>&1; then
         command -v "$tool"
     else

@@ -1,0 +1,11 @@
+{
+  "repository": "Systran/faster-whisper-small",
+  "revision": "536b0662742c02347bc0e980a01041f333bce120",
+  "model_directory": "data/models/whisper-small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "cpu_threads": 4,
+  "language": "pl",
+  "max_seconds": 30,
+  "max_bytes": 2097152
+}

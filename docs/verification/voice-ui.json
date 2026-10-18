@@ -1,0 +1,13 @@
+{
+  "python_tests_passed": 86,
+  "javascript_tests_passed": 5,
+  "mobile_width": 390,
+  "horizontal_overflow": false,
+  "microphone_ready": true,
+  "physical_microphone_recorded": false,
+  "synthetic_audio_formats": [
+    "wav",
+    "webm/opus"
+  ],
+  "model_offline": true
+}

@@ -51,8 +51,8 @@ def main():
     target_dir=ROOT/'maps'
     target_dir.mkdir(exist_ok=True)
     layout=json.loads((ROOT/'config/hangar.json').read_text())
-    goals={'BASE': layout['base_pose'], 'A':[-9,-1,math.pi/2],
-           'B':[0,-1,math.pi/2], 'C':[10,4,math.pi/2]}
+    goals={'BASE': layout['base_pose'],
+           **{sector: zone['pose'] for sector, zone in layout['inspection_zones'].items()}}
     goals.update({k:v['observation_pose'] for k,v in layout['inspection_points'].items()})
     target_data={'frame_id':'map','units':'meters and radians', 'poses':goals,
                  'note':'map uses hangar world coordinates; run navigation.launch.py for AMCL map->odom'}
@@ -109,7 +109,7 @@ def main():
         # Standalone vector overview for documentation; this is not a Gazebo camera image.
         svg=['<svg xmlns="http://www.w3.org/2000/svg" width="900" height="720" viewBox="0 0 900 720">',
              '<rect width="900" height="720" fill="#f5f7fa"/>',
-             f'<text x="40" y="30" font-family="sans-serif" font-size="22">RoboInspect — mapa geometrii ({scenario})</text>',
+             f'<text x="40" y="30" font-family="sans-serif" font-size="22">RoboInspect · mapa geometrii ({scenario})</text>',
              '<text x="40" y="55" font-family="sans-serif" font-size="13">Schemat mapy do nawigacji; nie jest obrazem kamery ani wynikiem SLAM.</text>']
         def xy(x,y): return 50+(x-XMIN)*25,80+(YMAX-y)*25
         svg.append('<rect x="50" y="80" width="800" height="600" fill="#e1e7ed"/>')
@@ -121,6 +121,9 @@ def main():
         for x1,x2,y1,y2 in boxes:
             x,y=xy(x1,y2)
             svg.append(f'<rect x="{x}" y="{y}" width="{(x2-x1)*25}" height="{(y2-y1)*25}" fill="#414955"/>')
+        for sector,zone in layout['inspection_zones'].items():
+            x,y,_=zone['pose']; w,h=zone['size']; px,py=xy(x-w/2,y+h/2)
+            svg.append(f'<rect x="{px}" y="{py}" width="{w*25}" height="{h*25}" fill="#e34149" fill-opacity="0.3" stroke="#c63332"/>')
         for name,(x,y,yaw) in goals.items():
             px,py=xy(x,y)
             svg.append(f'<circle cx="{px}" cy="{py}" r="5" fill="#c63332"/><text x="{px+7}" y="{py-7}" font-family="sans-serif" font-size="13">{name}</text>')

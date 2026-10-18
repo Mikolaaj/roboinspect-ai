@@ -1,10 +1,15 @@
 # RoboInspect AI
 
-Robot inspekcyjny w hangarze Gazebo, sterowany tekstem i głosem, z Pydantic AI, własnym modelem wizyjnym oraz procesem MLOps i CI/CD.
+Robot inspekcyjny w hangarze Gazebo, sterowany tekstem przez lokalnego Bielika, z walidacją Pydantic, nawigacją Nav2/SLAM i eksperymentami MLflow. Głos i percepcja wizyjna są w planie.
 
 ## Status
 
-Projekt: działająca symulacja oraz rdzeń fazy 5 (API i misje). własny hangar A/B/C i robot z ręcznym sterowaniem, kamerą, lidarem oraz odometrią przez ROS. Dostępny jest też wariant z przeszkodą. Dostępne są Nav2 z AMCL, cele nawigacyjne, kokpit z trzema kamerami i panel przycisków. Działają FastAPI, kontrakty Pydantic, sekwencje misji i trwała historia SQLite. Agent LLM i trening pozostają do implementacji. Instrukcja: [API i misje](docs/missions.md).
+Działają: hangar A/B/C, robot z kamerą i lidarem, trzy widoki, Nav2/AMCL,
+mapowanie SLAM z panelu, FastAPI, kontrakty Pydantic, trwałe misje i historia SQLite.
+Panel ma czat z lokalnym Bielikiem 4.5B Q4_K_M oraz zapisywaną rozmowę;
+MLflow rejestruje interpretacje i eksperymenty. Gotowe modele nie są jeszcze
+własnym treningiem. Mikrofon, RAG, YOLO/SAM oraz Docker/Kubernetes to dalsze etapy.
+Instrukcje: [API i misje](docs/missions.md), [czat i MLflow](docs/bielik-chat.md).
 
 ## Docelowe działanie
 
@@ -12,25 +17,22 @@ Operator wydaje polecenie „Sprawdź panele w sektorze B i wróć do bazy”. G
 
 Planowana percepcja: YOLO do detekcji + SAM do masek obiektów, z własnym modelem oceny defektów. Modele nie są jeszcze wdrożone; [założenia](docs/perception-plan.md).
 
-Panel operatora ma trzy kolumny: kamerę robota, widok podążający za nim oraz monitoring hangaru z góry z czatem i mikrofonem poniżej.
+Kokpit ma trzy kamery: robota, widok podążający i monitoring z góry. W panelu sterowania dotychczasowe funkcje są po lewej, a zapisywany czat po prawej. Mikrofon dojdzie później.
 
 ## Uruchomienie kokpitu
 
-Jednorazowo po pobraniu repo: `bash scripts/setup_project.sh`.
+Jednorazowo po pobraniu repo: `bash scripts/setup_project.sh`, a następnie `bash scripts/setup_bielik.sh` i `bash scripts/setup_whisper.sh`.
 
-Terminal 1 — symulacja, Nav2 i trzy obrazy w przeglądarce:
+Zatrzymanie poprzedniej sesji: `bash scripts/stop_cockpit.sh`.
+
+Jedna komenda uruchamia cały stos i otwiera dwie karty: kokpit oraz sterowanie z czatem.
 
 ```bash
 cd ~/Desktop/roboinspect-ai
 bash scripts/run_cockpit.sh
 ```
 
-Terminal 2 — przyciski A/B/C/BASE i anulowanie:
-
-```bash
-cd ~/Desktop/roboinspect-ai
-bash scripts/run_control_panel.sh
-```
+Dodatkowy terminal nie jest potrzebny. `bash scripts/run_control_panel.sh` pozostaje skrótem do ponownego otwarcia samego panelu.
 
 Domyślnie renderowanie wybiera RTX przy działającym sterowniku. Wymuszenie:
 `bash scripts/run_cockpit.sh --rendering gpu`; wariant CPU: `--rendering cpu`.
@@ -74,7 +76,7 @@ bash scripts/run_robot.sh
 
 ## Odbiór bieżącej fazy
 
-Zaliczono próby normal (A → B → P3 → C → BASE), blocked (B → C → BASE) oraz unreachable (oczekiwany błąd B). Sprawdzono trzy kamery, anulowanie w ruchu, zatrzymanie i ponowny start. Wyniki i granice odbioru: [docs/phase3-results.md](docs/phase3-results.md). Następne etapy to modele Pydantic/API, trwałe misje, a następnie czat LLM i głos.
+Zaliczono próby normal (A → B → P3 → C → BASE), blocked (B → C → BASE) oraz unreachable (oczekiwany błąd B). Sprawdzono trzy kamery, anulowanie w ruchu, zatrzymanie i ponowny start. Wyniki i granice odbioru: [docs/phase3-results.md](docs/phase3-results.md). API, trwałe misje, SLAM i czat są już wdrożone. Najnowszy odbiór: [Bielik i MLflow](docs/bielik-results.md). Następny etap to głos.
 
 ## Dokumentacja i odtwarzalność
 
@@ -84,13 +86,36 @@ Instrukcja instalacji, konfiguracji, uruchamiania, treningu i wdrożenia będzie
 
 Klucze API przechowujemy poza Git. Duże dane, wagi modeli, nagrania i lokalne logi nie są commitowane. Konfiguracja przykładowa będzie dodana wraz z pierwszą usługą.
 
-## SLAM — mapa i robot w panelu
+## SLAM · mapa i robot w panelu
 
-Uruchamianie nadal wymaga dwóch komend: `bash scripts/run_cockpit.sh` oraz
-`bash scripts/run_control_panel.sh`. W panelu pod A/B/C/BASE są przyciski:
+Uruchomienie wymaga jednej komendy: `bash scripts/run_cockpit.sh`. W panelu pod A/B/C/BASE są przyciski:
 rozpocznij mapowanie, zapisz mapę, resetuj mapę i zakończ mapowanie.
 Na mapie widać kropkę robota. Operacje i ich postęp trafiają do wspólnej
 historii z misjami, a wybrana mapa jest pamiętana po restarcie.
 
 Zatrzymanie całości: `bash scripts/stop_cockpit.sh`.
 Pełna instrukcja i narzędzia diagnostyczne: [docs/slam.md](docs/slam.md).
+
+## Lokalny czat Bielik i eksperymenty MLflow
+
+Panel sterowania ma zapisywaną rozmowę po prawej stronie. Bielik 4.5B Q4_K_M
+interpretuje tekst, Pydantic waliduje dozwolone cele, a istniejący wykonawca misji
+przekazuje je do Nav2. MLflow zapisuje konfigurację, interpretacje i wyniki pomiarów.
+Przygotowanie modelu, dwie komendy uruchomienia i testy opisano w [instrukcji czatu](docs/bielik-chat.md).
+
+Czat zaczyna się powitaniem; „Nowa rozmowa” archiwizuje dotychczasowe wiadomości.
+Wyjaśnienia mają osobny tor i publiczną instrukcję operatora w `src/roboinspect/operator_policy.py`.
+Enter wysyła wiadomość, Shift+Enter dodaje linię, a STOP zatrzymuje analizę i ruch robota.
+Szczegóły: [sterowanie czatem i ograniczenia](docs/chat-controls.md).
+
+## Mikrofon i czerwone strefy
+
+Panel obsługuje lokalny Whisper: nagraj, sprawdź rozpoznany tekst i wyślij. Cele A/B/C to teraz po jednej czerwonej strefie przed tablicami. [Instrukcja głosu i stref](docs/voice-and-inspection-zones.md).
+
+## Mapa 2D i aktualna trasa
+
+Kokpit pokazuje schemat całego hangaru obok mapy SLAM, pozycję robota i aktualny plan Nav2. Ta sama półprzezroczysta żółta linia jest widoczna w świecie Gazebo i kamerach. [Obsługa i test nagłej przeszkody](docs/navigation-route-view.md).
+
+## Ustawienie magazynu
+
+Pod mapowaniem są przyciski przywrócenia standardowego wyposażenia, usunięcia przeszkód i losowania układu z zachowaniem przejść. Zmiana odświeża świat i mapę, ustawia robota w BASE i trafia do historii. [Instrukcja i wyniki](docs/warehouse-controls.md).
