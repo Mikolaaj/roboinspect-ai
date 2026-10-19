@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "seed": 1514115452,
+  "previous": {
+    "P1": "000000000030",
+    "P2": "000000000009",
+    "P3": "000000000599",
+    "P4": "000000000650",
+    "P5": "000000000042"
+  },
+  "current": {
+    "P1": "000000000036",
+    "P2": "000000000074",
+    "P3": "000000000071",
+    "P4": "000000000042",
+    "P5": "000000000502"
+  },
+  "actual_gazebo_meshes": [
+    "000000000036",
+    "000000000042",
+    "000000000071",
+    "000000000074",
+    "000000000502"
+  ],
+  "retained_reports": 5,
+  "warehouse_preserved": true,
+  "job": "1ca7ee2a-ef44-4e3a-96d3-61d86c9ff848",
+  "events": [
+    {
+      "time": "2026-10-19T05:25:16.088100Z",
+      "message": "Operacja przyjęta"
+    },
+    {
+      "time": "2026-10-19T05:25:16.191913Z",
+      "message": "Rozpoczynanie operacji…"
+    },
+    {
+      "time": "2026-10-19T05:25:16.194281Z",
+      "message": "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…"
+    },
+    {
+      "time": "2026-10-19T05:25:30.532230Z",
+      "message": "Zmieniono zdjęcia na wszystkich pięciu banerach. Robot w BASE; historia inspekcji zachowana."
+    }
+  ]
+}

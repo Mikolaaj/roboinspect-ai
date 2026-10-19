@@ -24,3 +24,7 @@ Pod kamerami, obok mapy SLAM, znajduje się schemat całego hangaru z przeszkoda
 ## Ustawienie magazynu
 
 Pod mapowaniem wybierz Standardowe ustawienie magazynu, Usuń wszystkie przeszkody lub Losuj przeszkody. Usuwane są skrzynie, regał, stół i wolnostojące słupy; ściany i tablice pozostają. Losowanie zachowuje przejścia do czerwonych stref i punktów P. Zmiana wymaga zakończenia jazdy i mapowania, odświeża świat i mapę oraz ustawia robota w BASE. Wynik znajdziesz w historii. Zapisane mapy i wcześniejsze operacje pozostają zachowane.
+
+## Inspekcja zdjęć
+
+Wybierz Inspekcja sektora A, B lub C. Robot odwiedzi kolejno tablice P i po zapisaniu detekcji wróci na czerwone pole sektora. A obejmuje P1/P2, B P3/P4, C P5. Zmień zdjęcia na banerach losuje nowe fotografie i odświeża symulację, wracając do BASE. W kokpicie rozwiń historię detekcji. YOLO11s rozpoznaje 80 klas, person to człowiek, numer oznacza obiekt w jednej klatce, procent to pewność detektora. Możesz zapytać, co robot widział w sektorze A. Czat poda ostatnie zapisane wyniki i datę; aktualne zdjęcia mogły się zmienić.

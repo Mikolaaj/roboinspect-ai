@@ -1,16 +1,15 @@
 'use strict';
 const $ = id => document.getElementById(id);
-const labels = {idle:'Gotowy',dispatching:'Wysyłanie celu',navigating:'W drodze',canceling:'Anulowanie',succeeded:'Dotarł do celu',canceled:'Anulowano',failed:'Błąd przejazdu',queued:'Przyjęto',running:'W drodze',uncertain:'Sprawdzanie zatrzymania',interrupted:'Przerwano po utracie kontaktu'};
+const labels = {inspecting:'Analiza obrazu',idle:'Gotowy',dispatching:'Wysyłanie celu',navigating:'W drodze',canceling:'Anulowanie',succeeded:'Dotarł do celu',canceled:'Anulowano',failed:'Błąd przejazdu',queued:'Przyjęto',running:'W drodze',uncertain:'Sprawdzanie zatrzymania',interrupted:'Przerwano po utracie kontaktu'};
 let submitting = false;
 let current = null;
 let historyFingerprint = null;
 function text(id,value){if($(id)) $(id).textContent = value;}
 function buttons(){
-  document.querySelectorAll('[data-goal]').forEach(button=>{
+  document.querySelectorAll('[data-goal],[data-inspect]').forEach(button=>{
     button.disabled = submitting || !current?.ready || current?.busy;
     button.classList.toggle('active', Boolean(current?.busy && current?.goal === button.dataset.goal));
   });
-  if($('run-plan')) $('run-plan').disabled = submitting || !current?.ready || current?.busy;
   const op = current?.operation_busy ? current.operation : null;
   const missionBusy = current?.busy && !op;
   document.querySelectorAll('[data-mapping]').forEach(button=>{
@@ -47,6 +46,7 @@ async function command(path,data){
 document.querySelectorAll('[data-goal]').forEach(button=>button.addEventListener('click',()=>command('/api/goal',{goal:button.dataset.goal})));
 document.querySelectorAll('[data-mapping]').forEach(button=>button.addEventListener('click',()=>command('/api/mapping/'+button.dataset.mapping,{})));
 document.querySelectorAll('[data-warehouse]').forEach(button=>button.addEventListener('click',()=>command('/api/warehouse/'+button.dataset.warehouse,{})));
+document.querySelectorAll('[data-inspect]').forEach(button=>button.addEventListener('click',()=>command('/api/inspect/'+button.dataset.inspect,{})));
 if($('cancel')) $('cancel').addEventListener('click',()=>command('/api/cancel',{}));
 async function poll(){
   try{
@@ -76,16 +76,17 @@ async function poll(){
       if(current.map) {
         const m = current.map;
         const view = $('slam-map').parentElement;
-        for(const zone of current.inspection_zones || []){
+        const mapZones=[...(current.inspection_zones || []),...(current.observation_zones || []).map(z=>({...z,observation:true}))];
+        for(const zone of mapZones){
           let overlay = view.querySelector('[data-zone="'+zone.name+'"]');
-          if(!overlay){overlay=document.createElement('span');overlay.className='inspection-zone';overlay.dataset.zone=zone.name;overlay.setAttribute('aria-hidden','true');view.append(overlay);}
+          if(!overlay){overlay=document.createElement('span');overlay.className='inspection-zone'+(zone.observation?' observation-zone':'');overlay.dataset.zone=zone.name;overlay.setAttribute('aria-hidden','true');view.append(overlay);}
           overlay.textContent=zone.name;
           overlay.style.left=zone.x+'%';overlay.style.top=zone.y+'%';
           overlay.style.width=zone.width+'%';overlay.style.height=zone.height+'%';
           overlay.style.transform='translate(-50%,-50%) rotate('+zone.rotation+'rad)';
         }
         for(const overlay of view.querySelectorAll('[data-zone]')){
-          if(!(current.inspection_zones || []).some(zone=>zone.name===overlay.dataset.zone)) overlay.remove();
+          if(!mapZones.some(zone=>zone.name===overlay.dataset.zone)) overlay.remove();
         }
         const marker = $('robot-marker');
         const point = current.robot_marker;
@@ -104,18 +105,17 @@ async function poll(){
       }
     }
     const mission = current.mission;
-    text('plan-progress',opShown ? '' : mission ? `${mission.name} · krok ${mission.current_step == null ? 'Brak danych' : mission.current_step+1}/${mission.steps.length} · ${labels[mission.status] || mission.status}` : '');
     for(const name of ['fpv','follow','overhead']){
       const badge = document.querySelector(`[data-badge="${name}"]`);
       const wait = document.querySelector(`[data-wait="${name}"]`);
       if(!badge) continue;
       const frame = current.cameras[name];
-      const live = frame && frame.age_s < 4;
+      const live = frame && frame.age_s < 4 && (name!=='fpv' || badge.dataset.detectorReady==='true');
       badge.textContent = live ? 'NA ŻYWO' : frame ? 'OBRAZ NIEAKTUALNY' : 'OCZEKIWANIE';
       badge.classList.toggle('live',Boolean(live));
       badge.title = frame ? `Ostatnia odebrana klatka: ${frame.age_s.toFixed(1)} s temu` : 'Brak obrazu';
       wait.hidden = Boolean(live);
-      wait.textContent = frame ? 'Brak nowych klatek z kamery' : 'Oczekiwanie na obraz…';
+      wait.textContent = name==='fpv' && badge.dataset.detectorReady!=='true' ? 'Oczekiwanie na detekcję YOLO…' : frame ? 'Brak nowych klatek z kamery' : 'Oczekiwanie na obraz…';
     }
     if($('events')){
       $('events').replaceChildren();
@@ -141,13 +141,6 @@ for(const image of document.querySelectorAll('.viewport img')){
   image.addEventListener('error',()=>setTimeout(()=>{if(!document.hidden && visibleStreams.has(image)) image.src=image.dataset.stream+'?retry='+Date.now();},2500));
 }
 
-if($('run-plan')) $('run-plan').addEventListener('click',()=>{
-  const targets = $('plan-targets').value.split(',').map(x=>x.trim().toUpperCase());
-  if(!targets.length || targets.length > 20 || targets.some(t=>!['A','B','C','BASE','P1','P2','P3','P4','P5'].includes(t))) {
-    error('Podaj 1–20 znanych celów oddzielonych przecinkami.'); return;
-  }
-  command('/api/missions',{name:$('plan-name').value,steps:targets.map(target=>({target}))});
-});
 async function history(){
   if(!$('missions')) return;
   if(document.hidden){setTimeout(history,3000);return;}
@@ -189,16 +182,17 @@ history();
 // Chat inference and robot STOP are separate actions; STOP never waits for the model.
 if($('chat-form')) {
   let sending=0, canceling=false, chatFingerprint='', oldest=null, generation=0;
+  let panelReady=false;
   let controlEpoch=0, epochReady=false, normalRequest=null, pendingId=null, emergencySending=false;
   const rowsById=new Map();
   const stopText=value=>/^(stop|sotp|zatrzymaj(?:\s+(robota|wszystko|misje|przejazd))?)\s*[.!]*$/i.test(value.trim().normalize('NFD').replace(/[\u0300-\u036f]/g,''));
   function chatButtons(){
     document.dispatchEvent(new CustomEvent('roboinspect-model-busy',{detail:{busy:sending>0 || pendingId!==null}}));
     const emergency=stopText($('chat-input').value);
-    $('chat-send').disabled=(!emergency && (sending>0 || pendingId!==null || !epochReady));
+    $('chat-send').disabled=(!emergency && (sending>0 || pendingId!==null || !epochReady || !panelReady));
     $('chat-stop').hidden=pendingId===null;
     $('chat-stop').disabled=canceling;
-    $('chat-new').disabled=sending>0 || pendingId!==null;
+    $('chat-new').disabled=!panelReady || sending>0 || pendingId!==null;
   }
   function renderChat(){
     const rows=[...rowsById.values()].sort((a,b)=>a.sequence-b.sequence);
@@ -232,6 +226,7 @@ if($('chat-form')) {
     if(atBottom || initial) box.scrollTop=box.scrollHeight;
   }
   async function loadChat(older=false){
+    if(!panelReady) return;
     const requestGeneration=generation;
     try{
       const [response,control]=await Promise.all([
@@ -278,12 +273,11 @@ if($('chat-form')) {
     finally{sending--;await loadChat();chatButtons();}
   });
   $('chat-older').addEventListener('click',()=>loadChat(true));
-  const pending=JSON.parse(localStorage.getItem('roboinspect-chat-pending') || 'null');
-  if(pending) $('chat-input').value=pending.text;
+
   $('chat-form').addEventListener('submit',async event=>{
     event.preventDefault();
     const value=$('chat-input').value.trim(),emergency=stopText(value);
-    if(!value || (emergency && emergencySending) || (!emergency && (sending || pendingId || !epochReady))) return;
+    if(!value || (emergency && emergencySending) || (!emergency && (sending || pendingId || !epochReady || !panelReady))) return;
     const beforeEpoch=controlEpoch;
     if(emergency) emergencySending=true;
     if(emergency && normalRequest) normalRequest.abort();
@@ -312,6 +306,18 @@ if($('chat-form')) {
       text('chat-runtime',info.available ? (info.loaded ? `Model załadowany · GPU: ${(info.gpu_memory_bytes/1024**3).toFixed(1)} GiB` : 'Model gotowy · zostanie załadowany przy wiadomości') : 'Asystent chwilowo niedostępny');
     }catch{text('chat-runtime','Brak połączenia z asystentem');}
   }
+  const panelKey=crypto.randomUUID();
+  async function startPanel(){
+    try{
+      const response=await fetch('/api/chat/session',{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':panelKey},body:'{}',signal:AbortSignal.timeout(7000)});
+      const result=await response.json();if(!response.ok)throw new Error(result.error || 'Nie udało się rozpocząć nowej rozmowy');
+      generation++;rowsById.clear();oldest=null;chatFingerprint='';pendingId=null;
+      localStorage.removeItem('roboinspect-chat-pending');
+      localStorage.removeItem('roboinspect-stop-pending');
+      $('chat-input').value='';panelReady=true;text('chat-error','');await loadChat();chatButtons();
+    }catch(e){text('chat-error',e.message);setTimeout(startPanel,2000);}
+  }
+  renderChat();startPanel();
   chatButtons();runtimeChat();setInterval(()=>{if(!document.hidden) runtimeChat();},10000);loadChat();setInterval(()=>{if(!document.hidden) loadChat();},1500);
 }
 

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "experiment": "roboinspect-yolo",
+  "run_id": "9fb61eba8eff40b19751e05a2c5ebc91",
+  "params": {
+    "model": "YOLO11s",
+    "device": "cuda:0",
+    "confidence_threshold": "0.3"
+  },
+  "metrics": {
+    "detections": 1.0,
+    "inference_seconds": 0.127
+  },
+  "tags": {
+    "panel": "P5",
+    "sector": "C",
+    "mission_id": "57302993-69c6-4d17-9011-64f2470a3fc8",
+    "report_id": "7454ba7f-fa99-4185-934a-8ffebefe533b"
+  }
+}

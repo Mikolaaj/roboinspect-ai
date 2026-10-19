@@ -280,3 +280,17 @@ def test_instructional_question_cannot_trigger_navigation():
 
     guess = Interpretation(action="navigate", targets=["B"], message="Jadę")
     assert guard_targets("Jak wysłać robota do sektora B?", guess).action == "clarify"
+
+
+def test_panel_open_cancels_pending_answer_and_archives_but_keeps_mission(service):
+    chat = make(service)
+    pending, _ = chat.submit("Jedź do A", "pending-before-reload")
+    mission, _ = service.create(MissionPlan(steps=[{"target": "B"}]), "accepted-before-reload")
+    marker = chat.open_panel("panel-load")
+    assert chat.history() == []
+    assert chat.get(pending["id"])["status"] == "canceled"
+    assert service.store.active().id == mission.id
+    fresh, _ = chat.submit("Gdzie jesteś?", "after-reload")
+    assert chat.open_panel("panel-load") == marker
+    assert chat.get(fresh["id"])["status"] == "pending"
+    assert len(chat.history()) == 1

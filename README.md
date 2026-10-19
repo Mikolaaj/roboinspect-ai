@@ -76,7 +76,7 @@ bash scripts/run_robot.sh
 
 ## Odbiór bieżącej fazy
 
-Zaliczono próby normal (A → B → P3 → C → BASE), blocked (B → C → BASE) oraz unreachable (oczekiwany błąd B). Sprawdzono trzy kamery, anulowanie w ruchu, zatrzymanie i ponowny start. Wyniki i granice odbioru: [docs/phase3-results.md](docs/phase3-results.md). API, trwałe misje, SLAM i czat są już wdrożone. Najnowszy odbiór: [Bielik i MLflow](docs/bielik-results.md). Następny etap to głos.
+Zaliczono próby normal (A → B → P3 → C → BASE), blocked (B → C → BASE) oraz unreachable (oczekiwany błąd B). Sprawdzono trzy kamery, anulowanie w ruchu, zatrzymanie i ponowny start. Wyniki i granice odbioru: [docs/phase3-results.md](docs/phase3-results.md). API, trwałe misje, SLAM i czat są już wdrożone. Najnowszy odbiór: [Bielik i MLflow](docs/bielik-results.md). Głos i inspekcja zdjęć są opisane poniżej.
 
 ## Dokumentacja i odtwarzalność
 
@@ -98,7 +98,7 @@ Pełna instrukcja i narzędzia diagnostyczne: [docs/slam.md](docs/slam.md).
 
 ## Lokalny czat Bielik i eksperymenty MLflow
 
-Panel sterowania ma zapisywaną rozmowę po prawej stronie. Bielik 4.5B Q4_K_M
+Panel sterowania ma czat po prawej stronie. Otwarcie lub odświeżenie panelu rozpoczyna świeżą rozmowę, archiwizując wcześniejsze wpisy. Bielik 4.5B Q4_K_M
 interpretuje tekst, Pydantic waliduje dozwolone cele, a istniejący wykonawca misji
 przekazuje je do Nav2. MLflow zapisuje konfigurację, interpretacje i wyniki pomiarów.
 Przygotowanie modelu, dwie komendy uruchomienia i testy opisano w [instrukcji czatu](docs/bielik-chat.md).
@@ -119,3 +119,7 @@ Kokpit pokazuje schemat całego hangaru obok mapy SLAM, pozycję robota i aktual
 ## Ustawienie magazynu
 
 Pod mapowaniem są przyciski przywrócenia standardowego wyposażenia, usunięcia przeszkód i losowania układu z zachowaniem przejść. Zmiana odświeża świat i mapę, ustawia robota w BASE i trafia do historii. [Instrukcja i wyniki](docs/warehouse-controls.md).
+
+## Inspekcja zdjęć YOLO
+
+Kamera FPV ma 1280×720. Banery P1 do P5 wyświetlają fotografie z lokalnego zestawu COCO128. W sterowaniu są przyciski inspekcji sektorów oraz zmiany zdjęć. Robot odwiedza każdą tablicę i wraca na czerwone pole. Kokpit pokazuje detekcję YOLO11s na RTX i trwałą historię klatek, a czat odpowiada na pytania o zapisane wyniki. [Instalacja, obsługa i ograniczenia](docs/vision-inspection.md), [pochodzenie modeli i zdjęć](docs/third-party/vision.md).

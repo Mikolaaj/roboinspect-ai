@@ -49,11 +49,13 @@ WAREHOUSE_KINDS = {
     MappingAction.WAREHOUSE_STANDARD,
     MappingAction.WAREHOUSE_CLEAR,
     MappingAction.WAREHOUSE_RANDOM,
+    MappingAction.WAREHOUSE_PICTURES,
 }
 WAREHOUSE_TITLES = {
     MappingAction.WAREHOUSE_STANDARD: "Standardowe ustawienie magazynu",
     MappingAction.WAREHOUSE_CLEAR: "Usunięcie wszystkich przeszkód",
     MappingAction.WAREHOUSE_RANDOM: "Losowanie przeszkód w magazynie",
+    MappingAction.WAREHOUSE_PICTURES: "Zmiana zdjęć na banerach",
 }
 
 
@@ -85,7 +87,7 @@ def request_warehouse(service, action, key):
         record = MappingOperation(
             kind=kind,
             name=WAREHOUSE_TITLES[kind],
-            layout_seed=secrets.randbits(32) if action.value == "random" else None,
+            layout_seed=secrets.randbits(32) if action.value in ("random", "pictures") else None,
         )
         service.store.create_operation(record, key)
         return record, True

@@ -45,3 +45,24 @@ def test_zone_overlay_native_and_navigation_frames_agree():
     marker = project_zones(nav, zone)[0]
     assert marker["name"] == "A"
     assert marker["width"] == pytest.approx(6.25)
+
+
+def test_green_observation_pads_match_navigation_goals_and_have_no_collisions():
+    from roboinspect.observation import observation_zones
+
+    layout = json.loads((ROOT / "config/hangar.json").read_text())
+    goals = json.loads((ROOT / "config/navigation-goals.json").read_text())["poses"]
+    for path in (ROOT / "simulation/worlds").glob("hangar_*.sdf"):
+        world = ET.parse(path).getroot().find("world")
+        pads = [
+            m for m in world.findall("model") if m.get("name", "").startswith("observation_pad_")
+        ]
+        assert len(pads) == 5
+        for pad in pads:
+            name = pad.get("name").removeprefix("observation_pad_")
+            pose = list(map(float, pad.findtext("pose").split()))
+            assert pose[:2] == goals[name][:2]
+            assert not pad.findall(".//collision")
+            px, py, _ = layout["inspection_points"][name]["panel_xyz"]
+            assert px == pose[0] and py > pose[1]
+    assert set(observation_zones(layout)) == {"P1", "P2", "P3", "P4", "P5"}

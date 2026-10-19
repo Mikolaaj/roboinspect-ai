@@ -5,7 +5,7 @@ from enum import StrEnum
 from typing import Literal
 from uuid import uuid4
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 def now() -> datetime:
@@ -29,7 +29,7 @@ class StrictModel(BaseModel):
 
 
 class NavigationStep(StrictModel):
-    action: Literal["navigate"] = "navigate"
+    action: Literal["navigate", "inspect"] = "navigate"
     target: GoalName
     timeout_seconds: int = Field(default=300, ge=10, le=900, strict=True)
 
@@ -37,6 +37,18 @@ class NavigationStep(StrictModel):
 class MissionPlan(StrictModel):
     name: str = Field(default="Przejazd robota", min_length=1, max_length=120)
     steps: list[NavigationStep] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def inspection_follows_navigation(self):
+        for i, step in enumerate(self.steps):
+            if step.action == "inspect" and (
+                not str(step.target).startswith("P")
+                or i == 0
+                or self.steps[i - 1].action != "navigate"
+                or self.steps[i - 1].target != step.target
+            ):
+                raise ValueError("Inspekcja wymaga wcześniejszego przejazdu do tej samej tablicy P")
+        return self
 
 
 class MissionStatus(StrEnum):
@@ -113,6 +125,7 @@ class MappingAction(StrEnum):
     WAREHOUSE_STANDARD = "warehouse_standard"
     WAREHOUSE_CLEAR = "warehouse_clear"
     WAREHOUSE_RANDOM = "warehouse_random"
+    WAREHOUSE_PICTURES = "warehouse_pictures"
 
 
 class OperationLog(StrictModel):
@@ -142,6 +155,7 @@ class WarehouseAction(StrEnum):
     STANDARD = "standard"
     CLEAR = "clear"
     RANDOM = "random"
+    PICTURES = "pictures"
 
 
 class WarehouseView(StrictModel):

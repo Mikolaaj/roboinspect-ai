@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "mission_id": "ca077219-9a08-4dde-a873-3d171b193757",
+  "status": "canceled",
+  "reports_after_late_result_wait": 0,
+  "remaining_steps": [
+    "succeeded",
+    "succeeded",
+    "canceled",
+    "skipped"
+  ],
+  "stop_reply": "STOP przyjęty. Przerwano analizę, zlecono zatrzymanie robota i obchodu mapowania. Sprawdź potwierdzenie zatrzymania w panelu."
+}

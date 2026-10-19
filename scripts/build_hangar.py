@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Generate local, asset-free hangar worlds and navigation reference points."""
 import json
+import sys
 import copy
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'src'))
+from roboinspect.observation import paint_observation_pads
 SECTORS = {
     'A': {'label': 'Serwis', 'bounds': [-14, -5, -2, 10], 'color': [0.16, 0.35, 0.50, 1]},
     'B': {'label': 'Inspekcja', 'bounds': [-4, 5, -2, 10], 'color': [0.18, 0.43, 0.35, 1]},
@@ -149,6 +152,7 @@ def world_tree(blocked=False, unreachable=False):
             ('east', [x+width/2,y,0.022], [0.07,depth,0.008]),
         ]:
             box(mark, name, xyz, size, [1,0.22,0.25,1], False)
+    paint_observation_pads(world, {'inspection_points':POINTS})
     # Persistent visual pool. Hidden below the floor until a Nav2 path arrives.
     for i in range(160):
         link = model(world, f'route_segment_{i}')

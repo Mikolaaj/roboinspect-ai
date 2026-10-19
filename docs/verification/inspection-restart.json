@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "photo_seed_preserved": 1514115452,
+  "actual_mesh_ids": [
+    "000000000036",
+    "000000000042",
+    "000000000071",
+    "000000000074",
+    "000000000502"
+  ],
+  "retained_reports": 6,
+  "camera": {
+    "age_s": 0.03,
+    "sequence": 100,
+    "stamp_s": 18.625,
+    "width": 1280,
+    "height": 720
+  },
+  "detector_device": "cuda:0",
+  "grounded_reply": "Ostatnia zapisana inspekcja: 2026-10-19 05:27:26 UTC.\nSektor C, P5: bear 1 (92%). Liczba wykryć w tej klatce: 1.\nLiczba detekcji w zapisanych obserwacjach tej misji: 1. Nie oznacza to liczby unikalnych osób między zdjęciami.\nTo wynik YOLO z zapisanej kamery, nie pewny opis wszystkich obiektów. Procent oznacza pewność detektora. Aktualne zdjęcia mogły się od tego czasu zmienić; raporty znajdziesz w kokpicie.",
+  "no_new_movement_from_question": true
+}

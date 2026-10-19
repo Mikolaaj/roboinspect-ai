@@ -28,8 +28,10 @@ from .contracts import (
     Sector,
     WarehouseAction,
 )
+from .inspection import InspectionService, inspection_plan, list_reports
 from .mapping import project_zones
 from .missions import MissionService
+from .observation import observation_zones
 from .operations import request_operation, request_warehouse
 from .routes import hangar_layout
 from .speech import AUDIO_TYPES, SpeechError, SpeechService, Transcript
@@ -47,9 +49,13 @@ def create_app(
     chat=None,
     speech=None,
 ):
+    if operator is not None:
+        service.inspector = InspectionService(service.store)
     chat = chat or ChatService(service)
     speech = speech or SpeechService()
-    zones = json.loads((ROOT / "config/hangar.json").read_text())["inspection_zones"]
+    layout = json.loads((ROOT / "config/hangar.json").read_text())
+    zones = layout["inspection_zones"]
+    observation = observation_zones(layout)
 
     @asynccontextmanager
     async def lifespan(_):
@@ -173,6 +179,12 @@ def create_app(
             raise HTTPException(404, "Wiadomość nie istnieje")
         return record
 
+    @app.post("/api/chat/session")
+    def open_chat_panel(
+        body: MappingRequest, idempotency_key: str = Header(min_length=1, max_length=128)
+    ):
+        return chat.open_panel(idempotency_key)
+
     @app.post("/api/chat/new")
     def new_chat(body: MappingRequest, idempotency_key: str = Header(min_length=1, max_length=128)):
         return chat.new_conversation(idempotency_key)
@@ -197,7 +209,10 @@ def create_app(
                 "status": r.status,
                 "created_at": r.created_at,
                 "message": r.message,
-                "details": [f"{s.target} ({s.status})" for s in r.steps],
+                "details": [
+                    f"{'Analiza ' if s.action == 'inspect' else ''}{s.target} ({s.status})"
+                    for s in r.steps
+                ],
             }
             for r in service.store.list(limit)
         ]
@@ -310,6 +325,9 @@ def create_app(
         result["inspection_zones"] = (
             project_zones(result["map"], zones) if result.get("map") else []
         )
+        result["observation_zones"] = (
+            project_zones(result["map"], observation) if result.get("map") else []
+        )
         result["runtime_ready"] = result["ready"]
         record = service.summary()
         result["mission"] = record.model_dump(mode="json") if record else None
@@ -330,6 +348,11 @@ def create_app(
                 result["state"] = record.status.value
             if record.current_step is not None:
                 result["goal"] = record.steps[record.current_step].target
+                if (
+                    record.status.value == "running"
+                    and record.steps[record.current_step].action == "inspect"
+                ):
+                    result["state"] = "inspecting"
             if record.status.value == "uncertain":
                 result["ready"] = False
         jobs = service.store.operation_busy()
@@ -348,6 +371,54 @@ def create_app(
             if jobs[0].cancel_requested:
                 result.update(state="canceling", message="Zatrzymywanie obchodu…")
         return result
+
+    @app.post("/api/inspect/{sector}", response_model=MissionRecord, status_code=202)
+    def inspect_sector(
+        sector: str,
+        body: MappingRequest,
+        response: Response,
+        idempotency_key: str = Header(min_length=1, max_length=128),
+    ):
+        record, created = service.create(inspection_plan(sector), idempotency_key)
+        response.status_code = 202 if created else 200
+        return record
+
+    @app.get("/api/inspections")
+    def inspections(limit: int = Query(default=30, ge=1, le=100)):
+        return list_reports(service.store, limit)
+
+    @app.get("/api/inspections/{report_id}/{name}")
+    def inspection_image(report_id: UUID, name: str):
+        if name not in ("raw.jpg", "annotated.jpg"):
+            raise HTTPException(404, "Nieznany obraz")
+        path = ROOT / "data/inspections" / str(report_id) / name
+        if not path.is_file():
+            raise HTTPException(404, "Brak obrazu")
+        return FileResponse(path, media_type="image/jpeg")
+
+    def vision_request(path):
+        import os
+
+        import httpx
+
+        try:
+            with httpx.Client(timeout=1.5, trust_env=False) as client:
+                r = client.get(
+                    os.environ.get("ROBOINSPECT_VISION_URL", "http://127.0.0.1:8766") + path,
+                    headers={"X-Runtime-Token": getattr(operator, "runtime_token", "")},
+                )
+                r.raise_for_status()
+                return r
+        except httpx.HTTPError as exc:
+            raise HTTPException(503, "Detektor nie jest jeszcze gotowy") from exc
+
+    @app.get("/api/vision")
+    def vision_status():
+        return vision_request("/latest").json()
+
+    @app.get("/api/vision/frame.jpg")
+    def vision_frame():
+        return Response(vision_request("/frame.jpg").content, media_type="image/jpeg")
 
     @app.get("/api/hangar")
     def hangar():
@@ -415,12 +486,43 @@ def create_app(
         finally:
             pass
 
+    def detected_frames():
+        import os
+
+        import httpx
+
+        sequence = None
+        with httpx.Client(timeout=2, trust_env=False) as client:
+            while not stopping.is_set():
+                try:
+                    result = client.get(
+                        os.environ.get("ROBOINSPECT_VISION_URL", "http://127.0.0.1:8766")
+                        + "/frame.jpg",
+                        headers={"X-Runtime-Token": getattr(operator, "runtime_token", "")},
+                    )
+                    result.raise_for_status()
+                    current = result.headers.get("x-frame-sequence")
+                    if current != sequence or current is None:
+                        sequence = current
+                        data = result.content
+                        yield (
+                            b"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: "
+                            + str(len(data)).encode()
+                            + b"\r\n\r\n"
+                            + data
+                            + b"\r\n"
+                        )
+                except httpx.HTTPError:
+                    pass
+                stopping.wait(0.15)
+
     @app.get("/stream/{name}.mjpg")
     def stream(name: str):
         if operator is None or name not in CAMERAS:
             raise HTTPException(404, "Camera not found")
         return StreamingResponse(
-            frames(name), media_type="multipart/x-mixed-replace; boundary=frame"
+            detected_frames() if name == "fpv" else frames(name),
+            media_type="multipart/x-mixed-replace; boundary=frame",
         )
 
     files = {
@@ -430,6 +532,7 @@ def create_app(
         "/activity.js": ("activity.js", "text/javascript"),
         "/voice.js": ("voice.js", "text/javascript"),
         "/route-map.js": ("route-map.js", "text/javascript"),
+        "/vision.js": ("vision.js", "text/javascript"),
         "/style.css": ("style.css", "text/css"),
     }
 

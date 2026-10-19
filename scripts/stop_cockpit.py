@@ -28,7 +28,7 @@ def main():
     except ProcessLookupError:
         print('Proces kokpitu już się zakończył.')
         return 0
-    print('Zamykanie kokpitu, symulacji, Bielika i MLflow… Poczekaj na potwierdzenie.',flush=True)
+    print('Zamykanie kokpitu, symulacji, YOLO, Bielika i MLflow… Poczekaj na potwierdzenie.',flush=True)
     deadline=time.monotonic()+120
     progress=time.monotonic()+5
     while time.monotonic()<deadline:

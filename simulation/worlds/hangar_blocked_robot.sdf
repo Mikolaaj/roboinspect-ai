@@ -4217,6 +4217,556 @@
         </visual>
       </link>
     </model>
+    <model name="observation_pad_P1">
+      <static>true</static>
+      <pose>-11 6.6 0.038 0 0 0</pose>
+      <link name="pad">
+        <visual name="fill">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.04 0.32 0.2 1</ambient>
+            <diffuse>0.04 0.32 0.2 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="north">
+          <pose>0 0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="south">
+          <pose>0 -0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="west">
+          <pose>-0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="east">
+          <pose>0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_x">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.22 0.035 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_y">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.035 0.22 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="heading">
+          <pose>0 0.3 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.06 0.16 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+    <model name="observation_pad_P2">
+      <static>true</static>
+      <pose>-7 6.6 0.038 0 0 0</pose>
+      <link name="pad">
+        <visual name="fill">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.04 0.32 0.2 1</ambient>
+            <diffuse>0.04 0.32 0.2 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="north">
+          <pose>0 0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="south">
+          <pose>0 -0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="west">
+          <pose>-0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="east">
+          <pose>0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_x">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.22 0.035 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_y">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.035 0.22 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="heading">
+          <pose>0 0.3 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.06 0.16 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+    <model name="observation_pad_P3">
+      <static>true</static>
+      <pose>-1 6.6 0.038 0 0 0</pose>
+      <link name="pad">
+        <visual name="fill">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.04 0.32 0.2 1</ambient>
+            <diffuse>0.04 0.32 0.2 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="north">
+          <pose>0 0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="south">
+          <pose>0 -0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="west">
+          <pose>-0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="east">
+          <pose>0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_x">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.22 0.035 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_y">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.035 0.22 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="heading">
+          <pose>0 0.3 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.06 0.16 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+    <model name="observation_pad_P4">
+      <static>true</static>
+      <pose>3 6.6 0.038 0 0 0</pose>
+      <link name="pad">
+        <visual name="fill">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.04 0.32 0.2 1</ambient>
+            <diffuse>0.04 0.32 0.2 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="north">
+          <pose>0 0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="south">
+          <pose>0 -0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="west">
+          <pose>-0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="east">
+          <pose>0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_x">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.22 0.035 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_y">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.035 0.22 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="heading">
+          <pose>0 0.3 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.06 0.16 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+    <model name="observation_pad_P5">
+      <static>true</static>
+      <pose>10 6.6 0.038 0 0 0</pose>
+      <link name="pad">
+        <visual name="fill">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.04 0.32 0.2 1</ambient>
+            <diffuse>0.04 0.32 0.2 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="north">
+          <pose>0 0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="south">
+          <pose>0 -0.48 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 0.04 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="west">
+          <pose>-0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="east">
+          <pose>0.48 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 1 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.95 0.62 1</ambient>
+            <diffuse>0.25 0.95 0.62 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_x">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.22 0.035 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="center_y">
+          <pose>0 0 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.035 0.22 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <visual name="heading">
+          <pose>0 0.3 0.008 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.06 0.16 .006</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.82 1 0.9 1</ambient>
+            <diffuse>0.82 1 0.9 1</diffuse>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
     <model name="route_segment_0">
       <static>true</static>
       <link name="body">
@@ -8111,15 +8661,15 @@
           </material>
         </visual>
         <sensor name="front_camera" type="camera">
-          <pose>0.29 0 0.65 0 0 0</pose>
+          <pose>0.29 0 0.65 0 -0.14 0</pose>
           <topic>/roboinspect/camera/image</topic>
           <always_on>true</always_on>
           <update_rate>10</update_rate>
           <camera>
             <horizontal_fov>1.5</horizontal_fov>
             <image>
-              <width>320</width>
-              <height>240</height>
+              <width>1280</width>
+              <height>720</height>
               <format>R8G8B8</format>
             </image>
             <clip>

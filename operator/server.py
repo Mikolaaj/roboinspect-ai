@@ -151,6 +151,7 @@ class Operator(Node):
             p,q=tf.transform.translation,tf.transform.rotation
             yaw=math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z))
             self.state['map_position']={'x':p.x,'y':p.y}
+            self.state['map_heading']=yaw
             info=self.state.get('map')
             if info:
                 x,y=p.x,p.y
@@ -209,7 +210,7 @@ class Operator(Node):
             picture = PILImage.frombytes(mode, (msg.width,msg.height), bytes(msg.data),
                                          'raw', raw, msg.step, 1).convert('RGB')
             output = BytesIO()
-            picture.save(output, format='JPEG', quality=80)
+            picture.save(output, format='JPEG', quality=90)
             with self.frames_changed:
                 previous = self.frames.get(name, {})
                 self.frames[name] = {'jpeg':output.getvalue(), 'time':time.monotonic(),

@@ -51,6 +51,7 @@ class MissionService:
         self.recovery_sent = None
         self.failure_after_cancel = False
         self.healthy = True
+        self.inspector = None
         previous = store.active()
         if previous:
             self._uncertain(previous, "Restart wykonawcy: trwa sprawdzanie zatrzymania robota")
@@ -83,6 +84,10 @@ class MissionService:
                 or self.store.operation_busy()
             ):
                 raise ConflictError("Robot nie jest gotowy lub ma aktywną misję")
+            if any(s.action == "inspect" for s in plan.steps) and (
+                not self.inspector or not self.inspector.available()
+            ):
+                raise ConflictError("Detektor nie jest gotowy. Poczekaj na obraz YOLO w kokpicie")
             return self.store.create(plan, self.scenario, key)
 
     def cancel(self, mission_id: str | None = None) -> MissionRecord | None:
@@ -93,6 +98,8 @@ class MissionService:
             if record.status == MissionStatus.UNCERTAIN:
                 return record
             if record.status != MissionStatus.CANCELING:
+                if self.inspector:
+                    self.inspector.abort()
                 record.status = MissionStatus.CANCELING
                 record.message = "Anulowanie misji; pozostałe kroki nie zostaną wykonane"
                 self.store.save(record)
@@ -118,6 +125,8 @@ class MissionService:
     def _uncertain(self, record, message):
         record.status, record.message = MissionStatus.UNCERTAIN, message
         self.store.save(record)
+        if self.inspector:
+            self.inspector.abort()
         self.recovery_sent = None
 
     def _recover(self, record, state):
@@ -176,7 +185,29 @@ class MissionService:
                 return
             if record.current_step is not None:
                 step = record.steps[record.current_step]
-                if step.status == "running":
+                if step.status == "running" and step.action == "inspect":
+                    if not stationary(state) or state.get("busy") or state.get("remote_active"):
+                        self.cancel(record.id)
+                        return
+                    if self.clock() - self.step_started > 50:
+                        self.failure_after_cancel = True
+                        self.cancel(record.id)
+                        return
+                    try:
+                        result = self.inspector.poll()
+                    except Exception:
+                        self._finish(
+                            record,
+                            MissionStatus.FAILED,
+                            "Analiza kamery nie powiodła się; pozostałe kroki pominięto",
+                        )
+                        return
+                    if result is None:
+                        return
+                    step.status = "succeeded"
+                    record.message = f"Zapisano {step.target}: {result['total']} wykryć"
+                    self.store.save(record)
+                elif step.status == "running":
                     if state.get("execution_id") != step.execution_id:
                         self._uncertain(
                             record, "Niezgodny identyfikator wykonania; sprawdzanie zatrzymania"
@@ -218,11 +249,20 @@ class MissionService:
             step = record.steps[pending]
             step.execution_id, step.status = str(uuid4()), "running"
             record.current_step, record.status = pending, MissionStatus.RUNNING
-            record.message = f"Krok {pending + 1}/{len(record.steps)}: jazda do {step.target}"
+            record.message = (
+                f"Krok {pending + 1}/{len(record.steps)}: "
+                + ("analiza kamery przy " if step.action == "inspect" else "jazda do ")
+                + str(step.target)
+            )
             self.store.save(record)  # Commit intent before any physical side effect.
             self.step_started = self.clock()
             try:
-                self.robot.start(step.target.value, step.execution_id)
+                if step.action == "inspect":
+                    if self.inspector is None:
+                        raise RuntimeError("Brak detektora")
+                    self.inspector.start(step, record)
+                else:
+                    self.robot.start(step.target.value, step.execution_id)
             except Exception:
                 self._uncertain(record, "Niepotwierdzone wysłanie celu; ruch nie będzie ponawiany")
 
@@ -248,6 +288,8 @@ class MissionService:
                         record, "Zamknięcie przed potwierdzeniem wyniku; weryfikacja po restarcie"
                     )
         finally:
+            if self.inspector:
+                self.inspector.close()
             self.stop_event.set()
             if self.thread:
                 self.thread.join(timeout=3)

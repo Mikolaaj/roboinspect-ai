@@ -81,3 +81,7 @@ Test z fizycznym ruchem w symulacji (gotowy, bezczynny Nav2):
 `.venv/bin/python scripts/check_chat_controls.py`.
 
 Wynik próby rzeczywistej: [chat-controls.json](verification/chat-controls.json).
+
+## Nowa rozmowa przy otwarciu panelu
+
+Każde otwarcie lub odświeżenie panelu sterowania archiwizuje dotychczasową widoczną rozmowę i pokazuje powitanie. Oczekująca odpowiedź jest anulowana przed archiwizacją, więc nie wysyła później polecenia ruchu. Przyjęte misje pozostają aktywne. Powtórzenie żądania inicjalizacji tej samej strony nie archiwizuje jej nowych wiadomości.

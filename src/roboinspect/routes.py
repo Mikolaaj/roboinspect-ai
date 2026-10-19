@@ -150,6 +150,10 @@ def hangar_layout(scenario, world_file=None, layout_id="standard"):
         "bounds": layout["floor_bounds"],
         "sectors": layout["sectors"],
         "zones": layout["inspection_zones"],
+        "observation_zones": {
+            name: {"pose": point["observation_pose"], "size": [1, 1]}
+            for name, point in layout["inspection_points"].items()
+        },
         "base": layout["base_pose"][:2],
         "obstacles": boxes,
         "scenario": scenario,

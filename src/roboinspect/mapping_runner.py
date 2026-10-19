@@ -140,8 +140,16 @@ class MappingRunner:
                 )
                 return
             if job.kind in WAREHOUSE_KINDS:
-                self.progress("Przygotowanie układu i sprawdzanie drogi do wszystkich celów…")
-                selection = self.manager.change_warehouse(
+                self.progress(
+                    "Przygotowanie nowych zdjęć i odświeżanie hangaru…"
+                    if job.kind == MappingAction.WAREHOUSE_PICTURES
+                    else "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…"
+                )
+                selection = (
+                    self.manager.change_pictures
+                    if job.kind == MappingAction.WAREHOUSE_PICTURES
+                    else self.manager.change_warehouse
+                )(
                     job.kind.value.removeprefix("warehouse_"),
                     job.layout_seed,
                     lambda: self.store.operation(job.id).cancel_requested,
@@ -150,6 +158,8 @@ class MappingRunner:
                     f"Magazyn gotowy. Robot w BASE; przeszkody: {selection['movable_count']}. "
                     "Wszystkie czerwone strefy i punkty P są dostępne."
                 )
+                if job.kind == MappingAction.WAREHOUSE_PICTURES:
+                    message = "Zmieniono zdjęcia na wszystkich pięciu banerach. Robot w BASE; historia inspekcji zachowana."
             elif job.kind == MappingAction.RESET:
                 self.progress("Reset bieżącej mapy i powrót robota do BASE…")
                 self.manager.switch("mapping", None)

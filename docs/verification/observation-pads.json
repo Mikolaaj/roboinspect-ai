@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "actual_gazebo_pads": [
+    "observation_pad_P1",
+    "observation_pad_P2",
+    "observation_pad_P3",
+    "observation_pad_P4",
+    "observation_pad_P5"
+  ],
+  "slam_overlays": [
+    {
+      "name": "P1",
+      "x": 15.624999767169362,
+      "y": 22.291667821506636,
+      "width": 3.124999953433872,
+      "height": 4.166666604578496,
+      "rotation": 0.0
+    },
+    {
+      "name": "P2",
+      "x": 28.12499958090485,
+      "y": 22.291667821506636,
+      "width": 3.124999953433872,
+      "height": 4.166666604578496,
+      "rotation": 0.0
+    },
+    {
+      "name": "P3",
+      "x": 46.87499930150808,
+      "y": 22.291667821506636,
+      "width": 3.124999953433872,
+      "height": 4.166666604578496,
+      "rotation": 0.0
+    },
+    {
+      "name": "P4",
+      "x": 59.37499911524357,
+      "y": 22.291667821506636,
+      "width": 3.124999953433872,
+      "height": 4.166666604578496,
+      "rotation": 0.0
+    },
+    {
+      "name": "P5",
+      "x": 81.24999878928068,
+      "y": 22.291667821506636,
+      "width": 3.124999953433872,
+      "height": 4.166666604578496,
+      "rotation": 0.0
+    }
+  ],
+  "overview_zones": {
+    "P1": {
+      "pose": [
+        -11,
+        6.6,
+        1.57079632679
+      ],
+      "size": [
+        1,
+        1
+      ]
+    },
+    "P2": {
+      "pose": [
+        -7,
+        6.6,
+        1.57079632679
+      ],
+      "size": [
+        1,
+        1
+      ]
+    },
+    "P3": {
+      "pose": [
+        -1,
+        6.6,
+        1.57079632679
+      ],
+      "size": [
+        1,
+        1
+      ]
+    },
+    "P4": {
+      "pose": [
+        3,
+        6.6,
+        1.57079632679
+      ],
+      "size": [
+        1,
+        1
+      ]
+    },
+    "P5": {
+      "pose": [
+        10,
+        6.6,
+        1.57079632679
+      ],
+      "size": [
+        1,
+        1
+      ]
+    }
+  },
+  "warehouse": {
+    "mode": "random",
+    "layout_id": "random-cbf28cf994ff",
+    "seed": 1778666227,
+    "movable_count": 8
+  },
+  "tests_python": 136,
+  "tests_javascript": 8,
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "mobile_button_width": 347,
+  "mobile_button_height": 78,
+  "mobile_horizontal_overflow": false
+}

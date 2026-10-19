@@ -72,6 +72,8 @@ def help_topic(text):
         r"losow|losuj|ustawien\w*\s+magaz|usun\w*\s+(?:wszystkie\s+)?przeszkod|wyposaz", value
     ):
         return "warehouse"
+    if re.search(r"inspekcj|detekcj|yolo|baner|zdjeci|wykryw|zielon.*pol|pol.*obserw", value):
+        return "inspection"
     if re.search(r"mikrofon|whisper|glos|nagran|mowic", value):
         return "voice"
     if re.search(r"mlflow|eksperyment|wyniki", value):
@@ -92,6 +94,7 @@ def help_topic(text):
 
 
 GUIDE = {
+    "inspection": "Pod przyciskami jazdy wybierz Inspekcja sektora A, B lub C. Zielone pola P1 do P5 oznaczają dokładne miejsca obserwacji. Robot jedzie do środka zielonego pola i ustawia kamerę na tablicę. Robot odwiedzi kolejno każdą tablicę P w sektorze, zatrzyma się, zapisze zdjęcie i wykrycia YOLO, a potem wróci na czerwone pole sektora. A obejmuje P1 i P2, B P3 i P4, C P5. W kokpicie rozwiń Historię detekcji z inspekcji i wybierz obserwację. Widać zdjęcie, ramki, klasy, liczbę wykryć oraz pewność modelu. Person oznacza człowieka; numer dotyczy pojedynczej klatki, nie tożsamości osoby. Możesz zapytać, co robot widział w sektorze A. Odpowiedź opisuje ostatnią zapisaną inspekcję, a nie aktualny obraz. Zmień zdjęcia na banerach losuje nowe fotografie i odświeża symulację, wracając do BASE. Historia pozostaje. YOLO rozpoznaje 80 klas, więc brak wykryć nie oznacza pustego zdjęcia.",
     "warehouse": "W panelu sterowania pod mapowaniem są trzy przyciski ustawienia magazynu. Standardowe ustawienie przywraca oryginalne wyposażenie. Usuń wszystkie przeszkody usuwa wyposażenie, skrzynie i wolnostojące słupy; ściany, tablice oraz robot pozostają. Losuj przeszkody ustawia to samo wyposażenie w jego sektorach, zachowując przejścia do czerwonych stref i punktów P. Zmiana jest możliwa po zakończeniu jazdy i mapowania. Odświeża symulację i mapę nawigacyjną, przenosząc robota do bazy. Wcześniejsze mapy i historia są zachowane. Poczekaj na gotowość i obserwuj wynik operacji w historii.",
     "overview": "RoboInspect to symulacja mobilnego robota w hangarze. Możesz zlecać przejazdy między sektorami A, B i C oraz bazą BASE. Robot planuje trasę i omija przeszkody, a trzy kamery pozwalają obserwować przejazd. W panelu sprawdzisz pozycję, wynik misji i historię. Możesz też tworzyć i zapisywać mapę hali.",
     "voice": "Kliknij Mikrofon w panelu czatu i zezwól przeglądarce na nagrywanie. Powiedz krótkie polecenie po polsku, np. Jedź do sektora B i wróć do bazy. Kliknij Zakończ nagranie. Lokalny Whisper wpisze rozpoznaną wypowiedź do pola wiadomości. Sprawdź i w razie potrzeby popraw tekst, potem naciśnij Enter lub Wyślij. Samo nagranie nie uruchamia misji. Anuluj nagranie przerywa nagrywanie lub oczekiwanie na wynik. Aby szybko zatrzymać robota, użyj Anuluj przejazd albo wpisz STOP; nie czekaj na rozpoznawanie głosu.",
@@ -111,6 +114,7 @@ def safe_answer(text, topic):
     if restricted(text) or len(text.strip()) < 100:
         return False
     anchors = {
+        "inspection": ["inspekcj", "tablic", "yolo", "wykry", "sektor"],
         "overview": ["robot", "hangar", "misj", "sektor", "kamer"],
         "warehouse": ["magazyn", "przeszkod", "przycisk", "bazy", "losuj"],
         "voice": ["mikrofon", "whisper", "nagran", "tekst", "wyslij"],

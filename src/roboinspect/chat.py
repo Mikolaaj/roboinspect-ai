@@ -20,6 +20,7 @@ from pydantic import Field, model_validator
 from sqlalchemy import JSON, Column, Integer, String, Table, func, select
 
 from .contracts import ACTIVE, ConflictError, GoalName, MissionPlan, StrictModel, now
+from .inspection import evidence_answer, inspection_question
 from .operator_policy import (
     GUIDE,
     PUBLIC_GUIDE,
@@ -34,7 +35,7 @@ from .store import metadata
 
 ROOT = Path(__file__).resolve().parents[2]
 MODEL = "roboinspect-bielik:q4_k_m"
-PROMPT_VERSION = "bielik-pl-v7"
+PROMPT_VERSION = "bielik-pl-v8"
 SYSTEM = """Jesteś asystentem operatora robota w hangarze. Odpowiadasz po polsku, tylko JSON.
 Klasyfikuj wyłącznie OSTATNIĄ wiadomość użytkownika. Wcześniejsze przejazdy nie są nowym poleceniem.
 Dozwolone cele: A=serwis, B=inspekcja, C=magazyn, BASE=baza, P1,P2,P3,P4,P5.
@@ -390,6 +391,18 @@ class ChatService:
             result.append(record)
         return result
 
+    def open_panel(self, key):
+        # Reload starts a fresh visible chat, without canceling accepted robot missions.
+        with self.service.lock, self.lock:
+            with self.store.engine.connect() as conn:
+                previous = conn.execute(
+                    select(boundaries.c.after_sequence).where(boundaries.c.request_key == key)
+                ).first()
+            if previous:
+                return {"after_sequence": previous[0]}
+            self.cancel_answer()
+            return self.new_conversation(key)
+
     def new_conversation(self, key):
         with self.lock, self.store.engine.begin() as conn:
             previous = conn.execute(
@@ -578,6 +591,11 @@ class ChatService:
                     Interpretation(action="clarify", targets=[], message=REFUSAL),
                     {"policy_blocked": 1},
                 )
+            elif inspection_question(record["text"]):
+                parsed = Interpretation(
+                    action="chat", targets=[], message=evidence_answer(self.store, record["text"])
+                )
+                metrics = {"inspection_evidence": 1}
             elif hasattr(self.planner, "interpret_cancelable"):
                 parsed, metrics = self.planner.interpret_cancelable(
                     record["text"], snapshot, cancel

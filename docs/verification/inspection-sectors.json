@@ -1,0 +1,505 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "sector": "A",
+      "mission": {
+        "id": "bee54143-3fe7-4006-9c30-9ee880b8868e",
+        "name": "Inspekcja obrazów sektora A",
+        "scenario": "normal",
+        "status": "succeeded",
+        "steps": [
+          {
+            "action": "navigate",
+            "target": "A",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "d374dff0-0bd8-45af-8a39-669329f68e0d"
+          },
+          {
+            "action": "navigate",
+            "target": "P1",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "e91abf29-58ad-4051-b585-af1fff7dd910"
+          },
+          {
+            "action": "inspect",
+            "target": "P1",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "cf22f611-2ba5-4dfe-93dc-58f277da5376"
+          },
+          {
+            "action": "navigate",
+            "target": "P2",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "f7da9978-6f62-4f9f-8d7a-ff14acf6abbd"
+          },
+          {
+            "action": "inspect",
+            "target": "P2",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "f6c45e5c-39f0-445f-8d13-d14baea687a8"
+          },
+          {
+            "action": "navigate",
+            "target": "A",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "0bfeb84d-c622-4409-acff-c78f45209464"
+          }
+        ],
+        "current_step": 5,
+        "message": "Wszystkie kroki misji wykonane",
+        "created_at": "2026-10-19T05:16:56.911444Z",
+        "updated_at": "2026-10-19T05:19:59.645402Z"
+      },
+      "reports": [
+        {
+          "detections": [
+            {
+              "label": "bowl",
+              "instance": 1,
+              "confidence": 0.9136,
+              "xyxy": [
+                215.8,
+                298.8,
+                684.0,
+                504.0
+              ]
+            },
+            {
+              "label": "bowl",
+              "instance": 2,
+              "confidence": 0.7969,
+              "xyxy": [
+                468.7,
+                171.3,
+                689.3,
+                329.3
+              ]
+            },
+            {
+              "label": "bowl",
+              "instance": 3,
+              "confidence": 0.7798,
+              "xyxy": [
+                213.3,
+                173.7,
+                556.0,
+                431.7
+              ]
+            },
+            {
+              "label": "broccoli",
+              "instance": 1,
+              "confidence": 0.709,
+              "xyxy": [
+                414.7,
+                327.7,
+                648.0,
+                505.0
+              ]
+            }
+          ],
+          "counts": {
+            "bowl": 3,
+            "broccoli": 1
+          },
+          "total": 4,
+          "width": 1280,
+          "height": 720,
+          "inference_seconds": 0.02,
+          "model": "YOLO11s",
+          "device": "cuda:0",
+          "camera_stamp_s": 144.125,
+          "camera_sequence": 518,
+          "warehouse": {
+            "mode": "random",
+            "layout_id": "random-cbf28cf994ff",
+            "seed": 1778666227,
+            "movable_count": 8
+          },
+          "position": {
+            "x": -7.059948175247242,
+            "y": 6.607487883577724
+          },
+          "id": "eda4f2cb-4d29-450b-ab17-f4f0238a5cec",
+          "mission_id": "bee54143-3fe7-4006-9c30-9ee880b8868e",
+          "execution_id": "f6c45e5c-39f0-445f-8d13-d14baea687a8",
+          "panel": "P2",
+          "sector": "A",
+          "created_at": "2026-10-19T05:18:54.904644+00:00",
+          "image_url": "/api/inspections/eda4f2cb-4d29-450b-ab17-f4f0238a5cec/annotated.jpg",
+          "raw_url": "/api/inspections/eda4f2cb-4d29-450b-ab17-f4f0238a5cec/raw.jpg"
+        },
+        {
+          "detections": [
+            {
+              "label": "vase",
+              "instance": 1,
+              "confidence": 0.8916,
+              "xyxy": [
+                572.0,
+                299.0,
+                684.0,
+                431.7
+              ]
+            },
+            {
+              "label": "potted plant",
+              "instance": 1,
+              "confidence": 0.6001,
+              "xyxy": [
+                547.3,
+                223.0,
+                720.7,
+                432.3
+              ]
+            }
+          ],
+          "counts": {
+            "vase": 1,
+            "potted plant": 1
+          },
+          "total": 2,
+          "width": 1280,
+          "height": 720,
+          "inference_seconds": 0.134,
+          "model": "YOLO11s",
+          "device": "cuda:0",
+          "camera_stamp_s": 103.375,
+          "camera_sequence": 370,
+          "warehouse": {
+            "mode": "random",
+            "layout_id": "random-cbf28cf994ff",
+            "seed": 1778666227,
+            "movable_count": 8
+          },
+          "position": {
+            "x": -10.951267500303251,
+            "y": 6.555140214155589
+          },
+          "id": "986f6d33-32a9-4576-9651-8b5bab921634",
+          "mission_id": "bee54143-3fe7-4006-9c30-9ee880b8868e",
+          "execution_id": "cf22f611-2ba5-4dfe-93dc-58f277da5376",
+          "panel": "P1",
+          "sector": "A",
+          "created_at": "2026-10-19T05:18:14.454863+00:00",
+          "image_url": "/api/inspections/986f6d33-32a9-4576-9651-8b5bab921634/annotated.jpg",
+          "raw_url": "/api/inspections/986f6d33-32a9-4576-9651-8b5bab921634/raw.jpg"
+        }
+      ],
+      "return_position": {
+        "x": -8.965628976547634,
+        "y": 5.007325452361469
+      }
+    },
+    {
+      "sector": "B",
+      "mission": {
+        "id": "5c906363-be80-4d25-b3b2-3aab441fe59d",
+        "name": "Inspekcja obrazów sektora B",
+        "scenario": "normal",
+        "status": "succeeded",
+        "steps": [
+          {
+            "action": "navigate",
+            "target": "B",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "197b30dd-7d54-4148-be49-d4e7ed93b233"
+          },
+          {
+            "action": "navigate",
+            "target": "P3",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "190ec48e-7f57-42f1-ae67-801504b2817a"
+          },
+          {
+            "action": "inspect",
+            "target": "P3",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "22536059-728e-443a-b89c-adef661c0f7b"
+          },
+          {
+            "action": "navigate",
+            "target": "P4",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "8a0dcc19-d89e-4b4d-856a-52085e95766e"
+          },
+          {
+            "action": "inspect",
+            "target": "P4",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "4447d356-ed61-4b68-9c01-930ebbf37db5"
+          },
+          {
+            "action": "navigate",
+            "target": "B",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "fde579be-e241-422c-b78d-c666c262baa8"
+          }
+        ],
+        "current_step": 5,
+        "message": "Wszystkie kroki misji wykonane",
+        "created_at": "2026-10-19T05:19:59.971946Z",
+        "updated_at": "2026-10-19T05:23:07.766278Z"
+      },
+      "reports": [
+        {
+          "detections": [
+            {
+              "label": "cat",
+              "instance": 1,
+              "confidence": 0.9106,
+              "xyxy": [
+                527.3,
+                267.7,
+                731.3,
+                429.7
+              ]
+            }
+          ],
+          "counts": {
+            "cat": 1
+          },
+          "total": 1,
+          "width": 1280,
+          "height": 720,
+          "inference_seconds": 0.021,
+          "model": "YOLO11s",
+          "device": "cuda:0",
+          "camera_stamp_s": 348.375,
+          "camera_sequence": 1292,
+          "warehouse": {
+            "mode": "random",
+            "layout_id": "random-cbf28cf994ff",
+            "seed": 1778666227,
+            "movable_count": 8
+          },
+          "position": {
+            "x": 2.9254613600020196,
+            "y": 6.588188491390868
+          },
+          "id": "f4331f57-09ec-4cc1-9535-b767767fd236",
+          "mission_id": "5c906363-be80-4d25-b3b2-3aab441fe59d",
+          "execution_id": "4447d356-ed61-4b68-9c01-930ebbf37db5",
+          "panel": "P4",
+          "sector": "B",
+          "created_at": "2026-10-19T05:22:21.685710+00:00",
+          "image_url": "/api/inspections/f4331f57-09ec-4cc1-9535-b767767fd236/annotated.jpg",
+          "raw_url": "/api/inspections/f4331f57-09ec-4cc1-9535-b767767fd236/raw.jpg"
+        },
+        {
+          "detections": [
+            {
+              "label": "cat",
+              "instance": 1,
+              "confidence": 0.9053,
+              "xyxy": [
+                455.3,
+                233.3,
+                723.3,
+                474.0
+              ]
+            },
+            {
+              "label": "remote",
+              "instance": 1,
+              "confidence": 0.8975,
+              "xyxy": [
+                745.3,
+                335.7,
+                870.7,
+                391.0
+              ]
+            },
+            {
+              "label": "couch",
+              "instance": 1,
+              "confidence": 0.7007,
+              "xyxy": [
+                445.3,
+                209.5,
+                872.0,
+                472.0
+              ]
+            },
+            {
+              "label": "potted plant",
+              "instance": 1,
+              "confidence": 0.5981,
+              "xyxy": [
+                801.3,
+                204.3,
+                882.7,
+                361.7
+              ]
+            },
+            {
+              "label": "remote",
+              "instance": 2,
+              "confidence": 0.4282,
+              "xyxy": [
+                710.7,
+                316.7,
+                852.0,
+                353.3
+              ]
+            }
+          ],
+          "counts": {
+            "cat": 1,
+            "remote": 2,
+            "couch": 1,
+            "potted plant": 1
+          },
+          "total": 5,
+          "width": 1280,
+          "height": 720,
+          "inference_seconds": 0.021,
+          "model": "YOLO11s",
+          "device": "cuda:0",
+          "camera_stamp_s": 290.625,
+          "camera_sequence": 1062,
+          "warehouse": {
+            "mode": "random",
+            "layout_id": "random-cbf28cf994ff",
+            "seed": 1778666227,
+            "movable_count": 8
+          },
+          "position": {
+            "x": -0.9188245019417973,
+            "y": 6.5353116039611905
+          },
+          "id": "f867f78f-6423-49ce-9384-f11e2089658e",
+          "mission_id": "5c906363-be80-4d25-b3b2-3aab441fe59d",
+          "execution_id": "22536059-728e-443a-b89c-adef661c0f7b",
+          "panel": "P3",
+          "sector": "B",
+          "created_at": "2026-10-19T05:21:23.087865+00:00",
+          "image_url": "/api/inspections/f867f78f-6423-49ce-9384-f11e2089658e/annotated.jpg",
+          "raw_url": "/api/inspections/f867f78f-6423-49ce-9384-f11e2089658e/raw.jpg"
+        }
+      ],
+      "return_position": {
+        "x": 1.0082943917890255,
+        "y": 5.035041577265709
+      }
+    },
+    {
+      "sector": "C",
+      "mission": {
+        "id": "cd8d781f-ae34-43b7-834f-d27e47700d1b",
+        "name": "Inspekcja obrazów sektora C",
+        "scenario": "normal",
+        "status": "succeeded",
+        "steps": [
+          {
+            "action": "navigate",
+            "target": "C",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "c355e9aa-57f1-408c-9ba7-fca96a4dc0b1"
+          },
+          {
+            "action": "navigate",
+            "target": "P5",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "8b04ed33-7575-4dd6-a377-456b27fdb1f1"
+          },
+          {
+            "action": "inspect",
+            "target": "P5",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "677b1258-79d5-4b1b-9282-66382f1f73d1"
+          },
+          {
+            "action": "navigate",
+            "target": "C",
+            "timeout_seconds": 300,
+            "status": "succeeded",
+            "execution_id": "2e356fe2-05e2-4dec-8c07-c6c0f0f20278"
+          }
+        ],
+        "current_step": 3,
+        "message": "Wszystkie kroki misji wykonane",
+        "created_at": "2026-10-19T05:23:08.202497Z",
+        "updated_at": "2026-10-19T05:24:09.595503Z"
+      },
+      "reports": [
+        {
+          "detections": [
+            {
+              "label": "suitcase",
+              "instance": 1,
+              "confidence": 0.7358,
+              "xyxy": [
+                371.3,
+                72.7,
+                894.7,
+                612.0
+              ]
+            },
+            {
+              "label": "cat",
+              "instance": 1,
+              "confidence": 0.5,
+              "xyxy": [
+                574.3,
+                196.3,
+                828.0,
+                378.0
+              ]
+            }
+          ],
+          "counts": {
+            "suitcase": 1,
+            "cat": 1
+          },
+          "total": 2,
+          "width": 1280,
+          "height": 720,
+          "inference_seconds": 0.019,
+          "model": "YOLO11s",
+          "device": "cuda:0",
+          "camera_stamp_s": 455.0,
+          "camera_sequence": 1704,
+          "warehouse": {
+            "mode": "random",
+            "layout_id": "random-cbf28cf994ff",
+            "seed": 1778666227,
+            "movable_count": 8
+          },
+          "position": {
+            "x": 9.904988239036154,
+            "y": 6.593059546202026
+          },
+          "id": "03ca50ba-1c14-4a6b-8a44-de5554098a18",
+          "mission_id": "cd8d781f-ae34-43b7-834f-d27e47700d1b",
+          "execution_id": "677b1258-79d5-4b1b-9282-66382f1f73d1",
+          "panel": "P5",
+          "sector": "C",
+          "created_at": "2026-10-19T05:24:09.330277+00:00",
+          "image_url": "/api/inspections/03ca50ba-1c14-4a6b-8a44-de5554098a18/annotated.jpg",
+          "raw_url": "/api/inspections/03ca50ba-1c14-4a6b-8a44-de5554098a18/raw.jpg"
+        }
+      ],
+      "return_position": {
+        "x": 9.904988239036154,
+        "y": 6.593059546202026
+      }
+    }
+  ]
+}

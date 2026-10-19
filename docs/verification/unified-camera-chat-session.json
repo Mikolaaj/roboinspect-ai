@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "left_fpv_contains_yolo_boxes": true,
+  "observed_classes": [
+    "person",
+    "umbrella"
+  ],
+  "separate_yolo_preview_removed": true,
+  "fresh_chat_on_open": true,
+  "fresh_chat_on_reload": true,
+  "accepted_navigation_continued_during_chat_reload": true,
+  "archived_chat_preserved": true,
+  "python_tests": 135,
+  "javascript_tests": 8
+}

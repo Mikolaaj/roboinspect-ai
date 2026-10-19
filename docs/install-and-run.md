@@ -134,3 +134,7 @@ Jednorazowo `bash scripts/setup_whisper.sh` po instalacji zależności. Standard
 ## Wizualizacja trasy
 
 run_cockpit.sh automatycznie buduje klienta z robotics/visualization/pose_client.cpp. Wymaga g++, pkg-config oraz bibliotek Gazebo Transport 13 / Messages 10 z instalacji ROS. Po zmianie światów zrestartuj cały kokpit. [Mapa 2D i trasy](navigation-route-view.md).
+
+## Detekcja na tablicach
+
+Przed pierwszym uruchomieniem inspekcji wykonaj `bash scripts/setup_vision.sh`. Detektor ma osobne środowisko i startuje razem z `bash scripts/run_cockpit.sh`. Pełna instrukcja: [inspekcja zdjęć](vision-inspection.md).

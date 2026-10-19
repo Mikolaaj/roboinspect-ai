@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "camera_resolution": [
+    1280,
+    720
+  ],
+  "detector_device": "cuda:0",
+  "history_dropdown": true,
+  "instance_labels_and_confidence": true,
+  "chat_answer_from_sector_A_reports": true,
+  "bielik_public_inspection_guide": true,
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "mobile_control_overflow": false,
+  "mobile_cockpit_overflow": false,
+  "mobile_history_image_width_px": 313,
+  "python_tests": 134,
+  "javascript_tests": 8
+}

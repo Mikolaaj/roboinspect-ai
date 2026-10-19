@@ -3,6 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 .venv/bin/ruff check src tests
 .venv/bin/ruff format --check src tests
+node --check operator/web/vision.js
 node --check operator/web/activity.js
 node --check operator/web/app.js
 node --check operator/web/voice.js

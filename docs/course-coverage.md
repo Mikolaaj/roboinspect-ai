@@ -68,3 +68,7 @@ nie wybieramy teraz; wspólny budżet RTX 8 GB sprawdzimy przy ich wdrażaniu.
 ## Rozszerzenie: głos i punkty inspekcyjne
 
 Dodano lokalny Whisper small, nagrywanie z mikrofonu, walidację audio, edytowalną transkrypcję oraz osobny eksperyment MLflow. Sektory prowadzą do czerwonych stref przed tablicami. Głos korzysta z istniejącego wykonawcy misji po sprawdzeniu i wysłaniu tekstu przez operatora. Szczegóły: [instrukcja](voice-and-inspection-zones.md).
+
+## Inspekcja obrazów
+
+Gotowy YOLO11s na lokalnej RTX przetwarza rzeczywisty obraz kamery Gazebo. Pydantic waliduje plany inspekcji i dane wykryć. Trwały wykonawca misji łączy Nav2 z analizą zdjęcia; SQLite zachowuje obserwacje, REST udostępnia historię, a MLflow eksperyment roboinspect-yolo. Zapisane wyniki stanowią źródło odpowiedzi czatu. SAM, trening detektora i RAG wektorowy nie są częścią tego etapu.

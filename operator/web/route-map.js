@@ -37,6 +37,11 @@
       const [x,y]=zone.pose,[w,h]=zone.size;
       svg.append(rectangle([x-w/2,x+w/2,y-h/2,y+h/2],{'class':'overview-zone',rx:.12}));
     }
+    for(const [name,zone] of Object.entries(data.observation_zones || {})){
+      const [x,y]=zone.pose,[w,h]=zone.size;
+      svg.append(rectangle([x-w/2,x+w/2,y-h/2,y+h/2],{'class':'overview-observation',rx:.08}));
+      svg.append(element('text',{x,y:-y+.12,'text-anchor':'middle','class':'observation-label'},name));
+    }
     svg.append(observed,routeLine,goal,robot,direction);
   }
   function update(state){
