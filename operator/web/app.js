@@ -218,6 +218,18 @@ if($('chat-form')) {
           const body=document.createElement('div');body.className='chat-answer';body.textContent=content;bubble.append(body);
         }
         const meta=document.createElement('small');meta.textContent=(role==='user'?'Ty':'Bielik')+' · '+new Date(row.created_at).toLocaleTimeString('pl-PL');bubble.append(meta);
+        if(role==='assistant' && row.sources?.length){
+          const sources=document.createElement('details');sources.className='chat-sources';
+          const summary=document.createElement('summary');summary.textContent='Źródła instrukcji ('+row.sources.length+')';sources.append(summary);
+          for(const source of row.sources){
+            if(!/^\/guide#[a-z0-9-]+$/.test(source.url)) continue;
+            const item=document.createElement('div');const link=document.createElement('a');
+            link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=source.title;
+            const excerpt=document.createElement('p');excerpt.textContent=source.text;
+            item.append(link,excerpt);sources.append(item);
+          }
+          bubble.append(sources);
+        }
         if(role==='assistant' && row.mission){const result=document.createElement('small');result.textContent='Nav2: '+(labels[row.mission.status] || row.mission.status)+' · '+row.mission.message;bubble.append(result);}
         if(role==='assistant' && row.tracking_error){const warning=document.createElement('small');warning.textContent='Zapis pomiarów odpowiedzi nie powiódł się';bubble.append(warning);}
         box.append(bubble);

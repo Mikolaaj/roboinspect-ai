@@ -309,6 +309,17 @@ def main():
                     OLLAMA_MAX_LOADED_MODELS='1', OLLAMA_NUM_PARALLEL='1',
                     OLLAMA_CONTEXT_LENGTH='4096', OLLAMA_NO_CLOUD='true')
                 start('ollama',[str(ollama),'serve'])
+                if (ROOT/'data/rag/index.json').exists():
+                    saved_host=os.environ['OLLAMA_HOST']
+                    os.environ['OLLAMA_HOST']='127.0.0.1:11436'
+                    saved_cuda=os.environ.get('CUDA_VISIBLE_DEVICES')
+                    os.environ['CUDA_VISIBLE_DEVICES']='-1'
+                    start('rag-embeddings',[str(ollama),'serve'])
+                    os.environ['OLLAMA_HOST']=saved_host
+                    if saved_cuda is None: os.environ.pop('CUDA_VISIBLE_DEVICES',None)
+                    else: os.environ['CUDA_VISIBLE_DEVICES']=saved_cuda
+                else:
+                    print('RAG: przygotuj bash scripts/setup_rag.sh',flush=True)
             else:
                 print('Czat: najpierw wykonaj bash scripts/setup_bielik.sh',flush=True)
             start('mlflow',[str(ROOT/'.venv/bin/mlflow'),'server',

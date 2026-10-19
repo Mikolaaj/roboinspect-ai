@@ -1,0 +1,5 @@
+# Inspekcja zdjęć i YOLO
+
+Pod przyciskami jazdy wybierz Inspekcja sektora A, B lub C. Zielone pola P1 do P5 oznaczają dokładne miejsca obserwacji. Robot jedzie do środka zielonego pola i ustawia kamerę na tablicę. Robot odwiedzi kolejno każdą tablicę P w sektorze, zatrzyma się, zapisze zdjęcie i wykrycia YOLO, a potem wróci na czerwone pole sektora. A obejmuje P1 i P2, B P3 i P4, C P5. W kokpicie lub panelu sterowania rozwiń Historię detekcji z inspekcji i wybierz obserwację. Widać zdjęcie, ramki, klasy, liczbę wykryć oraz pewność modelu. Person oznacza człowieka; numer dotyczy pojedynczej klatki, nie tożsamości osoby. Możesz zapytać, co robot widział w sektorze A. Odpowiedź opisuje ostatnią zapisaną inspekcję, a nie aktualny obraz. Zmień zdjęcia na banerach losuje nowe fotografie i odświeża symulację, wracając do BASE. Historia pozostaje. YOLO rozpoznaje 80 klas, więc brak wykryć nie oznacza pustego zdjęcia.
+
+Procent przy ramce oznacza pewność detektora YOLO przypisania obiektu do klasy, a nie gwarancję poprawnego rozpoznania. Wysoka pewność może towarzyszyć pomyłce. Liczba obiektów w jednej klatce nie oznacza liczby unikalnych osób w całej misji.

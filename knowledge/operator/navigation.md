@@ -1,0 +1,3 @@
+# Nawigacja i żółta trasa
+
+Nav2 odpowiada za planowanie trasy i prowadzenie robota do wybranego celu. Korzysta z mapy oraz odczytów czujników, aby omijać przeszkody. Ty wskazujesz sektor w panelu lub czacie i obserwujesz postęp. W kokpicie obok mapy SLAM znajduje się plan 2D hangaru z przeszkodami i turkusową kropką robota. Żółta linia pokazuje aktualną trasę Nav2, a żółty punkt cel. Tę samą linię widać na podłodze w kamerach. Po wykryciu nowej przeszkody lidar aktualizuje dane i Nav2 przelicza plan; linia się zmienia. Po dojeździe lub anulowaniu trasa znika. Jeśli przejazd się nie powiedzie, panel pokaże błąd i pozostałe kroki zostaną pominięte.

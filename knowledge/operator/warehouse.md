@@ -1,0 +1,3 @@
+# Ustawienie magazynu
+
+W panelu sterowania pod mapowaniem są trzy przyciski ustawienia magazynu. Standardowe ustawienie przywraca oryginalne wyposażenie. Usuń wszystkie przeszkody usuwa wyposażenie, skrzynie i wolnostojące słupy; ściany, tablice oraz robot pozostają. Losuj przeszkody ustawia to samo wyposażenie w jego sektorach, zachowując przejścia do czerwonych stref i punktów P. Zmiana jest możliwa po zakończeniu jazdy i mapowania. Odświeża symulację i mapę nawigacyjną, przenosząc robota do bazy. Wcześniejsze mapy i historia są zachowane. Poczekaj na gotowość i obserwuj wynik operacji w historii.

@@ -5,12 +5,13 @@ import secrets
 import threading
 from collections.abc import Callable
 from contextlib import asynccontextmanager
+from html import escape
 from pathlib import Path
 from uuid import UUID
 
 from fastapi import FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from starlette.concurrency import run_in_threadpool
 
 from .chat import ChatRequest, ChatService
@@ -33,6 +34,7 @@ from .mapping import project_zones
 from .missions import MissionService
 from .observation import observation_zones
 from .operations import request_operation, request_warehouse
+from .rag import documents
 from .routes import hangar_layout
 from .speech import AUDIO_TYPES, SpeechError, SpeechService, Transcript
 
@@ -523,6 +525,24 @@ def create_app(
         return StreamingResponse(
             detected_frames() if name == "fpv" else frames(name),
             media_type="multipart/x-mixed-replace; boundary=frame",
+        )
+
+    @app.get("/guide", response_class=HTMLResponse, include_in_schema=False)
+    def operator_guide():
+        sections = "".join(
+            f'<section id="{escape(c["id"])}"><h2>{escape(c["title"])}</h2>'
+            f"<p>{escape(c['text'])}</p></section>"
+            for c in documents()
+        )
+        return HTMLResponse(
+            '<!doctype html><html lang="pl"><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<title>Instrukcja operatora RoboInspect</title><link rel="stylesheet" href="/style.css">'
+            '<main class="operator-guide"><a href="/control">Panel sterowania</a>'
+            "<h1>Instrukcja operatora</h1>" + sections + "</main></html>",
+            headers={
+                "Content-Security-Policy": "default-src 'none'; style-src 'self'; base-uri 'none'"
+            },
         )
 
     files = {

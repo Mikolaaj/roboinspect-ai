@@ -138,3 +138,7 @@ run_cockpit.sh automatycznie buduje klienta z robotics/visualization/pose_client
 ## Detekcja na tablicach
 
 Przed pierwszym uruchomieniem inspekcji wykonaj `bash scripts/setup_vision.sh`. Detektor ma osobne środowisko i startuje razem z `bash scripts/run_cockpit.sh`. Pełna instrukcja: [inspekcja zdjęć](vision-inspection.md).
+
+## RAG operatora
+
+Po przygotowaniu Bielika wykonaj jednorazowo `bash scripts/setup_rag.sh`. Następnie uruchamiaj standardowo `bash scripts/run_cockpit.sh`. Szczegóły, źródła i sprawdzenie MLflow: [rag.md](rag.md).

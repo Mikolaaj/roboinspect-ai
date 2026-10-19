@@ -476,3 +476,7 @@ Kamienie milowe:
 ## Aktualizacja: lokalna mowa i strefy inspekcji
 
 Mikrofon i Whisper small są wdrożone. Rozpoznany tekst operator sprawdza i wysyła do tego samego czatu. Dodano lokalne metryki ASR w MLflow oraz po jednej czerwonej strefie przed tablicami w A/B/C. Następne prace: RAG operatora, dane/EDA, YOLO i SAM, własny model defektów, pełne raporty inspekcji, następnie Docker, Kubernetes i CD. Instrukcja: [głos i strefy](voice-and-inspection-zones.md).
+
+## Aktualizacja 19.10: RAG
+
+Wdrożono podstawę fazy 8: lokalne wyszukiwanie instrukcji i odpowiedzi Bielika ze źródłami, indeks na CPU, ewaluacja i MLflow. Szczegóły: [rag.md](rag.md). Gotowy YOLO i inspekcje również działają. Następnie SAM, dane/EDA i własny model, a później konteneryzacja oraz deployment.

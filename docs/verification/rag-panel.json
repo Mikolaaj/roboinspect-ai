@@ -1,0 +1,34 @@
+{
+  "status": "answered",
+  "mission_id": null,
+  "sources": [
+    {
+      "id": "mapping-1",
+      "title": "Mapowanie SLAM",
+      "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+      "score": 0.72981,
+      "url": "/guide#mapping-1"
+    }
+  ],
+  "run_id": "d65a155889ec40209b0811ae57accc57",
+  "metrics": {
+    "eval_count": 60.0,
+    "eval_seconds": 0.983389,
+    "system_gpu_memory_mib_after": 3551.0,
+    "system_gpu_utilization_after_percent": 97.0,
+    "rag_used": 1.0,
+    "rag_available": 1.0,
+    "rag_retrieval_seconds": 1.6170260319995577,
+    "rag_hits": 1.0,
+    "rag_top_score": 0.72981,
+    "rag_abstained": 0.0,
+    "operator_guide_fallback": 1.0,
+    "latency_seconds": 4.559378154001024,
+    "schema_valid": 1.0,
+    "mission_accepted": 0.0
+  },
+  "artifacts": [
+    "interaction.json",
+    "retrieval.json"
+  ]
+}

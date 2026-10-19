@@ -72,3 +72,7 @@ Dodano lokalny Whisper small, nagrywanie z mikrofonu, walidację audio, edytowal
 ## Inspekcja obrazów
 
 Gotowy YOLO11s na lokalnej RTX przetwarza rzeczywisty obraz kamery Gazebo. Pydantic waliduje plany inspekcji i dane wykryć. Trwały wykonawca misji łączy Nav2 z analizą zdjęcia; SQLite zachowuje obserwacje, REST udostępnia historię, a MLflow eksperyment roboinspect-yolo. Zapisane wyniki stanowią źródło odpowiedzi czatu. SAM, trening detektora i RAG wektorowy nie są częścią tego etapu.
+
+## Aktualizacja 19.10: RAG operatora
+
+Dodano lokalne embeddingi EmbeddingGemma na CPU, publiczny zbiór instrukcji, fragmentację, wersjonowany indeks wektorowy, wyszukiwanie i źródła w odpowiedziach Bielika. Metryki i ewaluacja są w MLflow. [Zakres i ograniczenia](rag.md). Gotowy YOLO oraz RAG są wdrożone; SAM, EDA, własny trening, Optuna, Docker i Kubernetes pozostają do wykonania. Historyczne tabele powyżej opisują wcześniejszy stan.

@@ -1,0 +1,673 @@
+{
+  "metrics": {
+    "retrieval_accuracy_at_3": 1.0,
+    "cases": 20,
+    "available_fraction": 1.0,
+    "mean_retrieval_seconds": 0.041146104550080054
+  },
+  "results": [
+    {
+      "question": "Jak rozpocząć mapowanie?",
+      "expected": "mapping",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "mapping-1",
+            "title": "Mapowanie SLAM",
+            "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+            "score": 0.72981,
+            "url": "/guide#mapping-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.0715860979998979,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak zakończyć mapowanie i wrócić do nawigacji?",
+      "expected": "mapping",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "mapping-1",
+            "title": "Mapowanie SLAM",
+            "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+            "score": 0.61428,
+            "url": "/guide#mapping-1"
+          },
+          {
+            "id": "warehouse-1",
+            "title": "Ustawienie magazynu",
+            "text": "W panelu sterowania pod mapowaniem są trzy przyciski ustawienia magazynu. Standardowe ustawienie przywraca oryginalne wyposażenie. Usuń wszystkie przeszkody usuwa wyposażenie, skrzynie i wolnostojące słupy; ściany, tablice oraz robot pozostają. Losuj przeszkody ustawia to samo wyposażenie w jego sektorach, zachowując przejścia do czerwonych stref i punktów P. Zmiana jest możliwa po zakończeniu jazdy i mapowania. Odświeża symulację i mapę nawigacyjną, przenosząc robota do bazy. Wcześniejsze mapy i historia są zachowane. Poczekaj na gotowość i obserwuj wynik operacji w historii.",
+            "score": 0.61079,
+            "url": "/guide#warehouse-1"
+          },
+          {
+            "id": "navigation-1",
+            "title": "Nawigacja i żółta trasa",
+            "text": "Nav2 odpowiada za planowanie trasy i prowadzenie robota do wybranego celu. Korzysta z mapy oraz odczytów czujników, aby omijać przeszkody. Ty wskazujesz sektor w panelu lub czacie i obserwujesz postęp. W kokpicie obok mapy SLAM znajduje się plan 2D hangaru z przeszkodami i turkusową kropką robota. Żółta linia pokazuje aktualną trasę Nav2, a żółty punkt cel. Tę samą linię widać na podłodze w kamerach. Po wykryciu nowej przeszkody lidar aktualizuje dane i Nav2 przelicza plan; linia się zmienia. Po dojeździe lub anulowaniu trasa znika. Jeśli przejazd się nie powiedzie, panel pokaże błąd i pozostałe kroki zostaną pominięte.",
+            "score": 0.5427,
+            "url": "/guide#navigation-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.0521604749992548,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak nagrać polecenie głosowe?",
+      "expected": "voice",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "voice-1",
+            "title": "Mikrofon i rozpoznawanie mowy",
+            "text": "Kliknij Mikrofon w panelu czatu i zezwól przeglądarce na nagrywanie. Powiedz krótkie polecenie po polsku, np. Jedź do sektora B i wróć do bazy. Kliknij Zakończ nagranie. Lokalny Whisper wpisze rozpoznaną wypowiedź do pola wiadomości. Sprawdź i w razie potrzeby popraw tekst, potem naciśnij Enter lub Wyślij. Samo nagranie nie uruchamia misji. Anuluj nagranie przerywa nagrywanie lub oczekiwanie na wynik. Aby szybko zatrzymać robota, użyj Anuluj przejazd albo wpisz STOP; nie czekaj na rozpoznawanie głosu.",
+            "score": 0.72292,
+            "url": "/guide#voice-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04470460300035484,
+        "available": true
+      }
+    },
+    {
+      "question": "Czy samo nagranie uruchamia jazdę robota?",
+      "expected": "voice",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "voice-1",
+            "title": "Mikrofon i rozpoznawanie mowy",
+            "text": "Kliknij Mikrofon w panelu czatu i zezwól przeglądarce na nagrywanie. Powiedz krótkie polecenie po polsku, np. Jedź do sektora B i wróć do bazy. Kliknij Zakończ nagranie. Lokalny Whisper wpisze rozpoznaną wypowiedź do pola wiadomości. Sprawdź i w razie potrzeby popraw tekst, potem naciśnij Enter lub Wyślij. Samo nagranie nie uruchamia misji. Anuluj nagranie przerywa nagrywanie lub oczekiwanie na wynik. Aby szybko zatrzymać robota, użyj Anuluj przejazd albo wpisz STOP; nie czekaj na rozpoznawanie głosu.",
+            "score": 0.58719,
+            "url": "/guide#voice-1"
+          },
+          {
+            "id": "mapping-1",
+            "title": "Mapowanie SLAM",
+            "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+            "score": 0.55117,
+            "url": "/guide#mapping-1"
+          },
+          {
+            "id": "controls-1",
+            "title": "Sterowanie i sektory",
+            "text": "W panelu sterowania wybierz przycisk A, B, C lub Powrót do bazy. Możesz też napisać w czacie „Jedź do B i wróć do bazy” i nacisnąć Enter lub Wyślij. Kroki misji wykonają się kolejno. Wynik pokazuje panel i wiadomość z misją; samo przyjęcie polecenia nie oznacza dojazdu. Sektory A, B i C prowadzą do czerwonych stref przed tablicami. A ma wspólną strefę dla P1 i P2, B dla P3 i P4, a C przed P5. Robot ustawia kamerę w stronę tablic. Nie ma dodatkowego okna potwierdzenia.",
+            "score": 0.54247,
+            "url": "/guide#controls-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.05377337800018722,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak zatrzymać robota?",
+      "expected": "stop",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "stop-1",
+            "title": "Zatrzymanie robota",
+            "text": "Napisz w czacie STOP, aby przerwać odpowiedzi asystenta, anulować misję i zatrzymać obchód mapowania. Przycisk Anuluj przejazd służy do anulowania misji. Przycisk Zatrzymaj odpowiedź przerywa tylko analizę wiadomości; nie cofa już przyjętej misji. Panel pozostaje otwarty, aby pokazać potwierdzenie zatrzymania.",
+            "score": 0.79146,
+            "url": "/guide#stop-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.046897836999050924,
+        "available": true
+      }
+    },
+    {
+      "question": "Czym się różni zatrzymanie odpowiedzi od STOP?",
+      "expected": "stop",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "stop-1",
+            "title": "Zatrzymanie robota",
+            "text": "Napisz w czacie STOP, aby przerwać odpowiedzi asystenta, anulować misję i zatrzymać obchód mapowania. Przycisk Anuluj przejazd służy do anulowania misji. Przycisk Zatrzymaj odpowiedź przerywa tylko analizę wiadomości; nie cofa już przyjętej misji. Panel pozostaje otwarty, aby pokazać potwierdzenie zatrzymania.",
+            "score": 0.70966,
+            "url": "/guide#stop-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04686255500018888,
+        "available": true
+      }
+    },
+    {
+      "question": "Gdzie znajdę wyniki MLflow?",
+      "expected": "results",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "results-1",
+            "title": "Wyniki i MLflow",
+            "text": "Przycisk MLflow w nagłówku panelu sterowania otwiera panel eksperymentów w nowej karcie. W widoku Model training wybierz eksperyment i listę Runs. roboinspect-bielik zawiera pomiary czatu, roboinspect-whisper rozpoznawania mowy, a roboinspect-yolo analizy obrazów. Widać parametry modelu, czasy i zapisane metryki. Przyjęcie misji nie potwierdza dojazdu; wynik przejazdu sprawdzaj w panelu robota. Pomiary RAG są przy odpowiedziach w roboinspect-bielik, a porównanie wyszukiwania w roboinspect-rag-evaluation. Pusty widok Traces nie oznacza braku zapisanych Runs.",
+            "score": 0.69372,
+            "url": "/guide#results-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.045408951000354136,
+        "available": true
+      }
+    },
+    {
+      "question": "Dlaczego MLflow nie pokazuje Traces?",
+      "expected": "results",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "results-1",
+            "title": "Wyniki i MLflow",
+            "text": "Przycisk MLflow w nagłówku panelu sterowania otwiera panel eksperymentów w nowej karcie. W widoku Model training wybierz eksperyment i listę Runs. roboinspect-bielik zawiera pomiary czatu, roboinspect-whisper rozpoznawania mowy, a roboinspect-yolo analizy obrazów. Widać parametry modelu, czasy i zapisane metryki. Przyjęcie misji nie potwierdza dojazdu; wynik przejazdu sprawdzaj w panelu robota. Pomiary RAG są przy odpowiedziach w roboinspect-bielik, a porównanie wyszukiwania w roboinspect-rag-evaluation. Pusty widok Traces nie oznacza braku zapisanych Runs.",
+            "score": 0.66404,
+            "url": "/guide#results-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04780261100131611,
+        "available": true
+      }
+    },
+    {
+      "question": "Co oznacza żółta linia?",
+      "expected": "navigation",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "navigation-1",
+            "title": "Nawigacja i żółta trasa",
+            "text": "Nav2 odpowiada za planowanie trasy i prowadzenie robota do wybranego celu. Korzysta z mapy oraz odczytów czujników, aby omijać przeszkody. Ty wskazujesz sektor w panelu lub czacie i obserwujesz postęp. W kokpicie obok mapy SLAM znajduje się plan 2D hangaru z przeszkodami i turkusową kropką robota. Żółta linia pokazuje aktualną trasę Nav2, a żółty punkt cel. Tę samą linię widać na podłodze w kamerach. Po wykryciu nowej przeszkody lidar aktualizuje dane i Nav2 przelicza plan; linia się zmienia. Po dojeździe lub anulowaniu trasa znika. Jeśli przejazd się nie powiedzie, panel pokaże błąd i pozostałe kroki zostaną pominięte.",
+            "score": 0.43764,
+            "url": "/guide#navigation-1"
+          },
+          {
+            "id": "inspection-2",
+            "title": "Inspekcja zdjęć i YOLO",
+            "text": "YOLO rozpoznaje 80 klas, więc brak wykryć nie oznacza pustego zdjęcia.\n\nProcent przy ramce oznacza pewność detektora YOLO przypisania obiektu do klasy, a nie gwarancję poprawnego rozpoznania. Wysoka pewność może towarzyszyć pomyłce. Liczba obiektów w jednej klatce nie oznacza liczby unikalnych osób w całej misji.",
+            "score": 0.31893,
+            "url": "/guide#inspection-2"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04485485300028813,
+        "available": true
+      }
+    },
+    {
+      "question": "Do czego służy ten system?",
+      "expected": "overview",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "overview-1",
+            "title": "Do czego służy RoboInspect",
+            "text": "RoboInspect to symulacja mobilnego robota w hangarze. Możesz zlecać przejazdy między sektorami A, B i C oraz bazą BASE. Robot planuje trasę i omija przeszkody, a trzy kamery pozwalają obserwować przejazd. W panelu sprawdzisz pozycję, wynik misji i historię. Możesz też tworzyć i zapisywać mapę hali.",
+            "score": 0.3879,
+            "url": "/guide#overview-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04599531299936643,
+        "available": true
+      }
+    },
+    {
+      "question": "Co oznacza procent przy detekcji?",
+      "expected": "inspection",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "inspection-2",
+            "title": "Inspekcja zdjęć i YOLO",
+            "text": "YOLO rozpoznaje 80 klas, więc brak wykryć nie oznacza pustego zdjęcia.\n\nProcent przy ramce oznacza pewność detektora YOLO przypisania obiektu do klasy, a nie gwarancję poprawnego rozpoznania. Wysoka pewność może towarzyszyć pomyłce. Liczba obiektów w jednej klatce nie oznacza liczby unikalnych osób w całej misji.",
+            "score": 0.60698,
+            "url": "/guide#inspection-2"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.051562691000071936,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak przejrzeć historię przejazdów?",
+      "expected": "history",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "history-1",
+            "title": "Historia detekcji i przejazdów",
+            "text": "W kokpicie i panelu sterowania rozwiń Historię detekcji z inspekcji. Wybierz obserwację z listy, aby zobaczyć datę, sektor, punkt P, zapisany obraz i wykryte obiekty z pewnością. Pod nią jest Historia przejazdów i mapowania. Obie historie mają własny przewijany obszar. Bieżący status misji znajduje się nad historiami w kokpicie. Nowa rozmowa czyści widoczną rozmowę, ale nie usuwa historii inspekcji i przejazdów. Pytania o to, co robot widział, dotyczą ostatnich zapisanych obserwacji, nie obrazu na żywo.",
+            "score": 0.67899,
+            "url": "/guide#history-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04281681199972809,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak zmienić zdjęcia na tablicach?",
+      "expected": "inspection",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "inspection-1",
+            "title": "Inspekcja zdjęć i YOLO",
+            "text": "Pod przyciskami jazdy wybierz Inspekcja sektora A, B lub C. Zielone pola P1 do P5 oznaczają dokładne miejsca obserwacji. Robot jedzie do środka zielonego pola i ustawia kamerę na tablicę. Robot odwiedzi kolejno każdą tablicę P w sektorze, zatrzyma się, zapisze zdjęcie i wykrycia YOLO, a potem wróci na czerwone pole sektora. A obejmuje P1 i P2, B P3 i P4, C P5. W kokpicie lub panelu sterowania rozwiń Historię detekcji z inspekcji i wybierz obserwację. Widać zdjęcie, ramki, klasy, liczbę wykryć oraz pewność modelu. Person oznacza człowieka; numer dotyczy pojedynczej klatki, nie tożsamości osoby. Możesz zapytać, co robot widział w sektorze A. Odpowiedź opisuje ostatnią zapisaną inspekcję, a nie aktualny obraz. Zmień zdjęcia na banerach losuje nowe fotografie i odświeża symulację, wracając do BASE. Historia pozostaje.",
+            "score": 0.56857,
+            "url": "/guide#inspection-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.044844101001217496,
+        "available": true
+      }
+    },
+    {
+      "question": "Które punkty odwiedza inspekcja sektora B?",
+      "expected": "inspection",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "inspection-1",
+            "title": "Inspekcja zdjęć i YOLO",
+            "text": "Pod przyciskami jazdy wybierz Inspekcja sektora A, B lub C. Zielone pola P1 do P5 oznaczają dokładne miejsca obserwacji. Robot jedzie do środka zielonego pola i ustawia kamerę na tablicę. Robot odwiedzi kolejno każdą tablicę P w sektorze, zatrzyma się, zapisze zdjęcie i wykrycia YOLO, a potem wróci na czerwone pole sektora. A obejmuje P1 i P2, B P3 i P4, C P5. W kokpicie lub panelu sterowania rozwiń Historię detekcji z inspekcji i wybierz obserwację. Widać zdjęcie, ramki, klasy, liczbę wykryć oraz pewność modelu. Person oznacza człowieka; numer dotyczy pojedynczej klatki, nie tożsamości osoby. Możesz zapytać, co robot widział w sektorze A. Odpowiedź opisuje ostatnią zapisaną inspekcję, a nie aktualny obraz. Zmień zdjęcia na banerach losuje nowe fotografie i odświeża symulację, wracając do BASE. Historia pozostaje.",
+            "score": 0.58268,
+            "url": "/guide#inspection-1"
+          },
+          {
+            "id": "controls-1",
+            "title": "Sterowanie i sektory",
+            "text": "W panelu sterowania wybierz przycisk A, B, C lub Powrót do bazy. Możesz też napisać w czacie „Jedź do B i wróć do bazy” i nacisnąć Enter lub Wyślij. Kroki misji wykonają się kolejno. Wynik pokazuje panel i wiadomość z misją; samo przyjęcie polecenia nie oznacza dojazdu. Sektory A, B i C prowadzą do czerwonych stref przed tablicami. A ma wspólną strefę dla P1 i P2, B dla P3 i P4, a C przed P5. Robot ustawia kamerę w stronę tablic. Nie ma dodatkowego okna potwierdzenia.",
+            "score": 0.53512,
+            "url": "/guide#controls-1"
+          },
+          {
+            "id": "history-1",
+            "title": "Historia detekcji i przejazdów",
+            "text": "W kokpicie i panelu sterowania rozwiń Historię detekcji z inspekcji. Wybierz obserwację z listy, aby zobaczyć datę, sektor, punkt P, zapisany obraz i wykryte obiekty z pewnością. Pod nią jest Historia przejazdów i mapowania. Obie historie mają własny przewijany obszar. Bieżący status misji znajduje się nad historiami w kokpicie. Nowa rozmowa czyści widoczną rozmowę, ale nie usuwa historii inspekcji i przejazdów. Pytania o to, co robot widział, dotyczą ostatnich zapisanych obserwacji, nie obrazu na żywo.",
+            "score": 0.5,
+            "url": "/guide#history-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.05058676699991338,
+        "available": true
+      }
+    },
+    {
+      "question": "Czy SAM już działa?",
+      "expected": "limitations",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "limitations-1",
+            "title": "Ograniczenia i zakres odpowiedzi",
+            "text": "Robot działa w symulacji hangaru, a nie na fizycznym urządzeniu. YOLO wykrywa znane klasy obiektów, ale może popełniać błędy. Pewność nie jest gwarancją poprawności. SAM i własny model usterek nie są jeszcze dostępne. Asystent wyjaśnia obsługę i przyjmuje dozwolone polecenia; nie modyfikuje systemu. Instrukcja nie zawiera informacji o pogodzie, finansach ani innych miejscach. Brak wiedzy powinien zostać jasno zgłoszony, bez zgadywania.",
+            "score": 0.57581,
+            "url": "/guide#limitations-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.03968705400075123,
+        "available": true
+      }
+    },
+    {
+      "question": "Jakie widoki są w kokpicie?",
+      "expected": "cameras",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "cameras-1",
+            "title": "Kamery i podgląd",
+            "text": "Kokpit pokazuje trzy widoki: obraz z kamery robota, kamerę podążającą za robotem z boku i monitoring całej hali z góry. Pierwszy pozwala zobaczyć to, co znajduje się przed robotem. Widok boczny ułatwia obserwację jego ruchu, a monitoring pokazuje położenie w całym hangarze. Lewy obraz z kamery robota ma nałożone ramki YOLO. Pozostałe dwa widoki pokazują ruch robota i całą halę. Gdy obraz jest nieaktualny, nie traktuj go jako potwierdzenia bieżącej sytuacji. Sprawdź status połączenia i poczekaj na świeże klatki.",
+            "score": 0.5961,
+            "url": "/guide#cameras-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.04764955700011342,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak losować przeszkody w magazynie?",
+      "expected": "warehouse",
+      "correct": true,
+      "retrieval": {
+        "sources": [
+          {
+            "id": "warehouse-1",
+            "title": "Ustawienie magazynu",
+            "text": "W panelu sterowania pod mapowaniem są trzy przyciski ustawienia magazynu. Standardowe ustawienie przywraca oryginalne wyposażenie. Usuń wszystkie przeszkody usuwa wyposażenie, skrzynie i wolnostojące słupy; ściany, tablice oraz robot pozostają. Losuj przeszkody ustawia to samo wyposażenie w jego sektorach, zachowując przejścia do czerwonych stref i punktów P. Zmiana jest możliwa po zakończeniu jazdy i mapowania. Odświeża symulację i mapę nawigacyjną, przenosząc robota do bazy. Wcześniejsze mapy i historia są zachowane. Poczekaj na gotowość i obserwuj wynik operacji w historii.",
+            "score": 0.61332,
+            "url": "/guide#warehouse-1"
+          }
+        ],
+        "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 0.0456967430000077,
+        "available": true
+      }
+    },
+    {
+      "question": "Jaka jutro pogoda w Warszawie?",
+      "expected": null,
+      "correct": true,
+      "retrieval": {
+        "sources": [],
+        "corpus_sha256": "",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 1.324299955740571e-05,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak ugotować makaron?",
+      "expected": null,
+      "correct": true,
+      "retrieval": {
+        "sources": [],
+        "corpus_sha256": "",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 8.270999387605116e-06,
+        "available": true
+      }
+    },
+    {
+      "question": "Jak uruchomić teleportację na Marsa?",
+      "expected": null,
+      "correct": true,
+      "retrieval": {
+        "sources": [],
+        "corpus_sha256": "",
+        "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+        "model": "embeddinggemma:300m",
+        "seconds": 1.0178000593441539e-05,
+        "available": true
+      }
+    }
+  ],
+  "answers": [
+    {
+      "question": "Jak rozpocząć mapowanie?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+        "retrieval": {
+          "sources": [
+            {
+              "id": "mapping-1",
+              "title": "Mapowanie SLAM",
+              "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+              "score": 0.72981,
+              "url": "/guide#mapping-1"
+            }
+          ],
+          "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 0.045348036001087166,
+          "available": true
+        }
+      },
+      "metrics": {
+        "eval_count": 52,
+        "eval_seconds": 0.837316,
+        "system_gpu_memory_mib_after": 3565.0,
+        "system_gpu_utilization_after_percent": 98.0,
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 0.045348036001087166,
+        "rag_hits": 1,
+        "rag_top_score": 0.72981,
+        "rag_abstained": 0,
+        "operator_guide_fallback": 1
+      },
+      "seconds": 1.0397003500002029
+    },
+    {
+      "question": "Jak zakończyć mapowanie i wrócić do nawigacji?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+        "retrieval": {
+          "sources": [
+            {
+              "id": "mapping-1",
+              "title": "Mapowanie SLAM",
+              "text": "SLAM tworzy mapę hangaru podczas ruchu robota na podstawie pomiarów odległości. Pod przyciskami jazdy wybierz Rozpocznij mapowanie, aby uruchomić obchód. Zapisz mapę zachowuje jej wersję, a Resetuj mapę rozpoczyna świeżą mapę. Zakończ mapowanie zapisuje wynik i przywraca zwykłą nawigację z robotem w bazie. Kropka na mapie pokazuje pozycję robota.",
+              "score": 0.61428,
+              "url": "/guide#mapping-1"
+            }
+          ],
+          "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 0.05082248400140088,
+          "available": true
+        }
+      },
+      "metrics": {
+        "eval_count": 98,
+        "eval_seconds": 1.60174,
+        "system_gpu_memory_mib_after": 3565.0,
+        "system_gpu_utilization_after_percent": 98.0,
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 0.05082248400140088,
+        "rag_hits": 3,
+        "rag_top_score": 0.61428,
+        "rag_abstained": 0,
+        "operator_guide_fallback": 1
+      },
+      "seconds": 1.9079369720002433
+    },
+    {
+      "question": "Jak nagrać polecenie głosowe?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "Aby nagrać polecenie głosowe, wykonaj następujące kroki: 1. Kliknij przycisk Mikrofon w panelu czatu i zezwól przeglądarce na nagrywanie. 2. Powiedz krótkie polecenie po polsku, np. 'Jedź do sektora B i wróć do bazy'. 3. Kliknij 'Zakończ nagranie'. 4. Lokalny Whisper zapisze rozpoznaną wypowiedź w polu wiadomości. Sprawdź i popraw tekst, jeśli to konieczne, a następnie naciśnij Enter lub Wyślij.",
+        "retrieval": {
+          "sources": [
+            {
+              "id": "voice-1",
+              "title": "Mikrofon i rozpoznawanie mowy",
+              "text": "Kliknij Mikrofon w panelu czatu i zezwól przeglądarce na nagrywanie. Powiedz krótkie polecenie po polsku, np. Jedź do sektora B i wróć do bazy. Kliknij Zakończ nagranie. Lokalny Whisper wpisze rozpoznaną wypowiedź do pola wiadomości. Sprawdź i w razie potrzeby popraw tekst, potem naciśnij Enter lub Wyślij. Samo nagranie nie uruchamia misji. Anuluj nagranie przerywa nagrywanie lub oczekiwanie na wynik. Aby szybko zatrzymać robota, użyj Anuluj przejazd albo wpisz STOP; nie czekaj na rozpoznawanie głosu.",
+              "score": 0.72292,
+              "url": "/guide#voice-1"
+            }
+          ],
+          "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 0.050878430000011576,
+          "available": true
+        }
+      },
+      "metrics": {
+        "eval_count": 134,
+        "eval_seconds": 2.1648,
+        "system_gpu_memory_mib_after": 3565.0,
+        "system_gpu_utilization_after_percent": 98.0,
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 0.050878430000011576,
+        "rag_hits": 1,
+        "rag_top_score": 0.72292,
+        "rag_abstained": 0,
+        "operator_guide_fallback": 0
+      },
+      "seconds": 2.3976840140003333
+    },
+    {
+      "question": "Co oznacza żółta linia?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "Nav2 odpowiada za planowanie trasy i prowadzenie robota do wybranego celu. Korzysta z mapy oraz odczytów czujników, aby omijać przeszkody. Ty wskazujesz sektor w panelu lub czacie i obserwujesz postęp. W kokpicie obok mapy SLAM znajduje się plan 2D hangaru z przeszkodami i turkusową kropką robota. Żółta linia pokazuje aktualną trasę Nav2, a żółty punkt cel. Tę samą linię widać na podłodze w kamerach. Po wykryciu nowej przeszkody lidar aktualizuje dane i Nav2 przelicza plan; linia się zmienia. Po dojeździe lub anulowaniu trasa znika. Jeśli przejazd się nie powiedzie, panel pokaże błąd i pozostałe kroki zostaną pominięte.",
+        "retrieval": {
+          "sources": [
+            {
+              "id": "navigation-1",
+              "title": "Nawigacja i żółta trasa",
+              "text": "Nav2 odpowiada za planowanie trasy i prowadzenie robota do wybranego celu. Korzysta z mapy oraz odczytów czujników, aby omijać przeszkody. Ty wskazujesz sektor w panelu lub czacie i obserwujesz postęp. W kokpicie obok mapy SLAM znajduje się plan 2D hangaru z przeszkodami i turkusową kropką robota. Żółta linia pokazuje aktualną trasę Nav2, a żółty punkt cel. Tę samą linię widać na podłodze w kamerach. Po wykryciu nowej przeszkody lidar aktualizuje dane i Nav2 przelicza plan; linia się zmienia. Po dojeździe lub anulowaniu trasa znika. Jeśli przejazd się nie powiedzie, panel pokaże błąd i pozostałe kroki zostaną pominięte.",
+              "score": 0.43764,
+              "url": "/guide#navigation-1"
+            }
+          ],
+          "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 0.043368210001062835,
+          "available": true
+        }
+      },
+      "metrics": {
+        "eval_count": 102,
+        "eval_seconds": 1.637658,
+        "system_gpu_memory_mib_after": 3565.0,
+        "system_gpu_utilization_after_percent": 99.0,
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 0.043368210001062835,
+        "rag_hits": 2,
+        "rag_top_score": 0.43764,
+        "rag_abstained": 0,
+        "operator_guide_fallback": 1
+      },
+      "seconds": 1.9051089320000756
+    },
+    {
+      "question": "Co oznacza procent przy detekcji?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "Procent przy ramce oznacza pewność detektora YOLO przypisania obiektu do klasy, a nie gwarancję poprawnego rozpoznania. Wysoka pewność może towarzyszyć pomyłce.",
+        "retrieval": {
+          "sources": [
+            {
+              "id": "inspection-2",
+              "title": "Inspekcja zdjęć i YOLO",
+              "text": "YOLO rozpoznaje 80 klas, więc brak wykryć nie oznacza pustego zdjęcia.\n\nProcent przy ramce oznacza pewność detektora YOLO przypisania obiektu do klasy, a nie gwarancję poprawnego rozpoznania. Wysoka pewność może towarzyszyć pomyłce. Liczba obiektów w jednej klatce nie oznacza liczby unikalnych osób w całej misji.",
+              "score": 0.60698,
+              "url": "/guide#inspection-2"
+            }
+          ],
+          "corpus_sha256": "9ebc69a1f5895d283ade693676b2b84fdca5a792414c7a07681720ca44631dd8",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 0.05571944899929804,
+          "available": true
+        }
+      },
+      "metrics": {
+        "eval_count": 65,
+        "eval_seconds": 1.040898999,
+        "system_gpu_memory_mib_after": 3565.0,
+        "system_gpu_utilization_after_percent": 98.0,
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 0.05571944899929804,
+        "rag_hits": 1,
+        "rag_top_score": 0.60698,
+        "rag_abstained": 0,
+        "operator_guide_fallback": 0
+      },
+      "seconds": 1.2164732669989462
+    },
+    {
+      "question": "Jaka jutro pogoda w Warszawie?",
+      "answer": {
+        "action": "chat",
+        "targets": [],
+        "message": "Nie znalazłem wystarczającej informacji w instrukcji operatora. Zapytaj o sterowanie, mapowanie, kamery, inspekcje lub MLflow.",
+        "retrieval": {
+          "sources": [],
+          "corpus_sha256": "",
+          "weights_sha256": "0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515",
+          "model": "embeddinggemma:300m",
+          "seconds": 1.3761999070993625e-05,
+          "available": true
+        }
+      },
+      "metrics": {
+        "rag_used": 1,
+        "rag_available": 1,
+        "rag_retrieval_seconds": 1.3761999070993625e-05,
+        "rag_hits": 0,
+        "rag_top_score": 0,
+        "rag_abstained": 1
+      },
+      "seconds": 8.814899956632871e-05
+    }
+  ],
+  "run_id": "d7a3f93e37a649069b3a8b588e98bf07"
+}

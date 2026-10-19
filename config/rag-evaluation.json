@@ -1,0 +1,22 @@
+[
+ {"question":"Jak rozpocząć mapowanie?","expected":"mapping"},
+ {"question":"Jak zakończyć mapowanie i wrócić do nawigacji?","expected":"mapping"},
+ {"question":"Jak nagrać polecenie głosowe?","expected":"voice"},
+ {"question":"Czy samo nagranie uruchamia jazdę robota?","expected":"voice"},
+ {"question":"Jak zatrzymać robota?","expected":"stop"},
+ {"question":"Czym się różni zatrzymanie odpowiedzi od STOP?","expected":"stop"},
+ {"question":"Gdzie znajdę wyniki MLflow?","expected":"results"},
+ {"question":"Dlaczego MLflow nie pokazuje Traces?","expected":"results"},
+ {"question":"Co oznacza żółta linia?","expected":"navigation"},
+ {"question":"Do czego służy ten system?","expected":"overview"},
+ {"question":"Co oznacza procent przy detekcji?","expected":"inspection"},
+ {"question":"Jak przejrzeć historię przejazdów?","expected":"history"},
+ {"question":"Jak zmienić zdjęcia na tablicach?","expected":"inspection"},
+ {"question":"Które punkty odwiedza inspekcja sektora B?","expected":"inspection"},
+ {"question":"Czy SAM już działa?","expected":"limitations"},
+ {"question":"Jakie widoki są w kokpicie?","expected":"cameras"},
+ {"question":"Jak losować przeszkody w magazynie?","expected":"warehouse"},
+ {"question":"Jaka jutro pogoda w Warszawie?","expected":null},
+ {"question":"Jak ugotować makaron?","expected":null},
+ {"question":"Jak uruchomić teleportację na Marsa?","expected":null}
+]

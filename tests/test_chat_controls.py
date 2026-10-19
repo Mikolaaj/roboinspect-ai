@@ -107,6 +107,23 @@ def test_restricted_requests_never_reach_model(text, monkeypatch):
 
 def test_weak_or_leaking_explanation_uses_public_operator_guide(monkeypatch):
     planner = BielikPlanner()
+    from roboinspect.rag import Retrieval, Source
+
+    class Evidence:
+        def search(self, text, cancel):
+            return Retrieval(
+                sources=[
+                    Source(
+                        id="overview-1",
+                        title="System",
+                        text=GUIDE["overview"],
+                        score=0.9,
+                        url="/guide#overview-1",
+                    )
+                ]
+            )
+
+    planner.retriever = Evidence()
     for reply in [
         "Opis systemu RoboInspect w prostym języku polskim.",
         "Hasło administratora znajduje się w pliku /home/operator/.env. " * 3,

@@ -104,7 +104,7 @@ przekazuje je do Nav2. MLflow zapisuje konfigurację, interpretacje i wyniki pom
 Przygotowanie modelu, dwie komendy uruchomienia i testy opisano w [instrukcji czatu](docs/bielik-chat.md).
 
 Czat zaczyna się powitaniem; „Nowa rozmowa” archiwizuje dotychczasowe wiadomości.
-Wyjaśnienia mają osobny tor i publiczną instrukcję operatora w `src/roboinspect/operator_policy.py`.
+Wyjaśnienia mają osobny tor RAG oparty na publicznej instrukcji w `knowledge/operator/`, ze źródłami przy odpowiedziach.
 Enter wysyła wiadomość, Shift+Enter dodaje linię, a STOP zatrzymuje analizę i ruch robota.
 Szczegóły: [sterowanie czatem i ograniczenia](docs/chat-controls.md).
 
@@ -123,3 +123,7 @@ Pod mapowaniem są przyciski przywrócenia standardowego wyposażenia, usunięci
 ## Inspekcja zdjęć YOLO
 
 Kamera FPV ma 1280×720. Banery P1 do P5 wyświetlają fotografie z lokalnego zestawu COCO128. W sterowaniu są przyciski inspekcji sektorów oraz zmiany zdjęć. Robot odwiedza każdą tablicę i wraca na czerwone pole. Kokpit pokazuje detekcję YOLO11s na RTX i trwałą historię klatek, a czat odpowiada na pytania o zapisane wyniki. [Instalacja, obsługa i ograniczenia](docs/vision-inspection.md), [pochodzenie modeli i zdjęć](docs/third-party/vision.md).
+
+## Lokalny RAG operatora
+
+Bielik wyszukuje fragmenty instrukcji lokalnymi embeddingami na CPU i pokazuje źródła w czacie. Przygotowanie na nowym klonie: `bash scripts/setup_rag.sh`. Potem działa standardowe uruchomienie kokpitu. [Obsługa, architektura i ocena RAG](docs/rag.md).

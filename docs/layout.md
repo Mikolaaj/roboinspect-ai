@@ -20,3 +20,5 @@ Nieaktywna karta ogranicza pobieranie statusu, historii i czatu oraz wyłącza s
 ## Historie w panelach
 
 Kokpit i panel sterowania mają rozwijaną historię detekcji, a bezpośrednio pod nią historię przejazdów i mapowania. Każda historia przewija się we własnym obszarze o ograniczonej wysokości, również na telefonie. W kokpicie bieżący stan robota znajduje się nad historiami. Formularz „Zaplanuj misję” usunięto z panelu; misje nadal można zlecać przyciskami i czatem.
+
+Przycisk „MLflow” w nagłówku panelu sterowania otwiera lokalny panel eksperymentów (http://127.0.0.1:5001/) w nowej karcie. MLflow uruchamia się razem z kokpitem.
