@@ -480,3 +480,7 @@ Mikrofon i Whisper small są wdrożone. Rozpoznany tekst operator sprawdza i wys
 ## Aktualizacja 19.10: RAG
 
 Wdrożono podstawę fazy 8: lokalne wyszukiwanie instrukcji i odpowiedzi Bielika ze źródłami, indeks na CPU, ewaluacja i MLflow. Szczegóły: [rag.md](rag.md). Gotowy YOLO i inspekcje również działają. Następnie SAM, dane/EDA i własny model, a później konteneryzacja oraz deployment.
+
+## Aktualizacja: YOLO + SAM
+
+Inspekcje zapisują teraz maski SAM 2.1 Tiny z ramek YOLO na tej samej klatce. Podgląd i dane są w historii, pomiary w MLflow. Następne prace to dane/EDA, etykiety referencyjne i własny trening. [Instrukcja](sam.md).

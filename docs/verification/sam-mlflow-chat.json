@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "report_id": "df6919a2-ce17-4b3a-9ffa-08b64e5289d9",
+      "panel": "P2",
+      "run_id": "e562ca80cc1c403198c73e68cb2500fb",
+      "params": {
+        "model": "YOLO11s",
+        "device": "cuda:0",
+        "confidence_threshold": "0.3",
+        "segmentation_model": "SAM 2.1 Tiny",
+        "sam_weights_sha256": "3c1e81ca9b037dd39d70a014ddb9a813d6c4c4e12555420db7eaff31689bd4e3"
+      },
+      "metrics": {
+        "detections": 6.0,
+        "inference_seconds": 0.022,
+        "sam_seconds": 0.1337,
+        "sam_masks": 6.0,
+        "sam_gpu_allocated_mib": 336.8,
+        "sam_gpu_peak_allocated_mib": 620.3
+      },
+      "artifacts": [
+        "annotated.jpg",
+        "masks.npz",
+        "masks.png",
+        "segmentation.json",
+        "segmented.jpg"
+      ]
+    },
+    {
+      "report_id": "3cf1ab9c-b144-4d8d-89a3-3f0fbd855a6c",
+      "panel": "P1",
+      "run_id": "7c08147fbb29485fb677e215c11f94c1",
+      "params": {
+        "model": "YOLO11s",
+        "device": "cuda:0",
+        "confidence_threshold": "0.3",
+        "segmentation_model": "SAM 2.1 Tiny",
+        "sam_weights_sha256": "3c1e81ca9b037dd39d70a014ddb9a813d6c4c4e12555420db7eaff31689bd4e3"
+      },
+      "metrics": {
+        "detections": 2.0,
+        "inference_seconds": 0.129,
+        "sam_seconds": 0.497,
+        "sam_masks": 2.0,
+        "sam_gpu_allocated_mib": 336.3,
+        "sam_gpu_peak_allocated_mib": 533.6
+      },
+      "artifacts": [
+        "annotated.jpg",
+        "masks.npz",
+        "masks.png",
+        "segmentation.json",
+        "segmented.jpg"
+      ]
+    }
+  ],
+  "chat": {
+    "id": "d8c9973a-e6d7-48c7-adf8-4a58a488e6a3",
+    "text": "Ile masek zapisano w ostatniej inspekcji sektora A?",
+    "reply": "Ostatnia zapisana inspekcja: 2026-10-19 07:37:09 UTC.\nSektor A, P1: umbrella 1 (95%), person 1 (90%). Liczba wykryć w tej klatce: 2.\nSektor A, P2: bicycle 1 (92%), dog 1 (90%), person 1 (56%), person 2 (49%), person 3 (48%), person 4 (47%). Liczba wykryć w tej klatce: 6.\nLiczba detekcji w zapisanych obserwacjach tej misji: 8. Nie oznacza to liczby unikalnych osób między zdjęciami.\nP1: SAM 2.1 Tiny, status complete, zapisane maski: 2.\nP2: SAM 2.1 Tiny, status complete, zapisane maski: 6.\nMaska opisuje kształt obiektu wskazanego ramką YOLO. Nie potwierdza poprawności klasy ani rozpoznania usterki.\nTo wynik YOLO z zapisanej kamery, nie pewny opis wszystkich obiektów. Procent oznacza pewność detektora. Aktualne zdjęcia mogły się od tego czasu zmienić; raporty znajdziesz w kokpicie.",
+    "status": "answered",
+    "created_at": "2026-10-19T11:05:33.831619+00:00",
+    "mission_id": null,
+    "model": "roboinspect-bielik:q4_k_m",
+    "run_id": "b55fbb635f3a4199957e6ac52b43cf95",
+    "tracking_error": null,
+    "sequence": 37
+  }
+}

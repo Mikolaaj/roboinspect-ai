@@ -127,3 +127,7 @@ Kamera FPV ma 1280×720. Banery P1 do P5 wyświetlają fotografie z lokalnego ze
 ## Lokalny RAG operatora
 
 Bielik wyszukuje fragmenty instrukcji lokalnymi embeddingami na CPU i pokazuje źródła w czacie. Przygotowanie na nowym klonie: `bash scripts/setup_rag.sh`. Potem działa standardowe uruchomienie kokpitu. [Obsługa, architektura i ocena RAG](docs/rag.md).
+
+## Segmentacja SAM
+
+Inspekcje używają YOLO11s i SAM 2.1 Tiny na tej samej klatce. W historii przełączysz ramki YOLO na maski i pobierzesz dane do dalszej analizy. Przygotowanie: `bash scripts/setup_sam.sh`. [Obsługa, dane, pomiary i ograniczenia](docs/sam.md).

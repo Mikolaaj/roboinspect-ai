@@ -391,12 +391,19 @@ def create_app(
 
     @app.get("/api/inspections/{report_id}/{name}")
     def inspection_image(report_id: UUID, name: str):
-        if name not in ("raw.jpg", "annotated.jpg"):
+        if name not in ("raw.jpg", "annotated.jpg", "segmented.jpg", "masks.png", "masks.npz"):
             raise HTTPException(404, "Nieznany obraz")
         path = ROOT / "data/inspections" / str(report_id) / name
         if not path.is_file():
             raise HTTPException(404, "Brak obrazu")
-        return FileResponse(path, media_type="image/jpeg")
+        return FileResponse(
+            path,
+            media_type="image/png"
+            if name.endswith(".png")
+            else "application/octet-stream"
+            if name.endswith(".npz")
+            else "image/jpeg",
+        )
 
     def vision_request(path):
         import os

@@ -142,3 +142,7 @@ Przed pierwszym uruchomieniem inspekcji wykonaj `bash scripts/setup_vision.sh`. 
 ## RAG operatora
 
 Po przygotowaniu Bielika wykonaj jednorazowo `bash scripts/setup_rag.sh`. Następnie uruchamiaj standardowo `bash scripts/run_cockpit.sh`. Szczegóły, źródła i sprawdzenie MLflow: [rag.md](rag.md).
+
+## Segmentacja SAM
+
+Przy istniejącym YOLO wykonaj jednorazowo `bash scripts/setup_sam.sh`. Nowe przygotowanie `setup_vision.sh` obejmuje ten krok. Start i zatrzymanie pozostają bez zmian. [Instrukcja SAM](sam.md).

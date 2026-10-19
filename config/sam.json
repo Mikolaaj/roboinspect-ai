@@ -1,0 +1,9 @@
+{
+  "model": "SAM 2.1 Tiny",
+  "weights": "sam2.1_t.pt",
+  "sha256": "3c1e81ca9b037dd39d70a014ddb9a813d6c4c4e12555420db7eaff31689bd4e3",
+  "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/sam2.1_t.pt",
+  "image_size": 1024,
+  "prompt_batch": 4,
+  "alpha": 0.38
+}

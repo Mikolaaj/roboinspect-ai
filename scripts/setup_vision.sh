@@ -10,3 +10,5 @@ echo '85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5  data/vis
 curl -L --fail --retry 2 https://github.com/ultralytics/assets/releases/download/v0.0.0/coco128.zip -o data/vision/coco128.zip
 echo '61e5e3028863d8ffc3b81d6a514603954889f0edd5e4b44c4ce60b2da99aeb8e  data/vision/coco128.zip' | sha256sum --check
 .venv/bin/python scripts/setup_vision_assets.py
+
+bash scripts/setup_sam.sh

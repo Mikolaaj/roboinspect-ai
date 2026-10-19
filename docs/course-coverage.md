@@ -76,3 +76,7 @@ Gotowy YOLO11s na lokalnej RTX przetwarza rzeczywisty obraz kamery Gazebo. Pydan
 ## Aktualizacja 19.10: RAG operatora
 
 Dodano lokalne embeddingi EmbeddingGemma na CPU, publiczny zbiór instrukcji, fragmentację, wersjonowany indeks wektorowy, wyszukiwanie i źródła w odpowiedziach Bielika. Metryki i ewaluacja są w MLflow. [Zakres i ograniczenia](rag.md). Gotowy YOLO oraz RAG są wdrożone; SAM, EDA, własny trening, Optuna, Docker i Kubernetes pozostają do wykonania. Historyczne tabele powyżej opisują wcześniejszy stan.
+
+## Aktualizacja: segmentacja SAM
+
+Dodano gotowy SAM 2.1 Tiny, prompty ramkami YOLO, osobne maski obiektów, walidację Pydantic, trwałe artefakty i pomiary MLflow. [Szczegóły](sam.md). Ten etap pokrywa integrację segmentacji; własny trening i pomiary jakości względem ręcznych masek pozostają do wykonania.

@@ -1,0 +1,1305 @@
+{
+  "llm_loaded_after_inspection": {
+    "models": [
+      {
+        "name": "roboinspect-bielik:q4_k_m",
+        "model": "roboinspect-bielik:q4_k_m",
+        "size": 3181463469,
+        "digest": "1cfd8cc5f82af5dc4588211deaed515594088242d326c7ec115c2a12e267440c",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "4.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-19T13:19:38.970313817+02:00",
+        "size_vram": 3181463469,
+        "context_length": 4096,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "passed": true,
+  "sector": "C",
+  "mission": {
+    "id": "82eaf08c-6750-427c-a5e8-d7b3d5c4c261",
+    "name": "Inspekcja obrazów sektora C",
+    "scenario": "normal",
+    "status": "succeeded",
+    "steps": [
+      {
+        "action": "navigate",
+        "target": "C",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "8ba86da6-1d02-432c-a270-24240f7b391e"
+      },
+      {
+        "action": "navigate",
+        "target": "P5",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "da341bc8-40ed-4dc0-838c-08cac3b9c257"
+      },
+      {
+        "action": "inspect",
+        "target": "P5",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "25c1d3c9-8eb4-4ccd-99d2-b6aab9f0a38b"
+      },
+      {
+        "action": "navigate",
+        "target": "C",
+        "timeout_seconds": 300,
+        "status": "succeeded",
+        "execution_id": "15f5e753-a111-4d05-99b3-93b6cc1af6e7"
+      }
+    ],
+    "current_step": 3,
+    "message": "Wszystkie kroki misji wykonane",
+    "created_at": "2026-10-19T11:04:39.039848Z",
+    "updated_at": "2026-10-19T11:06:35.622433Z"
+  },
+  "reports": [
+    {
+      "detections": [
+        {
+          "label": "bear",
+          "instance": 1,
+          "confidence": 0.9458,
+          "xyxy": [
+            596.0,
+            246.3,
+            790.7,
+            423.0
+          ]
+        },
+        {
+          "label": "tv",
+          "instance": 1,
+          "confidence": 0.3074,
+          "xyxy": [
+            386.0,
+            83.3,
+            919.3,
+            606.0
+          ]
+        }
+      ],
+      "counts": {
+        "bear": 1,
+        "tv": 1
+      },
+      "total": 2,
+      "width": 1280,
+      "height": 720,
+      "inference_seconds": 0.256,
+      "model": "YOLO11s",
+      "device": "cuda:0",
+      "camera_stamp_s": 136.0,
+      "camera_sequence": 672,
+      "warehouse": {
+        "mode": "random",
+        "layout_id": "random-cbf28cf994ff",
+        "seed": 1778666227,
+        "movable_count": 8
+      },
+      "position": {
+        "x": 9.904858141566715,
+        "y": 6.603402020888277
+      },
+      "segmentation": {
+        "model": "SAM 2.1 Tiny",
+        "weights_sha256": "3c1e81ca9b037dd39d70a014ddb9a813d6c4c4e12555420db7eaff31689bd4e3",
+        "device": "cuda:0",
+        "status": "complete",
+        "masks": [
+          {
+            "detection_index": 1,
+            "pixels": 21169,
+            "image_fraction": 0.02297,
+            "predicted_iou": 0.9727,
+            "color": [
+              66,
+              211,
+              146
+            ]
+          },
+          {
+            "detection_index": 2,
+            "pixels": 259308,
+            "image_fraction": 0.281367,
+            "predicted_iou": 0.9696,
+            "color": [
+              255,
+              185,
+              60
+            ]
+          }
+        ],
+        "seconds": 0.7787,
+        "message": "Maski z ramek YOLO; wynik nie jest oceną jakości względem etykiet",
+        "gpu_allocated_mib": 336.3,
+        "gpu_peak_allocated_mib": 533.5,
+        "image_url": "/api/inspections/feb709c0-ae59-41ee-9b19-571d06f73040/segmented.jpg",
+        "mask_url": "/api/inspections/feb709c0-ae59-41ee-9b19-571d06f73040/masks.png",
+        "data_url": "/api/inspections/feb709c0-ae59-41ee-9b19-571d06f73040/masks.npz"
+      },
+      "id": "feb709c0-ae59-41ee-9b19-571d06f73040",
+      "mission_id": "82eaf08c-6750-427c-a5e8-d7b3d5c4c261",
+      "execution_id": "25c1d3c9-8eb4-4ccd-99d2-b6aab9f0a38b",
+      "panel": "P5",
+      "sector": "C",
+      "created_at": "2026-10-19T11:06:35.262883+00:00",
+      "image_url": "/api/inspections/feb709c0-ae59-41ee-9b19-571d06f73040/annotated.jpg",
+      "raw_url": "/api/inspections/feb709c0-ae59-41ee-9b19-571d06f73040/raw.jpg"
+    }
+  ],
+  "gpu_baseline": {
+    "used_mib": 3551.0,
+    "total_mib": 8188.0,
+    "utilization_percent": 1.0
+  },
+  "gpu_peak_sampled_mib": 4274.0,
+  "gpu_samples": [
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 2.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 2.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 2.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3551.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 2.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 3.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 0.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3552.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 4.0
+    },
+    {
+      "used_mib": 3566.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    },
+    {
+      "used_mib": 3730.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 5.0
+    },
+    {
+      "used_mib": 4274.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 33.0
+    },
+    {
+      "used_mib": 4274.0,
+      "total_mib": 8188.0,
+      "utilization_percent": 1.0
+    }
+  ],
+  "llm_loaded_before_inspection": {
+    "models": [
+      {
+        "name": "roboinspect-bielik:q4_k_m",
+        "model": "roboinspect-bielik:q4_k_m",
+        "size": 3181463469,
+        "digest": "1cfd8cc5f82af5dc4588211deaed515594088242d326c7ec115c2a12e267440c",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "4.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-19T13:19:38.970313817+02:00",
+        "size_vram": 3181463469,
+        "context_length": 4096,
+        "runner": "llamacpp"
+      }
+    ]
+  }
+}

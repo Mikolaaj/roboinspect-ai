@@ -15,6 +15,7 @@ from sqlalchemy import JSON, Column, String, Table, select
 from .banners import PANELS
 from .contracts import ConflictError, MissionPlan, StrictModel, now
 from .operator_policy import normalized
+from .segmentation import SegmentationResult, validate_artifacts
 from .store import metadata
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -69,6 +70,10 @@ class CaptureResult(StrictModel):
     camera_sequence: int = Field(ge=1)
     warehouse: dict | None
     position: dict
+    segmentation: SegmentationResult | None = None
+    segmented_jpeg: str | None = Field(default=None, max_length=6000000)
+    mask_png: str | None = Field(default=None, max_length=6000000)
+    masks_npz: str | None = Field(default=None, max_length=6000000)
 
     @model_validator(mode="after")
     def consistent_counts(self):
@@ -82,6 +87,34 @@ class CaptureResult(StrictModel):
                 raise ValueError("Ramka poza obrazem")
         if self.total != len(self.detections) or self.counts != observed:
             raise ValueError("Niezgodna liczba wykryć")
+        if self.segmentation:
+            seg = self.segmentation
+            ids = [m.detection_index for m in seg.masks]
+            if len(ids) != len(set(ids)) or any(i > self.total for i in ids):
+                raise ValueError("Maska bez odpowiadającego wykrycia")
+            for mask in seg.masks:
+                if (
+                    mask.pixels > self.width * self.height
+                    or abs(mask.image_fraction - mask.pixels / (self.width * self.height)) > 0.00001
+                ):
+                    raise ValueError("Niezgodna powierzchnia maski")
+                if any(c < 0 or c > 255 for c in mask.color):
+                    raise ValueError("Nieprawidłowy kolor maski")
+            if seg.status == "complete" and (not self.total or len(ids) != self.total):
+                raise ValueError("Niekompletne maski")
+            if seg.status == "no_detections" and self.total:
+                raise ValueError("Wykrycia bez próby segmentacji")
+            if seg.status not in ("complete", "partial") and ids:
+                raise ValueError("Maski przy nieudanej segmentacji")
+            artifacts = [self.segmented_jpeg, self.mask_png, self.masks_npz]
+            if (
+                seg.status in ("complete", "partial") and not all(a is not None for a in artifacts)
+            ) or (
+                seg.status not in ("complete", "partial") and any(a is not None for a in artifacts)
+            ):
+                raise ValueError("Niezgodne artefakty segmentacji")
+        elif any(a is not None for a in [self.segmented_jpeg, self.mask_png, self.masks_npz]):
+            raise ValueError("Artefakty bez segmentacji")
         return self
 
 
@@ -137,6 +170,33 @@ class InspectionService:
         directory.mkdir(parents=True)
         for field, name in [("raw_jpeg", "raw.jpg"), ("annotated_jpeg", "annotated.jpg")]:
             (directory / name).write_bytes(base64.b64decode(result.pop(field), validate=True))
+        overlay = result.pop("segmented_jpeg", None)
+        index_mask = result.pop("mask_png", None)
+        packed = result.pop("masks_npz", None)
+        if overlay is not None:
+            overlay, index_mask, packed = [
+                base64.b64decode(data, validate=True) for data in (overlay, index_mask, packed)
+            ]
+            validate_artifacts(
+                overlay,
+                index_mask,
+                packed,
+                result["width"],
+                result["height"],
+                result["total"],
+                result["segmentation"]["masks"],
+            )
+            for name, data in [
+                ("segmented.jpg", overlay),
+                ("masks.png", index_mask),
+                ("masks.npz", packed),
+            ]:
+                (directory / name).write_bytes(data)
+            result["segmentation"].update(
+                image_url=f"/api/inspections/{result['id']}/segmented.jpg",
+                mask_url=f"/api/inspections/{result['id']}/masks.png",
+                data_url=f"/api/inspections/{result['id']}/masks.npz",
+            )
         result["image_url"] = f"/api/inspections/{result['id']}/annotated.jpg"
         result["raw_url"] = f"/api/inspections/{result['id']}/raw.jpg"
         return result
@@ -190,6 +250,26 @@ class InspectionService:
             client.log_artifact(
                 run.info.run_id, str(ROOT / "data/inspections" / result["id"] / "annotated.jpg")
             )
+            segmentation = result.get("segmentation")
+            if segmentation:
+                client.log_param(run.info.run_id, "segmentation_model", segmentation["model"])
+                client.log_param(
+                    run.info.run_id, "sam_weights_sha256", segmentation["weights_sha256"]
+                )
+                client.set_tag(run.info.run_id, "sam_status", segmentation["status"])
+                for key, value in {
+                    "sam_seconds": segmentation["seconds"],
+                    "sam_masks": len(segmentation["masks"]),
+                    "sam_gpu_allocated_mib": segmentation["gpu_allocated_mib"],
+                    "sam_gpu_peak_allocated_mib": segmentation["gpu_peak_allocated_mib"],
+                }.items():
+                    client.log_metric(run.info.run_id, key, value)
+                client.log_dict(run.info.run_id, segmentation, "segmentation.json")
+                if segmentation.get("image_url"):
+                    for name in ["segmented.jpg", "masks.png", "masks.npz"]:
+                        client.log_artifact(
+                            run.info.run_id, str(ROOT / "data/inspections" / result["id"] / name)
+                        )
             client.set_terminated(run.info.run_id)
         except Exception:
             import logging
@@ -212,6 +292,10 @@ def inspection_question(text):
         re.search(
             r"widzial|wykryl|wykryto|rozpoznal|ile.*(?:osob|ludzi|zwierz)|wynik.*inspek|jakie.*zdjec|co.*(?:zdjec|baner|tablic)",
             value,
+        )
+        or (
+            re.search(r"mask|masek|segment|sam\b", value)
+            and re.search(r"sektor|stref|ostatni|p[1-5]\b", value)
         )
         or ("detekcj" in value and re.search(r"sektor|stref|ile|ostatni", value))
     )
@@ -266,6 +350,18 @@ def evidence_answer(store, text):
     if re.search(r"osob|ludz|czlowiek", value):
         people = sum(r["counts"].get("person", 0) for r in rows)
         lines.append(f"Liczba wykryć klasy person (człowiek): {people}.")
+    if re.search(r"mask|masek|segment|sam\b", value):
+        for row in reversed(rows):
+            segmentation = row.get("segmentation")
+            if not segmentation:
+                lines.append(f"{row['panel']}: starsza obserwacja bez zapisanej segmentacji.")
+            else:
+                lines.append(
+                    f"{row['panel']}: {segmentation['model']}, status {segmentation['status']}, zapisane maski: {len(segmentation['masks'])}."
+                )
+        lines.append(
+            "Maska opisuje kształt obiektu wskazanego ramką YOLO. Nie potwierdza poprawności klasy ani rozpoznania usterki."
+        )
     record = store.get(mission)
     if record and record.status.value != "succeeded":
         lines.append(

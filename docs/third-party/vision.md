@@ -19,3 +19,7 @@ Pochodzenie: obrazy COCO train2017, wybrane przez oficjalny przykład COCO128. I
 Fotografie COCO pochodzą z Flickr; poszczególne zdjęcia zachowują własne licencje, odrębne od licencji adnotacji i kodu. Nie deklarujemy, że wszystkie są w domenie publicznej. Pobierane są lokalnie jako przykłady edukacyjne; oryginały, pochodne tekstury i klatki inspekcji nie trafiają do Git. Manifest `data/vision/photos.json` zapisuje identyfikatory COCO, sumy plików i odnośnik do strony źródłowego zdjęcia w COCO Explorer. Do dalszej publikacji fotografii należy sprawdzić właściwą licencję źródłowego zdjęcia i wymagane przypisanie autorstwa.
 
 Kod wyboru i przygotowania: `scripts/setup_vision_assets.py`. Nie używamy etykiet COCO do wytwarzania odpowiedzi detektora; etykiety są użyte wyłącznie do wyboru różnorodnego zestawu fotografii podczas przygotowania.
+
+## SAM 2.1 Tiny
+
+Wagi z oficjalnego wydania Ultralytics v8.3.0: sam2.1_t.pt, SHA256 `3c1e81ca9b037dd39d70a014ddb9a813d6c4c4e12555420db7eaff31689bd4e3`. [Opis integracji i licencji](../sam.md).

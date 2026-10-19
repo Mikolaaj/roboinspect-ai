@@ -19,6 +19,7 @@ from fastapi.responses import Response
 from PIL import Image
 from pydantic import BaseModel, ConfigDict
 from ultralytics import YOLO
+from sam_segmenter import Segmenter
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
@@ -35,6 +36,7 @@ if (
     raise RuntimeError("Niezgodna suma kontrolna modelu YOLO11s")
 model = YOLO(str(ROOT / "data/vision/yolo11s.pt"))
 device = 0 if torch.cuda.is_available() else "cpu"
+segmenter = Segmenter(device)
 lock = threading.Lock()
 state_lock = threading.Lock()
 stop = threading.Event()
@@ -49,7 +51,7 @@ base = f"http://127.0.0.1:{args.operator_port}"
 token = os.environ["ROBOINSPECT_RUNTIME_TOKEN"]
 
 
-def predict(data, size):
+def predict(data, size, segment=False):
     picture = Image.open(io.BytesIO(data)).convert("RGB")
     started = time.monotonic()
     with lock:
@@ -80,13 +82,19 @@ def predict(data, size):
     annotated = Image.fromarray(result.plot()[:, :, ::-1])
     output = io.BytesIO()
     annotated.save(output, format="JPEG", quality=90)
+    detection_seconds = round(time.monotonic() - started, 3)
+    segmentation = {}
+    if segment:
+        with lock:
+            segmentation = segmenter.run(picture, boxes)
     return {
+        **segmentation,
         "detections": boxes,
         "counts": counts,
         "total": len(boxes),
         "width": picture.width,
         "height": picture.height,
-        "inference_seconds": round(time.monotonic() - started, 3),
+        "inference_seconds": detection_seconds,
         "model": "YOLO11s",
         "device": "cuda:0" if device == 0 else "cpu",
     }, output.getvalue()
@@ -158,7 +166,10 @@ class Capture(BaseModel):
 @app.get("/latest")
 def current():
     with state_lock:
-        return dict(latest)
+        return dict(
+            latest,
+            sam={"available": segmenter.available, "model": "SAM 2.1 Tiny", "mode": "inspection"},
+        )
 
 
 @app.get("/frame.jpg")
@@ -166,7 +177,11 @@ def frame():
     with state_lock:
         if jpeg is None or time.time() - latest.get("at", 0) > 4:
             raise HTTPException(503, "Oczekiwanie na detektor")
-        return Response(jpeg, media_type="image/jpeg", headers={"X-Frame-Sequence":str(latest.get("camera_sequence",0))})
+        return Response(
+            jpeg,
+            media_type="image/jpeg",
+            headers={"X-Frame-Sequence": str(latest.get("camera_sequence", 0))},
+        )
 
 
 @app.post("/capture")
@@ -192,7 +207,7 @@ def capture(body: Capture):
             or abs(math.atan2(math.sin(heading - point[2]), math.cos(heading - point[2]))) > 0.35
         ):
             raise HTTPException(409, "Robot nie patrzy w kierunku wskazanej tablicy")
-        result, image = predict(data, 960)
+        result, image = predict(data, 960, segment=True)
     result.update(
         raw_jpeg=base64.b64encode(data).decode(),
         annotated_jpeg=base64.b64encode(image).decode(),

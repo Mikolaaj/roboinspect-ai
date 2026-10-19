@@ -63,7 +63,8 @@ def help_topic(text):
     ):
         pass
     elif re.search(r"\b(?:co|czy)\b", value) and re.search(
-        r"system|robot|slam|nav2|kamer|mapow|mlflow|potraf", value
+        r"system|robot|slam|nav2|kamer|mapow|mlflow|potraf|sam|segment|mask|masek|yolo|inspek",
+        value,
     ):
         pass
     else:
@@ -72,7 +73,10 @@ def help_topic(text):
         r"losow|losuj|ustawien\w*\s+magaz|usun\w*\s+(?:wszystkie\s+)?przeszkod|wyposaz", value
     ):
         return "warehouse"
-    if re.search(r"inspekcj|detekcj|yolo|baner|zdjeci|wykryw|zielon.*pol|pol.*obserw", value):
+    if re.search(
+        r"inspekcj|detekcj|yolo|baner|zdjeci|wykryw|segment|mask|masek|sam\b|zielon.*pol|pol.*obserw",
+        value,
+    ):
         return "inspection"
     if re.search(r"mikrofon|whisper|glos|nagran|mowic", value):
         return "voice"
