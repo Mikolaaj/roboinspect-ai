@@ -1,0 +1,24 @@
+groups:
+  - name: roboinspect
+    rules:
+      - alert: GatewayUnavailable
+        expr: up{job="roboinspect-gateway"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Brama HTTP jest niedostępna
+      - alert: RobotExecutorUnavailable
+        expr: roboinspect_executor_ready == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Lokalny wykonawca ROS jest niedostępny
+      - alert: GatewayErrors
+        expr: rate(roboinspect_http_errors_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Wzrost liczby błędów HTTP

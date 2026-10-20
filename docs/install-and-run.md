@@ -154,3 +154,7 @@ Po przygotowaniu wizji uruchamiaj kokpit standardowo. Warianty tablic i zapis pr
 ## Pilotażowy klasyfikator stanu tablic
 
 Po przygotowaniu środowiska wizji można wykonać `.venv/bin/python scripts/train_classifier.py --epochs 25 --seed 42`. Trening wymaga zatwierdzonych próbek z wszystkimi klasami w każdej części i lokalnej CUDA. Nie wymaga działającej symulacji. Wynik w panelu: Dane do modelu usterek → Wyniki treningu klasyfikatora. [Pełna instrukcja i test pojedynczego obrazu](classifier-training.md).
+
+## Alternatywny tryb Kubernetes
+
+Po zatrzymaniu Compose przygotuj narzędzia i uruchom `bash scripts/run_kubernetes.sh`. Instrukcja startu, zatrzymania, przechowywania danych i ograniczenia lokalnego klastra: [kubernetes.md](kubernetes.md). Nie uruchamiaj równocześnie Compose i Kubernetes.

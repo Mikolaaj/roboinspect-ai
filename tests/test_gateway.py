@@ -60,3 +60,37 @@ def test_gateway_rewrites_valid_origin_for_local_executor():
             ).status_code
             == 200
         )
+
+
+def test_metrics_report_failures_and_executor_readiness():
+    def upstream(request):
+        if request.url.path == "/health":
+            return httpx.Response(200, json={"executor_healthy": True})
+        return httpx.Response(503, json={"error": "unavailable"})
+
+    with TestClient(
+        module.create_app(httpx.MockTransport(upstream)), base_url="http://localhost:8765"
+    ) as client:
+        client.get("/api/status")
+        text = client.get("/metrics").text
+        assert "roboinspect_http_requests_total 1" in text
+        assert "roboinspect_http_errors_total 1" in text
+        assert "roboinspect_executor_ready 1" in text
+        assert "roboinspect_http_active_requests 0" in text
+        assert "unavailable" not in text
+
+
+def test_bridge_requires_token_and_replaces_untrusted_outbound_token(monkeypatch):
+    monkeypatch.setenv("ROBOINSPECT_BRIDGE_TOKEN", "expected")
+    monkeypatch.setenv("ROBOINSPECT_UPSTREAM_TOKEN", "upstream-secret")
+
+    def upstream(request):
+        assert request.headers["x-bridge-token"] == "upstream-secret"
+        return httpx.Response(200, json={"ok": True})
+
+    with TestClient(
+        module.create_app(httpx.MockTransport(upstream)), base_url="http://localhost:8765"
+    ) as client:
+        assert client.get("/health/live").status_code == 403
+        assert client.get("/api/status", headers={"x-bridge-token": "wrong"}).status_code == 403
+        assert client.get("/api/status", headers={"x-bridge-token": "expected"}).status_code == 200

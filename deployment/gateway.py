@@ -1,6 +1,9 @@
 """Local HTTP gateway. ROS and the sole mission executor remain on the host."""
 
 import os
+import secrets
+import threading
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -39,6 +42,73 @@ def create_app(transport=None):
 
     app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 
+    bridge_token = os.environ.get("ROBOINSPECT_BRIDGE_TOKEN", "")
+    upstream_token = os.environ.get("ROBOINSPECT_UPSTREAM_TOKEN", "")
+    allowed_hosts = set(
+        os.environ.get("ROBOINSPECT_ALLOWED_HOSTS", "127.0.0.1:8765,localhost:8765").split(",")
+    )
+
+    @app.middleware("http")
+    async def bridge_auth(request: Request, call_next):
+        if bridge_token and not secrets.compare_digest(
+            request.headers.get("x-bridge-token", ""), bridge_token
+        ):
+            return JSONResponse({"error": "Bridge authentication required"}, status_code=403)
+        return await call_next(request)
+
+    def backend_headers():
+        return {"X-Bridge-Token": upstream_token} if upstream_token else {}
+
+    counters = {"requests": 0, "errors": 0, "seconds": 0.0, "active": 0}
+    lock = threading.Lock()
+
+    @app.middleware("http")
+    async def observe(request: Request, call_next):
+        if request.url.path in {"/metrics", "/health/live", "/health/ready"}:
+            return await call_next(request)
+        start = time.monotonic()
+        with lock:
+            counters["active"] += 1
+        failed = False
+        try:
+            response = await call_next(request)
+            failed = response.status_code >= 500
+            return response
+        except Exception:
+            failed = True
+            raise
+        finally:
+            with lock:
+                counters["requests"] += 1
+                counters["errors"] += int(failed)
+                counters["seconds"] += time.monotonic() - start
+                counters["active"] -= 1
+
+    @app.get("/metrics")
+    async def metrics(request: Request):
+        from fastapi.responses import PlainTextResponse
+
+        try:
+            health = await request.app.state.client.get(
+                UPSTREAM + "/health", timeout=3, headers=backend_headers()
+            )
+            ready = health.is_success and health.json().get("executor_healthy") is True
+        except (httpx.HTTPError, ValueError):
+            ready = False
+        with lock:
+            snapshot = dict(counters)
+        values = {
+            "roboinspect_http_requests_total": ("counter", snapshot["requests"]),
+            "roboinspect_http_errors_total": ("counter", snapshot["errors"]),
+            "roboinspect_http_headers_seconds_total": ("counter", snapshot["seconds"]),
+            "roboinspect_http_active_requests": ("gauge", snapshot["active"]),
+            "roboinspect_executor_ready": ("gauge", int(ready)),
+        }
+        body = "".join(
+            f"# TYPE {name} {kind}\n{name} {value}\n" for name, (kind, value) in values.items()
+        )
+        return PlainTextResponse(body, media_type="text/plain; version=0.0.4")
+
     @app.get("/health/live")
     def live():
         return {"service": "roboinspect-gateway"}
@@ -46,7 +116,9 @@ def create_app(transport=None):
     @app.get("/health/ready")
     async def ready(request: Request):
         try:
-            response = await request.app.state.client.get(UPSTREAM + "/health")
+            response = await request.app.state.client.get(
+                UPSTREAM + "/health", headers=backend_headers()
+            )
             healthy = response.is_success and response.json().get("executor_healthy") is True
         except (httpx.HTTPError, ValueError):
             healthy = False
@@ -55,7 +127,7 @@ def create_app(transport=None):
     @app.api_route("/{path:path}", methods=["GET", "POST"])
     async def proxy(path: str, request: Request):
         host = request.headers.get("host", "")
-        if host not in {"127.0.0.1:8765", "localhost:8765"}:
+        if host not in allowed_hosts:
             return JSONResponse({"error": "Host not allowed"}, status_code=403)
         if path.startswith("api/internal"):
             return JSONResponse({"error": "Private endpoint"}, status_code=403)
@@ -71,8 +143,9 @@ def create_app(transport=None):
         headers = {
             k: v
             for k, v in request.headers.items()
-            if k.lower() not in HOP | {"host", "origin", "x-runtime-token"}
+            if k.lower() not in HOP | {"host", "origin", "x-runtime-token", "x-bridge-token"}
         }
+        headers.update(backend_headers())
         url = UPSTREAM + "/" + path
         if request.url.query:
             url += "?" + request.url.query

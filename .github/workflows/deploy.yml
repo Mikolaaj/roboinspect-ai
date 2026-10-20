@@ -1,0 +1,34 @@
+name: Deploy local Kubernetes
+on:
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: Full SHA of a published and tested main commit
+        required: true
+      rollback:
+        description: Restore previous deployment revisions
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: roboinspect-local-deployment
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, linux, roboinspect-deploy]
+    environment: local-robot
+    timeout-minutes: 15
+    steps:
+      - name: Update explicitly configured local installation
+        env:
+          REVISION: ${{ inputs.revision }}
+          ROLLBACK: ${{ inputs.rollback }}
+          PROJECT_ROOT: ${{ vars.ROBOINSPECT_ROOT }}
+        run: |
+          test -n "$PROJECT_ROOT"
+          cd "$PROJECT_ROOT"
+          args=(--revision "$REVISION")
+          if [[ "$ROLLBACK" == true ]]; then args+=(--rollback); fi
+          .venv/bin/python scripts/deploy_kubernetes.py "${args[@]}"

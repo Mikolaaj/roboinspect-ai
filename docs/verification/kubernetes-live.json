@@ -1,0 +1,26 @@
+{
+  "ready": {
+    "ready": true
+  },
+  "frames": {
+    "fpv": {
+      "bytes": 52129,
+      "width": 1280,
+      "height": 720
+    },
+    "follow": {
+      "bytes": 35639,
+      "width": 640,
+      "height": 360
+    },
+    "overhead": {
+      "bytes": 49172,
+      "width": 640,
+      "height": 480
+    }
+  },
+  "mission_id": "7b4ebae2-5dba-4c5b-9454-476f779d488a",
+  "mission_state": "succeeded",
+  "metrics_ready": true,
+  "gateway_pod_replacement_recovered": true
+}

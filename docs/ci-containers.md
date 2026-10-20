@@ -35,3 +35,7 @@ Dokumentacja: [artefakty GitHub Actions](https://docs.github.com/actions/configu
 ## Wynik lokalny 20.10.2026
 
 Oba obrazy zbudowano i uruchomiono. Test HTTP oraz odczyt metryki i artefaktu MLflow po usunięciu i ponownym utworzeniu kontenerów zakończyły się sukcesem. Raport: [compose-ci.json](verification/compose-ci.json). Pełny zestaw aplikacji: 193 testy Python, testy JavaScript i kontrole Ruff przeszły. Pipeline na GitHub wymaga wysłania tych zmian do repozytorium.
+
+## Rozszerzenie pipeline
+
+Dodano osobny job `kubernetes`, który tworzy lokalny kind i sprawdza storage, monitoring i odzyskanie po błędnym obrazie. Publikacja `publish` zależy od sukcesu `test`, `containers` i `kubernetes`; działa wyłącznie dla push do main. Szczegóły: [wydania i CD](releases-and-cd.md).

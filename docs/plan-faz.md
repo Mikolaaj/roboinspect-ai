@@ -504,3 +504,7 @@ Dodano Compose, kontener panelu/bramy HTTP, kontener MLflow i skrypty start/stop
 ### CI kontenerów gotowe lokalnie
 
 Workflow rozszerzono o budowanie obrazów, test HTTP oraz weryfikację trwałości MLflow po odtworzeniu kontenerów. Lokalny test przeszedł; raport `docs/verification/compose-ci.json`. Uruchomienie workflow na GitHub nastąpi po push. Następny zakres: publikacja wersjonowanych obrazów, potem Kubernetes i CD.
+
+## Etap po CI kontenerów: wydania, Kubernetes i monitoring
+
+Dodano publikację GHCR po testach, lokalny klaster kind, Deployment/Service/ConfigMap/Secret/PV/PVC, start i stop całej aplikacji, skrypt aktualizacji i automatyczny rollback obrazów, Prometheus oraz instrukcje CD i prezentacji. Weryfikację i ograniczenia opisują `kubernetes.md`, `releases-and-cd.md`, `monitoring.md` i `demo.md`. Publikacja wymaga push; ręczne CD z GitHub wymaga dedykowanego runnera. Własny klasyfikator i rozwój zbiorów pozostają odłożone.

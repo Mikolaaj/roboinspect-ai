@@ -1,0 +1,8 @@
+{
+  "kubernetes_ready": true,
+  "http": true,
+  "mlflow_pvc_persistence": true,
+  "prometheus_scrape": true,
+  "failed_rollout_recovered": true,
+  "ros_tested": false
+}

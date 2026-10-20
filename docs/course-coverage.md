@@ -96,3 +96,9 @@ Dodano porównanie klasycznego modelu ridge z dostrajanym ResNet18 na GPU, prepr
 ### CI obrazów Docker
 
 GitHub Actions obejmuje testy aplikacji, walidację Compose, budowanie obrazów oraz izolowany test HTTP i trwałości runu/artefaktu MLflow po odtworzeniu kontenerów. Pokrywa to konteneryzację i automatyczną weryfikację integracji. Publikacja obrazów, CD, Kubernetes i rollback pozostają kolejnymi etapami. Szczegóły: [ci-containers.md](ci-containers.md).
+
+## Etap wydań i Kubernetes
+
+Dodano publikowanie obrazów GHCR po testach, tagi według SHA, SBOM i provenance; lokalny klaster kind z Deployment, Service, ConfigMap, Secret, PV/PVC, limitami zasobów i sondami; skrypt aktualizacji oraz automatyczny powrót do poprzednich obrazów; Prometheus z metrykami i regułami alertów. Workflow ręcznego CD wymaga skonfigurowania dedykowanego runnera GitHub. ROS, symulacja i modele GPU nadal działają lokalnie. Trening własnego modelu pozostaje odłożony.
+
+Nie oznacza to pełnego pokrycia całego kursu: wdrożenie jest lokalne i jednowęzłowe, a część treningowa wymaga dalszej pracy. Szczegóły: [Kubernetes](kubernetes.md), [wydania i CD](releases-and-cd.md), [monitoring](monitoring.md).

@@ -14,19 +14,20 @@ if [[ -f artifacts/cockpit-runtime.json ]]; then
   echo 'Najpierw zatrzymaj lokalny kokpit: bash scripts/stop_cockpit.sh'
   exit 1
 fi
+compose=(docker compose -f compose.yaml -f compose.monitoring.yaml)
 mkdir -p data/mlflow-artifacts artifacts
 # Build before starting any owned processes.
-docker compose build
-docker compose up -d mlflow
+"${compose[@]}" build
+"${compose[@]}" up -d mlflow
 cleanup() {
   trap - EXIT INT TERM
   bash scripts/stop_cockpit.sh
-  docker compose down
+  "${compose[@]}" down
 }
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
-docker compose up -d gateway
+"${compose[@]}" up -d gateway prometheus
 bash scripts/run_cockpit.sh --port 8767 --external-mlflow --no-browser "$@" &
 runtime_pid=$!
 for ((i=0; i<240; i++)); do

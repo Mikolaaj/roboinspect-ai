@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-.venv/bin/ruff check src tests
-.venv/bin/ruff format --check src tests
+.venv/bin/ruff check src tests deployment/gateway.py deployment/ci_operator.py scripts/kube_common.py scripts/render_kubernetes.py scripts/run_kubernetes.py scripts/forward_kubernetes.py scripts/deploy_kubernetes.py scripts/check_kubernetes.py
+.venv/bin/ruff format --check src tests deployment/gateway.py deployment/ci_operator.py scripts/kube_common.py scripts/render_kubernetes.py scripts/run_kubernetes.py scripts/forward_kubernetes.py scripts/deploy_kubernetes.py scripts/check_kubernetes.py
 node --check operator/web/vision.js
 node --check operator/web/activity.js
 node --check operator/web/app.js

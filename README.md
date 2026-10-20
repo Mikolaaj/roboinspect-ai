@@ -145,3 +145,10 @@ Pierwszy klasyfikator stanu tablicy jest wytrenowany: baseline cech obrazu oraz 
 Konfiguracja panelu/bramy HTTP i MLflow jest opisana w [instrukcji Compose](docs/docker-compose.md). ROS i modele GPU pozostają lokalnie. Pełna weryfikacja kontenerów wymaga działającego silnika Docker.
 
 Automatyczne budowanie obrazów i test trwałości MLflow: [CI kontenerów](docs/ci-containers.md).
+
+### Wydania, Kubernetes i monitoring
+
+- [Kubernetes: architektura, start i stop](docs/kubernetes.md)
+- [Publikacja obrazów, CD i rollback](docs/releases-and-cd.md)
+- [Monitoring usług](docs/monitoring.md)
+- [Scenariusz prezentacji końcowej](docs/demo.md)
