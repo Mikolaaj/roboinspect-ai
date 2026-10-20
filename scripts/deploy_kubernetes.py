@@ -6,7 +6,7 @@ import json
 import re
 import subprocess
 
-from kube_common import STATE, kubectl
+from kube_common import CLUSTER, STATE, kubectl, run
 
 
 def update_images(images, namespace="roboinspect", timeout="240s"):
@@ -66,6 +66,11 @@ def main():
             name: f"ghcr.io/mikolaaj/roboinspect-ai-{name}:sha-{args.revision}"
             for name in ("gateway", "mlflow")
         }
+        # Pull using the caller's registry credentials, then preload kind.
+        # Private images need no long-lived imagePullSecret in the cluster.
+        for image in images.values():
+            run("docker", "pull", image)
+        run("kind", "load", "docker-image", "--name", CLUSTER, *images.values())
         previous = update_images(images)
         (STATE / "release.json").write_text(json.dumps(images))
         print("Wdrożono:", json.dumps(images))

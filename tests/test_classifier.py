@@ -86,7 +86,8 @@ def test_freeze_refuses_changed_pixels(reviewed_data):
 def test_snapshot_refuses_manifest_tampering(reviewed_data):
     path = freeze_dataset(reviewed_data)
     manifest = json.loads((path / "manifest.json").read_text())
-    manifest["records"][0]["condition"] = "dirty"
+    original = manifest["records"][0]["condition"]
+    manifest["records"][0]["condition"] = next(mode for mode in MODES if mode != original)
     (path / "manifest.json").write_text(json.dumps(manifest))
     with pytest.raises(ValueError, match="manifest"):
         verify_snapshot(path)

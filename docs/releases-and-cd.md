@@ -9,7 +9,7 @@ Workflow Application checks uruchamia testy aplikacji, test kontenerów i integr
 
 Publikacja używa GITHUB_TOKEN z uprawnieniem packages:write tylko w zadaniu publish. Pull request nie publikuje obrazów. Obrazy otrzymują oznaczenie repozytorium i rewizji, SBOM oraz provenance. Nie używamy tagu latest do wdrażania wersji z GHCR. SHA jest identyfikatorem wydania, a nie deklaracją istnienia GitHub Release.
 
-Pierwsza publikacja wymaga wysłania zmian i sukcesu pipeline. Repozytorium nie zawiera klucza do rejestru. Nowy pakiet może być prywatny; dla lokalnego demonstracyjnego klastra najprościej ustawić pakiety jako publiczne w GitHub Packages. Prywatne pakiety wymagają osobnego imagePullSecret w namespace. Samo `docker login` na laptopie nie loguje węzła kind do rejestru.
+Pierwsza publikacja wymaga wysłania zmian i sukcesu pipeline. Repozytorium nie zawiera klucza do rejestru. Pakiety mogą pozostać prywatne. Workflow CD loguje Docker krótkotrwałym GITHUB_TOKEN z packages:read w tymczasowym katalogu konfiguracji. Skrypt pobiera obrazy i ładuje je bezpośrednio do kind przed wdrożeniem. Nie jest potrzebny stały PAT ani imagePullSecret. Przy ręcznym uruchomieniu lokalnym wymagane jest własne zalogowanie Dockera do GHCR.
 
 ## Aktualizacja działającego klastra
 
@@ -20,7 +20,7 @@ cd ~/Desktop/roboinspect-ai
 .venv/bin/python scripts/deploy_kubernetes.py --revision PELNY_40_ZNAKOWY_SHA
 ```
 
-Skrypt zapisuje obecne obrazy, aktualizuje wdrożenia i czeka na gotowość. Przy niepowodzeniu przywraca wcześniejsze obrazy i sprawdza gotowość. Nowe obrazy i ich identyfikatory są zapisywane w `data/deploy/release.json`, aby kolejne uruchomienie zachowało wybrane wydanie.
+Skrypt najpierw pobiera obrazy z GHCR i ładuje je do kind, następnie zapisuje obecne obrazy i aktualizuje wdrożenia i czeka na gotowość. Przy niepowodzeniu przywraca wcześniejsze obrazy i sprawdza gotowość. Nowe obrazy i ich identyfikatory są zapisywane w `data/deploy/release.json`, aby kolejne uruchomienie zachowało wybrane wydanie.
 
 Ręczny rollback:
 

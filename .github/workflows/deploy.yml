@@ -11,6 +11,7 @@ on:
         default: false
 permissions:
   contents: read
+  packages: read
 concurrency:
   group: roboinspect-local-deployment
   cancel-in-progress: false
@@ -26,9 +27,19 @@ jobs:
           REVISION: ${{ inputs.revision }}
           ROLLBACK: ${{ inputs.rollback }}
           PROJECT_ROOT: ${{ vars.ROBOINSPECT_ROOT }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHCR_USER: ${{ github.actor }}
         run: |
           test -n "$PROJECT_ROOT"
           cd "$PROJECT_ROOT"
+          [[ "$REVISION" =~ ^[0-9a-f]{40}$ ]]
+          registry_config="$(mktemp -d)"
+          trap 'rm -rf "$registry_config"' EXIT
+          export DOCKER_CONFIG="$registry_config"
+          if [[ "$ROLLBACK" != true ]]; then
+            printf '%s' "$GHCR_TOKEN" | docker login ghcr.io --username "$GHCR_USER" --password-stdin
+          fi
+          unset GHCR_TOKEN
           args=(--revision "$REVISION")
           if [[ "$ROLLBACK" == true ]]; then args+=(--rollback); fi
           .venv/bin/python scripts/deploy_kubernetes.py "${args[@]}"
