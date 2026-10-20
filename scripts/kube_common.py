@@ -16,6 +16,9 @@ def env():
         os.environ,
         PATH=str(BIN) + os.pathsep + os.environ["PATH"],
         KUBECONFIG=str(STATE / "kubeconfig"),
+        ROBOINSPECT_ROOT=str(ROOT),
+        ROBOINSPECT_UID=str(os.getuid()),
+        ROBOINSPECT_GID=str(os.getgid()),
     )
 
 
