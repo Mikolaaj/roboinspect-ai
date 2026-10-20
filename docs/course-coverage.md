@@ -80,3 +80,19 @@ Dodano lokalne embeddingi EmbeddingGemma na CPU, publiczny zbiór instrukcji, fr
 ## Aktualizacja: segmentacja SAM
 
 Dodano gotowy SAM 2.1 Tiny, prompty ramkami YOLO, osobne maski obiektów, walidację Pydantic, trwałe artefakty i pomiary MLflow. [Szczegóły](sam.md). Ten etap pokrywa integrację segmentacji; własny trening i pomiary jakości względem ręcznych masek pozostają do wykonania.
+
+## Aktualizacja: przygotowanie danych i EDA
+
+Dodano syntetyczne warianty tablic, deterministyczne grupowanie źródeł, zbieranie rzeczywistych klatek kamery z pochodzeniem etykiet, kontrolę duplikatów, podstawowe miary obrazów i raport EDA z MLflow. [Zakres](dataset.md). Jest to pilot do przeglądu; własny trening, Optuna i niezależna ocena modelu pozostają do wykonania.
+
+## Aktualizacja: kontrola etykiet
+
+Przegląd próbek obejmuje korektę etykiet, zatwierdzanie/odrzucanie, audyt decyzji i kontrolę rewizji. EDA oraz manifest uwzględniają statusy przeglądu i pokrycie klas w częściach zbioru. Własny trening i Optuna nadal pozostają kolejnymi etapami.
+
+## Aktualizacja: trening i ewaluacja klasyfikatora
+
+Dodano porównanie klasycznego modelu ridge z dostrajanym ResNet18 na GPU, preprocessing i augmentację obrazów, wersjonowanie snapshotu i modeli, seed, early stopping, wybór modelu na walidacji oraz końcową ocenę testową. MLflow zapisuje parametry, metryki klas, macierze pomyłek, przebieg uczenia i modele. Pokrywa to pierwszy praktyczny trening ML/DL i część MLOps. Zbiór pozostaje małym pilotem syntetycznym. Optuna, integracja własnego modelu z misjami, niezależna ocena oraz wdrożenie kontenerowe nadal pozostają do wykonania. [Instrukcja](classifier-training.md).
+
+### CI obrazów Docker
+
+GitHub Actions obejmuje testy aplikacji, walidację Compose, budowanie obrazów oraz izolowany test HTTP i trwałości runu/artefaktu MLflow po odtworzeniu kontenerów. Pokrywa to konteneryzację i automatyczną weryfikację integracji. Publikacja obrazów, CD, Kubernetes i rollback pozostają kolejnymi etapami. Szczegóły: [ci-containers.md](ci-containers.md).

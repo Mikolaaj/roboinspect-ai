@@ -51,6 +51,7 @@ class Operator(Node):
         super().__init__('roboinspect_operator')
         self.world_file=os.environ.get('ROBOINSPECT_WORLD')
         self.warehouse=json.loads(os.environ.get('ROBOINSPECT_WAREHOUSE','{}'))
+        self.banner_scene=json.loads(os.environ.get('ROBOINSPECT_BANNER_SCENE','null'))
         self.route = RouteState()
         self.cost_obstacles = []
         self.cost_at = 0
@@ -261,7 +262,7 @@ class Operator(Node):
     def snapshot(self):
         with self.lock:
             now = time.monotonic()
-            return {**self.state, 'warehouse':self.warehouse, 'route':self.route_snapshot(),
+            return {**self.state, 'warehouse':self.warehouse, 'banner_scene':self.banner_scene, 'route':self.route_snapshot(),
                     'observed_obstacles':self.cost_obstacles if now-self.cost_at<4 else [],
                     'obstacles_fresh':now-self.cost_at<4,
                     'route_visual':{**self.visual_status,'fresh':now-self.visual_at<4},

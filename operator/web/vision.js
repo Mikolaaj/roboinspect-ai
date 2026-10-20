@@ -16,6 +16,7 @@
     if(byId('inspection-mask-download') && samAvailable)byId('inspection-mask-download').href=seg.data_url;
     const status={complete:'ukończona',partial:'częściowa',no_detections:'brak ramek YOLO',unavailable:'niedostępna',error:'błąd'};
     if(byId('inspection-segmentation'))byId('inspection-segmentation').textContent=seg?`${seg.model} · segmentacja: ${status[seg.status]||seg.status} · maski: ${seg.masks.length}/${row.total} · czas: ${seg.seconds.toFixed(2)} s`:'Starsza obserwacja bez segmentacji SAM.';
+    if(row.dataset?.status==='collected')byId('inspection-meta').textContent+=` · etykieta symulacji: ${row.dataset.condition} · ${row.dataset.split} · wymaga przeglądu`;
     const list=byId('inspection-objects');list.replaceChildren();
     for(const [index,d] of row.detections.entries()){const li=document.createElement('li');const mask=seg?.masks.find(m=>m.detection_index===index+1);li.textContent=`${d.label} ${d.instance} · pewność YOLO ${(100*d.confidence).toFixed(1)}%`+(mask?` · maska ${mask.pixels.toLocaleString('pl-PL')} px (${(mask.image_fraction*100).toFixed(1)}% obrazu)`:'');if(mask && showSam)li.style.borderLeft=`3px solid rgb(${mask.color.join(',')})`;list.append(li);}
     if(!row.total){const li=document.createElement('li');li.textContent='Brak wykryć powyżej progu 30%.';list.append(li);}

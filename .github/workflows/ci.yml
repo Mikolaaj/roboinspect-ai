@@ -15,3 +15,22 @@ jobs:
           version: '0.13.1'
       - run: uv sync --frozen --python 3.12
       - run: bash scripts/test_project.sh
+  containers:
+    needs: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Compose configuration
+        env:
+          ROBOINSPECT_ROOT: ${{ github.workspace }}
+        run: docker compose config --quiet
+      - name: Build images and verify HTTP and persistent MLflow data
+        run: python3 scripts/check_compose_ci.py
+      - name: Upload container check results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compose-check-results
+          path: artifacts/compose-ci/
+          if-no-files-found: warn

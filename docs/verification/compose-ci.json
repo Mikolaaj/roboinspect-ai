@@ -1,0 +1,7 @@
+{
+  "gateway_http": true,
+  "private_routes_blocked": true,
+  "mlflow_run_persisted": true,
+  "mlflow_artifact_persisted": true,
+  "ros_tested": false
+}

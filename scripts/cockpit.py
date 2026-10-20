@@ -20,6 +20,7 @@ from roboinspect.mapping_runner import MappingRunner, MappingCanceled
 from roboinspect.warehouse import read_selection, view, prepare_layout, persist_selection
 from rendering import configure
 from roboinspect.banners import decorate, assignments
+from roboinspect.banner_conditions import read_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT/'artifacts/cockpit-runtime.json'
@@ -128,9 +129,9 @@ class RuntimeManager:
     def change_pictures(self, mode, seed, canceled):
         path=ROOT/'data/vision/selection.json'
         old=path.read_text() if path.exists() else None
-        previous=assignments(json.loads(old)['seed'] if old else 0)
+        previous=assignments(json.loads(old)['seed'] if old else 0, split=read_profile()['split'])
         for _ in range(100):
-            selected=assignments(seed)
+            selected=assignments(seed, split=read_profile()['split'])
             if all(selected[p]!=previous[p] for p in previous):break
             seed+=1
         else:raise RuntimeError('Nie udało się dobrać nowych zdjęć')
@@ -147,6 +148,31 @@ class RuntimeManager:
             if not self.shutdown.is_set():self.switch('navigation',self.map_path)
             raise
         return self.warehouse
+
+    def change_conditions(self, seed, profile, canceled):
+        path=ROOT/'data/vision/conditions.json'
+        old=path.read_text() if path.exists() else None
+        profile={**profile,'seed':seed}
+        temporary=path.with_suffix('.tmp')
+        temporary.write_text(json.dumps(profile))
+        temporary.replace(path)
+        try:
+            if canceled():raise MappingCanceled()
+            self.switch('navigation',self.map_path)
+            if canceled():raise MappingCanceled()
+        except Exception:
+            if old is None:path.unlink(missing_ok=True)
+            else:path.write_text(old)
+            if not self.shutdown.is_set():self.switch('navigation',self.map_path)
+            raise
+        return self.warehouse
+
+    def prepare_banners(self):
+        seed_file=ROOT/'data/vision/selection.json'
+        banner_seed=json.loads(seed_file.read_text())['seed'] if seed_file.exists() else 0
+        self.runtime_world,_=decorate(self.world_path,banner_seed)
+        self.banner_scene=json.loads(self.runtime_world.with_suffix('.json').read_text())
+        os.environ['ROBOINSPECT_BANNER_SCENE']=json.dumps(self.banner_scene)
 
     def write_runtime(self):
         RUNTIME.write_text(json.dumps({'pid':os.getpid(),'port':self.args.port,
@@ -172,11 +198,13 @@ class RuntimeManager:
         os.environ['ROBOINSPECT_MODE']=mode
         self.environment()
         os.environ['ROBOINSPECT_MAP']=str(self.map_path)
+        self.prepare_banners()
         request(url+'/api/internal/runtime',{'mode':mode,'transitioning':False,
+                                            'banner_scene':self.banner_scene,
                                             'map_file':str(self.map_path),
                                             'world_file':str(self.world_path),'warehouse':self.warehouse},self.token)
         self.write_runtime()
-        self.start_stack()
+        self.start_stack(prepared=True)
         deadline=time.monotonic()+60
         while not self.shutdown.wait(.3):
             state=request(url+'/api/status')
@@ -188,11 +216,10 @@ class RuntimeManager:
                 raise RuntimeError('Nowy tryb nie uzyskał gotowości; sprawdź logi kokpitu')
         raise RuntimeError('Przełączenie przerwane przez zamknięcie kokpitu')
 
-    def start_stack(self):
+    def start_stack(self, prepared=False):
         self.start('route-visualizer',[str(ROOT/'.venv/bin/python'),str(ROOT/'scripts/route_visualizer.py')])
-        seed_file=ROOT/'data/vision/selection.json'
-        banner_seed=json.loads(seed_file.read_text())['seed'] if seed_file.exists() else 0
-        runtime_world,_=decorate(self.world_path,banner_seed)
+        if not prepared:self.prepare_banners()
+        runtime_world=self.runtime_world
         self.start('simulation',['bash',str(ROOT/'scripts/run_robot.sh'),
                      f'scenario:={self.scenario}',f'headless:={str(not self.args.gazebo_gui).lower()}',
                      f'world:={runtime_world}'])
@@ -211,6 +238,7 @@ def main():
     parser.add_argument('--scenario',choices=['normal','blocked','unreachable'],default='normal')
     parser.add_argument('--port',type=int,default=8765)
     parser.add_argument('--no-browser',action='store_true')
+    parser.add_argument('--external-mlflow',action='store_true',help='MLflow is managed by Compose')
     parser.add_argument('--rendering',choices=['auto','gpu','cpu'],default=None)
     parser.add_argument('--gazebo-gui',action='store_true',help='Also open the Gazebo editor')
     parser.add_argument('--log-dir',type=Path,default=ROOT/'artifacts/cockpit')
@@ -322,10 +350,11 @@ def main():
                     print('RAG: przygotuj bash scripts/setup_rag.sh',flush=True)
             else:
                 print('Czat: najpierw wykonaj bash scripts/setup_bielik.sh',flush=True)
-            start('mlflow',[str(ROOT/'.venv/bin/mlflow'),'server',
-                '--backend-store-uri',f'sqlite:///{ROOT / "data/mlflow.db"}',
-                '--default-artifact-root',str(ROOT/'data/mlflow-artifacts'),
-                '--host','127.0.0.1','--port','5001','--workers','1'])
+            if not args.external_mlflow:
+                start('mlflow',[str(ROOT/'.venv/bin/mlflow'),'server',
+                    '--backend-store-uri',f'sqlite:///{ROOT / "data/mlflow.db"}',
+                    '--default-artifact-root',str(ROOT/'data/mlflow-artifacts'),
+                    '--host','127.0.0.1','--port','5001','--workers','1'])
             vision=ROOT/'data/vision/env/bin/python'
             if vision.exists() and (ROOT/'data/vision/yolo11s.pt').exists():
                 os.environ['ROBOINSPECT_VISION_URL']='http://127.0.0.1:8766'

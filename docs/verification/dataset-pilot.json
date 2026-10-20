@@ -1,0 +1,411 @@
+{
+  "passed": true,
+  "operation": {
+    "id": "33e8bc02-e6f9-48b4-85c0-02028db9fbe8",
+    "kind": "warehouse_conditions",
+    "name": "Zmiana stanu tablic i części zbioru",
+    "status": "queued",
+    "message": "Operacja przyjęta",
+    "cancel_requested": false,
+    "saved_map": null,
+    "layout_seed": 948450675,
+    "banner_profile": {
+      "mode": "mixed",
+      "split": "train",
+      "collect": true
+    },
+    "created_at": "2026-10-19T12:28:19.071195Z",
+    "updated_at": "2026-10-19T12:28:19.071198Z",
+    "events": [
+      {
+        "time": "2026-10-19T12:28:19.071205Z",
+        "message": "Operacja przyjęta"
+      }
+    ]
+  },
+  "scene": {
+    "profile": {
+      "mode": "mixed",
+      "split": "train",
+      "collect": true,
+      "seed": 948450675
+    },
+    "panels": {
+      "P1": {
+        "mesh": "variant_34e5a0e96bb658b467684729.obj",
+        "texture_sha256": "65a5a7abb74ef4ce965359fc0064aed7f6c4595e4bd0af8c81ed2f5b9fd051d0",
+        "source_id": "000000000283",
+        "source_sha256": "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "source_url": "https://cocodataset.org/#explore?id=283",
+        "condition": "missing",
+        "transform_seed": 1893376161,
+        "generator": "board-conditions-v1"
+      },
+      "P2": {
+        "mesh": "variant_25057564e2de57770d329509.obj",
+        "texture_sha256": "4e8fcad27f68f6666c1e448bd7e83ed2712c39deb51fa18738a7b8a45b474e35",
+        "source_id": "000000000064",
+        "source_sha256": "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "source_url": "https://cocodataset.org/#explore?id=64",
+        "condition": "dirty",
+        "transform_seed": 3861229626,
+        "generator": "board-conditions-v1"
+      },
+      "P3": {
+        "mesh": "variant_bddeca6087bed6cc621c090a.obj",
+        "texture_sha256": "18a87ed96aeec6179bfd9cf6560fc49f295126b084b316e8796fc57d8d913c91",
+        "source_id": "000000000042",
+        "source_sha256": "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "source_url": "https://cocodataset.org/#explore?id=42",
+        "condition": "cracked",
+        "transform_seed": 2704451731,
+        "generator": "board-conditions-v1"
+      },
+      "P4": {
+        "mesh": "variant_b6b7f56bb936cc72c2d151a2.obj",
+        "texture_sha256": "80938dc6b50839a5675538f90c3772013d4db97b4d63f98e7a4623707de2437f",
+        "source_id": "000000000025",
+        "source_sha256": "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "source_url": "https://cocodataset.org/#explore?id=25",
+        "condition": "clean",
+        "transform_seed": 2680052354,
+        "generator": "board-conditions-v1"
+      },
+      "P5": {
+        "mesh": "variant_46e2b438d7f3caebff60bb41.obj",
+        "texture_sha256": "31e05642352fc0ce32cc71e490c1561dc47f50f6e771c9657075f3ea1d5ad561",
+        "source_id": "000000000049",
+        "source_sha256": "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b",
+        "source_url": "https://cocodataset.org/#explore?id=49",
+        "condition": "occluded",
+        "transform_seed": 2772843708,
+        "generator": "board-conditions-v1"
+      }
+    },
+    "generator": "board-conditions-v1",
+    "id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817"
+  },
+  "samples": [
+    {
+      "id": "5a860937-3fe9-4fec-a9ff-ca6a2e99424c",
+      "version": "camera-dataset-v1",
+      "created_at": "2026-10-19T12:35:16.228462+00:00",
+      "mission_id": "0a203c09-f71f-4ce2-a3cd-cb9a9f7547cc",
+      "panel": "P5",
+      "sector": "C",
+      "scene_id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817",
+      "scene_source_groups": [
+        "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b"
+      ],
+      "condition": "occluded",
+      "split": "train",
+      "source_id": "000000000049",
+      "source_group": "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b",
+      "source_url": "https://cocodataset.org/#explore?id=49",
+      "label_origin": "synthetic_scene_manifest",
+      "generator": "board-conditions-v1",
+      "transform_seed": 2772843708,
+      "texture_sha256": "31e05642352fc0ce32cc71e490c1561dc47f50f6e771c9657075f3ea1d5ad561",
+      "camera_sequence": 2202,
+      "camera_stamp_s": 403.375,
+      "position": {
+        "x": 9.917502978998778,
+        "y": 6.607744539548843
+      },
+      "heading": 1.4529586828940875,
+      "width": 1280,
+      "height": 720,
+      "frame_sha256": "d603909aa1da31c74067cba0b1aa7e06e10f0e7ee139de767f25f76ac8a855e3",
+      "crop_sha256": "4370c358b6f0c9d5725b1da05f95519893c7069252de3d77201e69ac861eb469",
+      "roi_xyxy": [
+        308,
+        85,
+        826,
+        578
+      ],
+      "roi_method": "geometry_estimate_v1",
+      "review_status": "pending_review",
+      "status": "collected",
+      "training_ready": false,
+      "split_policy": "source-sha256-v1-2026",
+      "source_catalog_sha256": "e0b82666aa54b6b3ab1fbecd910fc626d250abe5e250e702b6262f1e8d8822ed"
+    },
+    {
+      "id": "004f8bc1-2ec4-403e-9e0c-1349d3cc1fb2",
+      "version": "camera-dataset-v1",
+      "created_at": "2026-10-19T12:32:57.916993+00:00",
+      "mission_id": "d3d2594d-7fd0-4ec7-9d52-f60842d184df",
+      "panel": "P3",
+      "sector": "B",
+      "scene_id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817",
+      "scene_source_groups": [
+        "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b"
+      ],
+      "condition": "cracked",
+      "split": "train",
+      "source_id": "000000000042",
+      "source_group": "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+      "source_url": "https://cocodataset.org/#explore?id=42",
+      "label_origin": "synthetic_scene_manifest",
+      "generator": "board-conditions-v1",
+      "transform_seed": 2704451731,
+      "texture_sha256": "18a87ed96aeec6179bfd9cf6560fc49f295126b084b316e8796fc57d8d913c91",
+      "camera_sequence": 1463,
+      "camera_stamp_s": 265.75,
+      "position": {
+        "x": -0.9165629359071978,
+        "y": 6.519790977858218
+      },
+      "heading": 1.6972753928082682,
+      "width": 1280,
+      "height": 720,
+      "frame_sha256": "02ea27f38a7993d17e692c011c46836abab0246dd5fd227cac669f0ae99545d4",
+      "crop_sha256": "78458c61602f62c9703c4c95b13258dfd36fdecf8db3ededdcbe5d29318c4cb5",
+      "roi_xyxy": [
+        475,
+        103,
+        966,
+        572
+      ],
+      "roi_method": "geometry_estimate_v1",
+      "review_status": "pending_review",
+      "status": "collected",
+      "training_ready": false,
+      "split_policy": "source-sha256-v1-2026",
+      "source_catalog_sha256": "e0b82666aa54b6b3ab1fbecd910fc626d250abe5e250e702b6262f1e8d8822ed"
+    },
+    {
+      "id": "906d9c79-9a74-46ae-a3b1-1951ac48b82d",
+      "version": "camera-dataset-v1",
+      "created_at": "2026-10-19T12:29:51.744809+00:00",
+      "mission_id": "077f1130-72bd-444b-8c93-e4cf774749eb",
+      "panel": "P1",
+      "sector": "A",
+      "scene_id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817",
+      "scene_source_groups": [
+        "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b"
+      ],
+      "condition": "missing",
+      "split": "train",
+      "source_id": "000000000283",
+      "source_group": "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+      "source_url": "https://cocodataset.org/#explore?id=283",
+      "label_origin": "synthetic_scene_manifest",
+      "generator": "board-conditions-v1",
+      "transform_seed": 1893376161,
+      "texture_sha256": "65a5a7abb74ef4ce965359fc0064aed7f6c4595e4bd0af8c81ed2f5b9fd051d0",
+      "camera_sequence": 450,
+      "camera_stamp_s": 80.5,
+      "position": {
+        "x": -10.921751095890636,
+        "y": 6.553105469076312
+      },
+      "heading": 1.7154569871385823,
+      "width": 1280,
+      "height": 720,
+      "frame_sha256": "c552c9b7b202c5db512fc6744c47d0f9e961289cebad873cc5ccb4c2efb3ec76",
+      "crop_sha256": "12dcdcbca216cd54de53ca0cd884db0ee8b624536309f6dd1031f3db378542ec",
+      "roi_xyxy": [
+        488,
+        92,
+        992,
+        576
+      ],
+      "roi_method": "geometry_estimate_v1",
+      "review_status": "pending_review",
+      "status": "collected",
+      "training_ready": false,
+      "split_policy": "source-sha256-v1-2026",
+      "source_catalog_sha256": "e0b82666aa54b6b3ab1fbecd910fc626d250abe5e250e702b6262f1e8d8822ed"
+    },
+    {
+      "id": "49c43443-86de-4647-bc2f-4f82d84e4fd2",
+      "version": "camera-dataset-v1",
+      "created_at": "2026-10-19T12:33:37.927130+00:00",
+      "mission_id": "d3d2594d-7fd0-4ec7-9d52-f60842d184df",
+      "panel": "P4",
+      "sector": "B",
+      "scene_id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817",
+      "scene_source_groups": [
+        "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b"
+      ],
+      "condition": "clean",
+      "split": "train",
+      "source_id": "000000000025",
+      "source_group": "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+      "source_url": "https://cocodataset.org/#explore?id=25",
+      "label_origin": "synthetic_scene_manifest",
+      "generator": "board-conditions-v1",
+      "transform_seed": 2680052354,
+      "texture_sha256": "80938dc6b50839a5675538f90c3772013d4db97b4d63f98e7a4623707de2437f",
+      "camera_sequence": 1676,
+      "camera_stamp_s": 305.625,
+      "position": {
+        "x": 2.944893720187139,
+        "y": 6.5553750351653655
+      },
+      "heading": 1.4581084991960067,
+      "width": 1280,
+      "height": 720,
+      "frame_sha256": "6d66940dd2278dc4279357f9128e5ed1834488e144de75310a823f1660918861",
+      "crop_sha256": "14000650a625b2bb664bca02ec6a586fbac0d2e0c1e658e77241ae631b149ae3",
+      "roi_xyxy": [
+        309,
+        96,
+        810,
+        574
+      ],
+      "roi_method": "geometry_estimate_v1",
+      "review_status": "pending_review",
+      "status": "collected",
+      "training_ready": false,
+      "split_policy": "source-sha256-v1-2026",
+      "source_catalog_sha256": "e0b82666aa54b6b3ab1fbecd910fc626d250abe5e250e702b6262f1e8d8822ed"
+    },
+    {
+      "id": "500e00a2-f19c-4826-96b8-db4b068a0641",
+      "version": "camera-dataset-v1",
+      "created_at": "2026-10-19T12:30:33.823877+00:00",
+      "mission_id": "077f1130-72bd-444b-8c93-e4cf774749eb",
+      "panel": "P2",
+      "sector": "A",
+      "scene_id": "0e7c6f08de93297099452b31840119d2b920fcb01048c7da3f9b93e16e42f817",
+      "scene_source_groups": [
+        "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+        "9008ddd846fc6002ec47ea6067cb92cf70f294773cc15765b6a14ffb392f52fa",
+        "9f016b98f31e4fe826910e56ee39fa0c2889f48d38cc5f4f6b6421c8c5fc7214",
+        "a668b293598b0097c9b38c136e54b8b43241df22d1c183f6f204a87eaf1f0724",
+        "bc1482d2cba6e4db671c8eedbc7c8d86e0a31c927587a24297647f530349fe7b"
+      ],
+      "condition": "dirty",
+      "split": "train",
+      "source_id": "000000000064",
+      "source_group": "406f84619f5197d416f60566d41ad4d58f1d10b0a182652bbda266eedbc3f1ab",
+      "source_url": "https://cocodataset.org/#explore?id=64",
+      "label_origin": "synthetic_scene_manifest",
+      "generator": "board-conditions-v1",
+      "transform_seed": 3861229626,
+      "texture_sha256": "4e8fcad27f68f6666c1e448bd7e83ed2712c39deb51fa18738a7b8a45b474e35",
+      "camera_sequence": 673,
+      "camera_stamp_s": 121.875,
+      "position": {
+        "x": -6.9536634022254376,
+        "y": 6.587861703338986
+      },
+      "heading": 1.4526819897729122,
+      "width": 1280,
+      "height": 720,
+      "frame_sha256": "aea3340acb39596eb37f85f22e8a21ebb0bb0480e22cdc5f9d9e556d8ed9384e",
+      "crop_sha256": "94311ac72d163acf6d9d8e2faedb606a1242244fc6b1c3f146c38e8850421f89",
+      "roi_xyxy": [
+        247,
+        86,
+        768,
+        578
+      ],
+      "roi_method": "geometry_estimate_v1",
+      "review_status": "pending_review",
+      "status": "collected",
+      "training_ready": false,
+      "split_policy": "source-sha256-v1-2026",
+      "source_catalog_sha256": "e0b82666aa54b6b3ab1fbecd910fc626d250abe5e250e702b6262f1e8d8822ed"
+    }
+  ],
+  "eda": {
+    "samples": 5,
+    "conditions": {
+      "cracked": 1,
+      "clean": 1,
+      "dirty": 1,
+      "occluded": 1,
+      "missing": 1
+    },
+    "splits": {
+      "train": 5
+    },
+    "review": {
+      "pending_review": 5
+    },
+    "training_ready": 0,
+    "version": "camera-dataset-v1",
+    "leakage_errors": [],
+    "duplicates": [],
+    "measurements": [
+      {
+        "id": "004f8bc1-2ec4-403e-9e0c-1349d3cc1fb2",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 105.42,
+        "contrast": 67.98,
+        "edge_variance": 1597.61
+      },
+      {
+        "id": "49c43443-86de-4647-bc2f-4f82d84e4fd2",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 107.07,
+        "contrast": 65.28,
+        "edge_variance": 2480.27
+      },
+      {
+        "id": "500e00a2-f19c-4826-96b8-db4b068a0641",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 95.2,
+        "contrast": 58.05,
+        "edge_variance": 1212.55
+      },
+      {
+        "id": "5a860937-3fe9-4fec-a9ff-ca6a2e99424c",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 104.46,
+        "contrast": 57.62,
+        "edge_variance": 1190.7
+      },
+      {
+        "id": "906d9c79-9a74-46ae-a3b1-1951ac48b82d",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 150.54,
+        "contrast": 59.57,
+        "edge_variance": 522.61
+      }
+    ],
+    "sample_ids": [
+      "004f8bc1-2ec4-403e-9e0c-1349d3cc1fb2",
+      "49c43443-86de-4647-bc2f-4f82d84e4fd2",
+      "500e00a2-f19c-4826-96b8-db4b068a0641",
+      "5a860937-3fe9-4fec-a9ff-ca6a2e99424c",
+      "906d9c79-9a74-46ae-a3b1-1951ac48b82d"
+    ],
+    "snapshot_sha256": "894e9f4700d597b9174e7b60240b3e13a4c72abb1f9d2923fddbbfddf7b1e66f",
+    "training_allowed": false,
+    "missing_conditions": [],
+    "missing_splits": [
+      "test",
+      "validation"
+    ],
+    "notes": [
+      "Pilot syntetyczny; wymagany przegląd kadrów i etykiet przed treningiem.",
+      "Maski SAM nie są ręcznymi etykietami referencyjnymi."
+    ],
+    "run_id": "ca95476578f44c7c8febfefd73338854"
+  }
+}

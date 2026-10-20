@@ -484,3 +484,23 @@ Wdrożono podstawę fazy 8: lokalne wyszukiwanie instrukcji i odpowiedzi Bielika
 ## Aktualizacja: YOLO + SAM
 
 Inspekcje zapisują teraz maski SAM 2.1 Tiny z ramek YOLO na tej samej klatce. Podgląd i dane są w historii, pomiary w MLflow. Następne prace to dane/EDA, etykiety referencyjne i własny trening. [Instrukcja](sam.md).
+
+## Aktualizacja: etap danych
+
+Wdrożono warianty tablic i zbieranie pilotażowych danych do przyszłego klasyfikatora stanu. Podział po zdjęciach źródłowych jest ustalany przed wariantami. EDA i eksport manifestu są dostępne w panelu. Każdy wycinek wymaga przeglądu; trening jest kolejnym etapem. [Instrukcja](dataset.md).
+
+## Aktualizacja: przegląd danych
+
+Dodano ekran przeglądu klatek i wycinków, filtry statusu/części zbioru/klasy, poprawianie etykiet i trwałe decyzje z historią. Zatwierdzenie weryfikuje artefakty i podział źródeł. EDA raportuje brakujące zatwierdzone klasy w każdej części zbioru. Następnie: ręczny przegląd i dalsze zbieranie danych, baseline, trening klasyfikatora oraz niezależna ocena.
+
+## Aktualizacja: pierwszy własny klasyfikator
+
+Wdrożono pilotażowy pipeline fazy 10: zamrożenie zatwierdzonego zbioru 120/40/40, model porównawczy cech obrazu + ridge, dostrojenie ResNet18, wybór na walidacji, końcową ocenę testową, modele i macierze w MLflow. W panelu dostępny raport. Następny etap: podłączenie wybranego klasyfikatora do inspekcji i raportów robota, następnie niezależne dane i dalsze eksperymenty. Optuna nie została jeszcze dodana. [Szczegóły](classifier-training.md).
+
+### Konteneryzacja HTTP i MLflow
+
+Dodano Compose, kontener panelu/bramy HTTP, kontener MLflow i skrypty start/stop. Wykonawca misji i ROS pozostają lokalnie. Szczegóły oraz lista testów na żywo: [docker-compose.md](docker-compose.md). Uruchomienie i trwałość danych w kontenerach wymagają jeszcze weryfikacji przy działającym Docker Engine. Publikowanie obrazów, CD i Kubernetes to kolejne etapy.
+
+### CI kontenerów gotowe lokalnie
+
+Workflow rozszerzono o budowanie obrazów, test HTTP oraz weryfikację trwałości MLflow po odtworzeniu kontenerów. Lokalny test przeszedł; raport `docs/verification/compose-ci.json`. Uruchomienie workflow na GitHub nastąpi po push. Następny zakres: publikacja wersjonowanych obrazów, potem Kubernetes i CD.

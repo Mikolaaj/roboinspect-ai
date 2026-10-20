@@ -126,11 +126,18 @@ class MappingAction(StrEnum):
     WAREHOUSE_CLEAR = "warehouse_clear"
     WAREHOUSE_RANDOM = "warehouse_random"
     WAREHOUSE_PICTURES = "warehouse_pictures"
+    WAREHOUSE_CONDITIONS = "warehouse_conditions"
 
 
 class OperationLog(StrictModel):
     time: datetime = Field(default_factory=now)
     message: str
+
+
+class BannerConditionRequest(StrictModel):
+    mode: Literal["clean", "cracked", "dirty", "occluded", "missing", "mixed"] = "mixed"
+    split: Literal["train", "validation", "test"] = "train"
+    collect: bool = True
 
 
 class MappingOperation(StrictModel):
@@ -142,6 +149,7 @@ class MappingOperation(StrictModel):
     cancel_requested: bool = False
     saved_map: str | None = None
     layout_seed: int | None = None
+    banner_profile: BannerConditionRequest | None = None
     created_at: datetime = Field(default_factory=now)
     updated_at: datetime = Field(default_factory=now)
     events: list[OperationLog] = Field(default_factory=list)
@@ -156,6 +164,7 @@ class WarehouseAction(StrEnum):
     CLEAR = "clear"
     RANDOM = "random"
     PICTURES = "pictures"
+    CONDITIONS = "conditions"
 
 
 class WarehouseView(StrictModel):
@@ -171,3 +180,11 @@ class RuntimeUpdate(StrictModel):
     map_file: str | None = None
     world_file: str | None = None
     warehouse: WarehouseView | None = None
+    banner_scene: dict | None = None
+
+
+class DatasetReviewRequest(StrictModel):
+    decision: Literal["approved", "rejected", "pending_review"]
+    condition: Literal["clean", "cracked", "dirty", "occluded", "missing"]
+    expected_revision: str = Field(pattern=r"^[0-9a-f]{64}$")
+    note: str = Field(default="", max_length=500)

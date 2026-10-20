@@ -1,0 +1,6 @@
+**
+!deployment/
+!deployment/**
+!operator/
+!operator/web/
+!operator/web/**

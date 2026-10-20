@@ -50,24 +50,28 @@ WAREHOUSE_KINDS = {
     MappingAction.WAREHOUSE_CLEAR,
     MappingAction.WAREHOUSE_RANDOM,
     MappingAction.WAREHOUSE_PICTURES,
+    MappingAction.WAREHOUSE_CONDITIONS,
 }
 WAREHOUSE_TITLES = {
     MappingAction.WAREHOUSE_STANDARD: "Standardowe ustawienie magazynu",
     MappingAction.WAREHOUSE_CLEAR: "Usunięcie wszystkich przeszkód",
     MappingAction.WAREHOUSE_RANDOM: "Losowanie przeszkód w magazynie",
     MappingAction.WAREHOUSE_PICTURES: "Zmiana zdjęć na banerach",
+    MappingAction.WAREHOUSE_CONDITIONS: "Zmiana stanu tablic i części zbioru",
 }
 
 
-def request_warehouse(service, action, key):
+def request_warehouse(service, action, key, profile=None):
     import secrets
 
     from .missions import stationary
 
     kind = MappingAction("warehouse_" + action.value)
+    if action.value == "conditions" and profile is None:
+        raise ConflictError("Wybierz stan tablic i część zbioru")
     with service.lock:
         if key and (previous := service.store.operation_key(key)):
-            if previous.kind != kind:
+            if previous.kind != kind or previous.banner_profile != profile:
                 raise ConflictError("Klucz został użyty do innej operacji")
             return previous, False
         state = service.robot.snapshot()
@@ -87,7 +91,10 @@ def request_warehouse(service, action, key):
         record = MappingOperation(
             kind=kind,
             name=WAREHOUSE_TITLES[kind],
-            layout_seed=secrets.randbits(32) if action.value in ("random", "pictures") else None,
+            layout_seed=secrets.randbits(32)
+            if action.value in ("random", "pictures", "conditions")
+            else None,
+            banner_profile=profile,
         )
         service.store.create_operation(record, key)
         return record, True

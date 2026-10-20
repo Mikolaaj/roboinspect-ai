@@ -143,23 +143,34 @@ class MappingRunner:
                 self.progress(
                     "Przygotowanie nowych zdjęć i odświeżanie hangaru…"
                     if job.kind == MappingAction.WAREHOUSE_PICTURES
+                    else "Przygotowanie stanów tablic i podziału danych…"
+                    if job.kind == MappingAction.WAREHOUSE_CONDITIONS
                     else "Przygotowanie układu i sprawdzanie drogi do wszystkich celów…"
                 )
-                selection = (
-                    self.manager.change_pictures
-                    if job.kind == MappingAction.WAREHOUSE_PICTURES
-                    else self.manager.change_warehouse
-                )(
-                    job.kind.value.removeprefix("warehouse_"),
-                    job.layout_seed,
-                    lambda: self.store.operation(job.id).cancel_requested,
-                )
+                if job.kind == MappingAction.WAREHOUSE_CONDITIONS:
+                    selection = self.manager.change_conditions(
+                        job.layout_seed,
+                        job.banner_profile.model_dump(),
+                        lambda: self.store.operation(job.id).cancel_requested,
+                    )
+                else:
+                    selection = (
+                        self.manager.change_pictures
+                        if job.kind == MappingAction.WAREHOUSE_PICTURES
+                        else self.manager.change_warehouse
+                    )(
+                        job.kind.value.removeprefix("warehouse_"),
+                        job.layout_seed,
+                        lambda: self.store.operation(job.id).cancel_requested,
+                    )
                 message = (
                     f"Magazyn gotowy. Robot w BASE; przeszkody: {selection['movable_count']}. "
                     "Wszystkie czerwone strefy i punkty P są dostępne."
                 )
                 if job.kind == MappingAction.WAREHOUSE_PICTURES:
                     message = "Zmieniono zdjęcia na wszystkich pięciu banerach. Robot w BASE; historia inspekcji zachowana."
+                if job.kind == MappingAction.WAREHOUSE_CONDITIONS:
+                    message = f"Zmieniono stan tablic ({job.banner_profile.mode}), część zbioru: {job.banner_profile.split}. Robot w BASE."
             elif job.kind == MappingAction.RESET:
                 self.progress("Reset bieżącej mapy i powrót robota do BASE…")
                 self.manager.switch("mapping", None)

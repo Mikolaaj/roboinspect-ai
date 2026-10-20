@@ -178,7 +178,7 @@ class Retriever:
         started = time.monotonic()
         try:
             # Reject unrelated questions before embedding. This is a scope gate, not a planner.
-            scope = r"robot|roboinspect|system|otoczen|hangar|hal[aię]|sektor|baz[ayę]|sterow|misj|przejazd|map|slam|nav2|lidar|kamer|obraz|widok|monitor|zolt|tras|mikrofon|glos|nagry|nagran|mow|whisper|mlflow|wynik|eksperyment|inspek|detek|wykry|yolo|person|pewn|procent|tablic|baner|zdjec|sam\b|segment|mask|masek|histori|przeszk|magazyn|stop|zatrzym|anul|enter|wyslij|rozmow|polecen|p[1-5]\b"
+            scope = r"robot|roboinspect|system|otoczen|hangar|hal[aię]|sektor|baz[ayę]|sterow|misj|przejazd|map|slam|nav2|lidar|kamer|obraz|widok|monitor|zolt|tras|mikrofon|glos|nagry|nagran|mow|whisper|mlflow|wynik|eksperyment|inspek|detek|wykry|yolo|person|pewn|procent|tablic|baner|zdjec|sam\b|segment|mask|masek|dane|zbior|etykiet|usterk|wariant|pekn|zabrud|zaslon|histori|przeszk|magazyn|stop|zatrzym|anul|enter|wyslij|rozmow|polecen|p[1-5]\b"
             if not re.search(scope, normalized(question)):
                 return Retrieval(seconds=time.monotonic() - started)
             chunks, vectors, digest = self.index(cancel)

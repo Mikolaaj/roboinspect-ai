@@ -1,0 +1,8 @@
+FROM python:3.12-slim
+WORKDIR /app
+RUN pip install --no-cache-dir fastapi==0.143.3 httpx==0.28.1 uvicorn==0.54.0
+COPY deployment/gateway.py /app/gateway.py
+COPY operator/web /app/web
+USER 10001:10001
+CMD ["uvicorn", "gateway:app", "--host", "127.0.0.1", "--port", "8765"]
+COPY deployment/ci_operator.py /app/ci_operator.py

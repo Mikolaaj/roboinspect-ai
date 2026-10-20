@@ -17,7 +17,9 @@ from starlette.concurrency import run_in_threadpool
 from .chat import ChatRequest, ChatService
 from .contracts import (
     ACTIVE,
+    BannerConditionRequest,
     ConflictError,
+    DatasetReviewRequest,
     GoalRequest,
     MappingAction,
     MappingOperation,
@@ -52,7 +54,9 @@ def create_app(
     speech=None,
 ):
     if operator is not None:
-        service.inspector = InspectionService(service.store)
+        service.inspector = InspectionService(
+            service.store, scene_provider=lambda: operator.snapshot().get("banner_scene")
+        )
     chat = chat or ChatService(service)
     speech = speech or SpeechService()
     layout = json.loads((ROOT / "config/hangar.json").read_text())
@@ -256,12 +260,140 @@ def create_app(
         response.status_code = 202 if created else 200
         return record
 
+    @app.get("/classifier", include_in_schema=False)
+    def classifier_report():
+        from .classifier_results import training_page
+
+        return HTMLResponse(
+            training_page(ROOT),
+            headers={
+                "Content-Security-Policy": "default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'"
+            },
+        )
+
+    @app.get("/api/classifier/training")
+    def classifier_training():
+        from .classifier_results import latest_result
+
+        report = latest_result(ROOT)
+        if not report:
+            return {"trained": False}
+        return {
+            "trained": True,
+            "selection": report["selection"],
+            "test": report["test"],
+            "mlflow": report["mlflow"],
+            "snapshot_id": report["config"]["snapshot_id"],
+            "pilot_only": True,
+            "deployed": False,
+        }
+
+    @app.get("/api/classifier/artifacts/{name}")
+    def classifier_artifact(name: str):
+        from .classifier_results import result_asset
+
+        try:
+            path = result_asset(ROOT, name)
+        except FileNotFoundError as error:
+            raise HTTPException(404, str(error)) from error
+        return FileResponse(path, media_type="image/svg+xml")
+
+    @app.get("/api/dataset")
+    def dataset_summary():
+        from .dataset import summary
+
+        return summary(ROOT)
+
+    @app.get("/api/dataset/samples")
+    def dataset_samples(
+        status: str = Query(default="all", pattern="^(all|pending|approved|rejected)$"),
+        split: str = Query(default="all", pattern="^(all|train|validation|test)$"),
+        condition: str = Query(
+            default="all", pattern="^(all|clean|cracked|dirty|occluded|missing)$"
+        ),
+        page: int = Query(default=1, ge=1),
+    ):
+        from .dataset import list_samples
+
+        return list_samples(ROOT, status, split, condition, page)
+
+    @app.post("/api/dataset/samples/{sample_id}/review")
+    def dataset_review(sample_id: UUID, body: DatasetReviewRequest):
+        from .dataset import review_sample
+
+        try:
+            return review_sample(sample_id, body, ROOT)
+        except FileNotFoundError as error:
+            raise HTTPException(404, str(error)) from error
+        except ValueError as error:
+            raise HTTPException(422, str(error)) from error
+
+    @app.post("/api/dataset/analyze")
+    async def dataset_analyze(body: MappingRequest):
+        from .dataset import analyze
+
+        return await run_in_threadpool(analyze, ROOT)
+
+    @app.get("/api/dataset/{sample_id}/{name}")
+    def dataset_file(sample_id: UUID, name: str):
+        if name not in ("frame.jpg", "crop.jpg", "metadata.json"):
+            raise HTTPException(404, "Nieznany artefakt danych")
+        path = ROOT / "data/dataset/samples" / str(sample_id) / name
+        if not path.is_file():
+            raise HTTPException(404, "Brak próbki")
+        return FileResponse(
+            path, media_type="application/json" if name.endswith(".json") else "image/jpeg"
+        )
+
+    @app.get("/api/dataset-export/{name}")
+    def dataset_export(name: str):
+        if name not in ("eda.json", "samples.csv", "splits.json"):
+            raise HTTPException(404, "Nieznany raport")
+        path = ROOT / "data/dataset/reports" / name
+        if not path.is_file():
+            raise HTTPException(404, "Najpierw przelicz EDA")
+        return FileResponse(
+            path,
+            media_type="text/csv" if name.endswith(".csv") else "application/json",
+            filename=name,
+        )
+
+    @app.get("/dataset", include_in_schema=False)
+    def dataset_report():
+        path = ROOT / "data/dataset/reports/report.html"
+        if not path.exists():
+            return HTMLResponse(
+                '<!doctype html><html lang="pl"><meta charset="utf-8"><title>Dane RoboInspect</title><p>Najpierw wybierz Przelicz EDA w panelu sterowania.</p><a href="/control">Panel sterowania</a></html>'
+            )
+        return FileResponse(
+            path,
+            media_type="text/html",
+            headers={
+                "Content-Security-Policy": "default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'"
+            },
+        )
+
+    @app.post("/api/banners/condition", response_model=MappingOperation, status_code=202)
+    def banner_condition(
+        body: BannerConditionRequest,
+        response: Response,
+        idempotency_key: str = Header(min_length=1, max_length=128),
+    ):
+        record, created = request_warehouse(
+            service, WarehouseAction.CONDITIONS, idempotency_key, body
+        )
+        response.status_code = 202 if created else 200
+        return record
+
     @app.post("/api/internal/runtime", include_in_schema=False)
     def runtime_update(update: RuntimeUpdate, x_runtime_token: str | None = Header(default=None)):
         expected = getattr(operator, "runtime_token", "")
         if not expected or not secrets.compare_digest(x_runtime_token or "", expected):
             raise HTTPException(403, "Runtime token required")
         operator.set_runtime(update.mode, update.transitioning, update.map_file)
+        if update.banner_scene is not None:
+            with operator.lock:
+                operator.banner_scene = update.banner_scene
         if update.world_file is not None and update.warehouse is not None:
             operator.set_warehouse(update.world_file, update.warehouse.model_dump())
         return {"accepted": True}
@@ -555,6 +687,8 @@ def create_app(
     files = {
         "/": ("index.html", "text/html"),
         "/control": ("control.html", "text/html"),
+        "/dataset/review": ("dataset-review.html", "text/html"),
+        "/dataset-review.js": ("dataset-review.js", "text/javascript"),
         "/app.js": ("app.js", "text/javascript"),
         "/activity.js": ("activity.js", "text/javascript"),
         "/voice.js": ("voice.js", "text/javascript"),

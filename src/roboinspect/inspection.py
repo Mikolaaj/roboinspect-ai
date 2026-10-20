@@ -70,6 +70,8 @@ class CaptureResult(StrictModel):
     camera_sequence: int = Field(ge=1)
     warehouse: dict | None
     position: dict
+    heading: float | None = None
+    scene_id: str | None = None
     segmentation: SegmentationResult | None = None
     segmented_jpeg: str | None = Field(default=None, max_length=6000000)
     mask_png: str | None = Field(default=None, max_length=6000000)
@@ -119,8 +121,9 @@ class CaptureResult(StrictModel):
 
 
 class InspectionService:
-    def __init__(self, store):
+    def __init__(self, store, scene_provider=None):
         self.store = store
+        self.scene_provider = scene_provider or (lambda: None)
         self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="camera-inspection")
         self.cancel = threading.Event()
         self.future = None
@@ -158,6 +161,10 @@ class InspectionService:
             result = CaptureResult.model_validate(response.json()).model_dump()
         if cancel.is_set():
             raise RuntimeError("Inspekcja anulowana")
+        scene = self.scene_provider()
+        result["collection_scene"] = (
+            scene if scene and scene.get("id") == result.get("scene_id") else None
+        )
         result.update(
             id=str(uuid4()),
             mission_id=mission_id,
@@ -207,6 +214,7 @@ class InspectionService:
         result = self.future.result()
         if self.cancel.is_set():
             raise RuntimeError("Inspekcja anulowana")
+        scene = result.pop("collection_scene", None)
         with self.store.engine.begin() as connection:
             connection.execute(
                 reports.insert().values(
@@ -216,6 +224,22 @@ class InspectionService:
                     record=result,
                 )
             )
+        if scene and scene["profile"].get("collect"):
+            try:
+                from .dataset import collect_observation
+
+                result["dataset"] = collect_observation(result, scene, ROOT)
+            except Exception:
+                import logging
+
+                logging.getLogger(__name__).exception(
+                    "Nie zebrano próbki danych; raport inspekcji zachowany"
+                )
+                result["dataset"] = {"status": "error", "message": "Nie zapisano próbki zbioru"}
+            with self.store.engine.begin() as connection:
+                connection.execute(
+                    reports.update().where(reports.c.id == result["id"]).values(record=result)
+                )
         self.future = None
         threading.Thread(target=self.log_metrics, args=(result,), daemon=True).start()
         return result
@@ -270,6 +294,11 @@ class InspectionService:
                         client.log_artifact(
                             run.info.run_id, str(ROOT / "data/inspections" / result["id"] / name)
                         )
+            dataset = result.get("dataset")
+            if dataset and dataset.get("status") == "collected":
+                for name in ["condition", "split", "source_group", "label_origin", "review_status"]:
+                    client.log_param(run.info.run_id, "dataset_" + name, dataset[name])
+                client.log_dict(run.info.run_id, dataset, "dataset-sample.json")
             client.set_terminated(run.info.run_id)
         except Exception:
             import logging
@@ -367,6 +396,14 @@ def evidence_answer(store, text):
         lines.append(
             "Misja nie ma statusu zakończonej: pokazuję tylko dotychczas zapisane tablice."
         )
+    if re.search(r"usterk|uszkod|etykiet|zabrud|stan.*tablic", value):
+        for row in reversed(rows):
+            label = row.get("dataset")
+            if label and label.get("status") == "collected":
+                lines.append(
+                    f"{row['panel']}: etykieta SYMULACJI {label['condition']}, wymaga przeglądu. Nie jest wynikiem modelu usterek."
+                )
+        lines.append("Własny model usterek nie został jeszcze wytrenowany.")
     lines.append(
         "To wynik YOLO z zapisanej kamery, nie pewny opis wszystkich obiektów. Procent oznacza pewność detektora. Aktualne zdjęcia mogły się od tego czasu zmienić; raporty znajdziesz w kokpicie."
     )

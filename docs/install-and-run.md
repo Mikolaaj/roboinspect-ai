@@ -146,3 +146,11 @@ Po przygotowaniu Bielika wykonaj jednorazowo `bash scripts/setup_rag.sh`. Nastę
 ## Segmentacja SAM
 
 Przy istniejącym YOLO wykonaj jednorazowo `bash scripts/setup_sam.sh`. Nowe przygotowanie `setup_vision.sh` obejmuje ten krok. Start i zatrzymanie pozostają bez zmian. [Instrukcja SAM](sam.md).
+
+## Zbieranie danych
+
+Po przygotowaniu wizji uruchamiaj kokpit standardowo. Warianty tablic i zapis próbek włącza się w sekcji Dane do modelu usterek. [Instrukcja danych i EDA](dataset.md).
+
+## Pilotażowy klasyfikator stanu tablic
+
+Po przygotowaniu środowiska wizji można wykonać `.venv/bin/python scripts/train_classifier.py --epochs 25 --seed 42`. Trening wymaga zatwierdzonych próbek z wszystkimi klasami w każdej części i lokalnej CUDA. Nie wymaga działającej symulacji. Wynik w panelu: Dane do modelu usterek → Wyniki treningu klasyfikatora. [Pełna instrukcja i test pojedynczego obrazu](classifier-training.md).

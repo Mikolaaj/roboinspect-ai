@@ -131,3 +131,17 @@ Bielik wyszukuje fragmenty instrukcji lokalnymi embeddingami na CPU i pokazuje �
 ## Segmentacja SAM
 
 Inspekcje używają YOLO11s i SAM 2.1 Tiny na tej samej klatce. W historii przełączysz ramki YOLO na maski i pobierzesz dane do dalszej analizy. Przygotowanie: `bash scripts/setup_sam.sh`. [Obsługa, dane, pomiary i ograniczenia](docs/sam.md).
+
+## Dane i EDA do modelu stanu tablic
+
+Panel pozwala ustawić pięć stanów tablic i zbierać surowe kadry oraz wycinki podczas inspekcji. Źródła są rozdzielone między trening, walidację i test. Etykiety pochodzą z symulacji i wymagają przeglądu. [Instrukcja, EDA i ograniczenia](docs/dataset.md). Trening nie jest jeszcze uruchamiany.
+
+Przegląd danych do modelu usterek: **Dane do modelu usterek → Przejrzyj i zatwierdź próbki**. Dostępne są poprawianie etykiet, zatwierdzanie, odrzucanie, cofanie decyzji i historia zmian. [Instrukcja](docs/dataset.md#przegląd-i-zatwierdzanie-próbek).
+
+Pierwszy klasyfikator stanu tablicy jest wytrenowany: baseline cech obrazu oraz dostrajany ResNet18, wersjonowany snapshot, metryki i modele w MLflow. W panelu **Dane do modelu usterek → Wyniki treningu klasyfikatora**. [Trening, predykcja i ograniczenia](docs/classifier-training.md). Integracja tego modelu z misjami pozostaje kolejnym etapem.
+
+### Uruchomienie z Docker Compose
+
+Konfiguracja panelu/bramy HTTP i MLflow jest opisana w [instrukcji Compose](docs/docker-compose.md). ROS i modele GPU pozostają lokalnie. Pełna weryfikacja kontenerów wymaga działającego silnika Docker.
+
+Automatyczne budowanie obrazów i test trwałości MLflow: [CI kontenerów](docs/ci-containers.md).

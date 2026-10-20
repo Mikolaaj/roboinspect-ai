@@ -19,7 +19,9 @@ def main():
     try:
         arguments=Path(f'/proc/{pid}/cmdline').read_bytes().split(b'\0')
     except FileNotFoundError:
-        print('Proces kokpitu już nie istnieje.')
+        if runtime.exists() and json.loads(runtime.read_text()).get('pid') == pid:
+            runtime.unlink()
+        print('Proces kokpitu już nie istnieje. Usunięto stary wpis.')
         return 0
     if str(ROOT/'scripts/cockpit.py').encode() not in arguments:
         raise RuntimeError('PID nie należy do tego kokpitu; nie wysłano sygnału')

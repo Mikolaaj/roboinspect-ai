@@ -215,6 +215,8 @@ def capture(body: Capture):
         camera_sequence=cam["sequence"],
         warehouse=s.get("warehouse"),
         position=s.get("map_position"),
+        heading=s.get("map_heading"),
+        scene_id=(s.get("banner_scene") or {}).get("id"),
     )
     return result
 

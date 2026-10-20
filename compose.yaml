@@ -1,0 +1,36 @@
+# Host networking: native Linux Docker Engine, or Docker Desktop with host networking enabled.
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile.gateway
+    network_mode: host
+    init: true
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/health/ready')"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s
+  mlflow:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile.mlflow
+    network_mode: host
+    init: true
+    user: "${ROBOINSPECT_UID:-1000}:${ROBOINSPECT_GID:-1000}"
+    environment:
+      HOME: /tmp
+    volumes:
+      - "${ROBOINSPECT_ROOT:?Set ROBOINSPECT_ROOT}/data:${ROBOINSPECT_ROOT}/data"
+    command: [mlflow, server, --backend-store-uri, "sqlite:///${ROBOINSPECT_ROOT}/data/mlflow.db", --default-artifact-root, "${ROBOINSPECT_ROOT}/data/mlflow-artifacts", --host, 127.0.0.1, --port, "5001", --workers, "1"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s

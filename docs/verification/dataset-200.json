@@ -1,0 +1,2106 @@
+{
+  "passed": true,
+  "batch_id": "20261019T191256Z",
+  "before": {
+    "samples": 185,
+    "conditions": {
+      "dirty": 37,
+      "cracked": 37,
+      "missing": 37,
+      "clean": 37,
+      "occluded": 37
+    },
+    "splits": {
+      "train": 120,
+      "validation": 40,
+      "test": 25
+    },
+    "review": {
+      "pending_review": 151,
+      "approved": 34
+    },
+    "training_ready": 34,
+    "pending_review": 151,
+    "rejected": 0
+  },
+  "after": {
+    "samples": 200,
+    "conditions": {
+      "dirty": 40,
+      "cracked": 40,
+      "occluded": 40,
+      "missing": 40,
+      "clean": 40
+    },
+    "splits": {
+      "train": 120,
+      "test": 40,
+      "validation": 40
+    },
+    "review": {
+      "pending_review": 166,
+      "approved": 34
+    },
+    "training_ready": 34,
+    "pending_review": 166,
+    "rejected": 0
+  },
+  "targets": {
+    "train": 120,
+    "validation": 40,
+    "test": 40
+  },
+  "new_ids": [
+    "e6cedbf6-7943-41f8-919d-697cebc8c3ee",
+    "52b7586d-b0c4-4517-9896-eb0baff97ff9",
+    "cd0dca9b-b523-4d5b-8983-417d89c110ba",
+    "0151b5b8-5d09-42f0-a439-6ab3bcced20d",
+    "a89ec001-4176-41af-90ae-565c1bb83db5",
+    "280148d9-28bf-4a8a-a3a6-6c53802eefab",
+    "65aa5712-ce52-4f8f-a258-1762db25131d",
+    "445b8186-3b2b-463a-817b-b912f4fce6d4",
+    "c2b57324-cc20-4f8f-865b-afcdb9c5c966",
+    "8e405d4a-5219-41ee-8d01-a8d4cdbee734",
+    "ad362149-8eb9-4589-82c0-6334b0ed5bc9",
+    "ccb1f46d-3ea2-4382-8b4f-9b5f2f86c810",
+    "b4543b56-c4e2-487e-922c-3744e58cfd63",
+    "626227d4-f9ee-40c1-957c-0c35899ae348",
+    "c69cf498-0f35-4d30-88e9-664370b729ee"
+  ],
+  "eda": {
+    "samples": 200,
+    "conditions": {
+      "dirty": 40,
+      "cracked": 40,
+      "occluded": 40,
+      "missing": 40,
+      "clean": 40
+    },
+    "splits": {
+      "train": 120,
+      "test": 40,
+      "validation": 40
+    },
+    "review": {
+      "pending_review": 166,
+      "approved": 34
+    },
+    "training_ready": 34,
+    "pending_review": 166,
+    "rejected": 0,
+    "version": "camera-dataset-v1",
+    "leakage_errors": [],
+    "duplicates": [],
+    "measurements": [
+      {
+        "id": "004e9774-a5e5-4093-bcba-69173addf28a",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 108.63,
+        "contrast": 58.13,
+        "edge_variance": 1317.41
+      },
+      {
+        "id": "004f8bc1-2ec4-403e-9e0c-1349d3cc1fb2",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 105.42,
+        "contrast": 67.98,
+        "edge_variance": 1597.61
+      },
+      {
+        "id": "0151b5b8-5d09-42f0-a439-6ab3bcced20d",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 87.26,
+        "contrast": 64.12,
+        "edge_variance": 764.88
+      },
+      {
+        "id": "05276771-801d-4c95-889b-70d6eec4da52",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 181.98,
+        "contrast": 37.42,
+        "edge_variance": 558.55
+      },
+      {
+        "id": "06b79e83-70c6-4f6f-83ad-3d69d3bee02c",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 182.61,
+        "contrast": 36.05,
+        "edge_variance": 559.24
+      },
+      {
+        "id": "070beb6f-02bf-4385-ba0f-c45e84d4f6a7",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 93.78,
+        "contrast": 60.59,
+        "edge_variance": 636.3
+      },
+      {
+        "id": "0963c3ef-a8a2-4ba4-8b6c-89da5e570428",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 104.8,
+        "contrast": 65.33,
+        "edge_variance": 2752.85
+      },
+      {
+        "id": "0c909d9e-001a-4779-83d2-6fc6085fdc01",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 93.77,
+        "contrast": 72.84,
+        "edge_variance": 1177.68
+      },
+      {
+        "id": "10c38ef3-464e-4396-b73f-613f92bf52c6",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 129.46,
+        "contrast": 62.99,
+        "edge_variance": 1410.88
+      },
+      {
+        "id": "12a137a1-7175-4a44-b6d1-8742375b671c",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 114.56,
+        "contrast": 66.79,
+        "edge_variance": 798.29
+      },
+      {
+        "id": "13802135-462b-4636-b551-7f85ba75a3f7",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 117.67,
+        "contrast": 63.33,
+        "edge_variance": 3099.09
+      },
+      {
+        "id": "1412aa4e-223f-4242-8a77-8cd166d38861",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 121.27,
+        "contrast": 58.72,
+        "edge_variance": 2221.87
+      },
+      {
+        "id": "15e3db48-6e73-47cb-ba01-c02085aeb1da",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 116.56,
+        "contrast": 67.29,
+        "edge_variance": 1826.42
+      },
+      {
+        "id": "1684db64-e369-43ac-8153-9c44dd2136c4",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 109.68,
+        "contrast": 55.78,
+        "edge_variance": 1123.5
+      },
+      {
+        "id": "170f8a0d-e961-4aa0-98e4-a7b9b486f456",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.54,
+        "contrast": 40.12,
+        "edge_variance": 533.22
+      },
+      {
+        "id": "175140ba-80a6-414f-afcd-ac22d132dfee",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 105.05,
+        "contrast": 63.27,
+        "edge_variance": 1435.63
+      },
+      {
+        "id": "17b3cbfa-348e-4ee9-9681-1446b0d1a071",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 123.54,
+        "contrast": 62.98,
+        "edge_variance": 1642.58
+      },
+      {
+        "id": "189bf95c-6e51-442c-9cef-30eca1dbaa77",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 117.63,
+        "contrast": 68.03,
+        "edge_variance": 2132.88
+      },
+      {
+        "id": "196b1bf8-3a8b-4148-ba64-4ca87cfaae34",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 94.99,
+        "contrast": 63.42,
+        "edge_variance": 1519.33
+      },
+      {
+        "id": "1a0e0c44-5633-44f3-ba54-6fdff9e7a841",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 113.74,
+        "contrast": 67.1,
+        "edge_variance": 825.67
+      },
+      {
+        "id": "1a628a5b-f188-4357-b39f-197c2f79c466",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 118.32,
+        "contrast": 66.14,
+        "edge_variance": 1214.1
+      },
+      {
+        "id": "1de920ab-b8b7-4fa3-bba8-4b08a53c3940",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 104.51,
+        "contrast": 54.82,
+        "edge_variance": 948.61
+      },
+      {
+        "id": "1f7e45e3-50a6-4ea8-b84c-622476500825",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 103.98,
+        "contrast": 64.81,
+        "edge_variance": 1787.89
+      },
+      {
+        "id": "20b575b0-6b73-4205-b9c4-04385bac3c5f",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 115.46,
+        "contrast": 66.49,
+        "edge_variance": 861.06
+      },
+      {
+        "id": "21080383-b18d-4a64-9bda-edc2c5f43a9a",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 147.12,
+        "contrast": 58.46,
+        "edge_variance": 511.9
+      },
+      {
+        "id": "21114613-19cd-4de2-88c8-efed288fface",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 119.72,
+        "contrast": 64.03,
+        "edge_variance": 794.36
+      },
+      {
+        "id": "22272534-d03b-4510-b7be-6471fbb89003",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 117.53,
+        "contrast": 66.37,
+        "edge_variance": 1224.68
+      },
+      {
+        "id": "26c09af4-aa6c-49ae-bdbe-16c467588769",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 179.57,
+        "contrast": 41.92,
+        "edge_variance": 490.32
+      },
+      {
+        "id": "272e4a2f-d121-4a99-9dd4-482bf4e1a63b",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 102.46,
+        "contrast": 67.06,
+        "edge_variance": 1824.36
+      },
+      {
+        "id": "280148d9-28bf-4a8a-a3a6-6c53802eefab",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 180.81,
+        "contrast": 39.66,
+        "edge_variance": 577.45
+      },
+      {
+        "id": "28d2121e-0114-4559-a2fe-ff9da39492d4",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 181.55,
+        "contrast": 38.28,
+        "edge_variance": 494.4
+      },
+      {
+        "id": "2d7a91cd-fc8e-43ef-b96e-ac7a1ce0e138",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 101.77,
+        "contrast": 58.46,
+        "edge_variance": 2402.17
+      },
+      {
+        "id": "2e04fa7a-a684-432d-939c-d01af80d059e",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 158.7,
+        "contrast": 62.7,
+        "edge_variance": 594.34
+      },
+      {
+        "id": "2f7abfdd-2f69-4829-b949-9d6f87c0c6df",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 105.3,
+        "contrast": 67.24,
+        "edge_variance": 2820.37
+      },
+      {
+        "id": "3115e49f-fa9b-4060-9588-6e1a6a164465",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 116.36,
+        "contrast": 67.36,
+        "edge_variance": 1928.13
+      },
+      {
+        "id": "31641530-80ab-45af-a7cb-ce9468763142",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 113.41,
+        "contrast": 62.07,
+        "edge_variance": 1493.52
+      },
+      {
+        "id": "34de903a-528f-4c8a-ad5d-fb0261245274",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 96.69,
+        "contrast": 77.59,
+        "edge_variance": 2172.57
+      },
+      {
+        "id": "3575dab6-1599-46a6-bd35-003fce826603",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 179.43,
+        "contrast": 42.16,
+        "edge_variance": 505.32
+      },
+      {
+        "id": "3606a974-2167-460e-bbef-418851098ebb",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.84,
+        "contrast": 39.57,
+        "edge_variance": 561.95
+      },
+      {
+        "id": "36201920-a496-489e-bb0a-9980edcd236e",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 182.3,
+        "contrast": 36.69,
+        "edge_variance": 576.37
+      },
+      {
+        "id": "364a33a8-4852-4379-8a37-75a944342d40",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 105.37,
+        "contrast": 59.96,
+        "edge_variance": 2107.19
+      },
+      {
+        "id": "36c35463-15c9-4a42-9475-03ddcc44fdce",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 114.05,
+        "contrast": 66.04,
+        "edge_variance": 2671.65
+      },
+      {
+        "id": "3c0b38f7-ea8c-4ca0-a20f-322b4c8ccf4b",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 111.61,
+        "contrast": 65.0,
+        "edge_variance": 1334.33
+      },
+      {
+        "id": "3de83e15-232b-49f8-a628-b82bf3cb30d4",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 103.01,
+        "contrast": 66.78,
+        "edge_variance": 1621.52
+      },
+      {
+        "id": "40c93739-e8bc-4d5c-93a1-81b18697bc1f",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 126.89,
+        "contrast": 64.65,
+        "edge_variance": 1782.62
+      },
+      {
+        "id": "4135957f-fd64-4b69-9d45-ff4016ea4513",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 117.17,
+        "contrast": 67.15,
+        "edge_variance": 2063.8
+      },
+      {
+        "id": "41bcf85e-744b-4fc8-b487-e91bac08df36",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 115.87,
+        "contrast": 67.75,
+        "edge_variance": 2125.92
+      },
+      {
+        "id": "43819370-de13-4dc4-8896-e26ce76378e3",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 133.12,
+        "contrast": 57.62,
+        "edge_variance": 3125.17
+      },
+      {
+        "id": "43c2107d-b82d-40d8-aed9-7078a7c1504a",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 86.0,
+        "contrast": 49.06,
+        "edge_variance": 790.18
+      },
+      {
+        "id": "445b8186-3b2b-463a-817b-b912f4fce6d4",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 135.35,
+        "contrast": 56.49,
+        "edge_variance": 2330.34
+      },
+      {
+        "id": "4613fc8f-677d-4b34-a0c3-768732241d1f",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 90.87,
+        "contrast": 63.24,
+        "edge_variance": 1139.41
+      },
+      {
+        "id": "46e1e56f-f4bf-4772-aa29-9c0a66b15d1e",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 131.73,
+        "contrast": 61.1,
+        "edge_variance": 4809.36
+      },
+      {
+        "id": "484f678a-31c1-4d93-878d-116fd0639c9c",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 105.12,
+        "contrast": 67.09,
+        "edge_variance": 2009.36
+      },
+      {
+        "id": "4857e79e-5c63-4e00-8278-cfc9d917eb7c",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 99.57,
+        "contrast": 48.29,
+        "edge_variance": 781.95
+      },
+      {
+        "id": "48dda027-dd6c-4db3-a219-34efb6134f7e",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.68,
+        "contrast": 39.9,
+        "edge_variance": 558.96
+      },
+      {
+        "id": "49c43443-86de-4647-bc2f-4f82d84e4fd2",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 107.07,
+        "contrast": 65.28,
+        "edge_variance": 2480.27
+      },
+      {
+        "id": "4c39a03c-040a-4e0a-9258-cd5f7da54fd4",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 96.55,
+        "contrast": 77.97,
+        "edge_variance": 1414.12
+      },
+      {
+        "id": "4dd0d377-11aa-4ee0-bd83-886197303c23",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 108.51,
+        "contrast": 71.2,
+        "edge_variance": 719.09
+      },
+      {
+        "id": "4f81f5df-954f-402d-b851-4581b133d1e8",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 102.77,
+        "contrast": 53.96,
+        "edge_variance": 3661.92
+      },
+      {
+        "id": "500e00a2-f19c-4826-96b8-db4b068a0641",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 95.2,
+        "contrast": 58.05,
+        "edge_variance": 1212.55
+      },
+      {
+        "id": "508b95c8-27b3-47c8-991a-5feec5093122",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 110.11,
+        "contrast": 59.07,
+        "edge_variance": 835.49
+      },
+      {
+        "id": "526cd120-8f1e-4ce4-8753-8f0c1edf80c6",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 110.91,
+        "contrast": 64.22,
+        "edge_variance": 1397.34
+      },
+      {
+        "id": "52b7586d-b0c4-4517-9896-eb0baff97ff9",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 129.17,
+        "contrast": 53.85,
+        "edge_variance": 2378.99
+      },
+      {
+        "id": "53071052-23c0-41aa-b8f7-83f4ec04bd4f",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 104.63,
+        "contrast": 62.95,
+        "edge_variance": 2170.18
+      },
+      {
+        "id": "53668026-6a70-48d9-89b5-b71ceacc8b53",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 181.51,
+        "contrast": 38.34,
+        "edge_variance": 529.45
+      },
+      {
+        "id": "53db7234-ce84-469e-a06a-d23253c53cae",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 103.43,
+        "contrast": 67.13,
+        "edge_variance": 2422.07
+      },
+      {
+        "id": "54d40c0b-01d7-4ff2-86ca-24024d5d8b95",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 94.37,
+        "contrast": 54.08,
+        "edge_variance": 1010.17
+      },
+      {
+        "id": "5562a523-60cb-4473-8ad4-20ecd55a2a2c",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 99.36,
+        "contrast": 60.35,
+        "edge_variance": 1357.15
+      },
+      {
+        "id": "5701567a-5f5c-4917-b44c-bdd5b51b0ae5",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 180.51,
+        "contrast": 40.18,
+        "edge_variance": 574.28
+      },
+      {
+        "id": "59024f8d-14ec-4721-a9f7-a3d6825971cd",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 105.56,
+        "contrast": 65.56,
+        "edge_variance": 1832.4
+      },
+      {
+        "id": "5938e5aa-bdf0-4f2f-9a8c-99f9ce857f5c",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 105.91,
+        "contrast": 63.7,
+        "edge_variance": 2378.66
+      },
+      {
+        "id": "5a860937-3fe9-4fec-a9ff-ca6a2e99424c",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 104.46,
+        "contrast": 57.62,
+        "edge_variance": 1190.7
+      },
+      {
+        "id": "5b0b1ecb-f70d-45bb-8c44-55a11f315d31",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 156.31,
+        "contrast": 64.48,
+        "edge_variance": 598.9
+      },
+      {
+        "id": "5c2c35aa-bb5e-4171-8138-d9d1f79cebba",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 102.51,
+        "contrast": 59.75,
+        "edge_variance": 1077.03
+      },
+      {
+        "id": "5e56c65f-260a-4eea-8802-42229910e9eb",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 181.24,
+        "contrast": 38.79,
+        "edge_variance": 579.75
+      },
+      {
+        "id": "621fe70d-016e-4d03-8184-4408cf5a022d",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 108.36,
+        "contrast": 71.17,
+        "edge_variance": 722.5
+      },
+      {
+        "id": "626227d4-f9ee-40c1-957c-0c35899ae348",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 101.38,
+        "contrast": 66.23,
+        "edge_variance": 1299.87
+      },
+      {
+        "id": "62c3deb4-6f82-40cd-bc9b-771da7928362",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 104.86,
+        "contrast": 61.27,
+        "edge_variance": 1514.48
+      },
+      {
+        "id": "6302f56f-2ea4-44c7-abd7-9d2f5742c7e3",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 131.58,
+        "contrast": 61.4,
+        "edge_variance": 900.29
+      },
+      {
+        "id": "633c8b4b-92f1-4eb7-9d27-76a2623eabd4",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 119.39,
+        "contrast": 62.61,
+        "edge_variance": 3443.58
+      },
+      {
+        "id": "65aa5712-ce52-4f8f-a258-1762db25131d",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 89.28,
+        "contrast": 66.06,
+        "edge_variance": 706.6
+      },
+      {
+        "id": "6667b087-d0e2-4a24-bde8-85794218d8f0",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 154.76,
+        "contrast": 57.56,
+        "edge_variance": 535.74
+      },
+      {
+        "id": "68dcd253-5f79-4e0e-bfbe-663aa6438ab4",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 181.08,
+        "contrast": 39.14,
+        "edge_variance": 541.57
+      },
+      {
+        "id": "69138260-f4ec-4780-a4d0-5873626dad1a",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 102.91,
+        "contrast": 58.03,
+        "edge_variance": 1451.61
+      },
+      {
+        "id": "6c36d52b-1593-4452-acfd-9950ff9dd1b5",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 123.14,
+        "contrast": 63.22,
+        "edge_variance": 1635.91
+      },
+      {
+        "id": "6c80ec36-24ab-4faa-afd8-4a2272ecf77f",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 106.19,
+        "contrast": 60.7,
+        "edge_variance": 1415.22
+      },
+      {
+        "id": "6ca7e19a-f7b3-4092-afff-f6600b1e0ff6",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 130.38,
+        "contrast": 62.04,
+        "edge_variance": 4734.42
+      },
+      {
+        "id": "6cf415d1-26c0-4358-9642-a27e3cebb7b0",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 108.53,
+        "contrast": 66.31,
+        "edge_variance": 1128.04
+      },
+      {
+        "id": "6e22262a-9870-4147-bbf9-2efa8cec46bb",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 112.89,
+        "contrast": 66.05,
+        "edge_variance": 3054.03
+      },
+      {
+        "id": "6e3b96c6-08a3-4252-a65a-2793f4746b0e",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 96.7,
+        "contrast": 52.41,
+        "edge_variance": 681.27
+      },
+      {
+        "id": "6f83fdef-74d1-4d05-b125-2541a73e92da",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 117.81,
+        "contrast": 61.99,
+        "edge_variance": 2305.97
+      },
+      {
+        "id": "70d2d556-ec41-4983-8777-e8751e7b714b",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 112.05,
+        "contrast": 66.03,
+        "edge_variance": 2837.69
+      },
+      {
+        "id": "72bc8863-be9e-4ac7-9541-3356146e1899",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 156.31,
+        "contrast": 62.47,
+        "edge_variance": 546.92
+      },
+      {
+        "id": "72ea3848-957c-4701-a9e2-c6b5a43bea23",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 99.36,
+        "contrast": 48.48,
+        "edge_variance": 783.95
+      },
+      {
+        "id": "740cddcc-4185-423f-bb66-96a014a1e4d9",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 117.79,
+        "contrast": 60.55,
+        "edge_variance": 4095.93
+      },
+      {
+        "id": "75f4d7a0-235b-4dd4-b327-9e8f81634c61",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 179.42,
+        "contrast": 42.16,
+        "edge_variance": 508.92
+      },
+      {
+        "id": "76c47a76-a5f1-4d28-97a2-7365dcc51a69",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 86.56,
+        "contrast": 52.9,
+        "edge_variance": 1069.27
+      },
+      {
+        "id": "76c6bedb-a4d5-4792-88be-2d27583ed003",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 109.84,
+        "contrast": 70.78,
+        "edge_variance": 1305.09
+      },
+      {
+        "id": "7a3a9adc-bdca-44fb-93b7-602ec8bd6d6d",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 104.73,
+        "contrast": 64.49,
+        "edge_variance": 2205.89
+      },
+      {
+        "id": "7bf9b511-146e-4107-a021-7cee01f990bc",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 97.59,
+        "contrast": 59.9,
+        "edge_variance": 1935.59
+      },
+      {
+        "id": "7de749f0-9130-4eff-8492-cdf6d6bc9a90",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 106.11,
+        "contrast": 63.54,
+        "edge_variance": 1068.03
+      },
+      {
+        "id": "7eff3676-a4b9-46fa-8d90-4c7404b33259",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 182.76,
+        "contrast": 35.79,
+        "edge_variance": 520.62
+      },
+      {
+        "id": "83861fb4-67b9-4412-81cc-7bc226f96336",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 104.5,
+        "contrast": 67.4,
+        "edge_variance": 2434.68
+      },
+      {
+        "id": "83af8613-82eb-4c3a-9a78-6b22d5eab754",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 181.61,
+        "contrast": 38.14,
+        "edge_variance": 531.58
+      },
+      {
+        "id": "851d6abf-b8a0-4106-baff-e6c0efd15c4d",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 118.85,
+        "contrast": 50.0,
+        "edge_variance": 1772.85
+      },
+      {
+        "id": "85497ded-ab8e-4ece-abd9-b2c94d97bf4d",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 101.07,
+        "contrast": 61.51,
+        "edge_variance": 1781.75
+      },
+      {
+        "id": "85c50acd-5276-47fb-9432-1950f1876e69",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 92.48,
+        "contrast": 63.66,
+        "edge_variance": 814.2
+      },
+      {
+        "id": "85f5f008-b505-49c2-b0d7-0009a31e7af4",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 107.34,
+        "contrast": 64.69,
+        "edge_variance": 1979.81
+      },
+      {
+        "id": "86e91640-ce04-4f0f-8ebb-0d557873782a",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 100.68,
+        "contrast": 64.14,
+        "edge_variance": 807.86
+      },
+      {
+        "id": "87d13475-cfdc-4e17-a291-33b48e7bd667",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 103.17,
+        "contrast": 60.47,
+        "edge_variance": 696.11
+      },
+      {
+        "id": "87fc73c1-a6b1-4e3e-b2ce-79688e873e4d",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 104.61,
+        "contrast": 66.64,
+        "edge_variance": 2930.9
+      },
+      {
+        "id": "882071f0-b9dc-464b-ac7c-0bcd7d8d1f86",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 181.63,
+        "contrast": 38.12,
+        "edge_variance": 536.26
+      },
+      {
+        "id": "887ca264-a877-4681-9f19-f37e8aed8090",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 180.3,
+        "contrast": 40.46,
+        "edge_variance": 504.27
+      },
+      {
+        "id": "8958fc80-feef-4427-8917-8dc7423f12a0",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 109.8,
+        "contrast": 61.7,
+        "edge_variance": 929.58
+      },
+      {
+        "id": "8b9715f3-d422-476b-910e-9ff27433af17",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 129.46,
+        "contrast": 62.66,
+        "edge_variance": 4477.68
+      },
+      {
+        "id": "8e405d4a-5219-41ee-8d01-a8d4cdbee734",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 108.28,
+        "contrast": 63.3,
+        "edge_variance": 1486.13
+      },
+      {
+        "id": "8ee10aca-17c8-4231-b12f-2a46fcac2147",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 115.97,
+        "contrast": 65.15,
+        "edge_variance": 2608.52
+      },
+      {
+        "id": "8f74bdf5-6195-49dc-baba-c50256a8a31b",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 105.67,
+        "contrast": 67.28,
+        "edge_variance": 942.49
+      },
+      {
+        "id": "906d9c79-9a74-46ae-a3b1-1951ac48b82d",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 150.54,
+        "contrast": 59.57,
+        "edge_variance": 522.61
+      },
+      {
+        "id": "92399dc7-8083-43de-9108-f52b4931cc4e",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 115.42,
+        "contrast": 67.94,
+        "edge_variance": 1396.19
+      },
+      {
+        "id": "95ec46b1-8d2b-4b0c-85c8-6cb746517196",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 103.63,
+        "contrast": 61.69,
+        "edge_variance": 1343.2
+      },
+      {
+        "id": "9800130b-03ba-453b-87f5-e7c00eab0b75",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 120.07,
+        "contrast": 49.0,
+        "edge_variance": 938.36
+      },
+      {
+        "id": "9a39cf8e-d510-4fc0-9bc4-05c17ddb5cce",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 129.91,
+        "contrast": 62.37,
+        "edge_variance": 4369.32
+      },
+      {
+        "id": "9b315381-4303-4fcd-9cc4-e48e72cedb1a",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 129.93,
+        "contrast": 63.1,
+        "edge_variance": 770.54
+      },
+      {
+        "id": "9e50d65d-1c1d-4939-be1a-3f148ea4a506",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 105.04,
+        "contrast": 56.41,
+        "edge_variance": 1290.21
+      },
+      {
+        "id": "9f00745c-4b6a-4d9d-abd0-b9da5a0037cd",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 142.98,
+        "contrast": 61.17,
+        "edge_variance": 1110.36
+      },
+      {
+        "id": "a1ff07e1-edb3-443b-9ad2-54b7a1d19bca",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 182.44,
+        "contrast": 36.46,
+        "edge_variance": 555.61
+      },
+      {
+        "id": "a5aab3c5-9ad4-4d3c-a9de-d403c45fb29b",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.76,
+        "contrast": 39.74,
+        "edge_variance": 529.31
+      },
+      {
+        "id": "a848ebaf-bcf0-4618-9516-499ea04d3a1e",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 91.15,
+        "contrast": 59.28,
+        "edge_variance": 667.5
+      },
+      {
+        "id": "a89ec001-4176-41af-90ae-565c1bb83db5",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 117.09,
+        "contrast": 68.44,
+        "edge_variance": 1640.77
+      },
+      {
+        "id": "aca60d95-21b7-43b7-b100-ebd49f78cd1c",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 141.14,
+        "contrast": 61.88,
+        "edge_variance": 1720.15
+      },
+      {
+        "id": "acd9b6d8-3537-4284-a70f-d3e686238f72",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 181.27,
+        "contrast": 38.78,
+        "edge_variance": 554.5
+      },
+      {
+        "id": "ad0d8c46-c4d5-4d61-a761-e33a4cefa162",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.02,
+        "contrast": 41.13,
+        "edge_variance": 505.75
+      },
+      {
+        "id": "ad362149-8eb9-4589-82c0-6334b0ed5bc9",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 131.83,
+        "contrast": 61.89,
+        "edge_variance": 970.83
+      },
+      {
+        "id": "ae349c45-cca6-49c0-ad30-3040ad5d76af",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 114.27,
+        "contrast": 60.55,
+        "edge_variance": 4221.84
+      },
+      {
+        "id": "aed6a341-91d2-4319-b067-fb6c99f48443",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 86.39,
+        "contrast": 51.82,
+        "edge_variance": 903.84
+      },
+      {
+        "id": "af0e97b2-2b1d-4b57-ad3b-738e6c9c60a8",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 96.61,
+        "contrast": 77.73,
+        "edge_variance": 1889.63
+      },
+      {
+        "id": "b0ce846f-038e-4a54-86a3-e09ef2ee5665",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 141.14,
+        "contrast": 62.08,
+        "edge_variance": 1573.34
+      },
+      {
+        "id": "b0ece1ad-6ebf-4cd7-8665-fd274296dd8e",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 117.0,
+        "contrast": 67.14,
+        "edge_variance": 2196.56
+      },
+      {
+        "id": "b18bdea5-cf90-4e13-b358-a0237a7f4f4f",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 112.83,
+        "contrast": 59.23,
+        "edge_variance": 1284.89
+      },
+      {
+        "id": "b34436ff-51ec-4c30-a702-2535b5a1eb15",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 106.11,
+        "contrast": 68.54,
+        "edge_variance": 1218.39
+      },
+      {
+        "id": "b36007a1-ef98-49b8-8f4f-50cac19a6b36",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 105.48,
+        "contrast": 60.91,
+        "edge_variance": 1516.85
+      },
+      {
+        "id": "b4543b56-c4e2-487e-922c-3744e58cfd63",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 101.89,
+        "contrast": 68.47,
+        "edge_variance": 1354.0
+      },
+      {
+        "id": "b4aacf5f-eeb0-4ea6-b2cf-e243cdb34145",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 87.08,
+        "contrast": 51.87,
+        "edge_variance": 957.12
+      },
+      {
+        "id": "b5462cb4-19ab-4205-8b7c-81dbcc434286",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 106.44,
+        "contrast": 68.36,
+        "edge_variance": 1129.0
+      },
+      {
+        "id": "b56536b9-5f92-4c9d-ad96-1ffc3f7512ad",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.76,
+        "contrast": 39.77,
+        "edge_variance": 534.88
+      },
+      {
+        "id": "b6cfc52d-e1b0-4f74-a95b-ba5298efbf50",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 100.38,
+        "contrast": 69.51,
+        "edge_variance": 735.86
+      },
+      {
+        "id": "b6d41bf2-3c52-4800-9a06-ffddf0cfbc17",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 100.82,
+        "contrast": 58.92,
+        "edge_variance": 1207.37
+      },
+      {
+        "id": "b7223316-5b59-46f8-a394-6f8eec7d0194",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 88.28,
+        "contrast": 70.6,
+        "edge_variance": 1041.23
+      },
+      {
+        "id": "b77ae509-5195-494b-a50c-76c04580f253",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.93,
+        "contrast": 39.47,
+        "edge_variance": 511.34
+      },
+      {
+        "id": "b8641b37-6b0e-47c5-8385-a3ce6ceeb244",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.23,
+        "contrast": 40.72,
+        "edge_variance": 564.37
+      },
+      {
+        "id": "b959731b-f919-48ad-b73c-1e59bdd4d63e",
+        "condition": "occluded",
+        "split": "test",
+        "brightness": 97.71,
+        "contrast": 67.83,
+        "edge_variance": 1423.39
+      },
+      {
+        "id": "b95f07eb-b88f-475b-921e-eb62cab4fa05",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 107.22,
+        "contrast": 47.75,
+        "edge_variance": 859.13
+      },
+      {
+        "id": "bc4bb7f1-6c4f-49fe-8b27-b5a57192afdc",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 88.86,
+        "contrast": 44.71,
+        "edge_variance": 621.98
+      },
+      {
+        "id": "bd7b22ce-1ead-438d-aaf0-749dea5c5ba1",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 87.21,
+        "contrast": 60.17,
+        "edge_variance": 705.99
+      },
+      {
+        "id": "be43678d-3efe-48f5-ae11-d36a2b665c2e",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 105.08,
+        "contrast": 61.12,
+        "edge_variance": 2129.89
+      },
+      {
+        "id": "bf38ad38-a527-4829-b97f-441b4fe44c7d",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 118.84,
+        "contrast": 62.84,
+        "edge_variance": 2700.0
+      },
+      {
+        "id": "bfffe79a-62da-41e1-86b1-a69e5c34a0be",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 134.16,
+        "contrast": 56.98,
+        "edge_variance": 2917.44
+      },
+      {
+        "id": "c03d4ddf-03b8-45ae-b77a-f7b7150a5fac",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 179.09,
+        "contrast": 42.71,
+        "edge_variance": 512.05
+      },
+      {
+        "id": "c051954d-4d1b-4782-9927-728c4318374b",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 141.73,
+        "contrast": 61.53,
+        "edge_variance": 1569.64
+      },
+      {
+        "id": "c05f7b12-d1c6-4f21-a3ce-c75d5605cb8f",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 102.98,
+        "contrast": 68.55,
+        "edge_variance": 940.49
+      },
+      {
+        "id": "c0a1909d-f602-40c2-bec0-39b15948f386",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 117.87,
+        "contrast": 67.09,
+        "edge_variance": 2130.06
+      },
+      {
+        "id": "c2b57324-cc20-4f8f-865b-afcdb9c5c966",
+        "condition": "cracked",
+        "split": "test",
+        "brightness": 129.53,
+        "contrast": 54.1,
+        "edge_variance": 1998.78
+      },
+      {
+        "id": "c30e32b6-7dea-4a8c-a303-b2bd24b8b177",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 117.21,
+        "contrast": 63.35,
+        "edge_variance": 3609.88
+      },
+      {
+        "id": "c3ff028d-b82a-4eaf-a32c-0c6990c4528b",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 117.77,
+        "contrast": 53.13,
+        "edge_variance": 1509.86
+      },
+      {
+        "id": "c69cf498-0f35-4d30-88e9-664370b729ee",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 122.05,
+        "contrast": 57.62,
+        "edge_variance": 1782.0
+      },
+      {
+        "id": "cb875691-136c-413b-b995-c7867bd74592",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 105.54,
+        "contrast": 64.26,
+        "edge_variance": 1423.2
+      },
+      {
+        "id": "ccb1f46d-3ea2-4382-8b4f-9b5f2f86c810",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 182.34,
+        "contrast": 36.65,
+        "edge_variance": 563.33
+      },
+      {
+        "id": "cd0dca9b-b523-4d5b-8983-417d89c110ba",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 119.2,
+        "contrast": 60.4,
+        "edge_variance": 893.4
+      },
+      {
+        "id": "cd515d90-7c14-4337-a351-585b54911aba",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 106.67,
+        "contrast": 68.01,
+        "edge_variance": 1039.26
+      },
+      {
+        "id": "cd8fe217-603b-42a6-a204-c0ab44802899",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 151.58,
+        "contrast": 57.55,
+        "edge_variance": 496.75
+      },
+      {
+        "id": "ce721dc2-dfe4-412b-8cff-fbef9da4ed89",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 101.79,
+        "contrast": 61.47,
+        "edge_variance": 838.06
+      },
+      {
+        "id": "d1ef0dd9-b0cf-498b-8825-e4caa911af85",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 99.95,
+        "contrast": 62.79,
+        "edge_variance": 1769.32
+      },
+      {
+        "id": "d20e20e4-1415-4ac0-a6eb-8b52198c6829",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 107.99,
+        "contrast": 64.65,
+        "edge_variance": 1433.77
+      },
+      {
+        "id": "d3889c4f-6ad7-47de-952b-315260739361",
+        "condition": "cracked",
+        "split": "validation",
+        "brightness": 102.88,
+        "contrast": 54.14,
+        "edge_variance": 4000.34
+      },
+      {
+        "id": "d46da211-b1ed-44a1-8a45-91c770b600b4",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 86.94,
+        "contrast": 51.05,
+        "edge_variance": 2161.33
+      },
+      {
+        "id": "d52a0a1b-4133-4c8f-9118-391b1d85b35b",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 103.89,
+        "contrast": 65.54,
+        "edge_variance": 2870.93
+      },
+      {
+        "id": "d6f73c0f-8fd0-4b48-a949-ebe6911709d2",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 84.69,
+        "contrast": 49.81,
+        "edge_variance": 791.04
+      },
+      {
+        "id": "d8de3e42-bcab-4265-ab7c-4fa700e7b739",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 103.4,
+        "contrast": 65.6,
+        "edge_variance": 888.31
+      },
+      {
+        "id": "df6e4ce2-aa21-47e3-b5e9-deb30d93dc9f",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 180.83,
+        "contrast": 39.59,
+        "edge_variance": 574.21
+      },
+      {
+        "id": "e2617eb5-0f7e-4a09-8fac-363f67861603",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 95.17,
+        "contrast": 51.04,
+        "edge_variance": 3262.7
+      },
+      {
+        "id": "e3bc29bf-843a-462a-b79f-507f7cc5113b",
+        "condition": "clean",
+        "split": "validation",
+        "brightness": 129.39,
+        "contrast": 62.66,
+        "edge_variance": 4524.77
+      },
+      {
+        "id": "e4a30b7b-1f3b-4e17-a487-9b1234f88599",
+        "condition": "missing",
+        "split": "validation",
+        "brightness": 180.74,
+        "contrast": 39.82,
+        "edge_variance": 510.79
+      },
+      {
+        "id": "e5a6b062-1ba3-4321-9cdf-2ddc0f98a770",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 102.06,
+        "contrast": 68.68,
+        "edge_variance": 783.8
+      },
+      {
+        "id": "e6cedbf6-7943-41f8-919d-697cebc8c3ee",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 178.43,
+        "contrast": 43.83,
+        "edge_variance": 487.86
+      },
+      {
+        "id": "e784e9fc-26a2-4c68-a327-e2ea436eff80",
+        "condition": "dirty",
+        "split": "test",
+        "brightness": 118.05,
+        "contrast": 53.73,
+        "edge_variance": 2004.13
+      },
+      {
+        "id": "ec58b21f-de20-4c2e-a68a-70ecb2c10160",
+        "condition": "missing",
+        "split": "test",
+        "brightness": 180.9,
+        "contrast": 39.51,
+        "edge_variance": 527.77
+      },
+      {
+        "id": "ece1af00-5456-45ff-8d8c-07b480467849",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 127.99,
+        "contrast": 64.14,
+        "edge_variance": 1858.09
+      },
+      {
+        "id": "ee1b3905-7d09-42db-b21e-5ea5bde0d12a",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 110.57,
+        "contrast": 57.76,
+        "edge_variance": 955.81
+      },
+      {
+        "id": "f16e0adb-0765-4cc0-b95d-a9a89cec6322",
+        "condition": "dirty",
+        "split": "train",
+        "brightness": 126.72,
+        "contrast": 60.41,
+        "edge_variance": 918.72
+      },
+      {
+        "id": "f347b377-5f67-4d71-a3d8-b34ec89e7ba5",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 100.3,
+        "contrast": 65.49,
+        "edge_variance": 1086.79
+      },
+      {
+        "id": "f46b6fcb-71d7-41b2-a2fb-c2215eef0e0d",
+        "condition": "dirty",
+        "split": "validation",
+        "brightness": 102.07,
+        "contrast": 60.55,
+        "edge_variance": 1219.36
+      },
+      {
+        "id": "f49b8c66-e6f7-4210-bb51-7e222268dbe6",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 106.74,
+        "contrast": 71.17,
+        "edge_variance": 1164.46
+      },
+      {
+        "id": "f7c3fcf8-4085-488e-b213-5b815a444334",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 84.69,
+        "contrast": 50.5,
+        "edge_variance": 1314.43
+      },
+      {
+        "id": "f835b675-9257-48e0-9541-eca5b791d3bd",
+        "condition": "missing",
+        "split": "train",
+        "brightness": 180.34,
+        "contrast": 40.55,
+        "edge_variance": 513.47
+      },
+      {
+        "id": "fb7c6178-2535-4db2-aeea-b7d4fe71ceb1",
+        "condition": "occluded",
+        "split": "validation",
+        "brightness": 86.34,
+        "contrast": 52.91,
+        "edge_variance": 961.28
+      },
+      {
+        "id": "fcb95261-7bb3-488e-b5cb-027c14e35991",
+        "condition": "clean",
+        "split": "train",
+        "brightness": 125.86,
+        "contrast": 65.15,
+        "edge_variance": 1745.49
+      },
+      {
+        "id": "fd4c5dd1-75f2-48d6-a4bb-ed7db3fa54d5",
+        "condition": "cracked",
+        "split": "train",
+        "brightness": 115.63,
+        "contrast": 64.96,
+        "edge_variance": 2934.91
+      },
+      {
+        "id": "fd83f281-f3db-4f58-b435-81c4836c576b",
+        "condition": "occluded",
+        "split": "train",
+        "brightness": 103.17,
+        "contrast": 68.59,
+        "edge_variance": 734.31
+      },
+      {
+        "id": "fe300c8c-fbc0-4f3d-902e-1f3b65f1d385",
+        "condition": "clean",
+        "split": "test",
+        "brightness": 134.96,
+        "contrast": 56.73,
+        "edge_variance": 2320.17
+      }
+    ],
+    "sample_ids": [
+      "004e9774-a5e5-4093-bcba-69173addf28a",
+      "004f8bc1-2ec4-403e-9e0c-1349d3cc1fb2",
+      "0151b5b8-5d09-42f0-a439-6ab3bcced20d",
+      "05276771-801d-4c95-889b-70d6eec4da52",
+      "06b79e83-70c6-4f6f-83ad-3d69d3bee02c",
+      "070beb6f-02bf-4385-ba0f-c45e84d4f6a7",
+      "0963c3ef-a8a2-4ba4-8b6c-89da5e570428",
+      "0c909d9e-001a-4779-83d2-6fc6085fdc01",
+      "10c38ef3-464e-4396-b73f-613f92bf52c6",
+      "12a137a1-7175-4a44-b6d1-8742375b671c",
+      "13802135-462b-4636-b551-7f85ba75a3f7",
+      "1412aa4e-223f-4242-8a77-8cd166d38861",
+      "15e3db48-6e73-47cb-ba01-c02085aeb1da",
+      "1684db64-e369-43ac-8153-9c44dd2136c4",
+      "170f8a0d-e961-4aa0-98e4-a7b9b486f456",
+      "175140ba-80a6-414f-afcd-ac22d132dfee",
+      "17b3cbfa-348e-4ee9-9681-1446b0d1a071",
+      "189bf95c-6e51-442c-9cef-30eca1dbaa77",
+      "196b1bf8-3a8b-4148-ba64-4ca87cfaae34",
+      "1a0e0c44-5633-44f3-ba54-6fdff9e7a841",
+      "1a628a5b-f188-4357-b39f-197c2f79c466",
+      "1de920ab-b8b7-4fa3-bba8-4b08a53c3940",
+      "1f7e45e3-50a6-4ea8-b84c-622476500825",
+      "20b575b0-6b73-4205-b9c4-04385bac3c5f",
+      "21080383-b18d-4a64-9bda-edc2c5f43a9a",
+      "21114613-19cd-4de2-88c8-efed288fface",
+      "22272534-d03b-4510-b7be-6471fbb89003",
+      "26c09af4-aa6c-49ae-bdbe-16c467588769",
+      "272e4a2f-d121-4a99-9dd4-482bf4e1a63b",
+      "280148d9-28bf-4a8a-a3a6-6c53802eefab",
+      "28d2121e-0114-4559-a2fe-ff9da39492d4",
+      "2d7a91cd-fc8e-43ef-b96e-ac7a1ce0e138",
+      "2e04fa7a-a684-432d-939c-d01af80d059e",
+      "2f7abfdd-2f69-4829-b949-9d6f87c0c6df",
+      "3115e49f-fa9b-4060-9588-6e1a6a164465",
+      "31641530-80ab-45af-a7cb-ce9468763142",
+      "34de903a-528f-4c8a-ad5d-fb0261245274",
+      "3575dab6-1599-46a6-bd35-003fce826603",
+      "3606a974-2167-460e-bbef-418851098ebb",
+      "36201920-a496-489e-bb0a-9980edcd236e",
+      "364a33a8-4852-4379-8a37-75a944342d40",
+      "36c35463-15c9-4a42-9475-03ddcc44fdce",
+      "3c0b38f7-ea8c-4ca0-a20f-322b4c8ccf4b",
+      "3de83e15-232b-49f8-a628-b82bf3cb30d4",
+      "40c93739-e8bc-4d5c-93a1-81b18697bc1f",
+      "4135957f-fd64-4b69-9d45-ff4016ea4513",
+      "41bcf85e-744b-4fc8-b487-e91bac08df36",
+      "43819370-de13-4dc4-8896-e26ce76378e3",
+      "43c2107d-b82d-40d8-aed9-7078a7c1504a",
+      "445b8186-3b2b-463a-817b-b912f4fce6d4",
+      "4613fc8f-677d-4b34-a0c3-768732241d1f",
+      "46e1e56f-f4bf-4772-aa29-9c0a66b15d1e",
+      "484f678a-31c1-4d93-878d-116fd0639c9c",
+      "4857e79e-5c63-4e00-8278-cfc9d917eb7c",
+      "48dda027-dd6c-4db3-a219-34efb6134f7e",
+      "49c43443-86de-4647-bc2f-4f82d84e4fd2",
+      "4c39a03c-040a-4e0a-9258-cd5f7da54fd4",
+      "4dd0d377-11aa-4ee0-bd83-886197303c23",
+      "4f81f5df-954f-402d-b851-4581b133d1e8",
+      "500e00a2-f19c-4826-96b8-db4b068a0641",
+      "508b95c8-27b3-47c8-991a-5feec5093122",
+      "526cd120-8f1e-4ce4-8753-8f0c1edf80c6",
+      "52b7586d-b0c4-4517-9896-eb0baff97ff9",
+      "53071052-23c0-41aa-b8f7-83f4ec04bd4f",
+      "53668026-6a70-48d9-89b5-b71ceacc8b53",
+      "53db7234-ce84-469e-a06a-d23253c53cae",
+      "54d40c0b-01d7-4ff2-86ca-24024d5d8b95",
+      "5562a523-60cb-4473-8ad4-20ecd55a2a2c",
+      "5701567a-5f5c-4917-b44c-bdd5b51b0ae5",
+      "59024f8d-14ec-4721-a9f7-a3d6825971cd",
+      "5938e5aa-bdf0-4f2f-9a8c-99f9ce857f5c",
+      "5a860937-3fe9-4fec-a9ff-ca6a2e99424c",
+      "5b0b1ecb-f70d-45bb-8c44-55a11f315d31",
+      "5c2c35aa-bb5e-4171-8138-d9d1f79cebba",
+      "5e56c65f-260a-4eea-8802-42229910e9eb",
+      "621fe70d-016e-4d03-8184-4408cf5a022d",
+      "626227d4-f9ee-40c1-957c-0c35899ae348",
+      "62c3deb4-6f82-40cd-bc9b-771da7928362",
+      "6302f56f-2ea4-44c7-abd7-9d2f5742c7e3",
+      "633c8b4b-92f1-4eb7-9d27-76a2623eabd4",
+      "65aa5712-ce52-4f8f-a258-1762db25131d",
+      "6667b087-d0e2-4a24-bde8-85794218d8f0",
+      "68dcd253-5f79-4e0e-bfbe-663aa6438ab4",
+      "69138260-f4ec-4780-a4d0-5873626dad1a",
+      "6c36d52b-1593-4452-acfd-9950ff9dd1b5",
+      "6c80ec36-24ab-4faa-afd8-4a2272ecf77f",
+      "6ca7e19a-f7b3-4092-afff-f6600b1e0ff6",
+      "6cf415d1-26c0-4358-9642-a27e3cebb7b0",
+      "6e22262a-9870-4147-bbf9-2efa8cec46bb",
+      "6e3b96c6-08a3-4252-a65a-2793f4746b0e",
+      "6f83fdef-74d1-4d05-b125-2541a73e92da",
+      "70d2d556-ec41-4983-8777-e8751e7b714b",
+      "72bc8863-be9e-4ac7-9541-3356146e1899",
+      "72ea3848-957c-4701-a9e2-c6b5a43bea23",
+      "740cddcc-4185-423f-bb66-96a014a1e4d9",
+      "75f4d7a0-235b-4dd4-b327-9e8f81634c61",
+      "76c47a76-a5f1-4d28-97a2-7365dcc51a69",
+      "76c6bedb-a4d5-4792-88be-2d27583ed003",
+      "7a3a9adc-bdca-44fb-93b7-602ec8bd6d6d",
+      "7bf9b511-146e-4107-a021-7cee01f990bc",
+      "7de749f0-9130-4eff-8492-cdf6d6bc9a90",
+      "7eff3676-a4b9-46fa-8d90-4c7404b33259",
+      "83861fb4-67b9-4412-81cc-7bc226f96336",
+      "83af8613-82eb-4c3a-9a78-6b22d5eab754",
+      "851d6abf-b8a0-4106-baff-e6c0efd15c4d",
+      "85497ded-ab8e-4ece-abd9-b2c94d97bf4d",
+      "85c50acd-5276-47fb-9432-1950f1876e69",
+      "85f5f008-b505-49c2-b0d7-0009a31e7af4",
+      "86e91640-ce04-4f0f-8ebb-0d557873782a",
+      "87d13475-cfdc-4e17-a291-33b48e7bd667",
+      "87fc73c1-a6b1-4e3e-b2ce-79688e873e4d",
+      "882071f0-b9dc-464b-ac7c-0bcd7d8d1f86",
+      "887ca264-a877-4681-9f19-f37e8aed8090",
+      "8958fc80-feef-4427-8917-8dc7423f12a0",
+      "8b9715f3-d422-476b-910e-9ff27433af17",
+      "8e405d4a-5219-41ee-8d01-a8d4cdbee734",
+      "8ee10aca-17c8-4231-b12f-2a46fcac2147",
+      "8f74bdf5-6195-49dc-baba-c50256a8a31b",
+      "906d9c79-9a74-46ae-a3b1-1951ac48b82d",
+      "92399dc7-8083-43de-9108-f52b4931cc4e",
+      "95ec46b1-8d2b-4b0c-85c8-6cb746517196",
+      "9800130b-03ba-453b-87f5-e7c00eab0b75",
+      "9a39cf8e-d510-4fc0-9bc4-05c17ddb5cce",
+      "9b315381-4303-4fcd-9cc4-e48e72cedb1a",
+      "9e50d65d-1c1d-4939-be1a-3f148ea4a506",
+      "9f00745c-4b6a-4d9d-abd0-b9da5a0037cd",
+      "a1ff07e1-edb3-443b-9ad2-54b7a1d19bca",
+      "a5aab3c5-9ad4-4d3c-a9de-d403c45fb29b",
+      "a848ebaf-bcf0-4618-9516-499ea04d3a1e",
+      "a89ec001-4176-41af-90ae-565c1bb83db5",
+      "aca60d95-21b7-43b7-b100-ebd49f78cd1c",
+      "acd9b6d8-3537-4284-a70f-d3e686238f72",
+      "ad0d8c46-c4d5-4d61-a761-e33a4cefa162",
+      "ad362149-8eb9-4589-82c0-6334b0ed5bc9",
+      "ae349c45-cca6-49c0-ad30-3040ad5d76af",
+      "aed6a341-91d2-4319-b067-fb6c99f48443",
+      "af0e97b2-2b1d-4b57-ad3b-738e6c9c60a8",
+      "b0ce846f-038e-4a54-86a3-e09ef2ee5665",
+      "b0ece1ad-6ebf-4cd7-8665-fd274296dd8e",
+      "b18bdea5-cf90-4e13-b358-a0237a7f4f4f",
+      "b34436ff-51ec-4c30-a702-2535b5a1eb15",
+      "b36007a1-ef98-49b8-8f4f-50cac19a6b36",
+      "b4543b56-c4e2-487e-922c-3744e58cfd63",
+      "b4aacf5f-eeb0-4ea6-b2cf-e243cdb34145",
+      "b5462cb4-19ab-4205-8b7c-81dbcc434286",
+      "b56536b9-5f92-4c9d-ad96-1ffc3f7512ad",
+      "b6cfc52d-e1b0-4f74-a95b-ba5298efbf50",
+      "b6d41bf2-3c52-4800-9a06-ffddf0cfbc17",
+      "b7223316-5b59-46f8-a394-6f8eec7d0194",
+      "b77ae509-5195-494b-a50c-76c04580f253",
+      "b8641b37-6b0e-47c5-8385-a3ce6ceeb244",
+      "b959731b-f919-48ad-b73c-1e59bdd4d63e",
+      "b95f07eb-b88f-475b-921e-eb62cab4fa05",
+      "bc4bb7f1-6c4f-49fe-8b27-b5a57192afdc",
+      "bd7b22ce-1ead-438d-aaf0-749dea5c5ba1",
+      "be43678d-3efe-48f5-ae11-d36a2b665c2e",
+      "bf38ad38-a527-4829-b97f-441b4fe44c7d",
+      "bfffe79a-62da-41e1-86b1-a69e5c34a0be",
+      "c03d4ddf-03b8-45ae-b77a-f7b7150a5fac",
+      "c051954d-4d1b-4782-9927-728c4318374b",
+      "c05f7b12-d1c6-4f21-a3ce-c75d5605cb8f",
+      "c0a1909d-f602-40c2-bec0-39b15948f386",
+      "c2b57324-cc20-4f8f-865b-afcdb9c5c966",
+      "c30e32b6-7dea-4a8c-a303-b2bd24b8b177",
+      "c3ff028d-b82a-4eaf-a32c-0c6990c4528b",
+      "c69cf498-0f35-4d30-88e9-664370b729ee",
+      "cb875691-136c-413b-b995-c7867bd74592",
+      "ccb1f46d-3ea2-4382-8b4f-9b5f2f86c810",
+      "cd0dca9b-b523-4d5b-8983-417d89c110ba",
+      "cd515d90-7c14-4337-a351-585b54911aba",
+      "cd8fe217-603b-42a6-a204-c0ab44802899",
+      "ce721dc2-dfe4-412b-8cff-fbef9da4ed89",
+      "d1ef0dd9-b0cf-498b-8825-e4caa911af85",
+      "d20e20e4-1415-4ac0-a6eb-8b52198c6829",
+      "d3889c4f-6ad7-47de-952b-315260739361",
+      "d46da211-b1ed-44a1-8a45-91c770b600b4",
+      "d52a0a1b-4133-4c8f-9118-391b1d85b35b",
+      "d6f73c0f-8fd0-4b48-a949-ebe6911709d2",
+      "d8de3e42-bcab-4265-ab7c-4fa700e7b739",
+      "df6e4ce2-aa21-47e3-b5e9-deb30d93dc9f",
+      "e2617eb5-0f7e-4a09-8fac-363f67861603",
+      "e3bc29bf-843a-462a-b79f-507f7cc5113b",
+      "e4a30b7b-1f3b-4e17-a487-9b1234f88599",
+      "e5a6b062-1ba3-4321-9cdf-2ddc0f98a770",
+      "e6cedbf6-7943-41f8-919d-697cebc8c3ee",
+      "e784e9fc-26a2-4c68-a327-e2ea436eff80",
+      "ec58b21f-de20-4c2e-a68a-70ecb2c10160",
+      "ece1af00-5456-45ff-8d8c-07b480467849",
+      "ee1b3905-7d09-42db-b21e-5ea5bde0d12a",
+      "f16e0adb-0765-4cc0-b95d-a9a89cec6322",
+      "f347b377-5f67-4d71-a3d8-b34ec89e7ba5",
+      "f46b6fcb-71d7-41b2-a2fb-c2215eef0e0d",
+      "f49b8c66-e6f7-4210-bb51-7e222268dbe6",
+      "f7c3fcf8-4085-488e-b213-5b815a444334",
+      "f835b675-9257-48e0-9541-eca5b791d3bd",
+      "fb7c6178-2535-4db2-aeea-b7d4fe71ceb1",
+      "fcb95261-7bb3-488e-b5cb-027c14e35991",
+      "fd4c5dd1-75f2-48d6-a4bb-ed7db3fa54d5",
+      "fd83f281-f3db-4f58-b435-81c4836c576b",
+      "fe300c8c-fbc0-4f3d-902e-1f3b65f1d385"
+    ],
+    "snapshot_sha256": "c4d3f86f52d57d4007c234cef6cdce2c46a92a2c20607d5f71cf8abe7efc514d",
+    "training_allowed": false,
+    "missing_conditions": [],
+    "missing_splits": [],
+    "conditions_by_split": {
+      "train": {
+        "dirty": 24,
+        "cracked": 24,
+        "missing": 24,
+        "clean": 24,
+        "occluded": 24
+      },
+      "validation": {
+        "missing": 8,
+        "dirty": 8,
+        "cracked": 8,
+        "clean": 8,
+        "occluded": 8
+      },
+      "test": {
+        "occluded": 8,
+        "dirty": 8,
+        "cracked": 8,
+        "missing": 8,
+        "clean": 8
+      }
+    },
+    "approved_missing_by_split": {
+      "train": [],
+      "validation": [],
+      "test": []
+    },
+    "notes": [
+      "Pilot syntetyczny; wymagany przegląd kadrów i etykiet przed treningiem.",
+      "Maski SAM nie są ręcznymi etykietami referencyjnymi."
+    ],
+    "run_id": "bd6ac5799bde4170b6d98a516a359e13"
+  },
+  "collection_mode": "staged_static_robot_camera",
+  "note": "Real Gazebo camera pixels, fixed chassis at varied known poses. Not Nav2 mission executions or YOLO predictions.",
+  "verified_at": "2026-10-19T19:14:12.517737+00:00",
+  "image_files_verified": 400,
+  "image_errors": [],
+  "collection_modes": {
+    "staged_static_robot_camera": 166,
+    "nav2_inspection": 34
+  },
+  "source_groups_by_split": {
+    "train": 14,
+    "validation": 5,
+    "test": 5
+  },
+  "metadata_normalization": {
+    "reason": "Staged camera captures do not represent executed Nav2 missions. Generated reference retained as capture_reference_id; mission_id cleared.",
+    "ids": [
+      "004e9774-a5e5-4093-bcba-69173addf28a",
+      "05276771-801d-4c95-889b-70d6eec4da52",
+      "06b79e83-70c6-4f6f-83ad-3d69d3bee02c",
+      "070beb6f-02bf-4385-ba0f-c45e84d4f6a7",
+      "0c909d9e-001a-4779-83d2-6fc6085fdc01",
+      "10c38ef3-464e-4396-b73f-613f92bf52c6",
+      "12a137a1-7175-4a44-b6d1-8742375b671c",
+      "13802135-462b-4636-b551-7f85ba75a3f7",
+      "15e3db48-6e73-47cb-ba01-c02085aeb1da",
+      "170f8a0d-e961-4aa0-98e4-a7b9b486f456",
+      "175140ba-80a6-414f-afcd-ac22d132dfee",
+      "17b3cbfa-348e-4ee9-9681-1446b0d1a071",
+      "189bf95c-6e51-442c-9cef-30eca1dbaa77",
+      "196b1bf8-3a8b-4148-ba64-4ca87cfaae34",
+      "1a0e0c44-5633-44f3-ba54-6fdff9e7a841",
+      "1a628a5b-f188-4357-b39f-197c2f79c466",
+      "1de920ab-b8b7-4fa3-bba8-4b08a53c3940",
+      "1f7e45e3-50a6-4ea8-b84c-622476500825",
+      "20b575b0-6b73-4205-b9c4-04385bac3c5f",
+      "22272534-d03b-4510-b7be-6471fbb89003",
+      "26c09af4-aa6c-49ae-bdbe-16c467588769",
+      "272e4a2f-d121-4a99-9dd4-482bf4e1a63b",
+      "28d2121e-0114-4559-a2fe-ff9da39492d4",
+      "2d7a91cd-fc8e-43ef-b96e-ac7a1ce0e138",
+      "2f7abfdd-2f69-4829-b949-9d6f87c0c6df",
+      "3115e49f-fa9b-4060-9588-6e1a6a164465",
+      "34de903a-528f-4c8a-ad5d-fb0261245274",
+      "3575dab6-1599-46a6-bd35-003fce826603",
+      "3606a974-2167-460e-bbef-418851098ebb",
+      "36201920-a496-489e-bb0a-9980edcd236e",
+      "364a33a8-4852-4379-8a37-75a944342d40",
+      "36c35463-15c9-4a42-9475-03ddcc44fdce",
+      "3de83e15-232b-49f8-a628-b82bf3cb30d4",
+      "40c93739-e8bc-4d5c-93a1-81b18697bc1f",
+      "4135957f-fd64-4b69-9d45-ff4016ea4513",
+      "41bcf85e-744b-4fc8-b487-e91bac08df36",
+      "43819370-de13-4dc4-8896-e26ce76378e3",
+      "43c2107d-b82d-40d8-aed9-7078a7c1504a",
+      "46e1e56f-f4bf-4772-aa29-9c0a66b15d1e",
+      "484f678a-31c1-4d93-878d-116fd0639c9c",
+      "4857e79e-5c63-4e00-8278-cfc9d917eb7c",
+      "48dda027-dd6c-4db3-a219-34efb6134f7e",
+      "4c39a03c-040a-4e0a-9258-cd5f7da54fd4",
+      "4dd0d377-11aa-4ee0-bd83-886197303c23",
+      "4f81f5df-954f-402d-b851-4581b133d1e8",
+      "508b95c8-27b3-47c8-991a-5feec5093122",
+      "526cd120-8f1e-4ce4-8753-8f0c1edf80c6",
+      "53071052-23c0-41aa-b8f7-83f4ec04bd4f",
+      "53668026-6a70-48d9-89b5-b71ceacc8b53",
+      "53db7234-ce84-469e-a06a-d23253c53cae",
+      "54d40c0b-01d7-4ff2-86ca-24024d5d8b95",
+      "5562a523-60cb-4473-8ad4-20ecd55a2a2c",
+      "5701567a-5f5c-4917-b44c-bdd5b51b0ae5",
+      "59024f8d-14ec-4721-a9f7-a3d6825971cd",
+      "5938e5aa-bdf0-4f2f-9a8c-99f9ce857f5c",
+      "5c2c35aa-bb5e-4171-8138-d9d1f79cebba",
+      "5e56c65f-260a-4eea-8802-42229910e9eb",
+      "621fe70d-016e-4d03-8184-4408cf5a022d",
+      "62c3deb4-6f82-40cd-bc9b-771da7928362",
+      "6302f56f-2ea4-44c7-abd7-9d2f5742c7e3",
+      "633c8b4b-92f1-4eb7-9d27-76a2623eabd4",
+      "68dcd253-5f79-4e0e-bfbe-663aa6438ab4",
+      "69138260-f4ec-4780-a4d0-5873626dad1a",
+      "6c36d52b-1593-4452-acfd-9950ff9dd1b5",
+      "6c80ec36-24ab-4faa-afd8-4a2272ecf77f",
+      "6ca7e19a-f7b3-4092-afff-f6600b1e0ff6",
+      "6cf415d1-26c0-4358-9642-a27e3cebb7b0",
+      "6e22262a-9870-4147-bbf9-2efa8cec46bb",
+      "6f83fdef-74d1-4d05-b125-2541a73e92da",
+      "70d2d556-ec41-4983-8777-e8751e7b714b",
+      "72ea3848-957c-4701-a9e2-c6b5a43bea23",
+      "75f4d7a0-235b-4dd4-b327-9e8f81634c61",
+      "76c47a76-a5f1-4d28-97a2-7365dcc51a69",
+      "76c6bedb-a4d5-4792-88be-2d27583ed003",
+      "7a3a9adc-bdca-44fb-93b7-602ec8bd6d6d",
+      "7de749f0-9130-4eff-8492-cdf6d6bc9a90",
+      "7eff3676-a4b9-46fa-8d90-4c7404b33259",
+      "83861fb4-67b9-4412-81cc-7bc226f96336",
+      "83af8613-82eb-4c3a-9a78-6b22d5eab754",
+      "851d6abf-b8a0-4106-baff-e6c0efd15c4d",
+      "85c50acd-5276-47fb-9432-1950f1876e69",
+      "85f5f008-b505-49c2-b0d7-0009a31e7af4",
+      "86e91640-ce04-4f0f-8ebb-0d557873782a",
+      "87d13475-cfdc-4e17-a291-33b48e7bd667",
+      "87fc73c1-a6b1-4e3e-b2ce-79688e873e4d",
+      "882071f0-b9dc-464b-ac7c-0bcd7d8d1f86",
+      "887ca264-a877-4681-9f19-f37e8aed8090",
+      "8958fc80-feef-4427-8917-8dc7423f12a0",
+      "8b9715f3-d422-476b-910e-9ff27433af17",
+      "8ee10aca-17c8-4231-b12f-2a46fcac2147",
+      "8f74bdf5-6195-49dc-baba-c50256a8a31b",
+      "92399dc7-8083-43de-9108-f52b4931cc4e",
+      "95ec46b1-8d2b-4b0c-85c8-6cb746517196",
+      "9800130b-03ba-453b-87f5-e7c00eab0b75",
+      "9a39cf8e-d510-4fc0-9bc4-05c17ddb5cce",
+      "9b315381-4303-4fcd-9cc4-e48e72cedb1a",
+      "9e50d65d-1c1d-4939-be1a-3f148ea4a506",
+      "9f00745c-4b6a-4d9d-abd0-b9da5a0037cd",
+      "a1ff07e1-edb3-443b-9ad2-54b7a1d19bca",
+      "a5aab3c5-9ad4-4d3c-a9de-d403c45fb29b",
+      "aca60d95-21b7-43b7-b100-ebd49f78cd1c",
+      "acd9b6d8-3537-4284-a70f-d3e686238f72",
+      "ad0d8c46-c4d5-4d61-a761-e33a4cefa162",
+      "af0e97b2-2b1d-4b57-ad3b-738e6c9c60a8",
+      "b0ce846f-038e-4a54-86a3-e09ef2ee5665",
+      "b0ece1ad-6ebf-4cd7-8665-fd274296dd8e",
+      "b18bdea5-cf90-4e13-b358-a0237a7f4f4f",
+      "b36007a1-ef98-49b8-8f4f-50cac19a6b36",
+      "b4aacf5f-eeb0-4ea6-b2cf-e243cdb34145",
+      "b56536b9-5f92-4c9d-ad96-1ffc3f7512ad",
+      "b6cfc52d-e1b0-4f74-a95b-ba5298efbf50",
+      "b7223316-5b59-46f8-a394-6f8eec7d0194",
+      "b77ae509-5195-494b-a50c-76c04580f253",
+      "b8641b37-6b0e-47c5-8385-a3ce6ceeb244",
+      "b95f07eb-b88f-475b-921e-eb62cab4fa05",
+      "bc4bb7f1-6c4f-49fe-8b27-b5a57192afdc",
+      "be43678d-3efe-48f5-ae11-d36a2b665c2e",
+      "bf38ad38-a527-4829-b97f-441b4fe44c7d",
+      "bfffe79a-62da-41e1-86b1-a69e5c34a0be",
+      "c03d4ddf-03b8-45ae-b77a-f7b7150a5fac",
+      "c051954d-4d1b-4782-9927-728c4318374b",
+      "c05f7b12-d1c6-4f21-a3ce-c75d5605cb8f",
+      "c0a1909d-f602-40c2-bec0-39b15948f386",
+      "c30e32b6-7dea-4a8c-a303-b2bd24b8b177",
+      "c3ff028d-b82a-4eaf-a32c-0c6990c4528b",
+      "cd515d90-7c14-4337-a351-585b54911aba",
+      "ce721dc2-dfe4-412b-8cff-fbef9da4ed89",
+      "d20e20e4-1415-4ac0-a6eb-8b52198c6829",
+      "d3889c4f-6ad7-47de-952b-315260739361",
+      "d46da211-b1ed-44a1-8a45-91c770b600b4",
+      "d52a0a1b-4133-4c8f-9118-391b1d85b35b",
+      "d6f73c0f-8fd0-4b48-a949-ebe6911709d2",
+      "df6e4ce2-aa21-47e3-b5e9-deb30d93dc9f",
+      "e2617eb5-0f7e-4a09-8fac-363f67861603",
+      "e3bc29bf-843a-462a-b79f-507f7cc5113b",
+      "e4a30b7b-1f3b-4e17-a487-9b1234f88599",
+      "e5a6b062-1ba3-4321-9cdf-2ddc0f98a770",
+      "e784e9fc-26a2-4c68-a327-e2ea436eff80",
+      "ec58b21f-de20-4c2e-a68a-70ecb2c10160",
+      "ece1af00-5456-45ff-8d8c-07b480467849",
+      "ee1b3905-7d09-42db-b21e-5ea5bde0d12a",
+      "f16e0adb-0765-4cc0-b95d-a9a89cec6322",
+      "f347b377-5f67-4d71-a3d8-b34ec89e7ba5",
+      "f49b8c66-e6f7-4210-bb51-7e222268dbe6",
+      "f7c3fcf8-4085-488e-b213-5b815a444334",
+      "f835b675-9257-48e0-9541-eca5b791d3bd",
+      "fb7c6178-2535-4db2-aeea-b7d4fe71ceb1",
+      "fcb95261-7bb3-488e-b5cb-027c14e35991",
+      "fd4c5dd1-75f2-48d6-a4bb-ed7db3fa54d5",
+      "fd83f281-f3db-4f58-b435-81c4836c576b",
+      "fe300c8c-fbc0-4f3d-902e-1f3b65f1d385"
+    ]
+  }
+}

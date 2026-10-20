@@ -1,0 +1,420 @@
+{
+  "selection": {
+    "selected": "resnet18",
+    "criterion": "validation macro_f1, then accuracy; tie -> baseline",
+    "snapshot_id": "87023d75944ca02077e6341d6012ceb90a03cea18d20585d0795e40cdd98680f",
+    "best_epoch": 8,
+    "baseline_alpha": 10.0,
+    "validation": {
+      "baseline": {
+        "accuracy": 0.65,
+        "macro_f1": 0.6278730158730159,
+        "balanced_accuracy": 0.65,
+        "per_class": {
+          "clean": {
+            "precision": 1.0,
+            "recall": 0.125,
+            "f1": 0.2222222222222222,
+            "support": 8
+          },
+          "cracked": {
+            "precision": 0.4117647058823529,
+            "recall": 0.875,
+            "f1": 0.56,
+            "support": 8
+          },
+          "dirty": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5,
+            "support": 8
+          },
+          "occluded": {
+            "precision": 1.0,
+            "recall": 0.75,
+            "f1": 0.8571428571428571,
+            "support": 8
+          },
+          "missing": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 8
+          }
+        },
+        "confusion_matrix": [
+          [
+            1,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            7,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            6,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            8
+          ]
+        ],
+        "n": 40
+      },
+      "resnet18": {
+        "accuracy": 0.975,
+        "macro_f1": 0.9749019607843138,
+        "balanced_accuracy": 0.975,
+        "per_class": {
+          "clean": {
+            "precision": 1.0,
+            "recall": 0.875,
+            "f1": 0.9333333333333333,
+            "support": 8
+          },
+          "cracked": {
+            "precision": 0.8888888888888888,
+            "recall": 1.0,
+            "f1": 0.9411764705882353,
+            "support": 8
+          },
+          "dirty": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 8
+          },
+          "occluded": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 8
+          },
+          "missing": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 8
+          }
+        },
+        "confusion_matrix": [
+          [
+            7,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            8,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            8
+          ]
+        ],
+        "n": 40
+      }
+    }
+  },
+  "test": {
+    "baseline": {
+      "accuracy": 0.65,
+      "macro_f1": 0.6640993788819876,
+      "balanced_accuracy": 0.65,
+      "per_class": {
+        "clean": {
+          "precision": 0.3333333333333333,
+          "recall": 0.25,
+          "f1": 0.28571428571428575,
+          "support": 8
+        },
+        "cracked": {
+          "precision": 0.3333333333333333,
+          "recall": 0.625,
+          "f1": 0.43478260869565216,
+          "support": 8
+        },
+        "dirty": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 8
+        },
+        "occluded": {
+          "precision": 1.0,
+          "recall": 0.875,
+          "f1": 0.9333333333333333,
+          "support": 8
+        },
+        "missing": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        }
+      },
+      "confusion_matrix": [
+        [
+          2,
+          6,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          3,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      ],
+      "n": 40
+    },
+    "resnet18": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "balanced_accuracy": 1.0,
+      "per_class": {
+        "clean": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        },
+        "cracked": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        },
+        "dirty": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        },
+        "occluded": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        },
+        "missing": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 8
+        }
+      },
+      "confusion_matrix": [
+        [
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          8,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      ],
+      "n": 40
+    }
+  },
+  "split_counts": {
+    "train": 120,
+    "validation": 40,
+    "test": 40
+  },
+  "source_group_counts": {
+    "train": 14,
+    "validation": 5,
+    "test": 5
+  },
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "cuda_peak_memory_mib": 317.068359375,
+  "training_seconds": 5.741315013999838,
+  "mlflow": {
+    "experiment": "roboinspect-classifier",
+    "parent_run_id": "e765f4d72f0a4f0e9ab5f1b74c28cd9d",
+    "child_run_ids": [
+      "63fb6d1fdc54413f8c973f0d5a0f2dc6",
+      "085aefdaa1c041cd998bca76de72580e"
+    ]
+  },
+  "model_sha256": {
+    "baseline": "4715e2b4dcae692ae0d6eedfc73f0c2ca5ae2e5e23c76164819506e37ea9b16a",
+    "resnet18": "89ddb5c36a3d16c1166db792b9c646dcfdb454efe8f1b36de66d815cc0959040"
+  },
+  "limitations": [
+    "Synthetic variants of 24 source photos; observations are correlated.",
+    "Pilot review; earlier user bulk approvals are retained in review_history.",
+    "No claim of real-world defect performance.",
+    "Uncalibrated model scores; pilot only; no automatic deployment or robot control."
+  ],
+  "config": {
+    "seed": 42,
+    "epochs_limit": 25,
+    "snapshot_id": "87023d75944ca02077e6341d6012ceb90a03cea18d20585d0795e40cdd98680f",
+    "weights_url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "worker_sha256": "a64408dc3d985f22c1584540b0da026000deabc98355015e28ed107dca99f305",
+    "classifier_module_sha256": "476a04b7688992a82c93073e7d145ba7945e7a9134dc5e09bb2c309fb7838e8e",
+    "git_head": "f4ab32c4e5e658ff71071c5f423ff16a462c1ab8",
+    "dirty_checkout": true,
+    "baseline_alphas": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "cnn_layer4_lr": 0.0001,
+    "cnn_fc_lr": 0.001,
+    "weight_decay": 0.001,
+    "batch_size": 16,
+    "early_stopping_patience": 6
+  },
+  "verification": {
+    "mlflow_and_http": {
+      "e765f4d72f0a4f0e9ab5f1b74c28cd9d": {
+        "status": "FINISHED",
+        "artifacts": [
+          "config.json",
+          "dataset",
+          "results.json",
+          "selection.json",
+          "source",
+          "training.log"
+        ]
+      },
+      "63fb6d1fdc54413f8c973f0d5a0f2dc6": {
+        "status": "FINISHED",
+        "artifacts": [
+          "baseline-test-confusion.svg",
+          "baseline-validation-confusion.svg",
+          "model",
+          "test-metrics.json",
+          "validation-metrics.json"
+        ]
+      },
+      "085aefdaa1c041cd998bca76de72580e": {
+        "status": "FINISHED",
+        "artifacts": [
+          "learning-curves.svg",
+          "model",
+          "resnet18-test-confusion.svg",
+          "resnet18-validation-confusion.svg",
+          "test-metrics.json",
+          "validation-metrics.json"
+        ]
+      },
+      "/api/classifier/training": {
+        "status": 200,
+        "bytes": 2716
+      },
+      "/api/classifier/artifacts/resnet18-test-confusion.svg": {
+        "status": 200,
+        "bytes": 31285
+      },
+      "/classifier": {
+        "status": 200,
+        "bytes": 2914
+      }
+    },
+    "full_suite_python_passed": 187,
+    "javascript_passed": 8,
+    "classifier_module_latest_tests_passed": 11,
+    "mobile_viewport": 390,
+    "mobile_overflow": false,
+    "saved_model_prediction": "cracked on aca60d95",
+    "training_auto_deployment": false
+  }
+}

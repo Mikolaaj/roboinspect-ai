@@ -4,6 +4,7 @@ const labels = {inspecting:'Analiza obrazu',idle:'Gotowy',dispatching:'Wysyłani
 let submitting = false;
 let current = null;
 let historyFingerprint = null;
+let bannerControlsInitialized=false;
 function text(id,value){if($(id)) $(id).textContent = value;}
 function buttons(){
   document.querySelectorAll('[data-goal],[data-inspect]').forEach(button=>{
@@ -22,6 +23,8 @@ function buttons(){
     button.disabled=submitting || !current?.mapping_controls || current?.scenario!=='normal' || current?.mode!=='navigation' || !current?.ready || current?.busy || Boolean(op);
     button.classList.toggle('selected',current?.warehouse?.mode===button.dataset.warehouse);
   });
+  if($('apply-banner-condition'))$('apply-banner-condition').disabled=submitting || !current?.ready || current?.busy || current?.mode!=='navigation' || Boolean(op);
+  if($('analyze-dataset'))$('analyze-dataset').disabled=submitting;
   if($('cancel')) $('cancel').disabled = submitting || !current?.busy || current?.state === 'canceling' ||
       (op && (op.kind !== 'start' || op.cancel_requested));
 }
@@ -40,6 +43,7 @@ async function command(path,data){
     sessionStorage.removeItem('pending-command');
     const result = await response.json();
     if(!response.ok) throw new Error(result.error || 'Polecenie nie powiodło się');
+    return result;
   }catch(exc){error(exc.message);}
   finally{submitting = false; await poll();}
 }
@@ -48,6 +52,17 @@ document.querySelectorAll('[data-mapping]').forEach(button=>button.addEventListe
 document.querySelectorAll('[data-warehouse]').forEach(button=>button.addEventListener('click',()=>command('/api/warehouse/'+button.dataset.warehouse,{})));
 document.querySelectorAll('[data-inspect]').forEach(button=>button.addEventListener('click',()=>command('/api/inspect/'+button.dataset.inspect,{})));
 if($('cancel')) $('cancel').addEventListener('click',()=>command('/api/cancel',{}));
+if($('apply-banner-condition'))$('apply-banner-condition').addEventListener('click',()=>command('/api/banners/condition',{mode:$('banner-condition').value,split:$('dataset-split').value,collect:$('dataset-collect').checked}));
+if($('analyze-dataset'))$('analyze-dataset').addEventListener('click',async()=>{
+  text('dataset-analysis-status','Analizuję próbki…');
+  const result=await command('/api/dataset/analyze',{});
+  text('dataset-analysis-status',result?`EDA gotowa. Próbki: ${result.samples}, błędy podziału: ${result.leakage_errors.length}. Otwórz Raport danych.`:'Nie udało się przeliczyć EDA. Sprawdź komunikat błędu.');
+});
+async function datasetRefresh(){
+  if(!$('dataset-summary') || document.hidden)return;
+  try{const response=await fetch('/api/dataset',{signal:AbortSignal.timeout(2500)});if(!response.ok)return;const data=await response.json();const stats=$('dataset-summary');stats.replaceChildren();for(const [label,value] of [['Wszystkie próbki',data.samples],['Do przeglądu',data.pending_review??data.samples-data.training_ready],['Gotowe do treningu',data.training_ready]]){const card=document.createElement('div');const number=document.createElement('strong');number.textContent=String(value);const caption=document.createElement('span');caption.textContent=label;card.append(number,caption);stats.append(card);}}catch{}
+}
+if($('dataset-summary')){datasetRefresh();setInterval(datasetRefresh,5000);}
 async function poll(){
   try{
     const response = await fetch('/api/status',{cache:'no-store',signal:AbortSignal.timeout(2500)});
@@ -63,6 +78,12 @@ async function poll(){
     text('distance',current.distance_m == null ? 'Brak danych' : `${current.distance_m.toFixed(1)} m`);
     text('speed',current.velocity ? `${current.velocity.linear.toFixed(2)} m/s` : 'Brak danych');
     text('position',current.map_position ? `${current.map_position.x.toFixed(1)}, ${current.map_position.y.toFixed(1)} m` : 'Brak danych');
+    const profile=current.banner_scene?.profile;
+    if(profile && $('banner-condition')){
+      const names={clean:'poprawny obraz',cracked:'pęknięcia',dirty:'zabrudzenie',occluded:'zasłonięcie',missing:'brak obrazu',mixed:'mieszane stany'};
+      text('dataset-active-profile',`Aktualnie: ${names[profile.mode]||profile.mode} · ${profile.collect?'zbieranie włączone':'zbieranie wyłączone'}`+(profile.split?` · ${{train:'zbiór treningowy',validation:'zbiór walidacyjny',test:'zbiór testowy'}[profile.split]||profile.split}`:''));
+      if(!bannerControlsInitialized && profile.split){$('banner-condition').value=profile.mode;$('dataset-split').value=profile.split;$('dataset-collect').checked=profile.collect;bannerControlsInitialized=true;}
+    }
     const op = current.operation;
     const opShown = op && (current.operation_busy || !current.mission || new Date(op.created_at) > new Date(current.mission.created_at));
     if(opShown) text('mission-state',current.operation_busy ? 'Operacja w toku' : ({succeeded:'Operacja zakończona',failed:'Błąd operacji',canceled:'Operacja anulowana',interrupted:'Operacja przerwana'}[op.status] || labels[op.status] || op.status));

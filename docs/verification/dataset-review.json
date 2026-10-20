@@ -1,0 +1,70 @@
+{
+  "samples": 34,
+  "splits": {
+    "train": 22,
+    "test": 5,
+    "validation": 7
+  },
+  "review": {
+    "pending_review": 33,
+    "approved": 1
+  },
+  "conditions_by_split": {
+    "train": {
+      "cracked": 4,
+      "dirty": 4,
+      "missing": 5,
+      "clean": 4,
+      "occluded": 5
+    },
+    "validation": {
+      "cracked": 2,
+      "missing": 1,
+      "clean": 1,
+      "occluded": 2,
+      "dirty": 1
+    },
+    "test": {
+      "cracked": 1,
+      "missing": 1,
+      "clean": 1,
+      "occluded": 1,
+      "dirty": 1
+    }
+  },
+  "approved_missing_by_split": {
+    "train": [
+      "clean",
+      "cracked",
+      "dirty",
+      "missing",
+      "occluded"
+    ],
+    "validation": [
+      "clean",
+      "dirty",
+      "missing",
+      "occluded"
+    ],
+    "test": [
+      "clean",
+      "cracked",
+      "dirty",
+      "missing",
+      "occluded"
+    ]
+  },
+  "leakage_errors": [],
+  "duplicates": [],
+  "approved_ids": [
+    "3c0b38f7-ea8c-4ca0-a20f-322b4c8ccf4b"
+  ],
+  "mlflow_run_id": "5fd374ffbea448f7a6101a53acaad336",
+  "tests": {
+    "full_python": 175,
+    "javascript": 8,
+    "latest_dataset_tests": 20
+  },
+  "mobile_width": 390,
+  "mobile_horizontal_overflow": false
+}
