@@ -1,8 +1,7 @@
 # Instalacja na nowym komputerze i uruchomienie
 
 Sprawdzany zestaw: Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic (Sim 8),
-systemowy Python 3.12. Na obecnym komputerze ROS i zależności są już dostępne;
-wystarczą dwie komendy startowe z końca tego dokumentu.
+systemowy Python 3.12. Na obecnym komputerze środowisko jest przygotowane. Aktualny skrót instalacji wszystkich modeli i startu Kubernetes znajduje się w [README](../README.md). Poniżej opisano przygotowanie systemu; sam ROS nie instaluje modeli AI.
 
 ## 1. ROS 2 Jazzy na Ubuntu 24.04
 
@@ -44,7 +43,7 @@ Zależności projektu pobierz przez pakiety ROS:
 
 ```bash
 sudo apt install ros-jazzy-ros-gz ros-jazzy-navigation2 \
-  ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox ros-jazzy-tf2-ros python3-pil python3-venv
+  ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox ros-jazzy-tf2-ros python3-pil python3-venv g++ pkg-config zstd
 source /opt/ros/jazzy/setup.bash
 ros2 pkg prefix nav2_bringup
 /usr/bin/python3 -c 'import rclpy; from PIL import Image; print("Zależności OK")'
@@ -63,7 +62,23 @@ cd roboinspect-ai
 Kod kokpitu musi być w pobieranej wersji repozytorium. Lokalne zmiany trzeba
 wcześniej zapisać w commitach i wypchnąć, aby były dostępne na drugim komputerze.
 
-## 3. Jedna komenda startowa
+## 3. Przygotowanie aplikacji i modeli
+
+Po klonowaniu wykonaj kolejno:
+
+```bash
+bash scripts/setup_project.sh
+bash scripts/setup_bielik.sh
+bash scripts/setup_whisper.sh
+bash scripts/setup_rag.sh
+bash scripts/setup_vision.sh
+```
+
+`setup_vision.sh` obejmuje także SAM. Potrzebny jest działający sterownik NVIDIA dla profilu CUDA. Sprawdź `nvidia-smi`. Do testów JavaScript potrzebny jest Node.js 18+; CI używa 22. Do trybów kontenerowych zainstaluj Docker Engine i wtyczkę Compose według [oficjalnej instrukcji Ubuntu](https://docs.docker.com/engine/install/ubuntu/), potem sprawdź `docker info` i `docker compose version`.
+
+Kubernetes przygotuj raz: `bash scripts/setup_kubernetes_tools.sh`. Codzienny start: `bash scripts/run_kubernetes.sh`; stop: `bash scripts/stop_kubernetes.sh`. Pełna [instrukcja klastra](kubernetes.md). Zależności i modele są pobierane lokalnie; klon nie zawiera danych treningowych i wcześniejszej historii.
+
+## 4. Start bez kontenerów, wariant alternatywny
 
 Najpierw zatrzymaj poprzednią sesję i poczekaj na zakończenie:
 
@@ -90,7 +105,7 @@ status i trzy obrazy, następnie sprawdź A → B → C → BASE oraz anulowanie
 Ctrl+C w terminalu 1 zamyka całość. Zamknięcie karty przeglądarki nie zatrzymuje
 misji. Warianty hali i diagnostyka: [cockpit.md](cockpit.md).
 
-## 4. Weryfikacja
+## 5. Weryfikacja
 
 Zamknij kokpit przed testami:
 

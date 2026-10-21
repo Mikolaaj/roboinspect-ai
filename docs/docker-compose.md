@@ -55,7 +55,7 @@ bash scripts/run_cockpit.sh
 5. Zatrzymaj Compose, uruchom ponownie i sprawdź tę samą historię oraz run.
 6. `docker compose logs --tail 100` pokazuje logi kontenerów; logi ROS pozostają w `artifacts/cockpit`.
 
-Stan weryfikacji 20.10.2026: konfiguracja Compose, składnia skryptów i testy HTTP są sprawdzane lokalnie. Pełny start kontenerów, przejazd przez bramę i test trwałości pozostają do wykonania, ponieważ silnik Docker Desktop nie był dostępny podczas implementacji. Tego etapu nie uznajemy jeszcze za zweryfikowany w działającym środowisku.
+Stan 21.10.2026: budowanie kontenerów, HTTP i trwałość MLflow potwierdzono testem integracyjnym w CI. Pełną sesję z robotem potwierdzono w trybie Kubernetes. Dowody i granice odbioru: [audyt projektu](project-audit.md).
 
 ## Automatyczna weryfikacja
 

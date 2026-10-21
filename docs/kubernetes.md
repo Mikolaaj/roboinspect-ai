@@ -84,3 +84,7 @@ Dokumentacja: [kind](https://kind.sigs.k8s.io/docs/user/quick-start/), [Kubernet
 Izolowany test klastra przeszedł: gotowość usług, panel HTTP, zachowanie runu MLflow po odtworzeniu poda, odczyt metryk przez Prometheusa oraz powrót do poprzedniego obrazu po celowo błędnym wdrożeniu. Wynik: [kubernetes-ci.json](verification/kubernetes-ci.json). Timeout podczas próby błędnego obrazu jest oczekiwanym elementem tego testu.
 
 Sprawdzono również pełną sesję z lokalnym ROS i Gazebo na RTX 4060: trzy kamery, FPV 1280×720, zakończony przejazd A → BASE, odczyt gotowości wykonawcy i powrót połączenia po wymianie poda gateway. Raport: [kubernetes-live.json](verification/kubernetes-live.json). Pełne testy aplikacji: 197 testów Python oraz testy JavaScript zakończyły się sukcesem. Publikacja GHCR i ręczne CD nie są potwierdzone tym lokalnym testem.
+
+## Aktualizacja 21.10.2026
+
+Publikacja GHCR i rzeczywiste CD zostały później potwierdzone: [wyniki](ghcr-cd-results.md). Aktualny przegląd: 198 testów Python oraz 8 JavaScript poprawnych, działające trzy pody i gotowe usługi. [Zakres audytu](project-audit.md).

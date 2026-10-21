@@ -45,3 +45,7 @@ Workflow jest ręczny i nie wykonuje kodu pull request na laptopie sterującym r
 Stan kodu i stan wdrożenia to różne rzeczy. Sam zapis workflow nie oznacza, że obrazy zostały opublikowane lub wdrożone. Sprawdź Actions oraz `kubectl get deployments`.
 
 Dokumentacja: [publikowanie do GHCR](https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images), [rollback](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/kubectl_rollout_undo/).
+
+## Wykonany test
+
+Publikacja i jednorazowe CD zostały zweryfikowane 21.10.2026. Runner po sukcesie został wyrejestrowany. Szczegóły, linki do zielonych workflow i ograniczenia kolejnych uruchomień: [ghcr-cd-results.md](ghcr-cd-results.md).

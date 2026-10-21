@@ -1,0 +1,47 @@
+{
+  "revision": "56593d79702b8eb6106bcfac1a18499ddfd12ea0",
+  "ci_run": "https://github.com/Mikolaaj/roboinspect-ai/actions/runs/39494533374",
+  "cd_run": "https://github.com/Mikolaaj/roboinspect-ai/actions/runs/39622237254",
+  "frames": {
+    "fpv": {
+      "width": 1280,
+      "height": 720,
+      "bytes": 31406
+    },
+    "follow": {
+      "width": 640,
+      "height": 360,
+      "bytes": 40865
+    },
+    "overhead": {
+      "width": 640,
+      "height": 480,
+      "bytes": 48257
+    }
+  },
+  "nav2_ready": true,
+  "rendering": {
+    "mode": "gpu",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "mission_id": "acce68b4-d59b-4f74-9f53-73bf77cec1cc",
+  "mission_status": "succeeded",
+  "metrics_ready": true,
+  "deployed_images": {
+    "gateway": {
+      "image": "ghcr.io/mikolaaj/roboinspect-ai-gateway:sha-56593d79702b8eb6106bcfac1a18499ddfd12ea0",
+      "image_id": "sha256:a935c8b1ac51d345238c4790674c46a04e590ba6e7410ef1f452c32a811bf91c",
+      "ready": true
+    },
+    "mlflow": {
+      "image": "ghcr.io/mikolaaj/roboinspect-ai-mlflow:sha-56593d79702b8eb6106bcfac1a18499ddfd12ea0",
+      "image_id": "sha256:9af38252817a9878873cdf584f805e0f64de6f3b7d7d8ac36a694c2848dad7d8",
+      "ready": true
+    }
+  },
+  "runner_result": "Succeeded",
+  "runner_ephemeral_unregistered": true,
+  "ci_conclusion": "success",
+  "cd_conclusion": "success",
+  "restart_without_runner": true
+}
